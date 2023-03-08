@@ -5,16 +5,24 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Restaurante {
+
+	// Essa annotation define uma geração de valor, e a "estratégia"
+	// esta setada como identity, que significa que ele passa a
+	// resposabilidade para o provedor de persistencia, que nesse
+	// caso é o mysql
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column
 	private String nome;
-	
+
 	@Column
 	private BigDecimal taxaFrete;
 
@@ -58,6 +66,5 @@ public class Restaurante {
 	public void setTaxaFrete(BigDecimal taxaFrete) {
 		this.taxaFrete = taxaFrete;
 	}
-	
-	
+
 }
