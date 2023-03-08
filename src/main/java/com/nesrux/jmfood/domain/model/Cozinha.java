@@ -13,12 +13,17 @@ public class Cozinha {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column
 	private String nome;
 
 	public Long getId() {
 		return id;
+	}
+
+	Cozinha(){}
+	public Cozinha(String nome) {
+		this.nome = nome;
 	}
 
 	public void setId(Long id) {
@@ -49,6 +54,5 @@ public class Cozinha {
 		Cozinha other = (Cozinha) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
+
 }
