@@ -1,0 +1,7 @@
+insert into cozinha (nome) values('tailandesa')
+insert into cozinha (nome) values('Brasileira')
+insert into cozinha (nome) values('Japonesa')
+insert into cozinha (nome) values('Espanhola')
+insert into cozinha (nome) values('Portuguesa')
+insert into cozinha (nome) values('Romena')
+insert into cozinha (nome) values('teste')
