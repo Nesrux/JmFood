@@ -31,4 +31,10 @@ public class CadastroCozinha {
 		 * Oque ele vai fazer nesse caso é um SELECT * from Cozinha where ID
 		 */
 	}
+
+	@Transactional
+	public void remover(Cozinha cozinha) {
+		cozinha = buscar(cozinha.getId());
+		menager.remove(cozinha);
+	}
 }
