@@ -14,14 +14,21 @@ import com.nesrux.jmfood.domain.model.Cozinha;
 public class CadastroCozinha {
 
 	@PersistenceContext // Injeção de persistencia do próprio JPA
-	private EntityManager manager;
+	private EntityManager menager;
 
 	public List<Cozinha> listar() {
-		return manager.createQuery("from Cozinha", Cozinha.class).getResultList();
+		return menager.createQuery("from Cozinha", Cozinha.class).getResultList();
 	}
 
 	@Transactional
 	public Cozinha adicionar(Cozinha cozinha) {
-		return manager.merge(cozinha);
+		return menager.merge(cozinha);
+	}
+
+	public Cozinha buscar(Long id) {
+		return menager.find(Cozinha.class, id);
+		/*
+		 * Oque ele vai fazer nesse caso é um SELECT * from Cozinha where ID
+		 */
 	}
 }
