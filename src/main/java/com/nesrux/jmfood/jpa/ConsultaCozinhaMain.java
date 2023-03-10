@@ -8,13 +8,14 @@ import org.springframework.context.ApplicationContext;
 
 import com.nesrux.jmfood.JmFoodApiApplication;
 import com.nesrux.jmfood.domain.model.Cozinha;
+import com.nesrux.jmfood.domain.repository.CozinhaRepository;
 
 public class ConsultaCozinhaMain {
 	public static void main(String[] args) {
 		ApplicationContext app = new SpringApplicationBuilder(JmFoodApiApplication.class).web(WebApplicationType.NONE)
 				.run(args);
 
-		CadastroCozinha cadastroCozinha = app.getBean(CadastroCozinha.class);
+		CozinhaRepository cadastroCozinha = app.getBean(CozinhaRepository.class);
 
 		List<Cozinha> cozinhas = cadastroCozinha.listar();
 		
