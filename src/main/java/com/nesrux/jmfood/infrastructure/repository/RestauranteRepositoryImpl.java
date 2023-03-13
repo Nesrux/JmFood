@@ -5,9 +5,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Component;
+
 import com.nesrux.jmfood.domain.model.Restaurante;
 import com.nesrux.jmfood.domain.repository.RestauranteRepository;
 
+@Component
 public class RestauranteRepositoryImpl implements RestauranteRepository {
 
 	@PersistenceContext
