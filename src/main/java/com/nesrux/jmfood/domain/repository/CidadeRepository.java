@@ -5,11 +5,12 @@ import java.util.List;
 import com.nesrux.jmfood.domain.model.Cidade;
 
 public interface CidadeRepository {
-	List<Cidade> listar();
-
 	Cidade salvar(Cidade Cidade);
+
+	Cidade buscar(Long id);
+
+	List<Cidade> listar();
 
 	void remover(Cidade Cidade);
 
-	Cidade buscar(Long id);
 }

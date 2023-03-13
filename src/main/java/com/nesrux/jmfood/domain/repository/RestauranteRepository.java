@@ -6,12 +6,12 @@ import com.nesrux.jmfood.domain.model.Restaurante;
 
 public interface RestauranteRepository {
 	// Repositório orientado a persistencia
-	List<Restaurante> listar();
+	Restaurante buscar(Long id);
 
 	Restaurante salvar(Restaurante restaurante);
 
-	void remover(Restaurante restaurante);
+	List<Restaurante> listar();
 
-	Restaurante buscar(Long id);
+	void remover(Restaurante restaurante);
 
 }
