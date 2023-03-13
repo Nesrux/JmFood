@@ -7,9 +7,9 @@ import com.nesrux.jmfood.domain.model.Cidade;
 public interface CidadeRepository {
 	List<Cidade> listar();
 
-	Cidade salvar(Cidade estado);
+	Cidade salvar(Cidade Cidade);
 
-	void remover(Cidade estado);
+	void remover(Cidade Cidade);
 
 	Cidade buscar(Long id);
 }
