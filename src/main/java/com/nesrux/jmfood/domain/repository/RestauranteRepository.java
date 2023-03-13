@@ -8,10 +8,10 @@ public interface RestauranteRepository {
 	// Repositório orientado a persistencia
 	List<Restaurante> listar();
 
-	Restaurante buscar();
+	Restaurante salvar(Restaurante restaurante);
 
-	Restaurante salvar();
+	void remover(Restaurante restaurante);
 
-	void remover();
+	Restaurante buscar(Long id);
 
 }
