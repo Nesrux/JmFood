@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.Data;
@@ -27,16 +28,19 @@ public class Restaurante {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column
+	@Column(nullable = false)
 	private String nome;
 
-	@Column
+	@Column(nullable = false) //Por padrão é true
 	private BigDecimal taxaFrete;
 
-	
-	//Vai criar uma coluna na tabela restaurante com o nome Cozinha_ID
-	//Essa coluna vai ser uma FK da tabela Cozinha
+	// Vai criar uma coluna na tabela restaurante com o nome Cozinha_ID
+	// Essa coluna vai ser uma FK da tabela Cozinha
 	@ManyToOne
+	// Se eu quiser renomear essa coluna é necessario
+	// utilizar a anotação joinColumn que esencialmente faz o mesmo
+	// Com a opção de renomear a coluna
+	@JoinColumn(name = "cozinha_id", nullable = false)
 	private Cozinha cozinha;
 
 }
