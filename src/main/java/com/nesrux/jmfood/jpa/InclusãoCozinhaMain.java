@@ -15,11 +15,16 @@ public class InclusãoCozinhaMain {
 
 		CozinhaRepository cadastroCozinha = app.getBean(CozinhaRepository.class);
 
-		Cozinha cozinha = new Cozinha("Paulista");
-		Cozinha cozinha2 = new Cozinha("Carioca");
-		Cozinha cozinha3 = new Cozinha("Mineira");
-		Cozinha cozinha4 = new Cozinha("Cearense");
+		Cozinha cozinha = new Cozinha();
+		Cozinha cozinha2 = new Cozinha();
+		Cozinha cozinha3 = new Cozinha();
+		Cozinha cozinha4 = new Cozinha();
 
+		cozinha.setNome("paulista");
+		cozinha2.setNome("adventista");
+		cozinha3.setNome("taxista");
+		cozinha4.setNome("otorrinarigologista");
+		
 		cadastroCozinha.salvar(cozinha);
 		cadastroCozinha.salvar(cozinha2);
 		cadastroCozinha.salvar(cozinha3);
