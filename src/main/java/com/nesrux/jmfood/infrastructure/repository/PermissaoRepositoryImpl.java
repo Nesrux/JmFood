@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import com.nesrux.jmfood.domain.model.Permissao;
 import com.nesrux.jmfood.domain.repository.PermissaoRepository;
 
-public class PermissaiRepositoryImpl implements PermissaoRepository {
+public class PermissaoRepositoryImpl implements PermissaoRepository {
 	@PersistenceContext
 	private EntityManager manager;
 
