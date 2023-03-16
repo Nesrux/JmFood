@@ -5,9 +5,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Component;
+
 import com.nesrux.jmfood.domain.model.Permissao;
 import com.nesrux.jmfood.domain.repository.PermissaoRepository;
-
+@Component
 public class PermissaoRepositoryImpl implements PermissaoRepository {
 	@PersistenceContext
 	private EntityManager manager;

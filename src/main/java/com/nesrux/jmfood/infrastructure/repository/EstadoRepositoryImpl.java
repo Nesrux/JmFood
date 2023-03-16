@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.nesrux.jmfood.domain.model.Estado;
 import com.nesrux.jmfood.domain.repository.EstadoRepository;
+
 @Component
 public class EstadoRepositoryImpl implements EstadoRepository {
 	@PersistenceContext

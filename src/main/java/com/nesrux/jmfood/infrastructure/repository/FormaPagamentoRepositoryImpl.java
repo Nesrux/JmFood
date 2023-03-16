@@ -5,9 +5,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Component;
+
 import com.nesrux.jmfood.domain.model.FormaPagamento;
 import com.nesrux.jmfood.domain.repository.FormaPagamentoRepository;
-
+@Component
 public class FormaPagamentoRepositoryImpl implements FormaPagamentoRepository {
 	@PersistenceContext
 	private EntityManager manager;
