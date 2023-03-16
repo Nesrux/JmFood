@@ -5,9 +5,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Component;
+
 import com.nesrux.jmfood.domain.model.Estado;
 import com.nesrux.jmfood.domain.repository.EstadoRepository;
-
+@Component
 public class EstadoRepositoryImpl implements EstadoRepository {
 	@PersistenceContext
 	private EntityManager manager;
