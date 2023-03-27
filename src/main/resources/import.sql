@@ -4,7 +4,6 @@ insert into cozinha (id, nome) values(3 , 'Japonesa')
 insert into cozinha (id, nome) values(4 ,'Espanhola')
 insert into cozinha (id, nome) values(5 , 'Portuguesa')
 insert into cozinha (id, nome) values(6, 'Romena')
-insert into cozinha (id, nome) values(7, 'teste')
 
 
 insert into restaurante (nome, taxa_frete, cozinha_id) values  ('EAI BURGUER', 2.7, 2) 
