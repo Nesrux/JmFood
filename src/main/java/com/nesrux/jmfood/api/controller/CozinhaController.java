@@ -1,9 +1,11 @@
 package com.nesrux.jmfood.api.controller;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -69,12 +71,16 @@ public class CozinhaController {
 
 	@DeleteMapping("/{cozinhaId}")
 	public ResponseEntity<Cozinha> deletar(@PathVariable Long cozinhaId) {
-		Cozinha cozinhaAtual = cozinhaRepository.buscar(cozinhaId);
-		if (cozinhaAtual == null) {
-			return ResponseEntity.status(404).build();
+		try {
+			Cozinha cozinhaAtual = cozinhaRepository.buscar(cozinhaId);
+			if (cozinhaAtual == null) {
+				return ResponseEntity.status(404).build();
+			}
+			cozinhaRepository.remover(cozinhaAtual);
+			return ResponseEntity.noContent().build();
+		} catch (DataIntegrityViolationException e) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
-		cozinhaRepository.remover(cozinhaAtual);
-		return ResponseEntity.ok().body(cozinhaAtual);
 	}
 
 }
