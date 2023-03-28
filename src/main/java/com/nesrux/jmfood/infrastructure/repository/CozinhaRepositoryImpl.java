@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
 import com.nesrux.jmfood.domain.model.Cozinha;
@@ -34,9 +35,14 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
 
 	@Override
 	@Transactional
-	public void remover(Cozinha cozinha) {
+	public void remover(Long cozinhaId) {
 		// Ele só funciona assim , pois existem varios estados de beans no Spring//
-		cozinha = buscar(cozinha.getId());
+		Cozinha cozinha = buscar(cozinhaId);
+		
+		if(cozinha == null ) {
+			throw new EmptyResultDataAccessException(1);
+		}
+		
 		menager.remove(cozinha);
 	}
 
