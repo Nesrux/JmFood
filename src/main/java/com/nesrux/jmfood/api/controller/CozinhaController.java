@@ -1,10 +1,8 @@
 package com.nesrux.jmfood.api.controller;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,12 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nesrux.jmfood.api.model.CozinhasXmlWrapper;
 import com.nesrux.jmfood.domain.model.Cozinha;
 import com.nesrux.jmfood.domain.repository.CozinhaRepository;
+import com.nesrux.jmfood.domain.service.CadastroCozinhaService;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @RestController
 @RequestMapping("/cozinhas")
 public class CozinhaController {
-	@Autowired
+
 	private CozinhaRepository cozinhaRepository;
+	private CadastroCozinhaService cozinhaService;
 
 	@GetMapping()
 	public List<Cozinha> listar() {
@@ -52,7 +55,8 @@ public class CozinhaController {
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public Cozinha adicionar(@RequestBody Cozinha cozinha) {
-		return cozinhaRepository.salvar(cozinha);
+		
+		return cozinhaService.salvar(cozinha);
 	}
 
 	@PutMapping("/{cozinhaId}")
