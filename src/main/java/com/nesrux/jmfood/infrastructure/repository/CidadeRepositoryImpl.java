@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.nesrux.jmfood.domain.model.Cidade;
 import com.nesrux.jmfood.domain.repository.CidadeRepository;
+
 @Component
 public class CidadeRepositoryImpl implements CidadeRepository {
 	@PersistenceContext
@@ -28,8 +29,8 @@ public class CidadeRepositoryImpl implements CidadeRepository {
 
 	@Override
 	@Transactional
-	public void remover(Cidade cidade) {
-		cidade = buscar(cidade.getId());
+	public void remover(Long cidadeId) {
+		Cidade cidade = buscar(cidadeId);
 		manager.remove(cidade);
 	}
 

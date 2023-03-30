@@ -12,6 +12,6 @@ public interface CidadeRepository {
 
 	List<Cidade> listar();
 
-	void remover(Cidade Cidade);
+	void remover(Long cidadeId);
 
 }
