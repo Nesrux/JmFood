@@ -61,8 +61,8 @@ public class RestauranteController {
 			Restaurante restauranteAtual = repository.buscar(restauranteId);
 			if (restauranteAtual != null) {
 				BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
-				restauranteAtual = restauranteService.savar(restauranteAtual);
 
+				restauranteAtual = restauranteService.savar(restauranteAtual);
 				return ResponseEntity.ok().body(restauranteAtual);
 			}
 			return ResponseEntity.notFound().build();

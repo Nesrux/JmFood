@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nesrux.jmfood.domain.exception.EntidadeNaoEncontradaException;
@@ -45,9 +44,14 @@ public class CidadeController {
 	}
 
 	@PostMapping()
-	@ResponseStatus(code = HttpStatus.CREATED)
-	public Cidade adicionar(@RequestBody Cidade cidade) {
-		return cidadeService.salvar(cidade);
+
+	public ResponseEntity<?> adicionar(@RequestBody Cidade cidade) {
+		try {
+			cidade = cidadeService.salvar(cidade);
+			return ResponseEntity.status(HttpStatus.CREATED).body(cidade);
+		} catch (EntidadeNaoEncontradaException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
 
 	}
 
@@ -59,7 +63,7 @@ public class CidadeController {
 				BeanUtils.copyProperties(cidade, cidadeAtual, "id");
 
 				cidadeAtual = cidadeService.salvar(cidadeAtual);
-				return ResponseEntity.ok(cidadeAtual);
+				return ResponseEntity.ok().body(cidadeAtual);
 			}
 			return ResponseEntity.notFound().build();
 		} catch (EntidadeNaoEncontradaException e) {

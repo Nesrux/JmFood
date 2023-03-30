@@ -18,14 +18,17 @@ public class CadastroCidadeService {
 	private EstadoRepository estadoRepository;
 
 	public Cidade salvar(Cidade cidade) {
-		Long cidadeId = cidade.getEstado().getId();
-		Estado estado = estadoRepository.buscar(cidadeId);
+		Long estadoId = cidade.getEstado().getId();
+		Estado estado = estadoRepository.buscar(estadoId);
 
 		if (estado == null) {
-			throw new EntidadeNaoEncontradaException(String.format("Não existe cadastro com o código %d", cidadeId));
+			throw new EntidadeNaoEncontradaException(
+					String.format("Não existe cadastro de estado com código %d", estadoId));
 		}
 
-		return repository.salvar(cidade);
-	}
+		cidade.setEstado(estado);
 
+		return repository.salvar(cidade);
+
+	}
 }
