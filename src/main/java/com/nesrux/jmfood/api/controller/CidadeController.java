@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nesrux.jmfood.domain.exception.EntidadeNaoEncontradaException;
 import com.nesrux.jmfood.domain.model.Cidade;
 import com.nesrux.jmfood.domain.repository.CidadeRepository;
 import com.nesrux.jmfood.domain.service.CadastroCidadeService;
@@ -52,13 +52,18 @@ public class CidadeController {
 	}
 
 	@PutMapping("/{cidadeId}")
-	public ResponseEntity<Cidade> atualizar(@PathVariable Long cidadeId, @RequestBody Cidade cidade) {
-		Cidade cidadeAtual = cidadeRepository.buscar(cidadeId);
-		if (cidade != null) {
-			cidadeService.salvar(cidade);
-			BeanUtils.copyProperties(cidade, cidadeAtual);
-			return ResponseEntity.ok(cidade);
+	public ResponseEntity<?> atualizar(@PathVariable Long cidadeId, @RequestBody Cidade cidade) {
+		try {
+			Cidade cidadeAtual = cidadeRepository.buscar(cidadeId);
+			if (cidade != null) {
+				BeanUtils.copyProperties(cidade, cidadeAtual, "id");
+
+				cidadeAtual = cidadeService.salvar(cidadeAtual);
+				return ResponseEntity.ok(cidadeAtual);
+			}
+			return ResponseEntity.notFound().build();
+		} catch (EntidadeNaoEncontradaException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-		return ResponseEntity.notFound().build();
 	}
 }
