@@ -3,6 +3,7 @@ package com.nesrux.jmfood.api.controller;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,14 +22,14 @@ import com.nesrux.jmfood.domain.model.Cozinha;
 import com.nesrux.jmfood.domain.repository.CozinhaRepository;
 import com.nesrux.jmfood.domain.service.CadastroCozinhaService;
 
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/cozinhas")
 public class CozinhaController {
 
+	@Autowired
 	private CozinhaRepository cozinhaRepository;
+	@Autowired
 	private CadastroCozinhaService cozinhaService;
 
 	@GetMapping()
