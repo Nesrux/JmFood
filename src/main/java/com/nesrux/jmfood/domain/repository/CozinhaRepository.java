@@ -9,6 +9,8 @@ public interface CozinhaRepository {
 	Cozinha buscar(Long id);
 
 	Cozinha salvar(Cozinha cozinha);
+	
+	List<Cozinha> buscarNome (String nome);
 
 	void remover(Long id);
 

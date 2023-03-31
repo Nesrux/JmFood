@@ -34,15 +34,22 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
 	}
 
 	@Override
+	public List<Cozinha> buscarNome(String nome) {
+		return menager.createQuery("from Cozinha where nome = :nome", Cozinha.class)
+				.setParameter("nome", nome)
+				.getResultList();
+	}
+
+	@Override
 	@Transactional
 	public void remover(Long cozinhaId) {
 		// Ele só funciona assim , pois existem varios estados de beans no Spring//
 		Cozinha cozinha = buscar(cozinhaId);
-		
-		if(cozinha == null ) {
+
+		if (cozinha == null) {
 			throw new EmptyResultDataAccessException(1);
 		}
-		
+
 		menager.remove(cozinha);
 	}
 
