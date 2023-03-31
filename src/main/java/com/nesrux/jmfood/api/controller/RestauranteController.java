@@ -1,5 +1,6 @@
 package com.nesrux.jmfood.api.controller;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -88,7 +90,12 @@ public class RestauranteController {
 
 	private void merge(Map<String, Object> camposOrigem, Restaurante restaurantesDestino) {
 		camposOrigem.forEach((propriedade, valor) -> {
+			Field field = ReflectionUtils.findField(Restaurante.class, propriedade);
+			field.setAccessible(true);
+
 			System.out.println(propriedade + " = " + valor);
+
+			ReflectionUtils.setField(field, restaurantesDestino, valor);
 		});
 	}
 }
