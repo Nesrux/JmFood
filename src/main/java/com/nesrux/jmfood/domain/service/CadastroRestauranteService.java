@@ -18,16 +18,13 @@ public class CadastroRestauranteService {
 	@Autowired
 	private CozinhaRepository cozinhaRepository;
 
-
 	public Restaurante savar(Restaurante restaurante) {
 		Long cozinhaId = restaurante.getCozinha().getId();
-		Cozinha cozinha = cozinhaRepository.buscar(cozinhaId);
-
-		if(cozinha == null) {
-			throw new EntidadeNaoEncontradaException(String
-					.format("Não existe cadastro com o código %d", cozinhaId ));
-		}
-		
+		Cozinha cozinha = cozinhaRepository.findById(cozinhaId)
+				.orElseThrow(() -> 	new EntidadeNaoEncontradaException(String
+						.format("Não existe cadastro com o código %d", cozinhaId ))
+						);
+		restaurante.setCozinha(cozinha);
 		return repository.salvar(restaurante);
 	}
 
