@@ -99,6 +99,7 @@ public class RestauranteController {
 			Field field = ReflectionUtils.findField(Restaurante.class, propriedade);
 			field.setAccessible(true);
 
+			@SuppressWarnings("unused")
 			Object novoValor = ReflectionUtils.getField(field, restauranteOrigem);
 
 			ReflectionUtils.setField(field, restaurantesDestino, valor);
