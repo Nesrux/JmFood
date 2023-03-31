@@ -23,7 +23,6 @@ import com.nesrux.jmfood.domain.model.Cozinha;
 import com.nesrux.jmfood.domain.repository.CozinhaRepository;
 import com.nesrux.jmfood.domain.service.CadastroCozinhaService;
 
-
 @RestController
 @RequestMapping("/cozinhas")
 public class CozinhaController {
@@ -40,7 +39,7 @@ public class CozinhaController {
 
 	@GetMapping("/{cozinhaId}")
 	public ResponseEntity<Cozinha> buscar(@PathVariable Long cozinhaId) {
-	 Optional<Cozinha> cozinha = cozinhaRepository.findById(cozinhaId);
+		Optional<Cozinha> cozinha = cozinhaRepository.findById(cozinhaId);
 
 		if (cozinha.isPresent()) {
 			return ResponseEntity.ok(cozinha.get());
@@ -60,10 +59,10 @@ public class CozinhaController {
 		Optional<Cozinha> cozinhaAtual = cozinhaRepository.findById(cozinhaId);
 		if (cozinhaAtual.isPresent()) {
 			// Importante
-			BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
+			BeanUtils.copyProperties(cozinha, cozinhaAtual.get(), "id");
 
-			cozinhaService.salvar(cozinhaAtual.get());
-			return ResponseEntity.ok(cozinhaAtual.get());
+			Cozinha cozinhaSalva = cozinhaService.salvar(cozinhaAtual.get());
+			return ResponseEntity.ok(cozinhaSalva);
 		}
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
