@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nesrux.jmfood.domain.exception.EntidadeNaoEncontradaException;
 import com.nesrux.jmfood.domain.model.Restaurante;
 import com.nesrux.jmfood.domain.repository.RestauranteRepository;
@@ -89,11 +90,16 @@ public class RestauranteController {
 	}
 
 	private void merge(Map<String, Object> camposOrigem, Restaurante restaurantesDestino) {
+		ObjectMapper mapper = new ObjectMapper();
+
+		Restaurante restauranteOrigem = mapper.convertValue(camposOrigem, Restaurante.class);
+
 		camposOrigem.forEach((propriedade, valor) -> {
+		
 			Field field = ReflectionUtils.findField(Restaurante.class, propriedade);
 			field.setAccessible(true);
 
-			System.out.println(propriedade + " = " + valor);
+			Object novoValor = ReflectionUtils.getField(field, restauranteOrigem);
 
 			ReflectionUtils.setField(field, restaurantesDestino, valor);
 		});
