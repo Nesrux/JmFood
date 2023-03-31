@@ -1,19 +1,11 @@
 package com.nesrux.jmfood.domain.repository;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.nesrux.jmfood.domain.model.Cozinha;
 
-public interface CozinhaRepository {
-	// Repositório orientado a persistencia
-	Cozinha buscar(Long id);
-
-	Cozinha salvar(Cozinha cozinha);
-	
-	List<Cozinha> buscarNome (String nome);
-
-	void remover(Long id);
-
-	List<Cozinha> listar();
+@Repository
+public interface CozinhaRepository extends JpaRepository<Cozinha, Long> {
 
 }
