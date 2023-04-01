@@ -1,5 +1,7 @@
 package com.nesrux.jmfood.domain.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -21,14 +23,14 @@ public class CadastroCidadeService {
 
 	public Cidade salvar(Cidade cidade) {
 		Long estadoId = cidade.getEstado().getId();
-		Estado estado = estadoRepository.buscar(estadoId);
+		Optional<Estado> estado = estadoRepository.findById(estadoId);
 
 		if (estado == null) {
 			throw new EntidadeNaoEncontradaException(
 					String.format("Não existe cadastro de estado com código %d", estadoId));
 		}
 
-		cidade.setEstado(estado);
+		cidade.setEstado(estado.get());
 
 		return cidadeRepository.salvar(cidade);
 

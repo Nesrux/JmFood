@@ -1,5 +1,7 @@
 package com.nesrux.jmfood.domain.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -15,14 +17,14 @@ public class CadastroEstadoService {
 	@Autowired
 	private EstadoRepository estadoRepository;
 
-	public Estado Salvar(Estado estado) {
-		return estadoRepository.salvar(estado);
+	public Estado salvar(Estado estado) {
+		return estadoRepository.save(estado);
 	}
 
 	public void excluir(Long estadoId) {
 		try {
-			Estado estado = estadoRepository.buscar(estadoId);
-			estadoRepository.remover(estado);
+			Optional<Estado> estado = estadoRepository.findById(estadoId);
+			estadoRepository.delete(estado.get());
 
 		} catch (EmptyResultDataAccessException e) {
 			throw new EntidadeNaoEncontradaException(

@@ -1,17 +1,10 @@
 package com.nesrux.jmfood.domain.repository;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.nesrux.jmfood.domain.model.Estado;
 
-public interface EstadoRepository {
+public interface EstadoRepository extends JpaRepository<Estado, Long> {
 
-	Estado buscar(Long id);
-
-	Estado salvar(Estado estado);
-
-	void remover(Estado estado);
-
-	List<Estado> listar();
 
 }
