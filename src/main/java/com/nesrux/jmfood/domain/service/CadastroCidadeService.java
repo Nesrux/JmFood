@@ -32,13 +32,13 @@ public class CadastroCidadeService {
 
 		cidade.setEstado(estado.get());
 
-		return cidadeRepository.salvar(cidade);
+		return cidadeRepository.save(cidade);
 
 	}
 
 	public void excluir(Long cidadeId) {
 		try {
-			cidadeRepository.remover(cidadeId);
+			cidadeRepository.deleteById(cidadeId);
 		} catch (IllegalArgumentException e) {
 			throw new EntidadeNaoEncontradaException(
 					String.format("Não existe um cadastro de cidade com código %d", cidadeId));

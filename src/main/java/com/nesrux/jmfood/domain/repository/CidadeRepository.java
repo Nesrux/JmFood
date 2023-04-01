@@ -1,17 +1,10 @@
 package com.nesrux.jmfood.domain.repository;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.nesrux.jmfood.domain.model.Cidade;
 
-public interface CidadeRepository {
-	Cidade salvar(Cidade Cidade);
+public interface CidadeRepository  extends JpaRepository<Cidade, Long>{
 
-	
-	Cidade buscar(Long id);
-
-	List<Cidade> listar();
-
-	void remover(Long cidadeId);
 
 }
