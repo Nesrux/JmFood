@@ -56,4 +56,9 @@ public class TesteController {
 		return restauranteRepository.findTop2RestauranteByNomeContaining(nome);
 
 	}
+
+	@GetMapping("/restaurantes/quantidade")
+	public int quantidadeDeCozinhas(Long id) {
+		return restauranteRepository.countByCozinhaId(id);
+	}
 }
