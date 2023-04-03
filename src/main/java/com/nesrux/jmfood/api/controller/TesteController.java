@@ -2,6 +2,7 @@ package com.nesrux.jmfood.api.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,8 +34,15 @@ public class TesteController {
 	public List<Restaurante> RestaurantePorTaxaFrete(BigDecimal v1, BigDecimal v2) {
 		return restauranteRepository.findByTaxaFreteBetween(v1, v2);
 	}
+
 	@GetMapping("/restaurantes/por-nome-e-id")
 	public List<Restaurante> restaurantePorNomeEid(String nome, Long id) {
 		return restauranteRepository.findByNomeContainingAndCozinhaId(nome, id);
+	}
+
+	@GetMapping("/restaurantes/primeiro")
+	public Optional<Restaurante> pRestaurante(String nome) {
+		return restauranteRepository.findFristRestauranteByNomeContaining(nome);
+
 	}
 }
