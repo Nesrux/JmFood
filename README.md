@@ -14,15 +14,10 @@
 
 O projeto ja foi completo !!!
 
-- [x] Criar o projeto
-- [x] Adicionar as dependencias necessarias
-- [x] Criar classes de dominio
-- [x] Criar classes de controle
-- [x] Criar classes de configuração
-- [x] Tratar exceções
-- [x] Fazer o crud
-- [x] Métodos não crud
-- [x] Finalizar projeto
+- [x] Criar o projeto e adicionar dependencias.
+- [x] criar classes de deminio.
+- [x] criar interfaces com JpaRepository.
+- [x] fazer o crud da API.
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
