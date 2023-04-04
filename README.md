@@ -31,7 +31,7 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 * Você instalou a versão de `MySql 8.0`
 * Você tem uma máquina `Windows`
 
-## 🚀 Instalando Jmlog
+## 🚀 Instalando JmFood
 
 Para instalar o JmFood, siga estas etapas:
 
