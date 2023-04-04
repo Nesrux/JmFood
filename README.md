@@ -6,9 +6,9 @@
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 
 
-<img src="restapi2.png" alt="exemplo imagem">
+<!--<img src="restapi2.png" alt="exemplo imagem">-->
 
-> Uma RestAPI que feita com o intuíto de aprender os conceitos Rest, ela simula um sistema de envio de mercadoria.
+> Uma API Rest feita com Java e spring para simular um sistema de delivey de entrega de comida
 
 ### Ajustes e melhorias
 
@@ -33,18 +33,18 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 ## 🚀 Instalando Jmlog
 
-Para instalar o JmLog, siga estas etapas:
+Para instalar o JmFood, siga estas etapas:
 
 Git:
 ```
-$ git clone https://github.com/Nesrux/Jmlog.git
+$ git clone https://github.com/Nesrux/JmFood.git
 ```
 
 Depois em sua IDE de preferencia, de Start no arquivo, que as dependencias vão ser baixadas automaticamente e a aplicação sera iniciada!
 
-## 📫 Contribuindo para o JmLog
+## 📫 Contribuindo para o JmFood
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
-Para contribuir com JmLog, siga estas etapas:
+Para contribuir com JmFood, siga estas etapas:
 
 1. Bifurque este repositório.
 2. Crie um branch: `git checkout -b <nome_branch>`.
