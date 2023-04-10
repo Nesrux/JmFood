@@ -1,6 +1,7 @@
 package com.nesrux.jmfood.infrastructure.repository;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,6 +13,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import com.nesrux.jmfood.domain.model.Restaurante;
 import com.nesrux.jmfood.domain.repository.CustomizedRestauranteRepository;
@@ -29,11 +31,18 @@ public class RestauranteRepositoryImpl implements CustomizedRestauranteRepositor
 		CriteriaQuery<Restaurante> criteria = builder.createQuery(Restaurante.class);
 		Root<Restaurante> root = criteria.from(Restaurante.class);// FROM Restaurante
 
-		Predicate nomePredicate = builder.like(root.get("nome"), "%" + nome + "%");
-		Predicate taxaInicialPredicate = builder.greaterThanOrEqualTo(root.get("taxaFrete"), taxaFreteInicial);
-		Predicate taxaFinalPredicate = builder.lessThanOrEqualTo(root.get("taxaFrete"), taxaFreteFinal);
+		var predicates = new ArrayList<Predicate>();
 
-		criteria.where(nomePredicate, taxaInicialPredicate, taxaFinalPredicate);
+		if (StringUtils.hasText(nome)) {
+			predicates.add(builder.like(root.get("nome"), "%" + nome + "%"));
+		}
+		if (taxaFreteInicial != null) {
+			predicates.add(builder.greaterThanOrEqualTo(root.get("taxaFrete"), taxaFreteInicial));
+		}
+		if (taxaFreteFinal != null) {
+			predicates.add(builder.lessThanOrEqualTo(root.get("taxaFrete"), taxaFreteFinal));
+		}
+		criteria.where(predicates.toArray(new Predicate[0]));
 
 		TypedQuery<Restaurante> query = manager.createQuery(criteria);
 
