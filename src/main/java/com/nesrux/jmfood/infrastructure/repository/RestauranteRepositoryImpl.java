@@ -8,6 +8,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
@@ -24,13 +26,16 @@ public class RestauranteRepositoryImpl implements CustomizedRestauranteRepositor
 	@Override
 	public List<Restaurante> find(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
-
 		CriteriaQuery<Restaurante> criteria = builder.createQuery(Restaurante.class);
-		criteria.from(Restaurante.class);//FROM Restaurante
+		Root<Restaurante> root = criteria.from(Restaurante.class);// FROM Restaurante
+		
+		Predicate nomePredicate = builder.like(root.get("nome"), "%" + nome + "%");
+		
+		criteria.where(nomePredicate);
 
-		TypedQuery<Restaurante> query =  manager.createQuery(criteria);
-		
+		TypedQuery<Restaurante> query = manager.createQuery(criteria);
+
 		return query.getResultList();
-		
+
 	}
 }
