@@ -27,6 +27,8 @@ public class RestauranteRepositoryImpl implements CustomizedRestauranteRepositor
 
 	@Override
 	public List<Restaurante> find(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
+		//TODO Estudar sobre Criteria API
+		
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Restaurante> criteria = builder.createQuery(Restaurante.class);
 		Root<Restaurante> root = criteria.from(Restaurante.class);// FROM Restaurante

@@ -14,6 +14,8 @@ import com.nesrux.jmfood.domain.model.Cozinha;
 import com.nesrux.jmfood.domain.model.Restaurante;
 import com.nesrux.jmfood.domain.repository.CozinhaRepository;
 import com.nesrux.jmfood.domain.repository.RestauranteRepository;
+import com.nesrux.jmfood.infrastructure.repository.spec.RestauranteComFreteGratisSpec;
+import com.nesrux.jmfood.infrastructure.repository.spec.RestauranteComNomeSemelhanteSpec;
 
 @RestController
 @RequestMapping("/teste")
@@ -65,5 +67,12 @@ public class TesteController {
 	@GetMapping("restaurantes/por-nome-taxa")
 	public List<Restaurante> seila(String nome, BigDecimal taxaInicial, BigDecimal taxaFinal) {
 		return restauranteRepository.find(nome, taxaInicial, taxaFinal);
+	}
+	
+	@GetMapping("restaurantes/com-frete-gratis")
+	public List<Restaurante> comFreteGratiz(String nome) {
+		var comFreteGratis = new RestauranteComFreteGratisSpec();
+		var comNomeSemelhante = new RestauranteComNomeSemelhanteSpec(nome);
+		return restauranteRepository.findAll(comFreteGratis.and(comNomeSemelhante));
 	}
 }
