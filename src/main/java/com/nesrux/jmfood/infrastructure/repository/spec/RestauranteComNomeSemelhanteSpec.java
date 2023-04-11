@@ -18,8 +18,9 @@ public class RestauranteComNomeSemelhanteSpec implements Specification<Restauran
 	private String nome;
 	
 	@Override
-	public Predicate toPredicate(Root<Restaurante> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-
-		return builder.equal(root.get("nome"), "%" + nome + "%");
+	public Predicate toPredicate(Root<Restaurante> root, CriteriaQuery<?> query, 
+			CriteriaBuilder builder) {
+		
+		return builder.like(root.get("nome"), "%" + nome + "%");
 	}
 }
