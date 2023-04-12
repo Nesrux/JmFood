@@ -1,5 +1,8 @@
 package com.nesrux.jmfood.api.controller;
 
+import static com.nesrux.jmfood.infrastructure.repository.spec.RestauranteSpecs.comFreteGratis;
+import static com.nesrux.jmfood.infrastructure.repository.spec.RestauranteSpecs.comNomeSemelhante;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -14,8 +17,6 @@ import com.nesrux.jmfood.domain.model.Cozinha;
 import com.nesrux.jmfood.domain.model.Restaurante;
 import com.nesrux.jmfood.domain.repository.CozinhaRepository;
 import com.nesrux.jmfood.domain.repository.RestauranteRepository;
-import com.nesrux.jmfood.infrastructure.repository.spec.RestauranteComFreteGratisSpec;
-import com.nesrux.jmfood.infrastructure.repository.spec.RestauranteComNomeSemelhanteSpec;
 
 @RestController
 @RequestMapping("/teste")
@@ -68,11 +69,9 @@ public class TesteController {
 	public List<Restaurante> seila(String nome, BigDecimal taxaInicial, BigDecimal taxaFinal) {
 		return restauranteRepository.find(nome, taxaInicial, taxaFinal);
 	}
-	
+	//TODO Estudar sobre DDD e as implementações do Spring, como a especfication
 	@GetMapping("restaurantes/com-frete-gratis")
-	public List<Restaurante> comFreteGratiz(String nome) {
-		var comFreteGratis = new RestauranteComFreteGratisSpec();
-		var comNomeSemelhante = new RestauranteComNomeSemelhanteSpec(nome);
-		return restauranteRepository.findAll(comFreteGratis.and(comNomeSemelhante));
+	public List<Restaurante> comFreteGratuito(String nome) {
+		return restauranteRepository.findAll(comFreteGratis().and(comNomeSemelhante(nome)));
 	}
 }
