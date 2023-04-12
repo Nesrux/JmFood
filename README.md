@@ -12,8 +12,6 @@
 
 ### Ajustes e melhorias
 
-O projeto ja foi completo !!!
-
 - [x] Criar o projeto e adicionar dependencias.
 - [x] criar classes de deminio.
 - [x] criar interfaces com JpaRepository.
