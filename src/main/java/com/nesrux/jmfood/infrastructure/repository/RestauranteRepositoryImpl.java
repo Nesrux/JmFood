@@ -1,5 +1,8 @@
 package com.nesrux.jmfood.infrastructure.repository;
 
+import static com.nesrux.jmfood.infrastructure.repository.spec.RestauranteSpecs.comFreteGratis;
+import static com.nesrux.jmfood.infrastructure.repository.spec.RestauranteSpecs.comNomeSemelhante;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +15,14 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import com.nesrux.jmfood.domain.model.Restaurante;
 import com.nesrux.jmfood.domain.repository.CustomizedRestauranteRepository;
+import com.nesrux.jmfood.domain.repository.RestauranteRepository;
 
 @Repository
 public class RestauranteRepositoryImpl implements CustomizedRestauranteRepository {
@@ -24,6 +30,9 @@ public class RestauranteRepositoryImpl implements CustomizedRestauranteRepositor
 	// método find com o método no controller
 	@PersistenceContext
 	private EntityManager manager;
+	
+	@Autowired @Lazy
+	private RestauranteRepository repository;
 
 	@Override
 	public List<Restaurante> find(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
@@ -50,5 +59,9 @@ public class RestauranteRepositoryImpl implements CustomizedRestauranteRepositor
 
 		return query.getResultList();
 
+	}
+	@Override
+	public List<Restaurante> findComFreteGratis(String nome) {
+		return repository.findAll(comFreteGratis().and(comNomeSemelhante(nome)));
 	}
 }

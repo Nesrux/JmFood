@@ -1,8 +1,5 @@
 package com.nesrux.jmfood.api.controller;
 
-import static com.nesrux.jmfood.infrastructure.repository.spec.RestauranteSpecs.comFreteGratis;
-import static com.nesrux.jmfood.infrastructure.repository.spec.RestauranteSpecs.comNomeSemelhante;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -69,9 +66,10 @@ public class TesteController {
 	public List<Restaurante> seila(String nome, BigDecimal taxaInicial, BigDecimal taxaFinal) {
 		return restauranteRepository.find(nome, taxaInicial, taxaFinal);
 	}
-	//TODO Estudar sobre DDD e as implementações do Spring, como a especfication
+
+	// TODO Estudar sobre DDD e as implementações do Spring, como a especfication
 	@GetMapping("restaurantes/com-frete-gratis")
 	public List<Restaurante> comFreteGratuito(String nome) {
-		return restauranteRepository.findAll(comFreteGratis().and(comNomeSemelhante(nome)));
+		return restauranteRepository.findComFreteGratis(nome);
 	}
 }
