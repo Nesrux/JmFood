@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -36,33 +37,33 @@ public class Restaurante {
 	@Column(nullable = false)
 	private String nome;
 
-	@Column(nullable = false) //Por padrão é true
+	@Column(nullable = false) // Por padrão é true
 	private BigDecimal taxaFrete;
 
 	@ManyToOne
 	@JoinColumn(name = "cozinha_id", nullable = false)
 	private Cozinha cozinha;
-	
+
 	@JsonIgnore
 	@Embedded
 	private Endereco endereco;
-	
+
 	@JsonIgnore
-	@CreationTimestamp //Sempre que a entidade for criada, ele vaiatualizar essa coluna
-	@Column(nullable = false , columnDefinition = "datetime")
+	@CreationTimestamp // Sempre que a entidade for criada, ele vaiatualizar essa coluna
+	@Column(nullable = false, columnDefinition = "datetime")
 	private LocalDateTime dataCadastro;
-	
+
 	@JsonIgnore
-	@UpdateTimestamp//sempre que a entidade for atualizada, ele vai criar essa coluna!
+	@UpdateTimestamp // sempre que a entidade for atualizada, ele vai criar essa coluna!
 	@Column(nullable = false, columnDefinition = "datetime")
 	private LocalDateTime dataAtualizacao;
-	
+
+	@OneToMany(mappedBy = "restaurante")
+	private List<Produto> produtos = new ArrayList<>();
+
 	@JsonIgnore
 	@ManyToMany
-	@JoinTable(name = "restaurante_forma_pagamento", 
-	joinColumns = @JoinColumn(name = "restaurante_id"),
-	inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
+	@JoinTable(name = "restaurante_forma_pagamento", joinColumns = @JoinColumn(name = "restaurante_id"), inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
 	private List<FormaPagamento> formasPagamentos = new ArrayList<>();
-	
 
 }
