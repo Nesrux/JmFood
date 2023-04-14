@@ -53,7 +53,7 @@ public class RestauranteController {
 	@PostMapping
 	public ResponseEntity<?> adicionar(@RequestBody Restaurante restaurante) {
 		try {
-			restaurante = restauranteService.savar(restaurante);
+			restaurante = restauranteService.salvar(restaurante);
 
 			return ResponseEntity.status(HttpStatus.CREATED).body(restaurante);
 		} catch (EntidadeNaoEncontradaException e) {
@@ -64,14 +64,18 @@ public class RestauranteController {
 	@PutMapping("/{restauranteId}")
 	public ResponseEntity<?> atualizar(@PathVariable Long restauranteId, @RequestBody Restaurante restaurante) {
 		try {
-			Optional<Restaurante> restauranteAtual = repository.findById(restauranteId);
-			if (restauranteAtual != null) {
-				BeanUtils.copyProperties(restaurante, restauranteAtual, "id", "formasPagamentos", "endereco", "datacadastro");
+			Restaurante restauranteAtual = repository.findById(restauranteId).orElse(null);
 
-				Restaurante restauranteSalvo = restauranteService.savar(restauranteAtual.get());
-				return ResponseEntity.ok().body(restauranteSalvo);
+			if (restauranteAtual != null) {
+				BeanUtils.copyProperties(restaurante, restauranteAtual, "id", "formasPagamento", "endereco",
+						"dataCadastro");
+
+				restauranteAtual = restauranteService.salvar(restauranteAtual);
+				return ResponseEntity.ok(restauranteAtual);
 			}
+
 			return ResponseEntity.notFound().build();
+
 		} catch (EntidadeNaoEncontradaException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
@@ -96,7 +100,7 @@ public class RestauranteController {
 		Restaurante restauranteOrigem = mapper.convertValue(camposOrigem, Restaurante.class);
 
 		camposOrigem.forEach((propriedade, valor) -> {
-		
+
 			Field field = ReflectionUtils.findField(Restaurante.class, propriedade);
 			field.setAccessible(true);
 
