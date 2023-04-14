@@ -47,10 +47,12 @@ public class Restaurante {
 	@Embedded
 	private Endereco endereco;
 	
+	@JsonIgnore
 	@CreationTimestamp //Sempre que a entidade for criada, ele vaiatualizar essa coluna
 	@Column(nullable = false , columnDefinition = "datetime")
 	private LocalDateTime dataCadastro;
 	
+	@JsonIgnore
 	@UpdateTimestamp//sempre que a entidade for atualizada, ele vai criar essa coluna!
 	@Column(nullable = false, columnDefinition = "datetime")
 	private LocalDateTime dataAtualizacao;
