@@ -43,5 +43,10 @@ public class Usuario {
 	joinColumns = @JoinColumn(name = "usuario_id"),
 	inverseJoinColumns = @JoinColumn(name =  "grupo_id" ))
 	private List<Grupo> grupos = new ArrayList<>();
+	
+	//a anotação manyToMany cria uma tabela intermediaria que faz a ponte entre 2 tabelas
+	// ela precisa de uma segunda anotação que é a @joinTable, que cria essa tabela de intesecção
+	//e respoectivamente ela precisa de outras 2 propriedaddes, joincoulum que recebe um @joinColumn, que fala quem é o principal dessa relação
+	// w o inverseJoinColumns que recebe a mesma anotação, mas fala quem é o secundario dessa relação
 
 }
