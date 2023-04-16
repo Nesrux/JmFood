@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 
 import com.nesrux.jmfood.domain.model.Restaurante;
 
@@ -15,6 +16,8 @@ public interface RestauranteRepository extends CustomJpaRepository<Restaurante, 
 	
 	//Só vai funcionar assim pq tem um arquivo dentro da pasta Meta-Inf que faz o bind desse método com a consulta que ele tem que fazer 
 	List <Restaurante> acharPorNomeEId(String nome, Long id);
+	@Query("FROM Restaurante r join r.cozinha")
+	List<Restaurante> findAll();
 	
 //	List<Restaurante> findByNomeContainingAndCozinhaId(String nome, Long cozinhaId);
 
