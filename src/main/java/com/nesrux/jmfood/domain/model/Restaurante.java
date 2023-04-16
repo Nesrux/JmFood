@@ -31,6 +31,12 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Restaurante {
+	//TODO estudar sobre lazy loading e Eager loagind
+	
+	//OBS: quanto termina com ToOne o padrão do sping é botar EAGER loading
+	// quanto termina co =m toMany o padrão do spirng é botar LAZY loading
+	
+	
 	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,6 +48,7 @@ public class Restaurante {
 	@Column(nullable = false) // Por padrão é true
 	private BigDecimal taxaFrete;
 
+	@JsonIgnore
 	@JsonIgnoreProperties({"hibernateLazyInitializer"})
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cozinha_id", nullable = false)
