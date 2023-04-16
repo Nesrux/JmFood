@@ -34,47 +34,45 @@ public class Restaurante {
 	//OBS: quanto termina com ToOne o padrão do sping é botar EAGER loading
 	// quanto termina co =m toMany o padrão do spirng é botar LAZY loading
 	
-	
 	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	@Column(nullable = false)
 	private String nome;
-
-	@Column(nullable = false) // Por padrão é true
+	
+	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
-
+	
 //	@JsonIgnore
-//	@JsonIgnoreProperties({"hibernateLazyInitializer"})
-	@ManyToOne    //(fetch = FetchType.LAZY)
+	@ManyToOne //(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cozinha_id", nullable = false)
 	private Cozinha cozinha;
-
+	
 	@JsonIgnore
 	@Embedded
 	private Endereco endereco;
-
+	
 	@JsonIgnore
-	@CreationTimestamp // Sempre que a entidade for criada, ele vaiatualizar essa coluna
+	@CreationTimestamp
 	@Column(nullable = false, columnDefinition = "datetime")
 	private LocalDateTime dataCadastro;
-
+	
 	@JsonIgnore
-	@UpdateTimestamp // sempre que a entidade for atualizada, ele vai criar essa coluna!
+	@UpdateTimestamp
 	@Column(nullable = false, columnDefinition = "datetime")
 	private LocalDateTime dataAtualizacao;
-
-	@JsonIgnore
-	@OneToMany(mappedBy = "restaurante")
-	private List<Produto> produtos = new ArrayList<>();
-
+	
 //	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "restaurante_forma_pagamento",
-	joinColumns = @JoinColumn(name = "restaurante_id"),
-	inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
-	private List<FormaPagamento> formasPagamentos = new ArrayList<>();
+			joinColumns = @JoinColumn(name = "restaurante_id"),
+			inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
+	private List<FormaPagamento> formasPagamento = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "restaurante")
+	private List<Produto> produtos = new ArrayList<>();
 
 }
