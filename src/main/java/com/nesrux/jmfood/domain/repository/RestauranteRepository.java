@@ -16,7 +16,8 @@ public interface RestauranteRepository extends CustomJpaRepository<Restaurante, 
 	
 	//Só vai funcionar assim pq tem um arquivo dentro da pasta Meta-Inf que faz o bind desse método com a consulta que ele tem que fazer 
 	List <Restaurante> acharPorNomeEId(String nome, Long id);
-	@Query("FROM Restaurante r join r.cozinha")
+	@Query("from Restaurante r join fetch r.cozinha left join fetch r.formasPagamento")
+	//      
 	List<Restaurante> findAll();
 	
 //	List<Restaurante> findByNomeContainingAndCozinhaId(String nome, Long cozinhaId);
