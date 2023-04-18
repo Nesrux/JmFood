@@ -19,7 +19,7 @@ public interface RestauranteRepository extends CustomJpaRepository<Restaurante, 
 	// bind desse método com a consulta que ele tem que fazer
 	List<Restaurante> consultarPorNome(String nome, Long id);
 
-	@Query("from Restaurante r join fetch r.cozinha left join fetch r.formasPagamento")
+	@Query("from Restaurante r join fetch r.cozinha") //left join fetch r.formasPagamento <- para fazer o join com formas de pagamento!
 	List<Restaurante> findAll();
 
 //	List<Restaurante> findByNomeContainingAndCozinhaId(String nome, Long cozinhaId);
