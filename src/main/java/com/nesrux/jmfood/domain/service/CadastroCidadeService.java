@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.nesrux.jmfood.domain.exception.EntidadeEmUsoException;
 import com.nesrux.jmfood.domain.exception.EntidadeNaoEncontradaException;
-import com.nesrux.jmfood.domain.model.Cidade;
-import com.nesrux.jmfood.domain.model.Estado;
+import com.nesrux.jmfood.domain.model.endereco.Cidade;
+import com.nesrux.jmfood.domain.model.endereco.Estado;
 import com.nesrux.jmfood.domain.repository.CidadeRepository;
 import com.nesrux.jmfood.domain.repository.EstadoRepository;
 
