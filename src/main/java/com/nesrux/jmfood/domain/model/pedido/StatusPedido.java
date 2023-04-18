@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.domain.model;
+package com.nesrux.jmfood.domain.model.pedido;
 
 public enum StatusPedido {
 	CRIADO,
