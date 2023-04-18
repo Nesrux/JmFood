@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.nesrux.jmfood.domain.model.Restaurante;
+import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 
 public class RestauranteSpecs {
 

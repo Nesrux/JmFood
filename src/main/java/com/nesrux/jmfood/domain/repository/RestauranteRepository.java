@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
-import com.nesrux.jmfood.domain.model.Restaurante;
+import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 
 public interface RestauranteRepository extends CustomJpaRepository<Restaurante, Long>, CustomizedRestauranteRepository,
 		JpaSpecificationExecutor<Restaurante> {

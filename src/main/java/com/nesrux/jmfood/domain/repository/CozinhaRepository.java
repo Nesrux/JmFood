@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.nesrux.jmfood.domain.model.Cozinha;
+import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 
 public interface CozinhaRepository extends JpaRepository<Cozinha, Long> {
 

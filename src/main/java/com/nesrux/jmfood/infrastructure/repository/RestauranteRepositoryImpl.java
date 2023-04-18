@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
-import com.nesrux.jmfood.domain.model.Restaurante;
+import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.repository.CustomizedRestauranteRepository;
 import com.nesrux.jmfood.domain.repository.RestauranteRepository;
 

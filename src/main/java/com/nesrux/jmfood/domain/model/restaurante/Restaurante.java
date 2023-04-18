@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.domain.model;
+package com.nesrux.jmfood.domain.model.restaurante;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -22,6 +22,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nesrux.jmfood.domain.model.endereco.Endereco;
+import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
+import com.nesrux.jmfood.domain.model.pedido.Produto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

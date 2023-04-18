@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nesrux.jmfood.domain.exception.EntidadeNaoEncontradaException;
-import com.nesrux.jmfood.domain.model.Restaurante;
+import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.repository.RestauranteRepository;
 import com.nesrux.jmfood.domain.service.CadastroRestauranteService;
 

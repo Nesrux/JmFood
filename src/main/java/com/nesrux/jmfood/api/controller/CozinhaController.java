@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nesrux.jmfood.domain.exception.EntidadeEmUsoException;
 import com.nesrux.jmfood.domain.exception.EntidadeNaoEncontradaException;
-import com.nesrux.jmfood.domain.model.Cozinha;
+import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.repository.CozinhaRepository;
 import com.nesrux.jmfood.domain.service.CadastroCozinhaService;
 

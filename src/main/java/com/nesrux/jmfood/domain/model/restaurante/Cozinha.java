@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.domain.model;
+package com.nesrux.jmfood.domain.model.restaurante;
 
 import java.util.ArrayList;
 import java.util.List;

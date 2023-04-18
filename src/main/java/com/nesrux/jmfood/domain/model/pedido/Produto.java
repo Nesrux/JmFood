@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.domain.model;
+package com.nesrux.jmfood.domain.model.pedido;
 
 import java.math.BigDecimal;
 
@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

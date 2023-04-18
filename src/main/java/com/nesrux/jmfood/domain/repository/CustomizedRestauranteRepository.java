@@ -3,7 +3,7 @@ package com.nesrux.jmfood.domain.repository;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.nesrux.jmfood.domain.model.Restaurante;
+import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 
 public interface CustomizedRestauranteRepository {
 

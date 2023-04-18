@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.domain.model.Cozinha;
-import com.nesrux.jmfood.domain.model.Restaurante;
+import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
+import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.repository.CozinhaRepository;
 import com.nesrux.jmfood.domain.repository.RestauranteRepository;
 
