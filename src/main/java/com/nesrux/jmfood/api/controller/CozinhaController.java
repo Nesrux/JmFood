@@ -1,7 +1,6 @@
 package com.nesrux.jmfood.api.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.domain.exception.EntidadeNaoEncontradaException;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.repository.CozinhaRepository;
 import com.nesrux.jmfood.domain.service.CadastroCozinhaService;
@@ -38,10 +36,7 @@ public class CozinhaController {
 
 	@GetMapping("/{cozinhaId}")
 	public Cozinha buscar(@PathVariable Long cozinhaId) {
-		return cozinhaRepository.findById(cozinhaId)
-				.orElseThrow(() -> new EntidadeNaoEncontradaException
-						("Não foi possivel achar essa cozinha com o id: " + cozinhaId));
-
+		return cozinhaService.buscaOuFalha(cozinhaId);
 	}
 
 	@PostMapping
@@ -53,12 +48,12 @@ public class CozinhaController {
 
 	@PutMapping("/{cozinhaId}")
 	public ResponseEntity<Cozinha> atualizar(@PathVariable Long cozinhaId, @RequestBody Cozinha cozinha) {
-		Optional<Cozinha> cozinhaAtual = cozinhaRepository.findById(cozinhaId);
-		if (cozinhaAtual.isPresent()) {
+		Cozinha cozinhaAtual = cozinhaService.buscaOuFalha(cozinhaId);
+		if (cozinhaAtual != null) {
 			// Importante
-			BeanUtils.copyProperties(cozinha, cozinhaAtual.get(), "id");
+			BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
 
-			Cozinha cozinhaSalva = cozinhaService.salvar(cozinhaAtual.get());
+			Cozinha cozinhaSalva = cozinhaService.salvar(cozinhaAtual);
 			return ResponseEntity.ok(cozinhaSalva);
 		}
 
