@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nesrux.jmfood.domain.exception.EntidadeNaoEncontradaException;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.repository.CozinhaRepository;
 import com.nesrux.jmfood.domain.service.CadastroCozinhaService;
@@ -36,13 +37,11 @@ public class CozinhaController {
 	}
 
 	@GetMapping("/{cozinhaId}")
-	public ResponseEntity<Cozinha> buscar(@PathVariable Long cozinhaId) {
-		Optional<Cozinha> cozinha = cozinhaRepository.findById(cozinhaId);
+	public Cozinha buscar(@PathVariable Long cozinhaId) {
+		return cozinhaRepository.findById(cozinhaId)
+				.orElseThrow(() -> new EntidadeNaoEncontradaException
+						("Não foi possivel achar essa cozinha com o id: " + cozinhaId));
 
-		if (cozinha.isPresent()) {
-			return ResponseEntity.ok(cozinha.get());
-		}
-		return ResponseEntity.notFound().build();
 	}
 
 	@PostMapping
@@ -65,18 +64,6 @@ public class CozinhaController {
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	}
-
-//	@DeleteMapping("/{cozinhaId}")
-//	public ResponseEntity<Cozinha> deletar(@PathVariable Long cozinhaId) {
-//		try {
-//			cozinhaService.excluir(cozinhaId);
-//			return ResponseEntity.noContent().build();
-//		} catch (EntidadeNaoEncontradaException e) {
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//		} catch (EntidadeEmUsoException e) {
-//			return ResponseEntity.status(HttpStatus.CONFLICT).build();
-//		}
-//	}
 
 	@DeleteMapping("/{cozinhaId}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
