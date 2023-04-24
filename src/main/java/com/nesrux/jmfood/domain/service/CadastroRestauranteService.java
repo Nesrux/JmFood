@@ -29,8 +29,7 @@ public class CadastroRestauranteService {
 		return restauranteRepository.save(restaurante);
 	}
 
-	@SuppressWarnings("unused")
-	private List<Restaurante> acharTodos() {
+	public List<Restaurante> acharTodos() {
 		return restauranteRepository.findAll();
 	}
 
