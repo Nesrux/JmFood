@@ -1,5 +1,7 @@
 package com.nesrux.jmfood.domain.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -45,9 +47,13 @@ public class CadastroCidadeService {
 		}
 	}
 
-	public Cidade achaOuFalha(Long cidadeId) {
+	public Cidade acharOuFalhar(Long cidadeId) {
 		return cidadeRepository.findById(cidadeId).orElseThrow(
 				() -> new EntidadeNaoEncontradaException(String.format(MSG_CIDADE_NAO_ENCONTRADAA, cidadeId)));
+	}
+	
+	public List<Cidade> acharTodas(){
+		return cidadeRepository.findAll();
 	}
 
 }
