@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nesrux.jmfood.domain.exception.EntidadeNaoEncontradaException;
+import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.model.endereco.Cidade;
 import com.nesrux.jmfood.domain.service.CadastroCidadeService;
 
@@ -40,9 +42,11 @@ public class CidadeController {
 	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cidade adicionar(@RequestBody Cidade cidade) {
-		Cidade cidadeSalva = cidadeService.salvar(cidade);
-
-		return cidadeSalva;
+		try {
+			return cidadeService.salvar(cidade);
+		} catch (EntidadeNaoEncontradaException e) {
+			throw new NegocioException(e.getMessage());
+		}
 	}
 
 	@PutMapping("/{cidadeId}")
@@ -51,9 +55,11 @@ public class CidadeController {
 
 		BeanUtils.copyProperties(cidade, cidadeAtual, "id");
 
-		Cidade cidadeSalva = cidadeService.salvar(cidadeAtual);
-		return cidadeSalva;
-
+		try {
+			return cidadeService.salvar(cidadeAtual);
+		} catch (EntidadeNaoEncontradaException e) {
+			throw new NegocioException(e.getMessage());
+		}
 	}
 
 	@DeleteMapping("{cidadeId}")
