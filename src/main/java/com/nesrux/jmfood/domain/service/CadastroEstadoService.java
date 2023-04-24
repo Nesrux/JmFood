@@ -1,5 +1,7 @@
 package com.nesrux.jmfood.domain.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -37,5 +39,9 @@ public class CadastroEstadoService {
 	public Estado acharOuFalhar(Long estadoId) {
 		return estadoRepository.findById(estadoId)
 				.orElseThrow(() -> new EntidadeNaoEncontradaException(String.format(MSG_ESTADO_EM_USO, estadoId)));
+	}
+
+	public List<Estado> acharTodos() {
+		return estadoRepository.findAll();
 	}
 }

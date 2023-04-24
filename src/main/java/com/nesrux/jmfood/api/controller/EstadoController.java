@@ -17,21 +17,18 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nesrux.jmfood.domain.model.endereco.Estado;
-import com.nesrux.jmfood.domain.repository.EstadoRepository;
 import com.nesrux.jmfood.domain.service.CadastroEstadoService;
 
 @RestController
 @RequestMapping("/estados")
 public class EstadoController {
-	@Autowired
-	private EstadoRepository estadoRepository;
 
 	@Autowired
 	private CadastroEstadoService estadoService;
 
 	@GetMapping
 	public List<Estado> listar() {
-		return estadoRepository.findAll();
+		return estadoService.acharTodos();
 	}
 
 	@GetMapping("/{estadoId}")

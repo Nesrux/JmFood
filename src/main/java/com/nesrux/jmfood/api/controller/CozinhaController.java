@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
-import com.nesrux.jmfood.domain.repository.CozinhaRepository;
 import com.nesrux.jmfood.domain.service.CadastroCozinhaService;
 
 @RestController
@@ -24,13 +23,11 @@ import com.nesrux.jmfood.domain.service.CadastroCozinhaService;
 public class CozinhaController {
 
 	@Autowired
-	private CozinhaRepository cozinhaRepository;
-	@Autowired
 	private CadastroCozinhaService cozinhaService;
 
 	@GetMapping()
 	public List<Cozinha> listar() {
-		return cozinhaRepository.findAll();
+		return cozinhaService.acharTodas();
 	}
 
 	@GetMapping("/{cozinhaId}")
@@ -48,11 +45,11 @@ public class CozinhaController {
 	@PutMapping("/{cozinhaId}")
 	public Cozinha atualizar(@PathVariable Long cozinhaId, @RequestBody Cozinha cozinha) {
 		Cozinha cozinhaAtual = cozinhaService.buscaOuFalha(cozinhaId);
-		
+
 		// Importante
 		BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
 		Cozinha cozinhaSalva = cozinhaService.salvar(cozinhaAtual);
-	
+
 		return cozinhaSalva;
 	}
 
