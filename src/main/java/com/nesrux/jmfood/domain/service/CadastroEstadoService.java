@@ -14,6 +14,10 @@ import com.nesrux.jmfood.domain.repository.EstadoRepository;
 
 @Service
 public class CadastroEstadoService {
+	private static final String MSG_COZINHA_NAO_ENCONTRADA = "Não existe um cadastro de cozinha com o código %d";
+
+	private static final String MSG_COZINHA_EM_USO = "Cozinha de código %d não pode ser removida, pois está em uso";
+	
 	@Autowired
 	private EstadoRepository estadoRepository;
 
@@ -28,11 +32,16 @@ public class CadastroEstadoService {
 
 		} catch (EmptyResultDataAccessException e) {
 			throw new EntidadeNaoEncontradaException(
-					String.format("Não existe um cadastro de cozinha com o código %d", estadoId));
+					String.format(MSG_COZINHA_NAO_ENCONTRADA, estadoId));
 		} catch (DataIntegrityViolationException e) {
 			throw new EntidadeEmUsoException(
-					String.format("Cozinha de código %d não pode ser removida, pois está em uso", estadoId));
+					String.format(MSG_COZINHA_EM_USO, estadoId));
 		}
 	}
-
+	
+	public Estado achaOuFaha(Long estadoId) {
+		return estadoRepository.findById(estadoId)
+				.orElseThrow(() -> 
+				new EntidadeNaoEncontradaException(String.format(MSG_COZINHA_EM_USO, estadoId)));
+	}
 }
