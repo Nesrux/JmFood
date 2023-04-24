@@ -36,7 +36,7 @@ public class EstadoController {
 
 	@GetMapping("/{estadoId}")
 	public Estado buscar(@PathVariable Long estadoId) {
-		return estadoService.achaOuFaha(estadoId);
+		return estadoService.acharOuFalhar(estadoId);
 	}
 
 	@PostMapping
@@ -47,7 +47,7 @@ public class EstadoController {
 
 	@PutMapping("{estadoId}")
 	public Estado atualizar(@PathVariable Long estadoId, @RequestBody Estado estado) {
-		Estado estadoAtual = estadoService.achaOuFaha(estadoId);
+		Estado estadoAtual = estadoService.acharOuFalhar(estadoId);
 
 		BeanUtils.copyProperties(estado, estadoAtual, "id");
 
