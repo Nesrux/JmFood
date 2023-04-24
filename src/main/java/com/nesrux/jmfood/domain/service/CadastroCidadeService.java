@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.nesrux.jmfood.domain.exception.EntidadeEmUsoException;
@@ -39,7 +40,7 @@ public class CadastroCidadeService {
 	public void excluir(Long cidadeId) {
 		try {
 			cidadeRepository.deleteById(cidadeId);
-		} catch (IllegalArgumentException e) {
+		} catch (EmptyResultDataAccessException e) {
 			throw new EntidadeNaoEncontradaException(String.format(MSG_CIDADE_NAO_ENCONTRADAA, cidadeId));
 
 		} catch (DataIntegrityViolationException e) {
