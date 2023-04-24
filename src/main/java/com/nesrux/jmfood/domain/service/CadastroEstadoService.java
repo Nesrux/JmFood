@@ -34,7 +34,7 @@ public class CadastroEstadoService {
 		}
 	}
 
-	public Estado achaOuFaha(Long estadoId) {
+	public Estado acharOuFalhar(Long estadoId) {
 		return estadoRepository.findById(estadoId)
 				.orElseThrow(() -> new EntidadeNaoEncontradaException(String.format(MSG_ESTADO_EM_USO, estadoId)));
 	}
