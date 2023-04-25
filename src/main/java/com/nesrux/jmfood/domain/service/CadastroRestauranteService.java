@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
+import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.RestauranteNaoEncontradoException;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.repository.RestauranteRepository;
@@ -35,8 +35,7 @@ public class CadastroRestauranteService {
 
 	public Restaurante acharOuFalhar(Long restauranteId) {
 		Restaurante restaurante = restauranteRepository.findById(restauranteId)
-				.orElseThrow(() -> new EntidadeNaoEncontradaException(
-						String.format("Não existe restaurante com o id: %d", restauranteId)));
+				.orElseThrow(() -> new RestauranteNaoEncontradoException(restauranteId));
 
 		return restaurante;
 	}
