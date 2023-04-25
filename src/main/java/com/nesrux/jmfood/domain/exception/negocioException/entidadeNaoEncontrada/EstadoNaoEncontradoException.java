@@ -1,6 +1,6 @@
-package com.nesrux.jmfood.domain.exception.spec;
+package com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada;
 
-import com.nesrux.jmfood.domain.exception.EntidadeNaoEncontradaException;
+import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 
 public class EstadoNaoEncontradoException extends EntidadeNaoEncontradaException {
 	private static final long serialVersionUID = 1L;

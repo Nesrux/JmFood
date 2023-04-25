@@ -7,8 +7,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.nesrux.jmfood.domain.exception.EntidadeEmUsoException;
-import com.nesrux.jmfood.domain.exception.spec.EstadoNaoEncontradoException;
+import com.nesrux.jmfood.domain.exception.negocioException.EntidadeEmUsoException;
+import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.EstadoNaoEncontradoException;
 import com.nesrux.jmfood.domain.model.endereco.Estado;
 import com.nesrux.jmfood.domain.repository.EstadoRepository;
 
