@@ -10,6 +10,6 @@ public class CidadeNaoEncontradaException extends EntidadeNaoEncontradaException
 	private static final long serialVersionUID = 1L;
 
 	public CidadeNaoEncontradaException(Long cidadeId) {
-		this(String.format("Cidade com o código %d não foi encontrado", cidadeId));
+		this(String.format("A cidade de código %d não foi encontrada", cidadeId));
 	}
 }
