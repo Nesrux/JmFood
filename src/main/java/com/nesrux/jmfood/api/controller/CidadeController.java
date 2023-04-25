@@ -45,7 +45,7 @@ public class CidadeController {
 		try {
 			return cidadeService.salvar(cidade);
 		} catch (EstadoNaoEncontradoException e) {
-			throw new NegocioException(e.getMessage());
+			throw new NegocioException(e.getMessage(), e);
 		}
 	}
 
@@ -58,7 +58,7 @@ public class CidadeController {
 
 			return cidadeService.salvar(cidadeAtual);
 		} catch (EstadoNaoEncontradoException e) {
-			throw new NegocioException(e.getMessage());
+			throw new NegocioException(e.getMessage(), e);
 		}
 	}
 
