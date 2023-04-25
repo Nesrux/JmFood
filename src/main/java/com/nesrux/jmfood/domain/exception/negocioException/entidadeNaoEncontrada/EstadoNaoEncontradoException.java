@@ -2,7 +2,7 @@ package com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrad
 
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 
-public class EstadoNaoEncontradoException extends EntidadeNaoEncontradaException {
+public abstract class EstadoNaoEncontradoException extends EntidadeNaoEncontradaException {
 	private static final long serialVersionUID = 1L;
 
 	public EstadoNaoEncontradoException(String mensagem) {
