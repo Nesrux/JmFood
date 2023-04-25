@@ -2,7 +2,7 @@ package com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrad
 
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 
-public abstract class CozinhaNaoEncontradaException extends EntidadeNaoEncontradaException {
+public class CozinhaNaoEncontradaException extends EntidadeNaoEncontradaException {
 
 	public CozinhaNaoEncontradaException(String mensagem) {
 		super(mensagem);
