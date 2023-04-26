@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -42,5 +43,13 @@ public class ApiExceptionHandler {
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
 	}
+	@ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+	public ResponseEntity<?> tratarErooMidiaType(){
+		ErroApi erro = ErroApi.builder()
+				.datahora(LocalDateTime.now())
+				.mensagem("Tipo de midia não suportado")
+				.build();
 
+		return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).body(erro);
+	}
 }
