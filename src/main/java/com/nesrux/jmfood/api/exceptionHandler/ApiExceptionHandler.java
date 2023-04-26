@@ -31,7 +31,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	 * dinamicas Ele só captura as exceptions geradas nesse controlador
 	 */
 	@ExceptionHandler(NegocioException.class)
-	public ResponseEntity<?> tratarNegocioException(
+	public ResponseEntity<?> handleNegocioException(
 			EntidadeNaoEncontradaException e, WebRequest request) {
 
 		return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(),
@@ -39,15 +39,22 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	@ExceptionHandler(EntidadeNaoEncontradaException.class)
-	public ResponseEntity<?> tratarEntidadeNaoEncontrada(
+	public ResponseEntity<?> handleEntidadeNaoEncontrada(
 			EntidadeNaoEncontradaException e, WebRequest request) {
 
-		return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(),
-				HttpStatus.NOT_FOUND, request);
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		String detail = e.getMessage();
+
+		ErroApi erro = ErroApi.builder().status(status.value())
+				.type("https://jmfood.com.br/entidade-nao-encontrada")
+				.title("Entidade Não Encontrada").detail(detail).build();
+
+		return handleExceptionInternal(e, erro, new HttpHeaders(),
+				status, request);
 	}
 
 	@ExceptionHandler(EntidadeEmUsoException.class)
-	public ResponseEntity<?> tratarEntidadeEmUsoException(
+	public ResponseEntity<?> hendleEntidadeEmUsoException(
 			EntidadeNaoEncontradaException e, WebRequest request) {
 
 		return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(),
