@@ -36,15 +36,26 @@ public class Pedido {
 	private BigDecimal taxaFrete;
 	private BigDecimal valorTotal;
 
+	/*
+	 * Na hora da persistencia dos dados dessa entidade, a
+	 * anotação @cretionTimeStanp vai "Ativar essa propriedade" e colocar uma
+	 * data no banco de dados, ela só ativa uma vez
+	 */
 	@CreationTimestamp
 	private LocalDate dataCriacao;
-	
+
 	private LocalDateTime dataConfirmacao;
 	private LocalDateTime dataCancelamento;
 	private LocalDateTime dataEntrega;
 
 	private StatusPedido statusPedido;
-
+	/*
+	 * a anotação Embedded faz com que a classe dessa propriedade faça parte da
+	 * mesma tabela dessa entidade, ou seja, ajuda na organização do código e
+	 * ajuda no re-aproveitamento do código, na hora da persistencia dos dados
+	 * dessa entidade, todas as propriedades dessa classe vao ser encorporadas a
+	 * tabela dessa entidade.
+	 */
 	@Embedded
 	private Endereco endereco;
 

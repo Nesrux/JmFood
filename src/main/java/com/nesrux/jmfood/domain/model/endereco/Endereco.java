@@ -11,6 +11,12 @@ import lombok.Data;
 @Data
 @Embeddable
 public class Endereco {
+	/*
+	 * A anotação @Embeddable funciona juntamente com a anotação @Embedded, essa
+	 * anotação "Fala" que essa classe pode ser "Consumida" e não é uma entidade
+	 * separada, mas sim uma entidade que é parte de outra entidade
+	 */
+
 	@Column(name = "endereco_cep")
 	private String cep;
 
