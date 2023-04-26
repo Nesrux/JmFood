@@ -14,4 +14,9 @@ public class ErroApi {
 	private String type;
 	private String title;
 	private String detail;
+	/*
+	 * Uma classe que padroniza as exceptions da api utilzando o padrao RFC 7807
+	 * para padronizar todos os erros da API
+	 */
+
 }

@@ -16,4 +16,9 @@ public enum TipoProblema {
 		this.titulo = titulo;
 
 	}
+
+	/*
+	 * Enum que ajuda no builder de ErroAPI, para facilitar a escrita de novos
+	 * códigos e na manutenção do mesmo.
+	 */
 }

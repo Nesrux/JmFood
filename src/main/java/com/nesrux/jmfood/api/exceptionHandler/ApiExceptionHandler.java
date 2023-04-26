@@ -46,16 +46,19 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		TipoProblema tipoProblema = TipoProblema.ENTIDADE_NAO_ENCONTRADA;
 		String detail = e.getMessage();
 
-		
-		
-		ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).build();
-		
-//		ErroApi erro = ErroApi.builder().status(status.value())
-//				.type("https://jmfood.com.br/entidade-nao-encontrada")
-//				.title("Entidade Não Encontrada").detail(detail).build();
+		ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail)
+				.build();
+		/**
+		 * Ambos códigos são o mesmo e funcionam da mesma forma, a diferença é
+		 * que fica mais eleante e mais pratico para manutenção!
+		 */
 
-		return handleExceptionInternal(e, erro, new HttpHeaders(),
-				status, request);
+		// ErroApi erro = ErroApi.builder().status(status.value())
+		// .type("https://jmfood.com.br/entidade-nao-encontrada")
+		// .title("Entidade Não Encontrada").detail(detail).build();
+
+		return handleExceptionInternal(e, erro, new HttpHeaders(), status,
+				request);
 	}
 
 	@ExceptionHandler(EntidadeEmUsoException.class)
@@ -82,13 +85,17 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		return super.handleExceptionInternal(ex, body, headers, status,
 				request);
 	}
-	
-	private ErroApi.ErroApiBuilder criacaoDeBilderProblema(HttpStatus status, 
+
+	/*
+	 * Ele retorna um erroAPIBuider uma classe criada pelo lombok que usa o
+	 * padrão Builder de projeto. como esse método não possui um .build no final
+	 * do método, ele vai retornar uma pseudo intancia de ErroAPI, que vai poder
+	 * ser editado em qualquer método que chame ele
+	 */
+	private ErroApi.ErroApiBuilder criacaoDeBilderProblema(HttpStatus status,
 			TipoProblema tipoProblema, String detail) {
-		return ErroApi.builder()
-				.status(status.value())
-				.type(tipoProblema.getUri())
-				.title(tipoProblema.getTitulo())
+		return ErroApi.builder().status(status.value())
+				.type(tipoProblema.getUri()).title(tipoProblema.getTitulo())
 				.detail(detail);
 	}
 }
