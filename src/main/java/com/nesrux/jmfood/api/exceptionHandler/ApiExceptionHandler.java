@@ -43,11 +43,16 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 			EntidadeNaoEncontradaException e, WebRequest request) {
 
 		HttpStatus status = HttpStatus.NOT_FOUND;
+		TipoProblema tipoProblema = TipoProblema.ENTIDADE_NAO_ENCONTRADA;
 		String detail = e.getMessage();
 
-		ErroApi erro = ErroApi.builder().status(status.value())
-				.type("https://jmfood.com.br/entidade-nao-encontrada")
-				.title("Entidade Não Encontrada").detail(detail).build();
+		
+		
+		ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).build();
+		
+//		ErroApi erro = ErroApi.builder().status(status.value())
+//				.type("https://jmfood.com.br/entidade-nao-encontrada")
+//				.title("Entidade Não Encontrada").detail(detail).build();
 
 		return handleExceptionInternal(e, erro, new HttpHeaders(),
 				status, request);
@@ -77,5 +82,13 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		return super.handleExceptionInternal(ex, body, headers, status,
 				request);
 	}
-
+	
+	private ErroApi.ErroApiBuilder criacaoDeBilderProblema(HttpStatus status, 
+			TipoProblema tipoProblema, String detail) {
+		return ErroApi.builder()
+				.status(status.value())
+				.type(tipoProblema.getUri())
+				.title(tipoProblema.getTitulo())
+				.detail(detail);
+	}
 }
