@@ -4,16 +4,22 @@ import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeEmUsoException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 
 @ControllerAdvice
-public class ApiExceptionHandler {
+public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
+	/*
+	 * Essa classe ResponseEntityExceptionHandler é uma classe utilitaria que trata todas as possiveis exceptions do spring MVC
+	 * como a classe httpMediaTypeNotaceppt
+	 * */
+	
+	
 	/*
 	 * Essa anotação controllerAdvice "fala para o spring" que essa classe vai
 	 * capturat todas as execoes
@@ -53,15 +59,6 @@ public class ApiExceptionHandler {
 
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
 	}
+	
 		
-
-	@ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-	public ResponseEntity<?> tratarErooMidiaType(){
-		ErroApi erro = ErroApi.builder()
-				.datahora(LocalDateTime.now())
-				.mensagem("Tipo de midia não suportado")
-				.build();
-
-		return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).body(erro);
-	}
 }
