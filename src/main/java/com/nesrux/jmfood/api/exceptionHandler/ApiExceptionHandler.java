@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.nesrux.jmfood.domain.exception.NegocioException;
+import com.nesrux.jmfood.domain.exception.negocioException.EntidadeEmUsoException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 
 @ControllerAdvice
@@ -23,6 +24,15 @@ public class ApiExceptionHandler {
 	 * cima dos métodos e pode ser utilizado para criar respostas de erros dinamicas
 	 * Ele só captura as exceptions geradas nesse controlador
 	 */
+	@ExceptionHandler(NegocioException.class)
+	public ResponseEntity<?> tratarNegocioException(EntidadeNaoEncontradaException e) {
+		ErroApi erro = ErroApi.builder()
+				.datahora(LocalDateTime.now())
+				.mensagem(e.getMessage())
+				.build();
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+	}
 
 	@ExceptionHandler(EntidadeNaoEncontradaException.class)
 	public ResponseEntity<?> tratarEntidadeNaoEncontrada(EntidadeNaoEncontradaException e) {
@@ -33,16 +43,18 @@ public class ApiExceptionHandler {
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}
-
-	@ExceptionHandler(NegocioException.class)
-	public ResponseEntity<?> tratarNegocioException(EntidadeNaoEncontradaException e) {
+	
+	@ExceptionHandler(EntidadeEmUsoException.class)
+	public ResponseEntity<?> tratarEntidadeEmUsoException(EntidadeNaoEncontradaException e) {
 		ErroApi erro = ErroApi.builder()
 				.datahora(LocalDateTime.now())
 				.mensagem(e.getMessage())
 				.build();
 
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
 	}
+		
+
 	@ExceptionHandler(HttpMediaTypeNotSupportedException.class)
 	public ResponseEntity<?> tratarErooMidiaType(){
 		ErroApi erro = ErroApi.builder()
