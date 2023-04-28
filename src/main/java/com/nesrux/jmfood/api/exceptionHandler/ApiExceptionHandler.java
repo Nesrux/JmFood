@@ -1,5 +1,8 @@
 package com.nesrux.jmfood.api.exceptionHandler;
 
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeEmUsoException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
@@ -90,11 +94,33 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		.detail(detail);
     }
 
+    private ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException ex, HttpHeaders headers,
+	    HttpStatus status, WebRequest request) {
+	TipoProblema tipoProblema = TipoProblema.MENSAGEM_INCOMPREENSIVEL;
+
+	// Faz um a junção dos nomes dos objetos com um "."
+	String caminho = ex.getPath().stream().map(ref -> ref.getFieldName()).collect(Collectors.joining("."));
+
+	String detail = String.format(
+		"A propriedade '%s' recebeu o valor '%s que é um tipo inválido. Corrija e informe um valor compativel com o tipo %s",
+		caminho, ex.getValue(), ex.getTargetType().getSimpleName());
+
+	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).build();
+
+	return handleExceptionInternal(ex, erro, headers, status, request);
+    }
     // ============== MÉTODOS SOBRESCRITOS DA CLASSE PAI =======================
 
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
 	    HttpHeaders headers, HttpStatus status, WebRequest request) {
+
+	Throwable causaRaiz = ExceptionUtils.getRootCause(ex);
+
+	if (causaRaiz instanceof InvalidFormatException) {
+	    return handleInvalidFormatException((InvalidFormatException) causaRaiz, headers, status, request);
+	}
+
 	TipoProblema tipoProblema = TipoProblema.MENSAGEM_INCOMPREENSIVEL;
 
 	String detail = "o corpo da requisição esta invalido. Verifique o erro de sintaxe.";
