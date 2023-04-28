@@ -34,8 +34,17 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<?> handleNegocioException(
 			EntidadeNaoEncontradaException e, WebRequest request) {
 
-		return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(),
-				HttpStatus.BAD_REQUEST, request);
+		// return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(),
+		// HttpStatus.BAD_REQUEST, request);
+
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		TipoProblema tipoProblema = TipoProblema.ENTIDADE_EM_USO;
+		String detail = e.getMessage();
+		ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail)
+				.build();
+
+		return handleExceptionInternal(e, erro, new HttpHeaders(), status,
+				request);
 	}
 
 	@ExceptionHandler(EntidadeNaoEncontradaException.class)
@@ -64,9 +73,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(EntidadeEmUsoException.class)
 	public ResponseEntity<?> hendleEntidadeEmUsoException(
 			EntidadeNaoEncontradaException e, WebRequest request) {
+		HttpStatus status = HttpStatus.CONFLICT;
+		TipoProblema tipoProblema = TipoProblema.ENTIDADE_EM_USO;
+		String detail = e.getMessage();
 
-		return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(),
-				HttpStatus.NOT_FOUND, request);
+		ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail)
+				.build();
+
+		return handleExceptionInternal(e, erro, null, status, request);
 	}
 
 	@Override
@@ -80,7 +94,11 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		} else if (body instanceof String) {
 			body = ErroApi.builder().title((String) body).status(status.value())
 					.build();
-
+		}
+		// Verifica se o cabeçalho esta nulo, se estiver ele atribui um
+		// cabeçaçho padrao
+		if (headers == null) {
+			headers = new HttpHeaders();
 		}
 		return super.handleExceptionInternal(ex, body, headers, status,
 				request);
