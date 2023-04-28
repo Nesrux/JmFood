@@ -54,7 +54,11 @@
    		<dependency>
     		<groupId>org.flywaydb</groupId>
     		<artifactId>flyway-core</artifactId>
-    </dependency>
+    	</dependency>
+    	<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
   </dependencies>
 
 	<build>
