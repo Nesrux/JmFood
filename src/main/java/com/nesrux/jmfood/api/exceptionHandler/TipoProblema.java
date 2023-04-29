@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum TipoProblema {
     MENSAGEM_INCOMPREENSIVEL("mensagem-incompreensivel", "Mensagem nao compreendida"),
-    RECURSO_NAO_ENCONTRADo("recurso-nao-encontrada", "recurso não encontrada"),
+    RECURSO_NAO_ENCONTRADO("recurso-nao-encontrada", "recurso não encontrada"),
     ENTIDADE_EM_USO("entidade-em-uso", "Entidade esta em uso"),
     ERRO_DE_NEGOCIO("violacao-negocio", "violação das regras de negócio"),
     PARAMETRO_INVALIDO("parametro-invalido", "O parametro da URL esta incorreto");

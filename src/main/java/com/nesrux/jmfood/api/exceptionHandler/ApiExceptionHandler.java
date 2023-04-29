@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
@@ -55,7 +56,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<?> handleEntidadeNaoEncontrada(EntidadeNaoEncontradaException e, WebRequest request) {
 
 	HttpStatus status = HttpStatus.NOT_FOUND;
-	TipoProblema tipoProblema = TipoProblema.RECURSO_NAO_ENCONTRADo;
+	TipoProblema tipoProblema = TipoProblema.RECURSO_NAO_ENCONTRADO;
 	String detail = e.getMessage();
 
 	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).build();
@@ -120,6 +121,17 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	return handleExceptionInternal(ex, erro, new HttpHeaders(), status, request);
 
     }
+
+    @Override
+    protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers,
+	    HttpStatus status, WebRequest request) {
+	TipoProblema problema = TipoProblema.RECURSO_NAO_ENCONTRADO;
+	String detail = String.format("O recurso %s que você tentou acessar, é inexistente", ex.getRequestURL());
+	ErroApi erro = criacaoDeBilderProblema(status, problema, detail).build();
+
+	return handleExceptionInternal(ex, erro, headers, status, request);
+    }
+      
 
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
