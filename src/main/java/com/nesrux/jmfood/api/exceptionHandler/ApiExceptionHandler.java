@@ -22,7 +22,9 @@ import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontrada
 
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
-    private static final String MSG_PROPRIEDADE_INEXISTENTE = "A Propreidade %s na linha %s não existe, por favor corrija o erro e tente novamente";
+    
+    private static final String MSG_ERRO_DE_SINTASE_CORPO_REQUISICAO = "o corpo da requisição esta invalido. Verifique o erro de sintaxe.";
+    private static final String MSG_PROPRIEDADE_INEXISTENTE = "A Propreidade %s não existe, por favor corrija o erro e tente novamente";
     private static final String MSG_PROPRIEDADE_COM_VALOR_ERRADO = "A propriedade '%s' recebeu o valor '%s que é um tipo inválido. Corrija e informe um valor compativel com o tipo %s";
     private static final String MSG_RECURSO_INEXISTENTE = "O recurso %s que você tentou acessar, é inexistente";
     private static final String MSG_PARAMETRO_URL_INVALIDO = "O parâmentro de URL '%s' recebeu o valor '%s', que é de um tipo inválido, corrija e informe um valor compatível com o tipo '%s'";
@@ -84,7 +86,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	TipoProblema tipoProblema = TipoProblema.ENTIDADE_EM_USO;
 	String detail = e.getMessage();
 
-	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).mensagemUsuario(detail).build();
+	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).userMessage(detail).build();
 
 	return handleExceptionInternal(e, erro, null, status, request);
     }
@@ -133,7 +135,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	TipoProblema tipoProblema = TipoProblema.MENSAGEM_INCOMPREENSIVEL;
 
-	String detail = "o corpo da requisição esta invalido. Verifique o erro de sintaxe.";
+	String detail = MSG_ERRO_DE_SINTASE_CORPO_REQUISICAO;
 
 	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).build();
 
@@ -195,7 +197,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	String detail = String.format(MSG_PROPRIEDADE_COM_VALOR_ERRADO, caminho, ex.getValue(),
 		ex.getTargetType().getSimpleName());
 
-	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).mensagemUsuario(MSG_ERRO_GENERICO).build();
+	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).userMessage(MSG_ERRO_GENERICO).build();
 
 	return handleExceptionInternal(ex, erro, headers, status, request);
     }
@@ -204,9 +206,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<Object> handlePropertyBindException(PropertyBindingException ex, HttpHeaders headers,
 	    HttpStatus status, WebRequest request) {
 	TipoProblema problema = TipoProblema.ERRO_DE_NEGOCIO;
-	String detail = String.format(MSG_PROPRIEDADE_INEXISTENTE, ex.getPropertyName(), ex.getLocation().getLineNr());
+	String detail = String.format(MSG_PROPRIEDADE_INEXISTENTE, ex.getPropertyName());
 
-	ErroApi erro = criacaoDeBilderProblema(status, problema, detail).mensagemUsuario(MSG_ERRO_GENERICO).build();
+	ErroApi erro = criacaoDeBilderProblema(status, problema, detail).userMessage(MSG_ERRO_GENERICO).build();
 
 	return handleExceptionInternal(ex, erro, headers, status, request);
     }

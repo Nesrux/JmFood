@@ -20,5 +20,5 @@ public class ErroApi {
     private String title;
     private String detail;
 
-    private String mensagemUsuario;
+    private String userMessage;
 }

@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum TipoProblema {
     MENSAGEM_INCOMPREENSIVEL("mensagem-incompreensivel", "Mensagem nao compreendida"),
-    RECURSO_NAO_ENCONTRADO("recurso-nao-encontrada", "recurso não encontrada"),
+    RECURSO_NAO_ENCONTRADO("recurso-nao-encontrado", "recurso não encontrado"),
     ENTIDADE_EM_USO("entidade-em-uso", "Entidade esta em uso"),
     ERRO_DE_NEGOCIO("violacao-negocio", "violação das regras de negócio"),
     ERRO_DE_SISTEMA("erro-sistema", "Ocorreu um erro durante o funcionamento da aplicação"),
