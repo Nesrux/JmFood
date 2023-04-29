@@ -13,9 +13,13 @@
 ### Ajustes e melhorias
 
 - [x] Criar o projeto e adicionar dependencias.
-- [x] criar classes de deminio.
-- [x] criar interfaces com JpaRepository.
-- [x] fazer o crud da API.
+- [x] Criar classes de dominio.
+- [x] Criar as classes de repositórios.
+- [x] Criar as classes de services.
+- [x] Criar as classes de controle
+- [x] mapear as entidades com JPA
+- [x] Criar as migrations com o flyway
+- [x] tratar exceptions
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
