@@ -13,6 +13,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.fasterxml.jackson.databind.exc.PropertyBindingException;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeEmUsoException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
@@ -109,6 +110,18 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	return handleExceptionInternal(ex, erro, headers, status, request);
     }
+
+    private ResponseEntity<Object> handlePropertyBindException(PropertyBindingException ex, HttpHeaders headers,
+	    HttpStatus status, WebRequest request) {
+	TipoProblema problema = TipoProblema.ERRO_DE_NEGOCIO;	
+	String detail = String.format(
+		"A Propreidade %s na linha %s não existe, por favor corrija o erro e tente novamente",
+		ex.getPropertyName(), ex.getLocation().getLineNr());
+
+	ErroApi erro = criacaoDeBilderProblema(status, problema, detail).build();
+
+	return handleExceptionInternal(ex, erro, headers, status, request);
+    }
     // ============== MÉTODOS SOBRESCRITOS DA CLASSE PAI =======================
 
     @Override
@@ -119,6 +132,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	if (causaRaiz instanceof InvalidFormatException) {
 	    return handleInvalidFormatException((InvalidFormatException) causaRaiz, headers, status, request);
+	} else if (causaRaiz instanceof PropertyBindingException) {
+
+	    return handlePropertyBindException(((PropertyBindingException) causaRaiz), headers, status, request);
 	}
 
 	TipoProblema tipoProblema = TipoProblema.MENSAGEM_INCOMPREENSIVEL;
