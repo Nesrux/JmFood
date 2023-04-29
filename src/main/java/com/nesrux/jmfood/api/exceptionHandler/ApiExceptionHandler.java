@@ -98,7 +98,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     // ============== MÉTODOS SOBRESCRITOS DA CLASSE PAI =======================
-
+    // Erro de sintax no corpo da requisição
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
 	    HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -108,7 +108,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	if (causaRaiz instanceof InvalidFormatException) {
 	    return handleInvalidFormatException((InvalidFormatException) causaRaiz, headers, status, request);
 	} else if (causaRaiz instanceof PropertyBindingException) {
-
 	    return handlePropertyBindException(((PropertyBindingException) causaRaiz), headers, status, request);
 	}
 
@@ -122,6 +121,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
+    // Erro de parametro na URL jmfood/teste/
     @Override
     protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers,
 	    HttpStatus status, WebRequest request) {
@@ -131,7 +131,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	return handleExceptionInternal(ex, erro, headers, status, request);
     }
-      
 
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
@@ -164,7 +163,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	return ErroApi.builder().status(status.value()).type(tipoProblema.getUri()).title(tipoProblema.getTitulo())
 		.detail(detail);
     }
-
+    //Erro de valores, precisava de um tipo Long e veio string.
     private ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException ex, HttpHeaders headers,
 	    HttpStatus status, WebRequest request) {
 	TipoProblema tipoProblema = TipoProblema.MENSAGEM_INCOMPREENSIVEL;
@@ -181,6 +180,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	return handleExceptionInternal(ex, erro, headers, status, request);
     }
 
+    //Propriedade inxistente ou propriedade ignorada com @jsonignore
     private ResponseEntity<Object> handlePropertyBindException(PropertyBindingException ex, HttpHeaders headers,
 	    HttpStatus status, WebRequest request) {
 	TipoProblema problema = TipoProblema.ERRO_DE_NEGOCIO;
