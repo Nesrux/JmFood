@@ -22,6 +22,12 @@ import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontrada
 
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
+    private static final String MSG_PROPRIEDADE_INEXISTENTE = "A Propreidade %s na linha %s não existe, por favor corrija o erro e tente novamente";
+    private static final String MSG_PROPRIEDADE_COM_VALOR_ERRADO = "A propriedade '%s' recebeu o valor '%s que é um tipo inválido. Corrija e informe um valor compativel com o tipo %s";
+    private static final String MSG_RECURSO_INEXISTENTE = "O recurso %s que você tentou acessar, é inexistente";
+    private static final String MSG_PARAMETRO_URL_INVALIDO = "O parâmentro de URL '%s' recebeu o valor '%s', que é de um tipo inválido, corrija e informe um valor compatível com o tipo '%s'";
+    private static final String MSG_ERRO_GENERICO = "Ocorreu um erro interno inesperado no sistema. Tente novamente e se o problema persistir, entre em contado com o adiministrador do sistema.";
+
     /*
      * Essa classe ResponseEntityExceptionHandler é uma classe utilitaria que trata
      * todas as possiveis exceptions do spring MVC como a classe
@@ -30,7 +36,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     /*
      * Essa anotação controllerAdvice "fala para o spring" que essa classe vai
-     * capturat todas as execoes
+     * capturar todas as execoes
      */
 
     /*
@@ -78,7 +84,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	TipoProblema tipoProblema = TipoProblema.ENTIDADE_EM_USO;
 	String detail = e.getMessage();
 
-	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).build();
+	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).mensagemUsuario(detail).build();
 
 	return handleExceptionInternal(e, erro, null, status, request);
     }
@@ -88,15 +94,15 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	HttpStatus status = HttpStatus.BAD_REQUEST;
 	TipoProblema tipoProblema = TipoProblema.PARAMETRO_INVALIDO;
 
-	String detail = String.format(
-		"O parâmentro de URL '%s' recebeu o valor '%s', que é de um tipo inválido, corrija e informe um valor compatível com o tipo '%s'",
-		ex.getParameter().getParameterName(), ex.getValue(), ex.getRequiredType().getSimpleName());
+	String detail = String.format(MSG_PARAMETRO_URL_INVALIDO, ex.getParameter().getParameterName(), ex.getValue(),
+		ex.getRequiredType().getSimpleName());
 
 	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).build();
 
 	return handleExceptionInternal(ex, erro, null, status, request);
     }
 
+    // Trata todas as exceptions de forma global
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handlAllExceptions(Exception ex, WebRequest request) {
 	HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -104,8 +110,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	HttpHeaders headers = new HttpHeaders();
 
-	String detail = String.format("Ocorreu um erro interno inesperado no sistema. "
-		+ "Tente novamente e se o problema persistir, entre em contado com o adiministrador do sistema.");
+	String detail = String.format(MSG_ERRO_GENERICO);
 
 	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).build();
 
@@ -141,7 +146,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers,
 	    HttpStatus status, WebRequest request) {
 	TipoProblema problema = TipoProblema.RECURSO_NAO_ENCONTRADO;
-	String detail = String.format("O recurso %s que você tentou acessar, é inexistente", ex.getRequestURL());
+	String detail = String.format(MSG_RECURSO_INEXISTENTE, ex.getRequestURL());
 	ErroApi erro = criacaoDeBilderProblema(status, problema, detail).build();
 
 	return handleExceptionInternal(ex, erro, headers, status, request);
@@ -187,11 +192,10 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	// Faz um a junção dos nomes dos objetos com um "."
 	String caminho = ex.getPath().stream().map(ref -> ref.getFieldName()).collect(Collectors.joining("."));
 
-	String detail = String.format(
-		"A propriedade '%s' recebeu o valor '%s que é um tipo inválido. Corrija e informe um valor compativel com o tipo %s",
-		caminho, ex.getValue(), ex.getTargetType().getSimpleName());
+	String detail = String.format(MSG_PROPRIEDADE_COM_VALOR_ERRADO, caminho, ex.getValue(),
+		ex.getTargetType().getSimpleName());
 
-	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).build();
+	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).mensagemUsuario(MSG_ERRO_GENERICO).build();
 
 	return handleExceptionInternal(ex, erro, headers, status, request);
     }
@@ -200,11 +204,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<Object> handlePropertyBindException(PropertyBindingException ex, HttpHeaders headers,
 	    HttpStatus status, WebRequest request) {
 	TipoProblema problema = TipoProblema.ERRO_DE_NEGOCIO;
-	String detail = String.format(
-		"A Propreidade %s na linha %s não existe, por favor corrija o erro e tente novamente",
-		ex.getPropertyName(), ex.getLocation().getLineNr());
+	String detail = String.format(MSG_PROPRIEDADE_INEXISTENTE, ex.getPropertyName(), ex.getLocation().getLineNr());
 
-	ErroApi erro = criacaoDeBilderProblema(status, problema, detail).build();
+	ErroApi erro = criacaoDeBilderProblema(status, problema, detail).mensagemUsuario(MSG_ERRO_GENERICO).build();
 
 	return handleExceptionInternal(ex, erro, headers, status, request);
     }
