@@ -97,6 +97,21 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	return handleExceptionInternal(ex, erro, null, status, request);
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> handlAllExceptions(Exception ex, WebRequest request) {
+	HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+	TipoProblema tipoProblema = TipoProblema.ERRO_DE_SISTEMA;
+
+	HttpHeaders headers = new HttpHeaders();
+
+	String detail = String.format("Ocorreu um erro interno inesperado no sistema. "
+		+ "Tente novamente e se o problema persistir, entre em contado com o adiministrador do sistema.");
+
+	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).build();
+
+	return handleExceptionInternal(ex, erro, headers, status, request);
+    }
+
     // ============== MÉTODOS SOBRESCRITOS DA CLASSE PAI =======================
     // Erro de sintax no corpo da requisição
     @Override
@@ -163,7 +178,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	return ErroApi.builder().status(status.value()).type(tipoProblema.getUri()).title(tipoProblema.getTitulo())
 		.detail(detail);
     }
-    //Erro de valores, precisava de um tipo Long e veio string.
+
+    // Erro de valores, precisava de um tipo Long e veio string.
     private ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException ex, HttpHeaders headers,
 	    HttpStatus status, WebRequest request) {
 	TipoProblema tipoProblema = TipoProblema.MENSAGEM_INCOMPREENSIVEL;
@@ -180,7 +196,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	return handleExceptionInternal(ex, erro, headers, status, request);
     }
 
-    //Propriedade inxistente ou propriedade ignorada com @jsonignore
+    // Propriedade inxistente ou propriedade ignorada com @jsonignore
     private ResponseEntity<Object> handlePropertyBindException(PropertyBindingException ex, HttpHeaders headers,
 	    HttpStatus status, WebRequest request) {
 	TipoProblema problema = TipoProblema.ERRO_DE_NEGOCIO;

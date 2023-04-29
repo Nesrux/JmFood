@@ -8,10 +8,11 @@ public enum TipoProblema {
     RECURSO_NAO_ENCONTRADO("recurso-nao-encontrada", "recurso não encontrada"),
     ENTIDADE_EM_USO("entidade-em-uso", "Entidade esta em uso"),
     ERRO_DE_NEGOCIO("violacao-negocio", "violação das regras de negócio"),
+    ERRO_DE_SISTEMA("erro-sistema", "Ocorreu um erro durante o funcionamento da aplicação"),
     PARAMETRO_INVALIDO("parametro-invalido", "O parametro da URL esta incorreto");
+
     private String titulo;
     private String uri;
-
     private TipoProblema(String caminho, String titulo) {
 	this.uri = "https://jmfood.com.br/" + caminho;
 	this.titulo = titulo;
