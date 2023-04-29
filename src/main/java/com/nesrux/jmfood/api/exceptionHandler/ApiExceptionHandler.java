@@ -55,7 +55,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<?> handleEntidadeNaoEncontrada(EntidadeNaoEncontradaException e, WebRequest request) {
 
 	HttpStatus status = HttpStatus.NOT_FOUND;
-	TipoProblema tipoProblema = TipoProblema.ENTIDADE_NAO_ENCONTRADA;
+	TipoProblema tipoProblema = TipoProblema.RECURSO_NAO_ENCONTRADo;
 	String detail = e.getMessage();
 
 	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).build();
