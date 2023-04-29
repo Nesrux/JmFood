@@ -7,8 +7,8 @@ public enum TipoProblema {
     MENSAGEM_INCOMPREENSIVEL("mensagem-incompreensivel", "Mensagem nao compreendida"),
     ENTIDADE_NAO_ENCONTRADA("entidade-nao-encontrada", "Entidade não encontrada"),
     ENTIDADE_EM_USO("entidade-em-uso", "Entidade esta em uso"),
-    ERRO_DE_NEGOCIO("violacao-negocio", "violação das regras de negócio");
-
+    ERRO_DE_NEGOCIO("violacao-negocio", "violação das regras de negócio"),
+    PARAMETRO_INVALIDO("parametro-invalido", "O parametro da URL esta incorreto");
     private String titulo;
     private String uri;
 

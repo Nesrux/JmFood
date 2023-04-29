@@ -10,6 +10,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
@@ -80,48 +81,21 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	return handleExceptionInternal(e, erro, null, status, request);
     }
-    // ======================= MÉTODOS PRIVADOS ========================== \\
 
-    /*
-     * Ele retorna um erroAPIBuider uma classe criada pelo lombok que usa o padrão
-     * Builder de projeto. como esse método não possui um .build no final do método,
-     * ele vai retornar uma pseudo intancia de ErroAPI, que vai poder ser editado em
-     * qualquer método que chame ele
-     */
-
-    private ErroApi.ErroApiBuilder criacaoDeBilderProblema(HttpStatus status, TipoProblema tipoProblema,
-	    String detail) {
-	return ErroApi.builder().status(status.value()).type(tipoProblema.getUri()).title(tipoProblema.getTitulo())
-		.detail(detail);
-    }
-
-    private ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException ex, HttpHeaders headers,
-	    HttpStatus status, WebRequest request) {
-	TipoProblema tipoProblema = TipoProblema.MENSAGEM_INCOMPREENSIVEL;
-
-	// Faz um a junção dos nomes dos objetos com um "."
-	String caminho = ex.getPath().stream().map(ref -> ref.getFieldName()).collect(Collectors.joining("."));
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<?> hendleArgumentTypeMismatch(MethodArgumentTypeMismatchException ex, WebRequest request) {
+	HttpStatus status = HttpStatus.BAD_REQUEST;
+	TipoProblema tipoProblema = TipoProblema.PARAMETRO_INVALIDO;
 
 	String detail = String.format(
-		"A propriedade '%s' recebeu o valor '%s que é um tipo inválido. Corrija e informe um valor compativel com o tipo %s",
-		caminho, ex.getValue(), ex.getTargetType().getSimpleName());
+		"O parâmentro de URL '%s' recebeu o valor '%s', que é de um tipo inválido, corrija e informe um valor compatível com o tipo '%s'",
+		ex.getParameter().getParameterName(), ex.getValue(), ex.getRequiredType().getSimpleName());
 
 	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).build();
 
-	return handleExceptionInternal(ex, erro, headers, status, request);
+	return handleExceptionInternal(ex, erro, null, status, request);
     }
 
-    private ResponseEntity<Object> handlePropertyBindException(PropertyBindingException ex, HttpHeaders headers,
-	    HttpStatus status, WebRequest request) {
-	TipoProblema problema = TipoProblema.ERRO_DE_NEGOCIO;	
-	String detail = String.format(
-		"A Propreidade %s na linha %s não existe, por favor corrija o erro e tente novamente",
-		ex.getPropertyName(), ex.getLocation().getLineNr());
-
-	ErroApi erro = criacaoDeBilderProblema(status, problema, detail).build();
-
-	return handleExceptionInternal(ex, erro, headers, status, request);
-    }
     // ============== MÉTODOS SOBRESCRITOS DA CLASSE PAI =======================
 
     @Override
@@ -158,10 +132,53 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 	// Verifica se o cabeçalho esta nulo, se estiver ele atribui um
 	// cabeçaçho padrao
-	if (headers == null) {
+	else if (headers == null) {
 	    headers = new HttpHeaders();
 	}
 	return super.handleExceptionInternal(ex, body, headers, status, request);
+    }
+
+    // ======================= MÉTODOS PRIVADOS ========================== \\
+
+    /*
+     * Ele retorna um erroAPIBuider uma classe criada pelo lombok que usa o padrão
+     * Builder de projeto. como esse método não possui um .build no final do método,
+     * ele vai retornar uma pseudo intancia de ErroAPI, que vai poder ser editado em
+     * qualquer método que chame ele
+     */
+
+    private ErroApi.ErroApiBuilder criacaoDeBilderProblema(HttpStatus status, TipoProblema tipoProblema,
+	    String detail) {
+	return ErroApi.builder().status(status.value()).type(tipoProblema.getUri()).title(tipoProblema.getTitulo())
+		.detail(detail);
+    }
+
+    private ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException ex, HttpHeaders headers,
+	    HttpStatus status, WebRequest request) {
+	TipoProblema tipoProblema = TipoProblema.MENSAGEM_INCOMPREENSIVEL;
+
+	// Faz um a junção dos nomes dos objetos com um "."
+	String caminho = ex.getPath().stream().map(ref -> ref.getFieldName()).collect(Collectors.joining("."));
+
+	String detail = String.format(
+		"A propriedade '%s' recebeu o valor '%s que é um tipo inválido. Corrija e informe um valor compativel com o tipo %s",
+		caminho, ex.getValue(), ex.getTargetType().getSimpleName());
+
+	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).build();
+
+	return handleExceptionInternal(ex, erro, headers, status, request);
+    }
+
+    private ResponseEntity<Object> handlePropertyBindException(PropertyBindingException ex, HttpHeaders headers,
+	    HttpStatus status, WebRequest request) {
+	TipoProblema problema = TipoProblema.ERRO_DE_NEGOCIO;
+	String detail = String.format(
+		"A Propreidade %s na linha %s não existe, por favor corrija o erro e tente novamente",
+		ex.getPropertyName(), ex.getLocation().getLineNr());
+
+	ErroApi erro = criacaoDeBilderProblema(status, problema, detail).build();
+
+	return handleExceptionInternal(ex, erro, headers, status, request);
     }
 
 }
