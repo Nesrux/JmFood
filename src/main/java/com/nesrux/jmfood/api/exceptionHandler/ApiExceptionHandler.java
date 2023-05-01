@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -26,10 +27,11 @@ import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontrada
 
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
-
+//ControllerAdvice é a anotação da classe para "avisar que essa classe" é expecializada em tratar exceptions
     public static final String MSG_ERRO_GENERICA_USUARIO_FINAL = "Ocorreu um erro interno inesperado no sistema. Tente novamente e se "
 	    + "o problema persistir, entre em contato com o administrador do sistema.";
 
+    // Trata todas as exceptions de forma global
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
 	HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -122,6 +124,20 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		.build();
 
 	return handleExceptionInternal(ex, problem, headers, status, request);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+	    HttpHeaders headers, HttpStatus status, WebRequest request) {
+
+	String detail = String
+		.format("Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.");
+
+	TipoProblema problema = TipoProblema.DADOS_INVALIDOS;
+
+	ErroApi erro = createProblemBuilder(status, problema, detail).userMessage(detail).build();
+
+	return handleExceptionInternal(ex, erro, headers, status, request);
     }
 
     @Override

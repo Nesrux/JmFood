@@ -9,6 +9,7 @@ public enum TipoProblema {
     ENTIDADE_EM_USO("entidade-em-uso", "Entidade esta em uso"),
     ERRO_DE_NEGOCIO("violacao-negocio", "violação das regras de negócio"),
     ERRO_DE_SISTEMA("erro-sistema", "Ocorreu um erro durante o funcionamento da aplicação"),
+    DADOS_INVALIDOS("dados-invalidos", "os dados estão invalidos"),
     PARAMETRO_INVALIDO("parametro-invalido", "O parametro da URL esta incorreto");
 
     private String titulo;
