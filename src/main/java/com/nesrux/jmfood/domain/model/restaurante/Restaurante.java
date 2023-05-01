@@ -20,6 +20,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -50,18 +52,19 @@ public class Restaurante {
     @Column(nullable = false)
     //@NotEmpty //não pode ser vazio, ou seja "" <- sem nada
     //@NotNull <- nao pode ser nullo
-    @NotBlank(groups = Groups.cadastroRestaurante.class) // <- nao pode ser nulo, vazio e vazio com espaços " " <-
+    @NotBlank// <- nao pode ser nulo, vazio e vazio com espaços " " <-
     private String nome;
 
     //@DecimalMin("0") o minimo que ela pode receber é tal valor
-    @PositiveOrZero(groups = Groups.cadastroRestaurante.class)
+    @PositiveOrZero
     @Column(name = "taxa_frete", nullable = false)
     private BigDecimal taxaFrete;
 
     @ManyToOne // (fetch = FetchType.LAZY)
     @JoinColumn(name = "cozinha_id", nullable = false)
-    @NotNull(groups = Groups.cadastroRestaurante.class)
+    @NotNull
     @Valid // essa anotação é para ele validar em cascata, pois por padrão, ele nao faz isso
+   @ConvertGroup(from = Default.class, to = Groups.cadastroRestaurante.class)
     private Cozinha cozinha;
 
     @JsonIgnore
