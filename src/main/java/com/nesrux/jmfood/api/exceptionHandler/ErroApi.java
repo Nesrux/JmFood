@@ -1,6 +1,7 @@
 package com.nesrux.jmfood.api.exceptionHandler;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -24,4 +25,13 @@ public class ErroApi {
 
     private String userMessage;
     private LocalDateTime timesStamp;
+
+    private List<Field> fields;
+
+    @Getter
+    @Builder
+    public static class Field {
+	private String nome;
+	private String userMessage;
+    }
 }
