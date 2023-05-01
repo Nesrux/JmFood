@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.BeanUtils;
@@ -48,10 +49,14 @@ public class RestauranteController {
 
 	return restaurante;
     }
+    // O @valid vai validar o objeto enviado na requisição na hora que ele chega no
+    // metodo adicionar, ao invés dele fazer isso na hora da persistencia de dados,
+    // ou seja, ele nem chega a ir para a camada de dominio, facilitando a
+    // manipulaçao das exceptions
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Restaurante adicionar(@RequestBody Restaurante restaurante) {
+    public Restaurante adicionar(@RequestBody @Valid Restaurante restaurante) {
 	try {
 	    return restaurante = restauranteService.salvar(restaurante);
 	} catch (EntidadeNaoEncontradaException e) {
