@@ -54,10 +54,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	// HttpStatus.BAD_REQUEST, request);
 
 	HttpStatus status = HttpStatus.BAD_REQUEST;
-	TipoProblema tipoProblema = TipoProblema.ENTIDADE_EM_USO;
+	TipoProblema tipoProblema = TipoProblema.RECURSO_NAO_ENCONTRADO;
 	String detail = e.getMessage();
-	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).userMessage(MSG_ERRO_GENERICO)
-		.timesStanp(LocalDateTime.now()).build();
+	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).userMessage(MSG_ERRO_GENERICO).build();
 
 	return handleExceptionInternal(e, erro, new HttpHeaders(), status, request);
     }
@@ -69,8 +68,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	TipoProblema tipoProblema = TipoProblema.RECURSO_NAO_ENCONTRADO;
 	String detail = e.getMessage();
 
-	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).userMessage(MSG_ERRO_GENERICO)
-		.timesStanp(LocalDateTime.now()).build();
+	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).userMessage(MSG_ERRO_GENERICO).build();
 	/**
 	 * Ambos códigos são o mesmo e funcionam da mesma forma, a diferença é que fica
 	 * mais eleante e mais pratico para manutenção!
@@ -89,10 +87,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	TipoProblema tipoProblema = TipoProblema.ENTIDADE_EM_USO;
 	String detail = e.getMessage();
 
-	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).userMessage(detail)
-		.timesStanp(LocalDateTime.now()).build();
+	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).userMessage(detail).build();
 
-	return handleExceptionInternal(e, erro, null, status, request);
+	return handleExceptionInternal(e, erro, new HttpHeaders(), status, request);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
@@ -103,8 +100,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	String detail = String.format(MSG_PARAMETRO_URL_INVALIDO, ex.getParameter().getParameterName(), ex.getValue(),
 		ex.getRequiredType().getSimpleName());
 
-	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).userMessage(MSG_ERRO_GENERICO)
-		.timesStanp(LocalDateTime.now()).build();
+	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).userMessage(MSG_ERRO_GENERICO).build();
 
 	return handleExceptionInternal(ex, erro, null, status, request);
     }
@@ -119,8 +115,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	String detail = String.format(MSG_ERRO_GENERICO);
 
-	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).userMessage(MSG_ERRO_GENERICO)
-		.timesStanp(LocalDateTime.now()).build();
+	ex.printStackTrace();
+
+	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).userMessage(MSG_ERRO_GENERICO).build();
 
 	return handleExceptionInternal(ex, erro, headers, status, request);
     }
@@ -143,8 +140,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	String detail = MSG_ERRO_DE_SINTASE_CORPO_REQUISICAO;
 
-	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).userMessage(MSG_ERRO_GENERICO)
-		.timesStanp(LocalDateTime.now()).build();
+	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).userMessage(MSG_ERRO_GENERICO).build();
 
 	return handleExceptionInternal(ex, erro, new HttpHeaders(), status, request);
 
@@ -156,8 +152,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	    HttpStatus status, WebRequest request) {
 	TipoProblema problema = TipoProblema.RECURSO_NAO_ENCONTRADO;
 	String detail = String.format(MSG_RECURSO_INEXISTENTE, ex.getRequestURL());
-	ErroApi erro = criacaoDeBilderProblema(status, problema, detail).userMessage(detail)
-		.timesStanp(LocalDateTime.now()).build();
+	ErroApi erro = criacaoDeBilderProblema(status, problema, detail).userMessage(detail).build();
 
 	return handleExceptionInternal(ex, erro, headers, status, request);
     }
@@ -191,7 +186,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     private ErroApi.ErroApiBuilder criacaoDeBilderProblema(HttpStatus status, TipoProblema tipoProblema,
 	    String detail) {
 	return ErroApi.builder().status(status.value()).type(tipoProblema.getUri()).title(tipoProblema.getTitulo())
-		.detail(detail);
+		.detail(detail).timesStamp(LocalDateTime.now());
     }
 
     // Erro de valores, precisava de um tipo Long e veio string.
@@ -205,8 +200,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	String detail = String.format(MSG_PROPRIEDADE_COM_VALOR_ERRADO, caminho, ex.getValue(),
 		ex.getTargetType().getSimpleName());
 
-	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).userMessage(MSG_ERRO_GENERICO)
-		.timesStanp(LocalDateTime.now()).build();
+	ErroApi erro = criacaoDeBilderProblema(status, tipoProblema, detail).userMessage(MSG_ERRO_GENERICO).build();
 
 	return handleExceptionInternal(ex, erro, headers, status, request);
     }
@@ -217,8 +211,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	TipoProblema problema = TipoProblema.ERRO_DE_NEGOCIO;
 	String detail = String.format(MSG_PROPRIEDADE_INEXISTENTE, ex.getPropertyName());
 
-	ErroApi erro = criacaoDeBilderProblema(status, problema, detail).userMessage(MSG_ERRO_GENERICO)
-		.timesStanp(LocalDateTime.now()).build();
+	ErroApi erro = criacaoDeBilderProblema(status, problema, detail).userMessage(MSG_ERRO_GENERICO).build();
 
 	return handleExceptionInternal(ex, erro, headers, status, request);
     }

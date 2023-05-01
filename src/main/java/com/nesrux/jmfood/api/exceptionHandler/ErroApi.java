@@ -23,5 +23,5 @@ public class ErroApi {
     private String detail;
 
     private String userMessage;
-    private LocalDateTime timesStanp;
+    private LocalDateTime timesStamp;
 }

@@ -51,8 +51,7 @@ public class RestauranteController {
     }
     // O @valid vai validar o objeto enviado na requisição na hora que ele chega no
     // metodo adicionar, ao invés dele fazer isso na hora da persistencia de dados,
-    // ou seja, ele nem chega a ir para a camada de dominio, facilitando a
-    // manipulaçao das exceptions
+    // ou seja, ele nem chega a ir para a camada de dominio, facilitando a manipulaçao das exceptions
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
