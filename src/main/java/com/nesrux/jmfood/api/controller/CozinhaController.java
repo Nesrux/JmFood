@@ -2,6 +2,8 @@ package com.nesrux.jmfood.api.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,42 +24,42 @@ import com.nesrux.jmfood.domain.service.CadastroCozinhaService;
 @RequestMapping("/cozinhas")
 public class CozinhaController {
 
-	@Autowired
-	private CadastroCozinhaService cozinhaService;
+    @Autowired
+    private CadastroCozinhaService cozinhaService;
 
-	@GetMapping()
-	public List<Cozinha> listar() {
-		return cozinhaService.acharTodas();
-	}
+    @GetMapping()
+    public List<Cozinha> listar() {
+	return cozinhaService.acharTodas();
+    }
 
-	@GetMapping("/{cozinhaId}")
-	public Cozinha buscar(@PathVariable Long cozinhaId) {
-		return cozinhaService.buscaOuFalha(cozinhaId);
-	}
+    @GetMapping("/{cozinhaId}")
+    public Cozinha buscar(@PathVariable Long cozinhaId) {
+	return cozinhaService.buscaOuFalha(cozinhaId);
+    }
 
-	@PostMapping
-	@ResponseStatus(code = HttpStatus.CREATED)
-	public Cozinha adicionar(@RequestBody Cozinha cozinha) {
+    @PostMapping
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Cozinha adicionar(@RequestBody @Valid Cozinha cozinha) {
 
-		return cozinhaService.salvar(cozinha);
-	}
+	return cozinhaService.salvar(cozinha);
+    }
 
-	@PutMapping("/{cozinhaId}")
-	public Cozinha atualizar(@PathVariable Long cozinhaId, @RequestBody Cozinha cozinha) {
-		Cozinha cozinhaAtual = cozinhaService.buscaOuFalha(cozinhaId);
+    @PutMapping("/{cozinhaId}")
+    public Cozinha atualizar(@PathVariable Long cozinhaId, @RequestBody Cozinha cozinha) {
+	Cozinha cozinhaAtual = cozinhaService.buscaOuFalha(cozinhaId);
 
-		// Importante
-		BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
-		Cozinha cozinhaSalva = cozinhaService.salvar(cozinhaAtual);
+	// Importante
+	BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
+	Cozinha cozinhaSalva = cozinhaService.salvar(cozinhaAtual);
 
-		return cozinhaSalva;
-	}
+	return cozinhaSalva;
+    }
 
-	@DeleteMapping("/{cozinhaId}")
-	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	public void deletar(@PathVariable Long cozinhaId) {
+    @DeleteMapping("/{cozinhaId}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deletar(@PathVariable Long cozinhaId) {
 
-		cozinhaService.excluir(cozinhaId);
+	cozinhaService.excluir(cozinhaId);
 
-	}
+    }
 }
