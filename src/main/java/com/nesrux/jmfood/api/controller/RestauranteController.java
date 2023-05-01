@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.BeanUtils;
@@ -14,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nesrux.jmfood.Groups;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
@@ -51,11 +52,12 @@ public class RestauranteController {
     }
     // O @valid vai validar o objeto enviado na requisição na hora que ele chega no
     // metodo adicionar, ao invés dele fazer isso na hora da persistencia de dados,
-    // ou seja, ele nem chega a ir para a camada de dominio, facilitando a manipulaçao das exceptions
+    // ou seja, ele nem chega a ir para a camada de dominio, facilitando a
+    // manipulaçao das exceptions
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Restaurante adicionar(@RequestBody @Valid Restaurante restaurante) {
+    public Restaurante adicionar(@RequestBody @Validated(Groups.cadastroRestaurante.class) Restaurante restaurante) {
 	try {
 	    return restaurante = restauranteService.salvar(restaurante);
 	} catch (EntidadeNaoEncontradaException e) {

@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.nesrux.jmfood.Groups;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,7 +22,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Cozinha {
-    @NotNull
+    
+    @NotNull(groups = Groups.cadastroRestaurante.class)
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

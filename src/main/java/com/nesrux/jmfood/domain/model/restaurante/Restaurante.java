@@ -25,6 +25,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.nesrux.jmfood.Groups;
 import com.nesrux.jmfood.domain.model.endereco.Endereco;
 import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
 import com.nesrux.jmfood.domain.model.pedido.Produto;
@@ -47,21 +48,20 @@ public class Restaurante {
     private Long id;
 
     @Column(nullable = false)
-//	@NotEmpty //não pode ser vazio, ou seja "" <- sem nada
-//	@NotNull <- nao pode ser nullo
-    @NotBlank // <- nao pode ser nulo, vazio e vazio com espaços " " <-
+    //@NotEmpty //não pode ser vazio, ou seja "" <- sem nada
+    //@NotNull <- nao pode ser nullo
+    @NotBlank(groups = Groups.cadastroRestaurante.class) // <- nao pode ser nulo, vazio e vazio com espaços " " <-
     private String nome;
 
-//	@DecimalMin("0") o minimo que ela pode receber é tal valor
-    @PositiveOrZero
+    //@DecimalMin("0") o minimo que ela pode receber é tal valor
+    @PositiveOrZero(groups = Groups.cadastroRestaurante.class)
     @Column(name = "taxa_frete", nullable = false)
     private BigDecimal taxaFrete;
 
     @ManyToOne // (fetch = FetchType.LAZY)
     @JoinColumn(name = "cozinha_id", nullable = false)
-    @NotNull
-    @Valid // essa anotação é para ele validar em cascata, pois por padrão, ele nao faz
-	   // isso
+    @NotNull(groups = Groups.cadastroRestaurante.class)
+    @Valid // essa anotação é para ele validar em cascata, pois por padrão, ele nao faz isso
     private Cozinha cozinha;
 
     @JsonIgnore
