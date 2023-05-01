@@ -16,7 +16,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -44,9 +45,13 @@ public class Restaurante {
 	private Long id;
 	
 	@Column(nullable = false)
-	@NotNull
+//	@NotEmpty //não pode ser vazio, ou seja "" <- sem nada
+//	@NotNull <- nao pode ser nullo
+	@NotBlank//<- nao pode ser nulo, vazio e vazio com espaços "   " <-
 	private String nome;
 	
+//	@DecimalMin("0") o minimo que ela pode receber é tal valor
+	@PositiveOrZero
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 	
