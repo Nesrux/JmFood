@@ -25,7 +25,6 @@ public class Cidade {
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(groups = Groups.CadastroCidade.class)
     private Long id;
 
     @Column(nullable = false)
