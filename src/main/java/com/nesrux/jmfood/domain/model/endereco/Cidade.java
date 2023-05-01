@@ -7,6 +7,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
+
+import com.nesrux.jmfood.Groups;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,15 +22,20 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Cidade {
-	@EqualsAndHashCode.Include
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @EqualsAndHashCode.Include
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(groups = Groups.CadastroCidade.class)
+    private Long id;
 
-	@Column(nullable = false)
-	private String nome;
+    @Column(nullable = false)
+    @NotBlank
+    private String nome;
 
-	@ManyToOne
-	@JoinColumn(nullable = false)
-	private Estado estado;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    @NotNull
+    @Valid
+    @ConvertGroup(from = Default.class, to = Groups.CadastroEstado.class)
+    private Estado estado;
 }

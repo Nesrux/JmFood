@@ -2,6 +2,8 @@ package com.nesrux.jmfood.api.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,41 +25,41 @@ import com.nesrux.jmfood.domain.service.CadastroEstadoService;
 @RequestMapping("/estados")
 public class EstadoController {
 
-	@Autowired
-	private CadastroEstadoService estadoService;
+    @Autowired
+    private CadastroEstadoService estadoService;
 
-	@GetMapping
-	public List<Estado> listar() {
-		return estadoService.acharTodos();
-	}
+    @GetMapping
+    public List<Estado> listar() {
+	return estadoService.acharTodos();
+    }
 
-	@GetMapping("/{estadoId}")
-	public Estado buscar(@PathVariable Long estadoId) {
-		return estadoService.acharOuFalhar(estadoId);
-	}
+    @GetMapping("/{estadoId}")
+    public Estado buscar(@PathVariable Long estadoId) {
+	return estadoService.acharOuFalhar(estadoId);
+    }
 
-	@PostMapping
-	public ResponseEntity<Estado> adicionar(@RequestBody Estado estado) {
-		estado = estadoService.salvar(estado);
-		return ResponseEntity.status(HttpStatus.CREATED).body(estado);
-	}
+    @PostMapping
+    public ResponseEntity<Estado> adicionar(@RequestBody @Valid Estado estado) {
+	estado = estadoService.salvar(estado);
+	return ResponseEntity.status(HttpStatus.CREATED).body(estado);
+    }
 
-	@PutMapping("{estadoId}")
-	public Estado atualizar(@PathVariable Long estadoId, @RequestBody Estado estado) {
-		Estado estadoAtual = estadoService.acharOuFalhar(estadoId);
+    @PutMapping("{estadoId}")
+    public Estado atualizar(@PathVariable Long estadoId, @RequestBody @Valid Estado estado) {
+	Estado estadoAtual = estadoService.acharOuFalhar(estadoId);
 
-		BeanUtils.copyProperties(estado, estadoAtual, "id");
+	BeanUtils.copyProperties(estado, estadoAtual, "id");
 
-		Estado estadoSalvo = estadoService.salvar(estadoAtual);
+	Estado estadoSalvo = estadoService.salvar(estadoAtual);
 
-		return estadoSalvo;
+	return estadoSalvo;
 
-	}
+    }
 
-	@DeleteMapping("{estadoId}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deletar(@PathVariable Long estadoId) {
-		estadoService.excluir(estadoId);
-	}
+    @DeleteMapping("{estadoId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletar(@PathVariable Long estadoId) {
+	estadoService.excluir(estadoId);
+    }
 
 }
