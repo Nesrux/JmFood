@@ -18,10 +18,10 @@ import lombok.EqualsAndHashCode;
 @Entity
 public class Estado {
 
+    @NotNull(groups = Groups.CadastroEstado.class)
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(groups = Groups.CadastroCidade.class)
     private Long id;
 
     @Column(nullable = false)

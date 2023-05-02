@@ -85,7 +85,7 @@ public class RestauranteController {
 
 	merge(campos, restauranteAtual, request);
 
-	return atualizar(restauranteId, restauranteAtual);
+	return atualizar(restauranteId,  restauranteAtual);
     }
 
     private void merge(Map<String, Object> camposOrigem, Restaurante restaurantesDestino, HttpServletRequest request) {

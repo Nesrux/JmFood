@@ -57,6 +57,7 @@ public class Restaurante {
 
     //@DecimalMin("0") o minimo que ela pode receber é tal valor
     @PositiveOrZero
+    @NotNull
     @Column(name = "taxa_frete", nullable = false)
     private BigDecimal taxaFrete;
 

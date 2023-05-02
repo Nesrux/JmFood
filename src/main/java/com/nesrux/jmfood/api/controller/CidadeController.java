@@ -23,7 +23,7 @@ import com.nesrux.jmfood.domain.model.endereco.Cidade;
 import com.nesrux.jmfood.domain.service.CadastroCidadeService;
 
 @RestController
-@RequestMapping("/cidades")
+@RequestMapping(value ="/cidades")
 public class CidadeController {
 
     @Autowired
