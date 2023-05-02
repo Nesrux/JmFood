@@ -52,7 +52,7 @@ public class Restaurante {
     @Column(nullable = false)
     //@NotEmpty //não pode ser vazio, ou seja "" <- sem nada
     //@NotNull <- nao pode ser nullo
-    @NotBlank// <- nao pode ser nulo, vazio e vazio com espaços " " <-
+    @NotBlank()// <- nao pode ser nulo, vazio e vazio com espaços " " <-
     private String nome;
 
     //@DecimalMin("0") o minimo que ela pode receber é tal valor
