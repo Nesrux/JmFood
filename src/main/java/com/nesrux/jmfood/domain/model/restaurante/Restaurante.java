@@ -28,6 +28,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nesrux.jmfood.core.validation.Groups;
+import com.nesrux.jmfood.core.validation.TaxaFrete;
 import com.nesrux.jmfood.domain.model.endereco.Endereco;
 import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
 import com.nesrux.jmfood.domain.model.pedido.Produto;
@@ -56,6 +57,7 @@ public class Restaurante {
     private String nome;
 
     @PositiveOrZero(message = "{taxaFrete.invalida}")
+    @TaxaFrete(message = "{taxaFrete.invalida}")
     @NotNull
     @Column(name = "taxa_frete", nullable = false)
     private BigDecimal taxaFrete;
