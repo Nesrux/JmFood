@@ -1,4 +1,4 @@
-package com.nesrux.jmfood;
+package com.nesrux.jmfood.core.validation;
 
 public interface Groups {
     public interface cadastroRestaurante{}
