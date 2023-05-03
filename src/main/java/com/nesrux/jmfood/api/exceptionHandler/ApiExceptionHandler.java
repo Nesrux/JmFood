@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -141,14 +142,17 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	TipoProblema problema = TipoProblema.DADOS_INVALIDOS;
 
 	BindingResult bindingResult = ex.getBindingResult();
-	List<ErroApi.Field> camposProblema = bindingResult.getFieldErrors().stream().map(campoErro -> {
-	    String message = messageSource.getMessage(campoErro,LocaleContextHolder.getLocale());
-	    return ErroApi.Field.builder()
-		    .nome(campoErro.getField())
-		    .userMessage(message).build();
+	List<ErroApi.Object> camposProblema = bindingResult.getAllErrors().stream().map(ObjectError -> {
+	    String message = messageSource.getMessage(ObjectError, LocaleContextHolder.getLocale());
+	    String name = ObjectError.getObjectName();
+	    if (ObjectError instanceof FieldError) {
+		name = ((FieldError) ObjectError).getField();
+	    }
+
+	    return ErroApi.Object.builder().nome(name).userMessage(message).build();
 	}).collect(Collectors.toList());
 
-	ErroApi erro = createProblemBuilder(status, problema, detail).userMessage(detail).fields(camposProblema)
+	ErroApi erro = createProblemBuilder(status, problema, detail).userMessage(detail).objects(camposProblema)
 		.build();
 
 	return handleExceptionInternal(ex, erro, headers, status, request);

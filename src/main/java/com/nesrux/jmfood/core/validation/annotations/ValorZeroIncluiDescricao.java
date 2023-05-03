@@ -14,7 +14,7 @@ import com.nesrux.jmfood.core.validation.validators.ValorZeroIncluiDescricaoVali
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {ValorZeroIncluiDescricaoValidator.class})
 public @interface ValorZeroIncluiDescricao {
-    String message() default "Descricão obrigatória inváçida";
+    String message() default "Descricão obrigatória inválida";
 
     Class<?>[] groups() default {};
 
