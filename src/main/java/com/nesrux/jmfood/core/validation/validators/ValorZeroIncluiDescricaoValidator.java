@@ -17,30 +17,31 @@ public class ValorZeroIncluiDescricaoValidator implements ConstraintValidator<Va
     private String descricaoObrigatoria;
 
     @Override
-    public void initialize(ValorZeroIncluiDescricao constraintAnnotation) {
-	this.descricaoField = constraintAnnotation.descricaoField();
-	this.descricaoField = constraintAnnotation.descricaoField();
-	this.valorField = constraintAnnotation.valorField();
+    public void initialize(ValorZeroIncluiDescricao constraint) {
+	this.valorField = constraint.valorField();
+	this.descricaoField = constraint.descricaoField();
+	this.descricaoObrigatoria = constraint.descricaoObrigatoria();
     }
 
     @Override
-    public boolean isValid(Object value, ConstraintValidatorContext context) {
+    public boolean isValid(Object objetoValidacao, ConstraintValidatorContext context) {
 	boolean valido = true;
 
 	try {
-	    BigDecimal valor = (BigDecimal) BeanUtils.getPropertyDescriptor(value.getClass(), valorField)
-		    .getReadMethod().invoke(value);
-	    String descricao = (String) BeanUtils.getPropertyDescriptor(value.getClass(), descricaoField).getReadMethod()
-		    .invoke(value);
+	    BigDecimal valor = (BigDecimal) BeanUtils.getPropertyDescriptor(objetoValidacao.getClass(), valorField)
+		    .getReadMethod().invoke(objetoValidacao);
+
+	    String descricao = (String) BeanUtils.getPropertyDescriptor(objetoValidacao.getClass(), descricaoField)
+		    .getReadMethod().invoke(objetoValidacao);
 
 	    if (valor != null && BigDecimal.ZERO.compareTo(valor) == 0 && descricao != null) {
 		valido = descricao.toLowerCase().contains(this.descricaoObrigatoria.toLowerCase());
 	    }
-	} catch (Exception e) {
-	    throw new ValidationException();
-	}
 
-	return valido;
+	    return valido;
+	} catch (Exception e) {
+	    throw new ValidationException(e);
+	}
     }
 
 }
