@@ -20,7 +20,7 @@ import com.nesrux.jmfood.core.validation.validators.MultiploValidator;
 @Retention(RUNTIME)
 @Constraint(validatedBy = {MultiploValidator.class})
 public @interface Multiplo {
-    String message() default "Multiplo invalido";
+    String message() default "{Multiplo}";
 
     Class<?>[] groups() default {};
 
