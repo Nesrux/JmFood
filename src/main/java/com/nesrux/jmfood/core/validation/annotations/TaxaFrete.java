@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.core.validation;
+package com.nesrux.jmfood.core.validation.annotations;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.CONSTRUCTOR;
