@@ -27,6 +27,7 @@ import com.fasterxml.jackson.databind.JsonMappingException.Reference;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.PropertyBindingException;
 import com.nesrux.jmfood.domain.exception.NegocioException;
+import com.nesrux.jmfood.domain.exception.ValidacaoException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeEmUsoException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 
@@ -87,6 +88,30 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	ErroApi problem = createProblemBuilder(status, problemType, detail).userMessage(detail).build();
 
 	return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+    }
+
+    @ExceptionHandler({ ValidacaoException.class })
+    public ResponseEntity<Object> handleValidacaoException(ValidacaoException ex, WebRequest request) {
+	String detail = String
+		.format("Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.");
+	TipoProblema problema = TipoProblema.DADOS_INVALIDOS;
+	HttpStatus status = HttpStatus.BAD_REQUEST;
+	BindingResult bindingResult = ex.getBindingResult();
+	List<ErroApi.Object> camposProblema = bindingResult.getAllErrors().stream().map(ObjectError -> {
+	    String message = messageSource.getMessage(ObjectError, LocaleContextHolder.getLocale());
+	    String name = ObjectError.getObjectName();
+	    if (ObjectError instanceof FieldError) {
+		name = ((FieldError) ObjectError).getField();
+	    }
+
+	    return ErroApi.Object.builder().nome(name).userMessage(message).build();
+	}).collect(Collectors.toList());
+
+	ErroApi erro = createProblemBuilder(status, problema, detail).userMessage(detail).objects(camposProblema)
+		.build();
+
+	return handleExceptionInternal(ex, erro, new HttpHeaders(), status, request);
+
     }
 
     @Override
