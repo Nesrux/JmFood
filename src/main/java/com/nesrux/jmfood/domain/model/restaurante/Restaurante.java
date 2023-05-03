@@ -28,7 +28,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nesrux.jmfood.core.validation.Groups;
-import com.nesrux.jmfood.core.validation.annotations.Multiplo;
+import com.nesrux.jmfood.core.validation.annotations.ValorZeroIncluiDescricao;
 import com.nesrux.jmfood.domain.model.endereco.Endereco;
 import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
 import com.nesrux.jmfood.domain.model.pedido.Produto;
@@ -36,6 +36,7 @@ import com.nesrux.jmfood.domain.model.pedido.Produto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+@ValorZeroIncluiDescricao(valorField = "taxaFrete", descricaoField = "nome", descricaoObrigatoria = "Frete Grátis")
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
@@ -56,7 +57,6 @@ public class Restaurante {
     @NotBlank() // <- nao pode ser nulo, vazio e vazio com espaços " " <-
     private String nome;
 
-    @Multiplo(numero = 5)
     @PositiveOrZero
     @NotNull
     @Column(name = "taxa_frete", nullable = false)
