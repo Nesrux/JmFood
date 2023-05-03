@@ -90,6 +90,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
     }
 
+    // TODO Refatorar esse codigo futuramente para usar o mesmo codigo de
+    // handleMethodArgumentNotValid
     @ExceptionHandler({ ValidacaoException.class })
     public ResponseEntity<Object> handleValidacaoException(ValidacaoException ex, WebRequest request) {
 	String detail = String
