@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.nesrux.jmfood.domain.exception.negocioException.EntidadeEmUsoException;
+import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.CozinhaNaoEncontradaException;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.service.CadastroCozinhaService;
 
@@ -22,7 +24,7 @@ public class CadastroCozinhaIntegrationTeste {
     private CadastroCozinhaService cozinhaService;
 
     @Test
-    public void testarCadastroComSucesso() {
+    public void deveFuncionar_quandoCadastrarCozinhaValida() {
 	// Caminho feliz, é o caminho onde todos os dados são validos
 
 	// ele funciona em 3 passos, o cenario onde você estancia os objetos
@@ -45,8 +47,8 @@ public class CadastroCozinhaIntegrationTeste {
     }
 
     @Test(expected = ConstraintViolationException.class)
-    public void Testar_CadastroCozinha_SemNome() {
-	//Caminho infeliz, onde acontece algum erro
+    public void deveFalhar_quandoCadastrarCozinhaSemNome() {
+	// Caminho infeliz, onde acontece algum erro
 	Cozinha cozinha = new Cozinha();
 	cozinha.setNome(null);
 	//
@@ -54,4 +56,16 @@ public class CadastroCozinhaIntegrationTeste {
 
     }
 
+    @Test(expected = EntidadeEmUsoException.class)
+    public void deveFalhar_quandoExcluirEmUso() {
+	Cozinha cozinha = new Cozinha();
+	cozinha = cozinhaService.buscaOuFalha(1L);
+	//
+	cozinhaService.excluir(cozinha.getId());
+    }
+
+    @Test(expected = CozinhaNaoEncontradaException.class)
+    public void deveFalhar_quandoEcluirCozinhaInesistente() {
+	cozinhaService.excluir(12L);
+    }
 }
