@@ -50,7 +50,8 @@
     	<dependency>
     		<groupId>org.projectlombok</groupId>
     		<artifactId>lombok</artifactId>
-   		</dependency>
+    		<version>1.18.20</version>
+		</dependency>
    		<dependency>
     		<groupId>org.flywaydb</groupId>
     		<artifactId>flyway-core</artifactId>
