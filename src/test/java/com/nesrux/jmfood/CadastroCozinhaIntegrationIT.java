@@ -17,7 +17,7 @@ import com.nesrux.jmfood.domain.service.CadastroCozinhaService;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class CadastroCozinhaIntegrationTeste {
+public class CadastroCozinhaIntegrationIT {
 //RunWith vai rodar o código junto com o spring, 
 //Teste de intregração e teste DE api
     @Autowired
