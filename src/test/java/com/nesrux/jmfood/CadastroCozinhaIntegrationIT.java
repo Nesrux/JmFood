@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import io.restassured.RestAssured;
@@ -17,10 +18,12 @@ import io.restassured.http.ContentType;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
+@TestPropertySource(locations = "aplication-test.properties")
 public class CadastroCozinhaIntegrationIT {
 //RunWith vai rodar o código junto com o spring, 
 //Teste de intregração e teste DE api
 
+ 
     @LocalServerPort
     private int port;
 
@@ -29,7 +32,7 @@ public class CadastroCozinhaIntegrationIT {
 	RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 	RestAssured.port = port;
 	RestAssured.basePath = "/cozinhas";
-    }
+   }
     
     @Test
     public void deveRetornarStatus200_quandoConsultar_listasCozinha() {
