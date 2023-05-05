@@ -7,11 +7,16 @@ import static org.hamcrest.Matchers.hasSize;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
+import com.nesrux.jmfood.domain.repository.CozinhaRepository;
+import com.nesrux.jmfood.util.DataBaseCleaner;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -23,8 +28,11 @@ import io.restassured.http.ContentType;
 public class CadastroCozinhaIntegrationIT {
 //RunWith vai rodar o código junto com o spring, 
 //Teste de intregração e teste DE api
-
- 
+	@Autowired
+	private DataBaseCleaner datacleaner;
+	@Autowired
+	private CozinhaRepository repository;
+	
     @LocalServerPort
     private int port;
 
@@ -33,6 +41,9 @@ public class CadastroCozinhaIntegrationIT {
 	RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 	RestAssured.port = port;
 	RestAssured.basePath = "/cozinhas";
+	
+	datacleaner.clearTables();
+	prepararDados();
    }
     
     @Test
@@ -63,7 +74,7 @@ public class CadastroCozinhaIntegrationIT {
 		.get()
 	.then()
 		.body("", hasSize(3))
-		.body("nome",hasItems("Indiana", "Tailandesa", "Brasileira"));
+		.body("nome",hasItems("Chinesa", "Brasileira", "Italiana"));
     }
     
     @Test
@@ -78,4 +89,18 @@ public class CadastroCozinhaIntegrationIT {
 		.statusCode(HttpStatus.CREATED.value());
     }
 
+    private void prepararDados() {
+    	Cozinha cozinha1 = new Cozinha();
+    	cozinha1.setNome("Chinesa");
+
+    	Cozinha cozinha2 = new Cozinha();
+    	cozinha2.setNome("Brasileira");
+
+    	Cozinha cozinha3 = new Cozinha();
+    	cozinha3.setNome("Italiana");
+    	
+    	repository.save(cozinha1);
+    	repository.save(cozinha2);
+    	repository.save(cozinha3);
+    }
 }
