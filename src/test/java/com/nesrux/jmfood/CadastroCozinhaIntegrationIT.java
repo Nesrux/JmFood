@@ -19,7 +19,7 @@ import io.restassured.http.ContentType;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 //@ActiveProfiles ("test")
-@TestPropertySource(locations = "aplication-test.properties")
+@TestPropertySource(locations = "/application-test.properties")
 public class CadastroCozinhaIntegrationIT {
 //RunWith vai rodar o código junto com o spring, 
 //Teste de intregração e teste DE api
