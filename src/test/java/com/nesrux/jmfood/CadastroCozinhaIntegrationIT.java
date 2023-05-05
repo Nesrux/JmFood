@@ -34,5 +34,15 @@ public class CadastroCozinhaIntegrationIT {
 		.statusCode(HttpStatus.OK.value());
 
     }
+    @Test
+    public void deveRetortar200_quando_consultar_umaCozinha() {
+	given().basePath("/cozinhas/1")
+		.port(port)
+		.accept(ContentType.JSON)
+	.when()
+		.get()
+	.then()
+		.statusCode(HttpStatus.OK.value());
+    }
 
 }
