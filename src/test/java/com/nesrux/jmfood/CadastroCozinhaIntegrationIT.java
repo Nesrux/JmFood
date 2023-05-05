@@ -1,7 +1,10 @@
 package com.nesrux.jmfood;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.Matchers.hasSize;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,12 +24,16 @@ public class CadastroCozinhaIntegrationIT {
     @LocalServerPort
     private int port;
 
+    @Before
+    public void setup() {
+	RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+	RestAssured.port = port;
+	RestAssured.basePath = "/cozinhas";
+    }
+    
     @Test
     public void deveRetornarStatus200_quandoConsultar_listasCozinha() {
-	RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 	given()
-		.basePath("/cozinhas")
-		.port(port)
 		.accept(ContentType.JSON)
 	.when()
 		.get()
@@ -36,13 +43,24 @@ public class CadastroCozinhaIntegrationIT {
     }
     @Test
     public void deveRetortar200_quando_consultar_umaCozinha() {
-	given().basePath("/cozinhas/1")
-		.port(port)
-		.accept(ContentType.JSON)
+	given()
+	.accept(ContentType.JSON)
 	.when()
 		.get()
 	.then()
 		.statusCode(HttpStatus.OK.value());
     }
+    
+    @Test
+    public void deveConter3Cozinhas() {
+	given()
+		.accept(ContentType.JSON)
+	.when()
+		.get()
+	.then()
+		.body("", hasSize(3))
+		.body("nome",hasItems("Indiana", "Tailandesa", "Brasileira"));
+    }
+
 
 }
