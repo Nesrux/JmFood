@@ -29,7 +29,7 @@ public class CadastroCozinhaIntegrationIT {
 //RunWith vai rodar o código junto com o spring, 
 //Teste de intregração e teste DE api
 	@Autowired
-	private DataBaseCleaner datacleaner;
+	private DataBaseCleaner datacleaner; //essa classe foi gerada a partir de um código de terceiros 
 	@Autowired
 	private CozinhaRepository repository;
 	
@@ -59,9 +59,9 @@ public class CadastroCozinhaIntegrationIT {
     @Test
     public void deveRetortar200_quando_consultar_umaCozinha() {
 	given()
-	.accept(ContentType.JSON)
+		.accept(ContentType.JSON)
 	.when()
-		.get()
+		.get("/1")
 	.then()
 		.statusCode(HttpStatus.OK.value());
     }
@@ -88,7 +88,16 @@ public class CadastroCozinhaIntegrationIT {
 	.then()
 		.statusCode(HttpStatus.CREATED.value());
     }
-
+    @Test
+    public void deveRetornarCodigo204_QuandoDeletarCozinha() {
+    	given()
+    		.accept(ContentType.JSON)
+    	.when()
+    		.delete("/1")
+    	.then()
+    		.statusCode(HttpStatus.NO_CONTENT.value());
+    }
+    
     private void prepararDados() {
     	Cozinha cozinha1 = new Cozinha();
     	cozinha1.setNome("Chinesa");
