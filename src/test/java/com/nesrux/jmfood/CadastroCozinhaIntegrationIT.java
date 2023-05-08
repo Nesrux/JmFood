@@ -1,6 +1,7 @@
 package com.nesrux.jmfood;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 
@@ -60,10 +61,12 @@ public class CadastroCozinhaIntegrationIT {
     public void deveRetortar200_quando_consultar_umaCozinha() {
 	given()
 		.accept(ContentType.JSON)
+		.pathParam("cozinhaId", 2)
 	.when()
-		.get("/1")
+		.get("/{cozinhaId}")
 	.then()
-		.statusCode(HttpStatus.OK.value());
+		.statusCode(HttpStatus.OK.value())
+		.body("nome", equalTo("Brasileira"));
     }
     
     @Test
@@ -92,10 +95,21 @@ public class CadastroCozinhaIntegrationIT {
     public void deveRetornarCodigo204_QuandoDeletarCozinha() {
     	given()
     		.accept(ContentType.JSON)
+    		.pathParam("cozinhaId",1)
     	.when()
-    		.delete("/1")
+    		.delete("/{cozinhaId}")
     	.then()
     		.statusCode(HttpStatus.NO_CONTENT.value());
+    }
+    
+    public void deveRetornar404_quandoConxultarCozinhaInexistente() {
+       	given()
+		.accept(ContentType.JSON)
+		.pathParam("cozinhaId", 10000)
+	.when()
+		.get("/{cozinhaId}")
+	.then()
+		.statusCode(HttpStatus.NOT_FOUND.value());
     }
     
     private void prepararDados() {
