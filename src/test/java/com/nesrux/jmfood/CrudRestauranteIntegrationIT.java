@@ -45,9 +45,19 @@ public class CrudRestauranteIntegrationIT {
 	private Restaurante restaurantePadrao = new Restaurante();
 	private BigDecimal taxaFrete = BigDecimal.valueOf(4);
 	private int qtdaRestaurantes;
+
 	private String jsonRestauranteChines;
+	private String jsonRestauranteComCozinhaInexistente;
+	private String jsonRestauranteComCozinhaNula;
+	private String jsonRestauranteComNomeBranco;
+	private String jsonRestauranteComNomeNulo;
+	private String jsonRestauranteComPropriedadesInvalidas;
+	private String jsonRestauranteComTaxaFreteNegativa;
+	private String jsonRestauranteComTaxaFreteNulo;
+	private String jsonRestauranteComTaxaFreteZero;
+
 	private int restauranteInexistente;
-	
+
 	@Before
 	public void setup() {
 		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
@@ -56,12 +66,21 @@ public class CrudRestauranteIntegrationIT {
 
 		
 		jsonRestauranteChines = ResourceUtils.getContentFromResource("/json/correto/RestauranteChines.json");
+		jsonRestauranteComCozinhaInexistente = ResourceUtils.getContentFromResource("/json/correto/Restaurante.json");
+		jsonRestauranteComCozinhaInexistente = ResourceUtils.getContentFromResource("/json/incorreto/RestauranteComCozinhaInexistente.json");
+		jsonRestauranteComCozinhaNula = ResourceUtils.getContentFromResource("/json/incorreto/RestauranteComCozinhaNulla.json");
+		jsonRestauranteComNomeBranco = ResourceUtils.getContentFromResource("/json/incorreto/RestauranteComNomeBranco.json");
+		jsonRestauranteComNomeNulo=ResourceUtils.getContentFromResource("/json/incorreto/RestauranteComNomeNulo.json");
+		jsonRestauranteComPropriedadesInvalidas = ResourceUtils.getContentFromResource("/json/incorreto/RestauranteComPropriedadesInvalidas.json");
+		jsonRestauranteComTaxaFreteNegativa =ResourceUtils.getContentFromResource("/json/incorreto/RestauranteComTaxaFreteNegativa.json");
+		jsonRestauranteComTaxaFreteNulo= ResourceUtils.getContentFromResource("/json/incorreto/RestauranteComTaxaFreteNulo.json");
+		jsonRestauranteComTaxaFreteZero= ResourceUtils.getContentFromResource("/json/incorreto/RestauranteComTaxaFreteZero.json");
 		
 		datacleaner.clearTables();
 		prepararDados();
 		restauranteInexistente = qtdaRestaurantes + 1;
 	}
-	
+
 	@Test
 	public void deveRetornar200_quandoConsultarTodasCozinhas() {
 		given()
@@ -69,21 +88,21 @@ public class CrudRestauranteIntegrationIT {
 		.when()
 			.get()
 		.then()
-			.statusCode(HttpStatus.OK.value())
-			.body("", hasSize(qtdaRestaurantes));
+			.statusCode(HttpStatus.OK.value()).body("",hasSize(qtdaRestaurantes));
 	}
+
 	@Test
 	public void deveRetornar200_quandoConsultarCozinha() {
 		given()
-		.accept(ContentType.JSON)
+			.accept(ContentType.JSON)
 			.pathParam("restauranteId", restaurantePadrao.getId())
 		.when()
 			.get("/{restauranteId}")
-		.then()
-			.statusCode(HttpStatus.OK.value())
-		.	body("nome",equalTo(restaurantePadrao.getNome()));
+		.then().
+			statusCode(HttpStatus.OK.value())
+			.body("nome", equalTo(restaurantePadrao.getNome()));
 	}
-	
+
 	@Test
 	public void deveRetornar201_quandoCadastrarUmaCozinha() {
 		given()
@@ -95,17 +114,54 @@ public class CrudRestauranteIntegrationIT {
 		.then()
 			.statusCode(HttpStatus.CREATED.value());
 	}
+
 	@Test
 	public void deveRetornar404_quandoConsultarRestauranteInexistente() {
 		given()
-		.accept(ContentType.JSON)
+			.accept(ContentType.JSON)
 			.pathParam("restauranteId", restauranteInexistente)
 		.when()
 			.get("/{restauranteId}")
 		.then()
-			.statusCode(HttpStatus.NOT_FOUND.value());		
+			.statusCode(HttpStatus.NOT_FOUND.value());
+	}
+	@Test
+	public void deveRetornar404_QuandoCadasTrarRestauranteComCozinhaInezistente() {
+	given()
+		.accept(ContentType.JSON)
+		.contentType(ContentType.JSON)
+		.body(jsonRestauranteComCozinhaInexistente)
+	.when()
+		.post()
+	.then()
+		.statusCode(HttpStatus.BAD_REQUEST.value());
+	}
+	@Test
+	public void deveRetornar400_QuandoCadastrarRestauranteComCozinhaNula() {
+	given()
+		.accept(ContentType.JSON)
+		.contentType(ContentType.JSON)
+		.body(jsonRestauranteComCozinhaNula)
+	.when()
+		.post()
+	.then()
+		.statusCode(HttpStatus.BAD_REQUEST.value());
+		
+	}
+	@Test
+	public void deveRetornar400_QuandoCadastrarRestauranteComNomeEmBranco() {
+		given()
+		.accept(ContentType.JSON)
+		.contentType(ContentType.JSON)
+		.body(jsonRestauranteComNomeBranco)
+	.when()
+		.post()
+	.then()
+		.statusCode(HttpStatus.BAD_REQUEST.value());
 	}
 	
+
+
 	private void prepararDados() {
 		Cozinha cozinhaPadrao = new Cozinha();
 		cozinhaPadrao.setNome("chinesa");
