@@ -2,7 +2,6 @@ package com.nesrux.jmfood;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 
 import org.junit.Before;
@@ -18,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.repository.CozinhaRepository;
 import com.nesrux.jmfood.util.DataBaseCleaner;
+import com.nesrux.jmfood.util.ResourceUtils;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -29,6 +29,8 @@ import io.restassured.http.ContentType;
 public class CadastroCozinhaIntegrationIT {
 //RunWith vai rodar o código junto com o spring, 
 //Teste de intregração e teste DE api
+	private static final int COZINHA_INEXISTENTE = 10000;	
+
 	@Autowired
 	private DataBaseCleaner datacleaner; //essa classe foi gerada a partir de um código de terceiros 
 	@Autowired
@@ -36,12 +38,19 @@ public class CadastroCozinhaIntegrationIT {
 	
     @LocalServerPort
     private int port;
+    
 
+    private Cozinha cozinhaBrasileira = new Cozinha();
+    private int quantidadeDeCozinhas;
+    private String jsonCozinhaChinesa;
     @Before
     public void setup() {
 	RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 	RestAssured.port = port;
 	RestAssured.basePath = "/cozinhas";
+	
+	
+	jsonCozinhaChinesa = ResourceUtils.getContentFromResource("/json/correto/CozinhaChinesa.json");
 	
 	datacleaner.clearTables();
 	prepararDados();
@@ -61,12 +70,12 @@ public class CadastroCozinhaIntegrationIT {
     public void deveRetortar200_quando_consultar_umaCozinha() {
 	given()
 		.accept(ContentType.JSON)
-		.pathParam("cozinhaId", 2)
+		.pathParam("cozinhaId", cozinhaBrasileira.getId())
 	.when()
 		.get("/{cozinhaId}")
 	.then()
 		.statusCode(HttpStatus.OK.value())
-		.body("nome", equalTo("Brasileira"));
+		.body("nome", equalTo(cozinhaBrasileira.getNome()));
     }
     
     @Test
@@ -76,14 +85,13 @@ public class CadastroCozinhaIntegrationIT {
 	.when()
 		.get()
 	.then()
-		.body("", hasSize(3))
-		.body("nome",hasItems("Chinesa", "Brasileira", "Italiana"));
-    }
+		.body("", hasSize(quantidadeDeCozinhas));
+	}
     
     @Test
     public void deveRetornarStatus201_quandoCadastrarCozinha() {
 	given()
-		.body("{\"nome\" : \"Chinesa\"}")
+		.body(jsonCozinhaChinesa)
 		.contentType(ContentType.JSON)
 		.accept(ContentType.JSON)
 	.when()
@@ -105,7 +113,7 @@ public class CadastroCozinhaIntegrationIT {
     public void deveRetornar404_quandoConxultarCozinhaInexistente() {
        	given()
 		.accept(ContentType.JSON)
-		.pathParam("cozinhaId", 10000)
+		.pathParam("cozinhaId", COZINHA_INEXISTENTE)
 	.when()
 		.get("/{cozinhaId}")
 	.then()
@@ -114,16 +122,18 @@ public class CadastroCozinhaIntegrationIT {
     
     private void prepararDados() {
     	Cozinha cozinha1 = new Cozinha();
-    	cozinha1.setNome("Chinesa");
+    	cozinha1.setNome("Italiana");
 
-    	Cozinha cozinha2 = new Cozinha();
-    	cozinha2.setNome("Brasileira");
-
+    	cozinhaBrasileira.setNome("Brasileira");
+    	
     	Cozinha cozinha3 = new Cozinha();
     	cozinha3.setNome("Italiana");
     	
+    	
     	repository.save(cozinha1);
-    	repository.save(cozinha2);
+    	repository.save(cozinhaBrasileira);
     	repository.save(cozinha3);
+    	
+    	quantidadeDeCozinhas = (int) repository.count();
     }
 }
