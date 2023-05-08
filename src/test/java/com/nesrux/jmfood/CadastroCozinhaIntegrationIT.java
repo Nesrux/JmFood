@@ -101,7 +101,7 @@ public class CadastroCozinhaIntegrationIT {
     	.then()
     		.statusCode(HttpStatus.NO_CONTENT.value());
     }
-    
+    @Test
     public void deveRetornar404_quandoConxultarCozinhaInexistente() {
        	given()
 		.accept(ContentType.JSON)
