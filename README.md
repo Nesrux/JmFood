@@ -20,7 +20,7 @@
 - [x] mapear as entidades com JPA
 - [x] Criar as migrations com o flyway
 - [x] tratar exceptions
-- [ ] fazer as validações com bean validation
+- [x] fazer as validações com bean validation
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
