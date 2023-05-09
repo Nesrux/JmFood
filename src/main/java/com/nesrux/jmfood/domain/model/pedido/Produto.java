@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 
 import lombok.Data;
@@ -38,7 +37,6 @@ public class Produto {
 	@Column(nullable = false)
 	private boolean ativo;
 
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Restaurante restaurante;
