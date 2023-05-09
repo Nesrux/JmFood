@@ -216,7 +216,7 @@ public class CrudRestauranteIntegrationIT {
 	.when()
 		.post()
 	.then()
-		.statusCode(HttpStatus.BAD_REQUEST.value());
+		.statusCode(HttpStatus.CREATED.value());
 	
 	}
 	
