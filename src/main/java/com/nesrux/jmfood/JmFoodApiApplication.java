@@ -1,5 +1,7 @@
 package com.nesrux.jmfood;
 
+import java.util.TimeZone;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -14,6 +16,7 @@ public class JmFoodApiApplication {
 	 * implementação do jpa padrão criando asssim 
 	 */
 	public static void main(String[] args) {
+		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 		SpringApplication.run(JmFoodApiApplication.class, args);
 	}
 
