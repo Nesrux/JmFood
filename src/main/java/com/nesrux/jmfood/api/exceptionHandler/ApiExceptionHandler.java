@@ -207,7 +207,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	TipoProblema problemType = TipoProblema.MENSAGEM_INCOMPREENSIVEL;
 	String detail = String.format(
-		"A propriedade '%s' não existe. " + "Corrija ou remova essa propriedade e tente novamente.", path);
+		"A propriedade '%s' não existe.  Corrija ou remova essa propriedade e tente novamente.", path);
 
 	ErroApi problem = createProblemBuilder(status, problemType, detail).userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL)
 		.build();

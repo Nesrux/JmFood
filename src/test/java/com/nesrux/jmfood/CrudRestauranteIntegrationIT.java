@@ -136,6 +136,7 @@ public class CrudRestauranteIntegrationIT {
 	.then()
 		.statusCode(HttpStatus.BAD_REQUEST.value());
 	}
+	
 	@Test
 	public void deveRetornar400_QuandoCadastrarRestauranteComCozinhaNula() {
 	given()
@@ -150,7 +151,7 @@ public class CrudRestauranteIntegrationIT {
 	}
 	@Test
 	public void deveRetornar400_QuandoCadastrarRestauranteComNomeEmBranco() {
-		given()
+	given()
 		.accept(ContentType.JSON)
 		.contentType(ContentType.JSON)
 		.body(jsonRestauranteComNomeBranco)
@@ -158,6 +159,29 @@ public class CrudRestauranteIntegrationIT {
 		.post()
 	.then()
 		.statusCode(HttpStatus.BAD_REQUEST.value());
+	}
+	public void deveRetornar400_QuandoCadastrarUmRestauranteComNomeNulo() {
+		given()
+		.accept(ContentType.JSON)
+		.contentType(ContentType.JSON)
+		.body(jsonRestauranteComNomeNulo)
+	.when()
+		.post()
+	.then()
+		.statusCode(HttpStatus.BAD_REQUEST.value());
+	
+	}
+	
+	public void deveRetornar000_quandoCadastrarRestauranteComPropriedadeInvalida() {
+	given()
+		.accept(ContentType.JSON)
+		.contentType(ContentType.JSON)
+		.body(jsonRestauranteComPropriedadesInvalidas)
+	.when()
+		.post()
+	.then()
+		.statusCode(HttpStatus.BAD_REQUEST.value());
+	
 	}
 	
 
