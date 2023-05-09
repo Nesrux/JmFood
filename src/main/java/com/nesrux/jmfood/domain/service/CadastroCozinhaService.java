@@ -2,6 +2,8 @@ package com.nesrux.jmfood.domain.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -22,7 +24,7 @@ public class CadastroCozinhaService {
 	public Cozinha salvar(Cozinha cozinha) {
 		return cozinhaRepository.save(cozinha);
 	}
-
+	@Transactional
 	public void excluir(Long cozinhaId) {
 		try {
 			cozinhaRepository.deleteById(cozinhaId);
@@ -34,7 +36,7 @@ public class CadastroCozinhaService {
 			throw new EntidadeEmUsoException(String.format(MSG_COZINHA_EM_USO, cozinhaId));
 		}
 	}
-
+	@Transactional
 	public Cozinha buscaOuFalha(Long cozinhaId) {
 		return cozinhaRepository.findById(cozinhaId).orElseThrow(
 				() -> new CozinhaNaoEncontradaException(cozinhaId));

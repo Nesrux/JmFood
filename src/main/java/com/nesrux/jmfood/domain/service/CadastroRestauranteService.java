@@ -2,6 +2,8 @@ package com.nesrux.jmfood.domain.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,8 @@ public class CadastroRestauranteService {
 
 	@Autowired
 	private CadastroCozinhaService cozinhaService;
-
+	
+	@Transactional
 	public Restaurante salvar(Restaurante restaurante) {
 		Long cozinhaId = restaurante.getCozinha().getId();
 

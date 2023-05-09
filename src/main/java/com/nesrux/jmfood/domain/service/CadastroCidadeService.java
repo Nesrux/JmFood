@@ -2,6 +2,8 @@ package com.nesrux.jmfood.domain.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -23,6 +25,7 @@ public class CadastroCidadeService {
 	@Autowired
 	private CadastroEstadoService estadoService;
 
+	@Transactional
 	public Cidade salvar(Cidade cidade) {
 		// Pega o id do estado cadastrado na cidade
 		Long estadoId = cidade.getEstado().getId();
@@ -34,7 +37,7 @@ public class CadastroCidadeService {
 		return cidadeRepository.save(cidade);
 
 	}
-
+	@Transactional
 	public void excluir(Long cidadeId) {
 		try {
 			cidadeRepository.deleteById(cidadeId);
