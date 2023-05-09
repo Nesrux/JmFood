@@ -160,6 +160,7 @@ public class CrudRestauranteIntegrationIT {
 	.then()
 		.statusCode(HttpStatus.BAD_REQUEST.value());
 	}
+	@Test
 	public void deveRetornar400_QuandoCadastrarUmRestauranteComNomeNulo() {
 		given()
 		.accept(ContentType.JSON)
@@ -171,12 +172,47 @@ public class CrudRestauranteIntegrationIT {
 		.statusCode(HttpStatus.BAD_REQUEST.value());
 	
 	}
-	
+	@Test
 	public void deveRetornar000_quandoCadastrarRestauranteComPropriedadeInvalida() {
 	given()
 		.accept(ContentType.JSON)
 		.contentType(ContentType.JSON)
 		.body(jsonRestauranteComPropriedadesInvalidas)
+	.when()
+		.post()
+	.then()
+		.statusCode(HttpStatus.BAD_REQUEST.value());
+	}
+	@Test
+	public void deveRetornar400_quandoCadastrarRestauranteComTaxaFreteNula() {
+	given()
+		.accept(ContentType.JSON)
+		.contentType(ContentType.JSON)
+		.body(jsonRestauranteComTaxaFreteNulo)
+	.when()
+		.post()
+	.then()
+		.statusCode(HttpStatus.BAD_REQUEST.value());
+	
+	}
+	@Test
+	public void deveRetornar400_quandoCadastrarRestauranteComTaxaFretenegativo() {
+	given()
+		.accept(ContentType.JSON)
+		.contentType(ContentType.JSON)
+		.body(jsonRestauranteComTaxaFreteNegativa)
+	.when()
+		.post()
+	.then()
+		.statusCode(HttpStatus.BAD_REQUEST.value());
+	
+	}
+	@Test
+	public void deveRetornar400_quandoCadastrarRestauranteComTaxaFreteZero() {
+	given()
+		.accept(ContentType.JSON)
+		.contentType(ContentType.JSON)
+		.body(jsonRestauranteComTaxaFreteZero)
 	.when()
 		.post()
 	.then()
