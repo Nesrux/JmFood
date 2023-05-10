@@ -1,6 +1,6 @@
 package com.nesrux.jmfood.api.exceptionHandler;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -24,7 +24,7 @@ public class ErroApi {
     private String detail;
 
     private String userMessage;
-    private LocalDateTime timesStamp;
+    private OffsetDateTime timesStamp;
 
     private List<Object> objects;
 

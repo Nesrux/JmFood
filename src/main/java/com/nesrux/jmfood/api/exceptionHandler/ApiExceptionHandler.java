@@ -1,6 +1,6 @@
 package com.nesrux.jmfood.api.exceptionHandler;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -190,10 +190,10 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	    HttpStatus status, WebRequest request) {
 
 	if (body == null) {
-	    body = ErroApi.builder().timesStamp(LocalDateTime.now()).title(status.getReasonPhrase())
+	    body = ErroApi.builder().timesStamp(OffsetDateTime.now()).title(status.getReasonPhrase())
 		    .status(status.value()).userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL).build();
 	} else if (body instanceof String) {
-	    body = ErroApi.builder().timesStamp(LocalDateTime.now()).title((String) body).status(status.value())
+	    body = ErroApi.builder().timesStamp(OffsetDateTime.now()).title((String) body).status(status.value())
 		    .userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL).build();
 	}
 
@@ -217,7 +217,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     private ErroApi.ErroApiBuilder createProblemBuilder(HttpStatus status, TipoProblema problemType, String detail) {
 
-	return ErroApi.builder().timesStamp(LocalDateTime.now()).status(status.value()).type(problemType.getUri())
+	return ErroApi.builder().timesStamp(OffsetDateTime.now()).status(status.value()).type(problemType.getUri())
 		.title(problemType.getTitulo()).detail(detail);
     }
 
