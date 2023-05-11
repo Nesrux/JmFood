@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nesrux.jmfood.api.model.dto.input.RestauranteInputDTO;
 import com.nesrux.jmfood.api.model.dto.output.CozinhaOutputDTO;
 import com.nesrux.jmfood.api.model.dto.output.RestauranteOutputDTO;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
+import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.service.CadastroRestauranteService;
 
@@ -52,21 +54,24 @@ public class RestauranteController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public RestauranteOutputDTO adicionar(@RequestBody @Valid Restaurante restaurante) {
+	public RestauranteOutputDTO adicionar(@RequestBody @Valid RestauranteInputDTO restauranteInputDTO) {
 		try {
-			restaurante = restauranteService.salvar(restaurante);
-			return toModel(restaurante);
+			Restaurante restaurante = toDomainObject(restauranteInputDTO);
+			
+			return toModel(restauranteService.salvar(restaurante));
+			
 		} catch (EntidadeNaoEncontradaException e) {
 			throw new NegocioException(e.getMessage(), e);
 		}
 	}
 
 	@PutMapping("/{restauranteId}")
-	public RestauranteOutputDTO atualizar(@PathVariable Long restauranteId, @RequestBody @Valid Restaurante restaurante) {
+	public RestauranteOutputDTO atualizar(@PathVariable Long restauranteId,
+			@RequestBody @Valid RestauranteInputDTO restauranteInputDto) {
 		try {
 			Restaurante restauranteAtual = restauranteService.acharOuFalhar(restauranteId);
 
-			BeanUtils.copyProperties(restaurante, restauranteAtual, "id", "formasPagamento", "endereco",
+			BeanUtils.copyProperties(restauranteInputDto, restauranteAtual, "id", "formasPagamento", "endereco",
 					"dataCadastro");
 
 			return toModel(restauranteService.salvar(restauranteAtual));
@@ -90,6 +95,19 @@ public class RestauranteController {
 		restauranteDTO.setTaxaFrete(restaurante.getTaxaFrete());
 		restauranteDTO.setCozinha(cozinhaDTO);
 		return restauranteDTO;
+	}
+
+	private Restaurante toDomainObject(RestauranteInputDTO inputDTO) {
+		Restaurante restaurante = new Restaurante();
+		restaurante.setNome(inputDTO.getNome());
+		restaurante.setTaxaFrete(inputDTO.getTaxaFrete());
+
+		Cozinha cozinha = new Cozinha();
+		cozinha.setId(inputDTO.getCozinha().getId());
+
+		restaurante.setCozinha(cozinha);
+
+		return restaurante;
 	}
 
 }
