@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.api.classconversion.assembler.RestauranteModelAssembler;
-import com.nesrux.jmfood.api.classconversion.dissasembler.RestauranteModelDissasembler;
+import com.nesrux.jmfood.api.classconversion.assembler.RestauranteOutputAssembler;
+import com.nesrux.jmfood.api.classconversion.dissasembler.RestauranteInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.RestauranteInputDTO;
 import com.nesrux.jmfood.api.model.dto.output.RestauranteOutputDTO;
 import com.nesrux.jmfood.domain.exception.NegocioException;
@@ -35,9 +35,9 @@ public class RestauranteController {
 	@Autowired
 	private CadastroRestauranteService restauranteService;
 	@Autowired
-	private RestauranteModelAssembler restauranteAssembler;
+	private RestauranteOutputAssembler restauranteAssembler;
 	@Autowired
-	private RestauranteModelDissasembler restauranteDissasembler;
+	private RestauranteInputDisassembler restauranteDissasembler;
 
 	@GetMapping()
 	public List<RestauranteOutputDTO> listar() {

@@ -7,7 +7,8 @@ import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 
 @Component
-public class RestauranteModelDissasembler {
+public class RestauranteInputDisassembler
+ {
 	public Restaurante toDomainObject(RestauranteInputDTO inputDTO) {
 		Restaurante restaurante = new Restaurante();
 		restaurante.setNome(inputDTO.getNome());
