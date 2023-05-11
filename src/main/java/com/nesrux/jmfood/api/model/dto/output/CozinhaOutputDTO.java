@@ -1,11 +1,11 @@
-package com.nesrux.jmfood.api.model;
+package com.nesrux.jmfood.api.model.dto.output;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class CozinhaDTO {
+public class CozinhaOutputDTO {
 
 	private Long id;
 	private String nome;
