@@ -12,6 +12,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
+/*
+ * Classe para o cadastro De restaurante
+ */
 public class RestauranteInputDTO {
 
 	@NotBlank
@@ -20,7 +23,7 @@ public class RestauranteInputDTO {
 	@PositiveOrZero
 	@NotNull
 	private BigDecimal taxaFrete;
-	
+
 	@Valid
 	@NotNull
 	private CozinhaIdInputDTO cozinha;

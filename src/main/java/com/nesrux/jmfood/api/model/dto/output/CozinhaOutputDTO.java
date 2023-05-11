@@ -5,6 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
+/*
+ *  Classe de saida de dados para o controller de Restaurante e Cozinha
+ */
 public class CozinhaOutputDTO {
 
 	private Long id;
