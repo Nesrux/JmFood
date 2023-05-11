@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.api.assembler.RestauranteModelAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.RestauranteModelAssembler;
+import com.nesrux.jmfood.api.classconversion.dissasembler.RestauranteModelDissasembler;
 import com.nesrux.jmfood.api.model.dto.input.RestauranteInputDTO;
 import com.nesrux.jmfood.api.model.dto.output.RestauranteOutputDTO;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
-import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.service.CadastroRestauranteService;
 
@@ -36,6 +36,8 @@ public class RestauranteController {
 	private CadastroRestauranteService restauranteService;
 	@Autowired
 	private RestauranteModelAssembler restauranteAssembler;
+	@Autowired
+	private RestauranteModelDissasembler restauranteDissasembler;
 
 	@GetMapping()
 	public List<RestauranteOutputDTO> listar() {
@@ -57,7 +59,7 @@ public class RestauranteController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public RestauranteOutputDTO adicionar(@RequestBody @Valid RestauranteInputDTO restauranteInputDTO) {
 		try {
-			Restaurante restaurante = toDomainObject(restauranteInputDTO);
+			Restaurante restaurante =restauranteDissasembler.toDomainObject(restauranteInputDTO);
 
 			return restauranteAssembler.toModel(restauranteService.salvar(restaurante));
 
@@ -81,17 +83,6 @@ public class RestauranteController {
 		}
 	}
 
-	private Restaurante toDomainObject(RestauranteInputDTO inputDTO) {
-		Restaurante restaurante = new Restaurante();
-		restaurante.setNome(inputDTO.getNome());
-		restaurante.setTaxaFrete(inputDTO.getTaxaFrete());
 
-		Cozinha cozinha = new Cozinha();
-		cozinha.setId(inputDTO.getCozinha().getId());
-
-		restaurante.setCozinha(cozinha);
-
-		return restaurante;
-	}
 
 }
