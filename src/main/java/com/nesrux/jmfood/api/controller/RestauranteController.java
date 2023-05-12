@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nesrux.jmfood.api.classconversion.assembler.RestauranteOutputAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.RestauranteInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteInputDto;
-import com.nesrux.jmfood.api.model.dto.output.RestauranteOutputDto;
+import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteOutputDto;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;

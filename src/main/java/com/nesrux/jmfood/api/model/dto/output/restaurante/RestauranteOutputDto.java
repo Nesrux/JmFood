@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.api.model.dto.output;
+package com.nesrux.jmfood.api.model.dto.output.restaurante;
 
 import java.math.BigDecimal;
 
