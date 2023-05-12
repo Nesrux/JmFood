@@ -7,14 +7,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-/*
- * Classe de saida de dados para controller de Restaurante
- * */
+/** 
+ * Classe de saida de dados para controller de Restaurante 
+ */
 public class RestauranteOutputDTO {
 	private Long id;
 	private String nome;
 	private BigDecimal taxaFrete;
-		
+
 	private CozinhaOutputDTO cozinha;
 
 }

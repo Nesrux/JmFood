@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -74,8 +73,7 @@ public class RestauranteController {
 		try {
 			Restaurante restauranteAtual = restauranteService.acharOuFalhar(restauranteId);
 
-			BeanUtils.copyProperties(restauranteInputDto, restauranteAtual, "id", "formasPagamento", "endereco",
-					"dataCadastro");
+			restauranteDissasembler.copyTodomainObject(restauranteInputDto, restauranteAtual);
 
 			return restauranteAssembler.toModel(restauranteService.salvar(restauranteAtual));
 		} catch (EntidadeNaoEncontradaException e) {
