@@ -48,10 +48,13 @@ public class EstadoController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Estado adicionar(@RequestBody @Valid EstadoOutputDto estadoDto) {
+	public EstadoOutputDto adicionar(@RequestBody @Valid EstadoInputDto estadoDto) {
 		Estado estado = inputDisassembler.toDomainObject(estadoDto);
-
-		return estadoService.salvar(estado);
+		estadoService.salvar(estado);
+		
+		EstadoOutputDto outputDto = outputAssembler.toModel(estado);
+		
+		return outputDto;
 
 	}
 
