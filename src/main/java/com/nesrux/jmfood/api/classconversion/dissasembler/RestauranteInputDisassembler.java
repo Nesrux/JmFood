@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.nesrux.jmfood.api.model.dto.input.RestauranteInputDto;
+import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteInputDto;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 

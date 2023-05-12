@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.api.model.dto.input;
+package com.nesrux.jmfood.api.model.dto.input.restaurante;
 
 import javax.validation.constraints.NotNull;
 
