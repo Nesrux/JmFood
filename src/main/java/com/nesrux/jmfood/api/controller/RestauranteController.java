@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nesrux.jmfood.api.classconversion.assembler.RestauranteOutputAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.RestauranteInputDisassembler;
-import com.nesrux.jmfood.api.model.dto.input.RestauranteInputDTO;
-import com.nesrux.jmfood.api.model.dto.output.RestauranteOutputDTO;
+import com.nesrux.jmfood.api.model.dto.input.RestauranteInputDto;
+import com.nesrux.jmfood.api.model.dto.output.RestauranteOutputDto;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
@@ -39,12 +39,12 @@ public class RestauranteController {
 	private RestauranteInputDisassembler restauranteDissasembler;
 
 	@GetMapping()
-	public List<RestauranteOutputDTO> listar() {
+	public List<RestauranteOutputDto> listar() {
 		return restauranteAssembler.toCollectionDto(restauranteService.acharTodos());
 	}
 
 	@GetMapping("/{restauranteId}")
-	public RestauranteOutputDTO buscar(@PathVariable Long restauranteId) {
+	public RestauranteOutputDto buscar(@PathVariable Long restauranteId) {
 		Restaurante restaurante = restauranteService.acharOuFalhar(restauranteId);
 
 		return restauranteAssembler.toModel(restaurante);
@@ -56,7 +56,7 @@ public class RestauranteController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public RestauranteOutputDTO adicionar(@RequestBody @Valid RestauranteInputDTO restauranteInputDTO) {
+	public RestauranteOutputDto adicionar(@RequestBody @Valid RestauranteInputDto restauranteInputDTO) {
 		try {
 			Restaurante restaurante =restauranteDissasembler.toDomainObject(restauranteInputDTO);
 
@@ -68,8 +68,8 @@ public class RestauranteController {
 	}
 
 	@PutMapping("/{restauranteId}")
-	public RestauranteOutputDTO atualizar(@PathVariable Long restauranteId,
-			@RequestBody @Valid RestauranteInputDTO restauranteInputDto) {
+	public RestauranteOutputDto atualizar(@PathVariable Long restauranteId,
+			@RequestBody @Valid RestauranteInputDto restauranteInputDto) {
 		try {
 			Restaurante restauranteAtual = restauranteService.acharOuFalhar(restauranteId);
 

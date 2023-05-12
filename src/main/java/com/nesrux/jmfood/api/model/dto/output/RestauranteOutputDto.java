@@ -10,11 +10,11 @@ import lombok.Setter;
 /** 
  * Classe de saida de dados para controller de Restaurante 
  */
-public class RestauranteOutputDTO {
+public class RestauranteOutputDto {
 	private Long id;
 	private String nome;
 	private BigDecimal taxaFrete;
 
-	private CozinhaOutputDTO cozinha;
+	private CozinhaOutputDto cozinha;
 
 }
