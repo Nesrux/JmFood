@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,56 +16,69 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nesrux.jmfood.api.classconversion.assembler.CidadeOutputAssembler;
+import com.nesrux.jmfood.api.classconversion.dissasembler.CidadeInputDisassembler;
+import com.nesrux.jmfood.api.model.dto.input.cidade.CidadeInputDto;
+import com.nesrux.jmfood.api.model.dto.output.cidade.CidadeOutputDto;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.EstadoNaoEncontradoException;
 import com.nesrux.jmfood.domain.model.endereco.Cidade;
 import com.nesrux.jmfood.domain.service.CadastroCidadeService;
 
 @RestController
-@RequestMapping(value ="/cidades")
+@RequestMapping(value = "/cidades")
 public class CidadeController {
 
-    @Autowired
-    private CadastroCidadeService cidadeService;
+	@Autowired
+	private CadastroCidadeService cidadeService;
+	@Autowired
+	private CidadeInputDisassembler cidadeDisassembler;
+	@Autowired
+	private CidadeOutputAssembler cidadeAssembler;
 
-    @GetMapping
-    public List<Cidade> listar() {
-	return cidadeService.acharTodas();
-    }
-
-    @GetMapping("{cidadeId}")
-    @ResponseStatus(HttpStatus.OK)
-    public Cidade buscar(@PathVariable Long cidadeId) {
-	Cidade cidade = cidadeService.acharOuFalhar(cidadeId);
-	return cidade;
-    }
-
-    @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
-    public Cidade adicionar(@RequestBody @Valid Cidade cidade) {
-	try {
-	    return cidadeService.salvar(cidade);
-	} catch (EstadoNaoEncontradoException e) {
-	    throw new NegocioException(e.getMessage(), e);
+	@GetMapping
+	public List<CidadeOutputDto> listar() {
+		return cidadeAssembler.toCollectionDto(cidadeService.acharTodas());
 	}
-    }
 
-    @PutMapping("/{cidadeId}")
-    public Cidade atualizar(@PathVariable Long cidadeId, @RequestBody @Valid Cidade cidade) {
-	try {
-	    Cidade cidadeAtual = cidadeService.acharOuFalhar(cidadeId);
+	@GetMapping("{cidadeId}")
+	@ResponseStatus(HttpStatus.OK)
+	public CidadeOutputDto buscar(@PathVariable Long cidadeId) {
+		Cidade cidade = cidadeService.acharOuFalhar(cidadeId);
 
-	    BeanUtils.copyProperties(cidade, cidadeAtual, "id");
-
-	    return cidadeService.salvar(cidadeAtual);
-	} catch (EstadoNaoEncontradoException e) {
-	    throw new NegocioException(e.getMessage(), e);
+		return cidadeAssembler.toModel(cidade);
 	}
-    }
 
-    @DeleteMapping("{cidadeId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluir(@PathVariable Long cidadeId) {
-	cidadeService.excluir(cidadeId);
-    }
+	@PostMapping()
+	@ResponseStatus(HttpStatus.CREATED)
+	public CidadeOutputDto adicionar(@RequestBody @Valid CidadeInputDto cidadeInputDto) {
+		try {
+			Cidade cidade = cidadeDisassembler.toDomainObject(cidadeInputDto);
+			cidadeService.salvar(cidade);
+
+			return cidadeAssembler.toModel(cidade);
+		} catch (EstadoNaoEncontradoException e) {
+			throw new NegocioException(e.getMessage(), e);
+		}
+	}
+
+	@PutMapping("/{cidadeId}")
+	public CidadeOutputDto atualizar(@PathVariable Long cidadeId, @RequestBody @Valid CidadeInputDto cidadeInputDto) {
+		try {
+			Cidade cidadeAtual = cidadeService.acharOuFalhar(cidadeId);
+
+			cidadeDisassembler.copyToDomainObject(cidadeInputDto, cidadeAtual);
+			cidadeService.salvar(cidadeAtual);
+
+			return cidadeAssembler.toModel(cidadeAtual);
+		} catch (EstadoNaoEncontradoException e) {
+			throw new NegocioException(e.getMessage(), e);
+		}
+	}
+
+	@DeleteMapping("{cidadeId}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void excluir(@PathVariable Long cidadeId) {
+		cidadeService.excluir(cidadeId);
+	}
 }
