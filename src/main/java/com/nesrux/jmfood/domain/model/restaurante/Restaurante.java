@@ -16,7 +16,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -43,21 +42,13 @@ public class Restaurante {
 	private Long id;
 
 	@Column(nullable = false)
-	// @NotEmpty //não pode ser vazio, ou seja "" <- sem nada
-	// @NotNull <- nao pode ser nullo
-	@NotBlank() // <- nao pode ser nulo, vazio e vazio com espaços " " <-
 	private String nome;
 
-	// @PositiveOrZero
-	// @NotNull
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 
 	@ManyToOne // (fetch = FetchType.LAZY)
 	@JoinColumn(name = "cozinha_id", nullable = false)
-	//@NotNull
-	//@Valid
-	//@ConvertGroup(from = Default.class, to = Groups.cadastroRestaurante.class)
 	private Cozinha cozinha;
 
 	@Embedded
