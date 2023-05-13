@@ -50,7 +50,8 @@
     	<dependency>
     		<groupId>org.projectlombok</groupId>
     		<artifactId>lombok</artifactId>
-    		</dependency>
+    		<!--<version>1.18.22</version> para fazer os testes por linha de comando utilizando o ./mvnw verify-->	
+    	</dependency>
    		<dependency>
     		<groupId>org.flywaydb</groupId>
     		<artifactId>flyway-core</artifactId>
