@@ -8,7 +8,7 @@ import lombok.Setter;
 /*
  *  Classe de saida de dados para o controller de Restaurante e Cozinha
  */
-public class CozinhaOutputDto {
+public class CozinhaOutputRestaurante {
 
 	private Long id;
 	private String nome;

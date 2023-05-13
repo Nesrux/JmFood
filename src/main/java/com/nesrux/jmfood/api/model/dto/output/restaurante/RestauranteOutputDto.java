@@ -15,6 +15,6 @@ public class RestauranteOutputDto {
 	private String nome;
 	private BigDecimal taxaFrete;
 
-	private CozinhaOutputDto cozinha;
+	private CozinhaOutputRestaurante cozinha;
 
 }
