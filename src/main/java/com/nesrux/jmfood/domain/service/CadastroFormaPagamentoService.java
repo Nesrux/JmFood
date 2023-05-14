@@ -43,7 +43,7 @@ public class CadastroFormaPagamentoService {
 		} catch (EmptyResultDataAccessException e) {
 			throw new FormaPagamentoNaoEncontradaException(formaPagamentoId);
 		} catch (DataIntegrityViolationException e) {
-			throw new EntidadeEmUsoException(MSG_FORMAPAGAMENTO_EM_USO);
+			throw new EntidadeEmUsoException(String.format(MSG_FORMAPAGAMENTO_EM_USO, formaPagamentoId));
 		}
 	}
 
