@@ -46,6 +46,8 @@ public class Restaurante {
 
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
+	
+	private boolean ativo = Boolean.TRUE;
 
 	@ManyToOne // (fetch = FetchType.LAZY)
 	@JoinColumn(name = "cozinha_id", nullable = false)
@@ -68,5 +70,14 @@ public class Restaurante {
 
 	@OneToMany(mappedBy = "restaurante")
 	private List<Produto> produtos = new ArrayList<>();
+	
+	
+	public void ativar() {
+		setAtivo(true);
+	}
+	
+	public void desativar() {
+		setAtivo(false);
+	}
 
 }

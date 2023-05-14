@@ -31,6 +31,18 @@ public class CadastroRestauranteService {
 
 		return restauranteRepository.save(restaurante);
 	}
+	
+	@Transactional
+	public void ativar(Long id) {
+		Restaurante restaurante = acharOuFalhar(id);
+		restaurante.ativar();
+	}
+	
+	@Transactional
+	public void desativar(Long id) {
+		Restaurante restaurante = acharOuFalhar(id);
+		restaurante.desativar();
+	}
 
 	public List<Restaurante> acharTodos() {
 		return restauranteRepository.findAll();
