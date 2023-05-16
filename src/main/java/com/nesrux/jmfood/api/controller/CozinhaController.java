@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nesrux.jmfood.api.classconversion.assembler.CozinhaOutputAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.CozinhaInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.cozinha.CozinhaInputDto;
-import com.nesrux.jmfood.api.model.dto.output.cozinha.CozinhaOutputDto;
+import com.nesrux.jmfood.api.model.dto.output.cozinha.CozinhaModel;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.service.CadastroCozinhaService;
 
@@ -35,28 +35,28 @@ public class CozinhaController {
 	private CozinhaOutputAssembler outputAssembler;
 
 	@GetMapping()
-	public List<CozinhaOutputDto> listar() {
+	public List<CozinhaModel> listar() {
 		return outputAssembler.toCollectionDto(cozinhaService.acharTodas());
 	}
 
 	@GetMapping("/{cozinhaId}")
-	public CozinhaOutputDto buscar(@PathVariable Long cozinhaId) {
+	public CozinhaModel buscar(@PathVariable Long cozinhaId) {
 		return outputAssembler.toModel(cozinhaService.buscaOuFalha(cozinhaId));
 	}
 
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public CozinhaOutputDto adicionar(@RequestBody @Valid CozinhaInputDto cozinhaInputDto) {
+	public CozinhaModel adicionar(@RequestBody @Valid CozinhaInputDto cozinhaInputDto) {
 		Cozinha cozinha = inputDisassembler.toDomainnObject(cozinhaInputDto);
 		cozinhaService.salvar(cozinha);
 
-		CozinhaOutputDto cozinhaOutputDto = outputAssembler.toModel(cozinha);
+		CozinhaModel cozinhaOutputDto = outputAssembler.toModel(cozinha);
 
 		return cozinhaOutputDto;
 	}
 
 	@PutMapping("/{cozinhaId}")
-	public CozinhaOutputDto atualizar(@PathVariable Long cozinhaId,
+	public CozinhaModel atualizar(@PathVariable Long cozinhaId,
 			@RequestBody @Valid CozinhaInputDto cozinhaInputDto) {
 		Cozinha cozinhaAtual = cozinhaService.buscaOuFalha(cozinhaId);
 
@@ -65,7 +65,7 @@ public class CozinhaController {
 
 		Cozinha cozinhaSalva = cozinhaService.salvar(cozinhaAtual);
 
-		CozinhaOutputDto outputDto = outputAssembler.toModel(cozinhaSalva);
+		CozinhaModel outputDto = outputAssembler.toModel(cozinhaSalva);
 
 		return outputDto;
 	}

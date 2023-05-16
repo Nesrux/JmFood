@@ -2,6 +2,8 @@ package com.nesrux.jmfood.api.model.dto.output.restaurante;
 
 import java.math.BigDecimal;
 
+import com.nesrux.jmfood.api.model.dto.output.cozinha.CozinhaModel;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,13 +12,13 @@ import lombok.Setter;
 /** 
  * Classe de saida de dados para controller de Restaurante 
  */
-public class RestauranteOutputDto {
+public class RestauranteModel {
 	private Long id;
 	private String nome;
 	private BigDecimal taxaFrete;
 	private boolean ativo;
 	
-	private CozinhaOutputRestaurante cozinha;
+	private CozinhaModel cozinha;
 	
 
 }

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nesrux.jmfood.api.classconversion.assembler.EstadoOutputAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.EstadoInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.estado.EstadoInputDto;
-import com.nesrux.jmfood.api.model.dto.output.estado.EstadoOutputDto;
+import com.nesrux.jmfood.api.model.dto.output.estado.EstadoModel;
 import com.nesrux.jmfood.domain.model.endereco.Estado;
 import com.nesrux.jmfood.domain.service.CadastroEstadoService;
 
@@ -37,22 +37,22 @@ public class EstadoController {
 	private EstadoOutputAssembler outputAssembler;
 
 	@GetMapping
-	public List<EstadoOutputDto> listar() {
+	public List<EstadoModel> listar() {
 		return outputAssembler.toCollectionDto(estadoService.acharTodos());
 	}
 
 	@GetMapping("/{estadoId}")
-	public EstadoOutputDto buscar(@PathVariable Long estadoId) {
+	public EstadoModel buscar(@PathVariable Long estadoId) {
 		return outputAssembler.toModel(estadoService.acharOuFalhar(estadoId));
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public EstadoOutputDto adicionar(@RequestBody @Valid EstadoInputDto estadoDto) {
+	public EstadoModel adicionar(@RequestBody @Valid EstadoInputDto estadoDto) {
 		Estado estado = inputDisassembler.toDomainObject(estadoDto);
 		estadoService.salvar(estado);
 		
-		EstadoOutputDto outputDto = outputAssembler.toModel(estado);
+		EstadoModel outputDto = outputAssembler.toModel(estado);
 		
 		return outputDto;
 

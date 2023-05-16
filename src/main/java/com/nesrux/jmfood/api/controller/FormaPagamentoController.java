@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nesrux.jmfood.api.classconversion.assembler.FormaPagamentoOutputAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.FormaPagamentoInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.formaPagamento.FormaPagamentoInputDto;
-import com.nesrux.jmfood.api.model.dto.output.formaPagamento.FormaPagamentoOutputDto;
+import com.nesrux.jmfood.api.model.dto.output.formaPagamento.FormaPagamentoModel;
 import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
 import com.nesrux.jmfood.domain.service.CadastroFormaPagamentoService;
 
@@ -36,12 +36,12 @@ public class FormaPagamentoController {
 	private FormaPagamentoOutputAssembler assembler;
 
 	@GetMapping
-	public List<FormaPagamentoOutputDto> listar() {
+	public List<FormaPagamentoModel> listar() {
 		return assembler.toCollectionDto(service.acharTodos());
 	}
 	
 	@GetMapping("/{formaPagamentoID}")
-	public FormaPagamentoOutputDto buscar(@PathVariable Long formaPagamentoID) {
+	public FormaPagamentoModel buscar(@PathVariable Long formaPagamentoID) {
 		FormaPagamento formaPagamento = service.acharOuFalhar(formaPagamentoID);
 		
 		return assembler.toModel(formaPagamento);
@@ -49,10 +49,10 @@ public class FormaPagamentoController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public FormaPagamentoOutputDto adicionar(@RequestBody @Valid FormaPagamentoInputDto inputDto) {
+	public FormaPagamentoModel adicionar(@RequestBody @Valid FormaPagamentoInputDto inputDto) {
 		FormaPagamento formaPagamento = disassembler.toDomainObject(inputDto);
 		
-		FormaPagamentoOutputDto outputDto = assembler.toModel(service.salvar(formaPagamento));
+		FormaPagamentoModel outputDto = assembler.toModel(service.salvar(formaPagamento));
 		
 		return outputDto;
 	}

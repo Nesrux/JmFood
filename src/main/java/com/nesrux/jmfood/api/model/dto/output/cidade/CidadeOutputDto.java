@@ -1,5 +1,7 @@
 package com.nesrux.jmfood.api.model.dto.output.cidade;
 
+import com.nesrux.jmfood.api.model.dto.output.estado.EstadoModel;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,5 +12,5 @@ public class CidadeOutputDto {
 	
 	private String nome;
 	
-	private EstadoOutputCidadeDto estado;
+	private EstadoModel estado;
 }
