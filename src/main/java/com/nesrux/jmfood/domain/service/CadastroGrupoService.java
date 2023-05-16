@@ -35,7 +35,7 @@ public class CadastroGrupoService {
 	public void excluir(Long grupoId) {
 		try {
 			repository.deleteById(grupoId);
-			repository.flush();
+			//repository.flush();
 		} catch (EmptyResultDataAccessException e) {
 			throw new GrupoNaoEncontradoException(grupoId);
 		} catch (DataIntegrityViolationException e) {
