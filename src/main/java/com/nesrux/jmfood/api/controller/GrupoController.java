@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -57,6 +58,17 @@ public class GrupoController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluir(@PathVariable Long grupoId) {
 		service.excluir(grupoId);
+	}
+
+	@PutMapping("/{grupoId}")
+	public GrupoModel atualizar(@RequestBody GrupoInputDto inputDto, @PathVariable Long grupoId) {
+		Grupo grupo = service.acharOuFalahar(grupoId);
+		disassembler.copyToDomainObject(inputDto, grupo);
+		
+		service.salvar(grupo);
+
+		return assembler.toModel(grupo);
+		
 	}
 
 }
