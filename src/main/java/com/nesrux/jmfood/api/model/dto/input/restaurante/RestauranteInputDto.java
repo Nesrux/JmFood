@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
+import com.nesrux.jmfood.api.model.dto.input.endereco.EnderecoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.cozinha.CozinhaIDInputDto;
 
 import lombok.Getter;
@@ -27,5 +28,9 @@ public class RestauranteInputDto {
 	@Valid
 	@NotNull
 	private CozinhaIDInputDto cozinha;
+	
+	@Valid
+	@NotNull
+	private EnderecoInputDto endereco;
 
 }
