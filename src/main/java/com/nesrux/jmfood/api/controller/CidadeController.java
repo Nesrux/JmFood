@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nesrux.jmfood.api.classconversion.assembler.CidadeOutputAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.CidadeInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.cidade.CidadeInputDto;
-import com.nesrux.jmfood.api.model.dto.output.cidade.CidadeOutputDto;
+import com.nesrux.jmfood.api.model.dto.output.cidade.CidadeModel;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.EstadoNaoEncontradoException;
 import com.nesrux.jmfood.domain.model.endereco.Cidade;
@@ -37,13 +37,13 @@ public class CidadeController {
 	private CidadeOutputAssembler cidadeAssembler;
 
 	@GetMapping
-	public List<CidadeOutputDto> listar() {
+	public List<CidadeModel> listar() {
 		return cidadeAssembler.toCollectionDto(cidadeService.acharTodas());
 	}
 
 	@GetMapping("{cidadeId}")
 	@ResponseStatus(HttpStatus.OK)
-	public CidadeOutputDto buscar(@PathVariable Long cidadeId) {
+	public CidadeModel buscar(@PathVariable Long cidadeId) {
 		Cidade cidade = cidadeService.acharOuFalhar(cidadeId);
 
 		return cidadeAssembler.toModel(cidade);
@@ -51,7 +51,7 @@ public class CidadeController {
 
 	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
-	public CidadeOutputDto adicionar(@RequestBody @Valid CidadeInputDto cidadeInputDto) {
+	public CidadeModel adicionar(@RequestBody @Valid CidadeInputDto cidadeInputDto) {
 		try {
 			Cidade cidade = cidadeDisassembler.toDomainObject(cidadeInputDto);
 			cidadeService.salvar(cidade);
@@ -63,7 +63,7 @@ public class CidadeController {
 	}
 
 	@PutMapping("/{cidadeId}")
-	public CidadeOutputDto atualizar(@PathVariable Long cidadeId, @RequestBody @Valid CidadeInputDto cidadeInputDto) {
+	public CidadeModel atualizar(@PathVariable Long cidadeId, @RequestBody @Valid CidadeInputDto cidadeInputDto) {
 		try {
 			Cidade cidadeAtual = cidadeService.acharOuFalhar(cidadeId);
 

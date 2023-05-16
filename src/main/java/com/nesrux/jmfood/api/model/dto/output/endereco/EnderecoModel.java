@@ -1,6 +1,6 @@
 package com.nesrux.jmfood.api.model.dto.output.endereco;
 
-import com.nesrux.jmfood.domain.model.endereco.Cidade;
+import com.nesrux.jmfood.api.model.dto.output.cidade.CidadeModel;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EnderecoModel {
+	
 	private String cep;
 
 	private String logradouro;
@@ -18,6 +19,6 @@ public class EnderecoModel {
 
 	private String bairro;
 
-	private Cidade cidade;
+	private CidadeModel cidade;
 
 }

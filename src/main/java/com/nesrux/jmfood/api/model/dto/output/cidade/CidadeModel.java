@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CidadeOutputDto {
+public class CidadeModel {
 	private Long id;
 	
 	private String nome;
