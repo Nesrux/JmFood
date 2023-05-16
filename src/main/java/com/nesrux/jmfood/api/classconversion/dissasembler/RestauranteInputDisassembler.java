@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteInputDto;
+import com.nesrux.jmfood.domain.model.endereco.Cidade;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 
@@ -21,6 +22,10 @@ public class RestauranteInputDisassembler {
 		// Para evitar a exception de trocar o id de uma cozinha, foi instanciado uma
 		// nova cozinhas na linha abaixo
 		restaurante.setCozinha(new Cozinha());
+		
+		if(restaurante.getEndereco() != null) {
+			restaurante.getEndereco().setCidade(new Cidade());
+		}
 
 		modelMapper.map(restauranteInputDTO, restaurante);
 	}

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.RestauranteNaoEncontradoException;
+import com.nesrux.jmfood.domain.model.endereco.Cidade;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.repository.RestauranteRepository;
@@ -21,14 +22,21 @@ public class CadastroRestauranteService {
 	@Autowired
 	private CadastroCozinhaService cozinhaService;
 	
+	@Autowired
+	private CadastroCidadeService cidadeService;
+	
 	@Transactional
 	public Restaurante salvar(Restaurante restaurante) {
 		Long cozinhaId = restaurante.getCozinha().getId();
-
+		Long cidadeId = restaurante.getEndereco().getCidade().getId();
+		
 		Cozinha cozinha = cozinhaService.buscaOuFalha(cozinhaId);
-
+		Cidade cidade = cidadeService.acharOuFalhar(cidadeId);
+		
+		
 		restaurante.setCozinha(cozinha);
-
+		restaurante.getEndereco().setCidade(cidade);
+		
 		return restauranteRepository.save(restaurante);
 	}
 	
