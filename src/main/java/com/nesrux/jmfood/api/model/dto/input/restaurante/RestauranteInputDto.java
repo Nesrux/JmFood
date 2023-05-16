@@ -7,6 +7,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
+import com.nesrux.jmfood.api.model.dto.output.cozinha.CozinhaIDInputDto;
+
 import lombok.Getter;
 import lombok.Setter;
 

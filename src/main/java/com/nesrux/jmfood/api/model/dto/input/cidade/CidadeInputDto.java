@@ -4,6 +4,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.nesrux.jmfood.api.model.dto.input.estado.EstadoIDInputDto;
+
 import lombok.Getter;
 import lombok.Setter;
 
