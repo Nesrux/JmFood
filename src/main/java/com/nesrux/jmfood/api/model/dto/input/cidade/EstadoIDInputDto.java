@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class EstadoIdInputDto {
+public class EstadoIDInputDto {
 	@NotNull
 	private Long id;
 }
