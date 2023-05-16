@@ -1,6 +1,6 @@
 package com.nesrux.jmfood.api.model.dto.output.endereco;
 
-import com.nesrux.jmfood.api.model.dto.output.cidade.CidadeModel;
+import com.nesrux.jmfood.api.model.dto.output.cidade.CidadeResumoModel;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +19,6 @@ public class EnderecoModel {
 
 	private String bairro;
 
-	private CidadeModel cidade;
+	private CidadeResumoModel cidade;
 
 }
