@@ -13,7 +13,7 @@ import com.nesrux.jmfood.domain.model.endereco.Cidade;
 @Component
 public class CidadeOutputAssembler {
 	@Autowired
-	private ModelMapper modelMapper = new ModelMapper();
+	private ModelMapper modelMapper;
 
 	public CidadeOutputDto toModel(Cidade cidade) {
 		return modelMapper.map(cidade, CidadeOutputDto.class);
