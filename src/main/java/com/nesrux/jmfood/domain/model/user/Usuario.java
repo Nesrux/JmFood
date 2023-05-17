@@ -58,8 +58,8 @@ public class Usuario {
 		return getSenha().equals(senha);
 	}
 
-	public boolean senhaDiferente(String senha) {
-		return senhaIgualA(senha);
+	public boolean senhaNaoConhecideCom(String senha) {
+		return !senhaIgualA(senha);
 	}
 
 }

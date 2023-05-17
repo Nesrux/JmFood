@@ -1,13 +1,14 @@
 package com.nesrux.jmfood.domain.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.nesrux.jmfood.domain.exception.negocioException.SenhaInvaldaException;
+import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.UsuarioNaoEncontradoException;
 import com.nesrux.jmfood.domain.model.user.Usuario;
 import com.nesrux.jmfood.domain.repository.UsuarioRepository;
@@ -27,6 +28,15 @@ public class CadastroUsuarioService {
 
 	@Transactional
 	public Usuario salvar(Usuario usuario) {
+		repository.detach(usuario);
+		
+		Optional<Usuario> usuarioExistente = repository.findByEmail(usuario.getEmail());
+
+		if (usuarioExistente.isPresent() && !usuarioExistente.get().equals(usuario)) {
+			throw new NegocioException(
+					String.format("ja exisre um usuário cadastrado com o email %s", usuario.getEmail()));
+		}
+
 		return repository.save(usuario);
 	}
 
@@ -34,11 +44,10 @@ public class CadastroUsuarioService {
 	public void alterarSenha(Long userID, String senhaAtual, String novaSenha) {
 		Usuario usuario = acharOuFalhar(userID);
 
-		if (usuario.senhaIgualA(senhaAtual)) {
-			usuario.setSenha(novaSenha);
-			repository.save(usuario);
-		} else {
-			throw new SenhaInvaldaException();
+		if (usuario.senhaNaoConhecideCom(senhaAtual)) {
+			throw new NegocioException("A senha atual esta inválida, por favor preencha corretamente e tente de novo.");
+
 		}
+		usuario.setSenha(novaSenha);
 	}
 }
