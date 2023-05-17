@@ -53,5 +53,12 @@ public class Usuario {
 	// recebe um @joinColumn, que fala quem é o principal dessa relação
 	// w o inverseJoinColumns que recebe a mesma anotação, mas fala quem é o
 	// secundario dessa relação
+	
+	boolean verificaSenha(String senha) {
+		return getSenha().equals(senha);
+	}
+	boolean senhaDiferente(String senha) {
+		return !verificaSenha(senha);
+	}
 
 }

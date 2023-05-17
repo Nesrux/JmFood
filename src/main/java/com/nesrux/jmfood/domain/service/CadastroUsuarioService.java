@@ -26,13 +26,4 @@ public class CadastroUsuarioService {
 		return repository.save(usuario);
 	}
 
-	public String acharEmail(Long usuarioId) {
-		Usuario usuario = acharOuFalhar(usuarioId);
-		return usuario.getEmail();
-	}
-
-	public String acharSenha(Long usuarioId) {
-		return repository.findSenhaById(usuarioId);
-	}
-
 }
