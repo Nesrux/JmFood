@@ -90,3 +90,5 @@ insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Esp
 
 
 insert into grupo (nome) values ('CTO'), ('CSO'), ('Gerente'), ('Secretario'), ('Chefe de departamento'), ('dev junior'), ('Dev pleno'), ('Dev senior');
+
+insert into usuario (nome, senha, email) values ('joao marcos', '123456', 'joaomarcos@jmfood.com'), ('glaucya' '123456', 'domini@gmail.com'), ('elma maria pinto' , '123456', 'limamaria@gmail.com'),  ('Jean Linguiça', '123456', 'amoraluca@gmail.com') 
