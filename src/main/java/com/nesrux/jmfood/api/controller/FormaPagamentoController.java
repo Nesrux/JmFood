@@ -59,7 +59,7 @@ public class FormaPagamentoController {
 	}
 
 	@PutMapping("/{formaPagamentoId}")
-	public FormaPagamentoModel atualizar(@RequestBody FormaPagamentoInputDto inputDto,
+	public FormaPagamentoModel atualizar(@RequestBody @Valid FormaPagamentoInputDto inputDto,
 			@PathVariable Long formaPagamentoId) {
 		FormaPagamento formaPagamento = service.acharOuFalhar(formaPagamentoId);
 		disassembler.copyToDomainObject(inputDto, formaPagamento);

@@ -61,7 +61,7 @@ public class GrupoController {
 	}
 
 	@PutMapping("/{grupoId}")
-	public GrupoModel atualizar(@RequestBody GrupoInputDto inputDto, @PathVariable Long grupoId) {
+	public GrupoModel atualizar(@Valid @RequestBody GrupoInputDto inputDto, @PathVariable Long grupoId) {
 		Grupo grupo = service.acharOuFalahar(grupoId);
 		disassembler.copyToDomainObject(inputDto, grupo);
 		
