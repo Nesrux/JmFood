@@ -22,7 +22,7 @@ public class CadastroUsuarioService {
 		return repository.findById(usuarioId).orElseThrow(() -> new UsuarioNaoEncontradoException(usuarioId));
 	}
 
-	public Usuario Salvar(Usuario usuario) {
+	public Usuario salvar(Usuario usuario) {
 		return repository.save(usuario);
 	}
 
