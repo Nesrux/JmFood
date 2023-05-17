@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.CidadeNaoEncontradaException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.UsuarioNaoEncontradoException;
 import com.nesrux.jmfood.domain.model.user.Usuario;
 import com.nesrux.jmfood.domain.repository.UsuarioRepository;
@@ -26,4 +27,14 @@ public class CadastroUsuarioService {
 		return repository.save(usuario);
 	}
 
+	public void alterarSenha(Long userID, String senhaAtual, String novaSenha) {
+		Usuario usuario = acharOuFalhar(userID);
+
+		if (usuario.senhaIgualA(senhaAtual)) {
+			usuario.setSenha(novaSenha);
+			repository.save(usuario);
+		} else {
+			throw new CidadeNaoEncontradaException(userID);
+		}
+	}
 }

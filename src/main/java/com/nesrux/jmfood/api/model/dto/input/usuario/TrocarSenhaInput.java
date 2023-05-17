@@ -1,5 +1,7 @@
 package com.nesrux.jmfood.api.model.dto.input.usuario;
 
+import javax.validation.constraints.NotBlank;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,7 +9,10 @@ import lombok.Setter;
 @Setter
 public class TrocarSenhaInput {
 	
+	@NotBlank
 	private String senhaAtual;
-	private String SenhaNova;
+	
+	@NotBlank
+	private String senhaNova;
 
 }

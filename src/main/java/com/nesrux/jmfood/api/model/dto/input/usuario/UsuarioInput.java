@@ -14,6 +14,7 @@ public class UsuarioInput {
 	private String nome;
 
 	@Email
+	@NotBlank
 	private String email;
 
 	@NotBlank
