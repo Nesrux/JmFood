@@ -27,11 +27,12 @@ public class CadastroUsuarioService {
 	}
 
 	public String acharEmail(Long usuarioId) {
-		return repository.findEmailByID(usuarioId);
+		Usuario usuario = acharOuFalhar(usuarioId);
+		return usuario.getEmail();
 	}
 
 	public String acharSenha(Long usuarioId) {
-		return repository.findEmailByID(usuarioId);
+		return repository.findSenhaById(usuarioId);
 	}
 
 }

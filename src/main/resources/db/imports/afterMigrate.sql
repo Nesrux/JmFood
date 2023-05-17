@@ -91,4 +91,8 @@ insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Esp
 
 insert into grupo (nome) values ('CTO'), ('CSO'), ('Gerente'), ('Secretario'), ('Chefe de departamento'), ('dev junior'), ('Dev pleno'), ('Dev senior');
 
-insert into usuario (nome, senha, email) values ('joao marcos', '123456', 'joaomarcos@jmfood.com'), ('glaucya' '123456', 'domini@gmail.com'), ('elma maria pinto' , '123456', 'limamaria@gmail.com'),  ('Jean Linguiça', '123456', 'amoraluca@gmail.com') 
+insert into usuario (id, nome, email, senha, data_cadastro) values
+(1, 'João da Silva', 'joao.ger@algafood.com', '123', utc_timestamp),
+(2, 'Maria Joaquina', 'maria.vnd@algafood.com', '123', utc_timestamp),
+(3, 'José Souza', 'jose.aux@algafood.com', '123', utc_timestamp),
+(4, 'Sebastião Martins', 'sebastiao.cad@algafood.com', '123', utc_timestamp);
