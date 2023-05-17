@@ -2,6 +2,8 @@ package com.nesrux.jmfood.domain.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,16 +25,17 @@ public class CadastroUsuarioService {
 		return repository.findById(usuarioId).orElseThrow(() -> new UsuarioNaoEncontradoException(usuarioId));
 	}
 
+	@Transactional
 	public Usuario salvar(Usuario usuario) {
 		return repository.save(usuario);
 	}
 
+	@Transactional
 	public void alterarSenha(Long userID, String senhaAtual, String novaSenha) {
 		Usuario usuario = acharOuFalhar(userID);
 
 		if (usuario.senhaIgualA(senhaAtual)) {
-			if (usuario.senhaDiferente(novaSenha))
-				usuario.setSenha(novaSenha);
+			usuario.setSenha(novaSenha);
 			repository.save(usuario);
 		} else {
 			throw new SenhaInvaldaException();
