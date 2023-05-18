@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -54,9 +55,18 @@ public class RestauranteProdutoController {
 	public ProdutoModel salvar(@PathVariable Long restauranteId, @Valid @RequestBody ProdutoInputDto inputDto) {
 		Produto produto = disassembler.toDomainObject(inputDto);
 		Restaurante restaurante = restauranteService.acharOuFalhar(restauranteId);
-		
+
 		produto.setRestaurante(restaurante);
-		
+
+		service.salvar(produto);
+
+		return assembler.toModel(produto);
+	}
+
+	@PutMapping("/{produtoId}")
+	public ProdutoModel atualizar(@PathVariable Long produtoId,@Valid @RequestBody ProdutoInputDto inputDto) {
+		Produto produto = service.acharOuFalhar(produtoId);
+		disassembler.copyToDomainObject(inputDto, produto);
 		service.salvar(produto);
 
 		return assembler.toModel(produto);
