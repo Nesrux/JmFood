@@ -10,18 +10,17 @@ import lombok.Setter;
 
 @Getter
 @Setter
-/** 
- * Classe de saida de dados para controller de Restaurante 
+/**
+ * Classe de saida de dados para controller de Restaurante
  */
 public class RestauranteModel {
 	private Long id;
 	private String nome;
 	private BigDecimal taxaFrete;
 	private boolean ativo;
+	private boolean aberto;
 	
 	private CozinhaModel cozinha;
-	
 	private EnderecoModel endereco;
-	
 
 }

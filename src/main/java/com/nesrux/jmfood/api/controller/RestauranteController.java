@@ -93,5 +93,16 @@ public class RestauranteController {
 	public void desativarRestaurante(@PathVariable Long restauranteId) {
 		restauranteService.desativar(restauranteId);
 	}
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@PutMapping("/{restauranteId}/fechamento")
+	public void fecharRestaurante(@PathVariable Long restauranteId) {
+		restauranteService.fechar(restauranteId);
+	}
+
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@PutMapping("/{restauranteId}/abertura")
+	public void abrirRestaurante(@PathVariable Long restauranteId) {
+		restauranteService.abrir(restauranteId);
+	}
 
 }

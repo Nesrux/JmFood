@@ -1,2 +1,2 @@
 ALTER TABLE restaurante
-	ADD aberto BOOLEAN
+	ADD COLUMN aberto BOOLEAN NOT NULL DEFAULT false;

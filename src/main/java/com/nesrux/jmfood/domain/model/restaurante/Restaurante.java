@@ -49,7 +49,11 @@ public class Restaurante {
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 
+	@Column(name = "ativo")
 	private boolean ativo = Boolean.TRUE;
+
+	@Column(name = "aberto")
+	private boolean aberto = Boolean.FALSE;
 
 	@ManyToOne // (fetch = FetchType.LAZY)
 	@JoinColumn(name = "cozinha_id", nullable = false)
@@ -84,6 +88,14 @@ public class Restaurante {
 		setAtivo(false);
 	}
 
+	public void abrir() {
+		setAberto(true);
+	}
+
+	public void fechar() {
+		setAberto(false);
+	}
+
 	public boolean removerFormaPagamento(FormaPagamento formaPagamento) {
 		return getFormasPagamento().remove(formaPagamento);
 	}
@@ -92,5 +104,5 @@ public class Restaurante {
 		return getFormasPagamento().add(formaPagamento);
 
 	}
-	
+
 }
