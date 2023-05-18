@@ -92,8 +92,5 @@ public class Restaurante {
 		return getFormasPagamento().add(formaPagamento);
 
 	}
-	public boolean adicionarProduto(Produto produto) {
-		return produtos.add(produto);
-	}
-
+	
 }
