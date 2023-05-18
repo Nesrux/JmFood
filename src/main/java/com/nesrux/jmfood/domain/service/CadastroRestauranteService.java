@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.RestauranteNaoEncontradoException;
 import com.nesrux.jmfood.domain.model.endereco.Cidade;
+import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.repository.RestauranteRepository;
@@ -21,36 +22,12 @@ public class CadastroRestauranteService {
 
 	@Autowired
 	private CadastroCozinhaService cozinhaService;
-	
+
 	@Autowired
 	private CadastroCidadeService cidadeService;
 	
-	@Transactional
-	public Restaurante salvar(Restaurante restaurante) {
-		Long cozinhaId = restaurante.getCozinha().getId();
-		Long cidadeId = restaurante.getEndereco().getCidade().getId();
-		
-		Cozinha cozinha = cozinhaService.buscaOuFalha(cozinhaId);
-		Cidade cidade = cidadeService.acharOuFalhar(cidadeId);
-		
-		
-		restaurante.setCozinha(cozinha);
-		restaurante.getEndereco().setCidade(cidade);
-		
-		return restauranteRepository.save(restaurante);
-	}
-	
-	@Transactional
-	public void ativar(Long id) {
-		Restaurante restaurante = acharOuFalhar(id);
-		restaurante.ativar();
-	}
-	
-	@Transactional
-	public void desativar(Long id) {
-		Restaurante restaurante = acharOuFalhar(id);
-		restaurante.desativar();
-	}
+	@Autowired
+	private CadastroFormaPagamentoService pagamentoService;
 
 	public List<Restaurante> acharTodos() {
 		return restauranteRepository.findAll();
@@ -61,6 +38,47 @@ public class CadastroRestauranteService {
 				.orElseThrow(() -> new RestauranteNaoEncontradoException(restauranteId));
 
 		return restaurante;
+	}
+
+	@Transactional
+	public Restaurante salvar(Restaurante restaurante) {
+		Long cozinhaId = restaurante.getCozinha().getId();
+		Long cidadeId = restaurante.getEndereco().getCidade().getId();
+
+		Cozinha cozinha = cozinhaService.buscaOuFalha(cozinhaId);
+		Cidade cidade = cidadeService.acharOuFalhar(cidadeId);
+
+		restaurante.setCozinha(cozinha);
+		restaurante.getEndereco().setCidade(cidade);
+
+		return restauranteRepository.save(restaurante);
+	}
+
+	@Transactional
+	public void ativar(Long id) {
+		Restaurante restaurante = acharOuFalhar(id);
+		restaurante.ativar();
+	}
+
+	@Transactional
+	public void desativar(Long id) {
+		Restaurante restaurante = acharOuFalhar(id);
+		restaurante.desativar();
+	}
+	@Transactional
+	public void desassociarFormaPagamento(Long restauranteID, Long formaPagamentoID) {
+		Restaurante restaurante = acharOuFalhar(restauranteID);
+		FormaPagamento formaPagamento = pagamentoService.acharOuFalhar(formaPagamentoID);
+		
+		restaurante.removerFormaPagamento(formaPagamento);
+	}
+	
+	@Transactional
+	public void associarFormaPagamento(Long restauranteID, Long formaPagamentoID) {
+		Restaurante restaurante = acharOuFalhar(restauranteID);
+		FormaPagamento formaPagamento = pagamentoService.acharOuFalhar(formaPagamentoID);
+		
+		restaurante.adicionarFormaPagamento(formaPagamento);
 	}
 
 }

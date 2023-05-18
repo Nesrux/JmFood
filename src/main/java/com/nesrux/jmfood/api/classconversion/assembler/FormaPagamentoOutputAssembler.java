@@ -1,5 +1,6 @@
 package com.nesrux.jmfood.api.classconversion.assembler;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +16,7 @@ public class FormaPagamentoOutputAssembler {
 	@Autowired
 	private ModelMapper mapper;
 
-	public List<FormaPagamentoModel> toCollectionDto(List<FormaPagamento> formaPagamentos) {
+	public List<FormaPagamentoModel> toCollectionDto(Collection<FormaPagamento> formaPagamentos) {
 		return formaPagamentos.stream().map(formaPagamento -> toModel(formaPagamento)).collect(Collectors.toList());
 	}
 
