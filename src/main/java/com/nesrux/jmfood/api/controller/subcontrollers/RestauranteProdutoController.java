@@ -72,13 +72,6 @@ public class RestauranteProdutoController {
 		return assembler.toModel(produto);
 	}
 
-	@GetMapping("/{produtoId}/test")
-	public ProdutoModel buscararalho(@PathVariable Long restauranteId, @PathVariable Long produtoId) {
-
-		return null;
-
-	}
-
 	@GetMapping("/test")
 	public List<ProdutoModel> listarDiferente(@PathVariable Long restauranteId) {
 		Restaurante restaurante = restauranteService.acharOuFalhar(restauranteId);
