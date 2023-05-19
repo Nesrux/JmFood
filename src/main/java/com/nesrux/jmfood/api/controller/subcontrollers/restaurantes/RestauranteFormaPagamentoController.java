@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.api.controller.subcontrollers;
+package com.nesrux.jmfood.api.controller.subcontrollers.restaurantes;
 
 import java.util.List;
 
