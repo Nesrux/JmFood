@@ -1,8 +1,8 @@
 package com.nesrux.jmfood.domain.model.user;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,7 +43,7 @@ public class Usuario {
 
 	@ManyToMany
 	@JoinTable(name = "usuario_grupos", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "grupo_id"))
-	private List<Grupo> grupos = new ArrayList<>();
+	private Set<Grupo> grupos = new HashSet<>();
 
 	// a anotação manyToMany cria uma tabela intermediaria que faz a ponte entre 2
 	// tabelas
@@ -61,5 +61,14 @@ public class Usuario {
 	public boolean senhaNaoConhecideCom(String senha) {
 		return !senhaIgualA(senha);
 	}
+	
+	public void associar(Grupo grupo) {
+		this.grupos.add(grupo);
+	}
+	
+	public void desassociar(Grupo grupo) {
+		this.grupos.remove(grupo);
+	}
+	
 
 }
