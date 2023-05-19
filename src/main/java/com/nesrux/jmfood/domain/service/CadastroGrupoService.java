@@ -50,9 +50,10 @@ public class CadastroGrupoService {
 	public List<Permissao> listarPermissoes(Long grupoId) {
 		Grupo grupo = acharOuFalahar(grupoId);
 
-		return grupo.getPermissoes();
+		return grupo.getPermissoes().stream().toList();
 	}
 
+	@Transactional
 	public void associarPermissao(Long grupoId, Long permissaoId) {
 		Grupo grupo = acharOuFalahar(grupoId);
 		Permissao permissao = permissaoService.acharOuFalhar(permissaoId);
@@ -60,6 +61,7 @@ public class CadastroGrupoService {
 		grupo.associarPermissao(permissao);
 	}
 
+	@Transactional
 	public void deassociarPermissao(Long grupoId, Long permissaoId) {
 		Grupo grupo = acharOuFalahar(grupoId);
 		Permissao permissao = permissaoService.acharOuFalhar(permissaoId);
