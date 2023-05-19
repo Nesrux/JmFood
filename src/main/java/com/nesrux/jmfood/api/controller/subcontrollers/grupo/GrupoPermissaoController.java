@@ -13,7 +13,7 @@ import com.nesrux.jmfood.domain.service.CadastroGrupoService;
 import com.nesrux.jmfood.domain.service.CadastroPermissaoService;
 
 @RestController
-@RequestMapping("/{grupoId}/permissoes")
+@RequestMapping("/grupos/{grupoId}/permissoes")
 public class GrupoPermissaoController {
 	@Autowired
 	private CadastroGrupoService grupoService;
@@ -25,4 +25,15 @@ public class GrupoPermissaoController {
 	public List<Permissao> ListarPermissoes(@PathVariable Long grupoId) {
 		return grupoService.listarPermissoes(grupoId);
 	}
+	
+	@GetMapping("/{permissaoId}")
+	public Permissao buscarPermissao(Long grupoId, Long permissaoId) {
+	
+		Permissao permissao = permissaoService.acharOuFalhar(grupoId, permissaoId);
+		
+		return permissao;
+	}
+	
+	
+	
 }
