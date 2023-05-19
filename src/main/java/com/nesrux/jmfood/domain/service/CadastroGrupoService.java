@@ -12,12 +12,16 @@ import org.springframework.stereotype.Component;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeEmUsoException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.GrupoNaoEncontradoException;
 import com.nesrux.jmfood.domain.model.user.Grupo;
+import com.nesrux.jmfood.domain.model.user.Permissao;
 import com.nesrux.jmfood.domain.repository.GrupoRepository;
 
 @Component
 public class CadastroGrupoService {
 	@Autowired
 	private GrupoRepository repository;
+
+	@Autowired
+	private CadastroPermissaoService permissaoService;
 
 	public List<Grupo> acharTodos() {
 		return repository.findAll();
@@ -43,7 +47,23 @@ public class CadastroGrupoService {
 		}
 	}
 
+	public List<Permissao> listarPermissoes(Long grupoId) {
+		Grupo grupo = acharOuFalahar(grupoId);
+
+		return grupo.getPermissoes();
+	}
+
 	public void associarPermissao(Long grupoId, Long permissaoId) {
-		
+		Grupo grupo = acharOuFalahar(grupoId);
+		Permissao permissao = permissaoService.acharOuFalhar(permissaoId);
+
+		grupo.associarPermissao(permissao);
+	}
+
+	public void deassociarPermissao(Long grupoId, Long permissaoId) {
+		Grupo grupo = acharOuFalahar(grupoId);
+		Permissao permissao = permissaoService.acharOuFalhar(permissaoId);
+
+		grupo.deassociarPermissao(permissao);
 	}
 }
