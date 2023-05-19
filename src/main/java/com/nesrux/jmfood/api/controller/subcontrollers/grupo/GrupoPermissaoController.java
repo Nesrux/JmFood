@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nesrux.jmfood.api.classconversion.assembler.PermissaoModelAssembler;
+import com.nesrux.jmfood.api.model.dto.output.permissao.PermissaoModel;
 import com.nesrux.jmfood.domain.model.user.Permissao;
 import com.nesrux.jmfood.domain.service.CadastroGrupoService;
 import com.nesrux.jmfood.domain.service.CadastroPermissaoService;
@@ -25,17 +27,20 @@ public class GrupoPermissaoController {
 	@Autowired
 	private CadastroPermissaoService permissaoService;
 
+	@Autowired
+	private PermissaoModelAssembler assembler;
+
 	@GetMapping
-	public List<Permissao> ListarPermissoes(@PathVariable Long grupoId) {
-		return grupoService.listarPermissoes(grupoId);
+	public List<PermissaoModel> ListarPermissoes(@PathVariable Long grupoId) {
+		return assembler.toCollectionDto(grupoService.listarPermissoes(grupoId));
 	}
 
 	@GetMapping("/{permissaoId}")
-	public Permissao buscarPermissao(@PathVariable Long grupoId, @PathVariable Long permissaoId) {
+	public PermissaoModel buscarPermissao(@PathVariable Long grupoId, @PathVariable Long permissaoId) {
 
 		Permissao permissao = permissaoService.acharOuFalhar(permissaoId);
 
-		return permissao;
+		return assembler.toModel(permissao);
 	}
 
 	@DeleteMapping("/{permissaoId}")
