@@ -12,7 +12,7 @@ import com.nesrux.jmfood.api.model.dto.output.formaPagamento.FormaPagamentoModel
 import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
 
 @Component
-public class FormaPagamentoOutputAssembler {
+public class FormaPagamentoModelAssembler {
 	@Autowired
 	private ModelMapper mapper;
 

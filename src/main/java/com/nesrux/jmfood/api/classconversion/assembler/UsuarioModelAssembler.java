@@ -11,7 +11,7 @@ import com.nesrux.jmfood.api.model.dto.output.usuario.UsuarioModel;
 import com.nesrux.jmfood.domain.model.user.Usuario;
 
 @Component
-public class UsuarioOutputAssembler {
+public class UsuarioModelAssembler {
 	@Autowired
 	private ModelMapper mapper;
 

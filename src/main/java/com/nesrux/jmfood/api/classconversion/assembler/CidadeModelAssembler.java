@@ -11,7 +11,7 @@ import com.nesrux.jmfood.api.model.dto.output.cidade.CidadeModel;
 import com.nesrux.jmfood.domain.model.endereco.Cidade;
 
 @Component
-public class CidadeOutputAssembler {
+public class CidadeModelAssembler {
 	@Autowired
 	private ModelMapper modelMapper;
 

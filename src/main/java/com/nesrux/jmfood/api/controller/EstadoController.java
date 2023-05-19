@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.api.classconversion.assembler.EstadoOutputAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.EstadoModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.EstadoInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.estado.EstadoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.estado.EstadoModel;
@@ -34,7 +34,7 @@ public class EstadoController {
 	private EstadoInputDisassembler inputDisassembler;
 
 	@Autowired
-	private EstadoOutputAssembler outputAssembler;
+	private EstadoModelAssembler outputAssembler;
 
 	@GetMapping
 	public List<EstadoModel> listar() {

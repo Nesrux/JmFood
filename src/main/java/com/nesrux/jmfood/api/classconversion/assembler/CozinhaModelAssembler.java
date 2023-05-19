@@ -11,7 +11,7 @@ import com.nesrux.jmfood.api.model.dto.output.cozinha.CozinhaModel;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 
 @Component
-public class CozinhaOutputAssembler {
+public class CozinhaModelAssembler {
 
 	@Autowired
 	private ModelMapper modelMapper;

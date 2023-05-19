@@ -11,7 +11,7 @@ import com.nesrux.jmfood.api.model.dto.output.grupo.GrupoModel;
 import com.nesrux.jmfood.domain.model.user.Grupo;
 
 @Component
-public class GrupoOutputAssembler {
+public class GrupoModelAssembler {
 	@Autowired
 	private ModelMapper mapper;
 

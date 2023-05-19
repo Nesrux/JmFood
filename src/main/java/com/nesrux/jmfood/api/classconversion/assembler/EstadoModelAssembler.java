@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.nesrux.jmfood.api.model.dto.output.estado.EstadoModel;
 import com.nesrux.jmfood.domain.model.endereco.Estado;
 @Component
-public class EstadoOutputAssembler {
+public class EstadoModelAssembler {
 
 	@Autowired
 	private ModelMapper mapper;

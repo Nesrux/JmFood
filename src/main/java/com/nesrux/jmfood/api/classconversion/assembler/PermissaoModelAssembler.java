@@ -1,5 +1,6 @@
 package com.nesrux.jmfood.api.classconversion.assembler;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,10 @@ public class PermissaoModelAssembler {
 	}
 
 	public List<PermissaoModel> toCollectionDto(List<Permissao> permissoes) {
+		return permissoes.stream().map(permissao -> toModel(permissao)).collect(Collectors.toList());
+	}
+	//Caso de algo de errado, esse foi feito copiando da aula
+	public List<PermissaoModel> toCollectionDto(Collection<Permissao> permissoes) {
 		return permissoes.stream().map(permissao -> toModel(permissao)).collect(Collectors.toList());
 	}
 }

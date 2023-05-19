@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.api.classconversion.assembler.RestauranteOutputAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.RestauranteModeltAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.RestauranteInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteInputDto;
 import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteModel;
@@ -35,7 +35,7 @@ public class RestauranteController {
 	@Autowired
 	private CadastroRestauranteService restauranteService;
 	@Autowired
-	private RestauranteOutputAssembler restauranteAssembler;
+	private RestauranteModeltAssembler restauranteAssembler;
 	@Autowired
 	private RestauranteInputDisassembler restauranteDissasembler;
 

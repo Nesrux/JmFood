@@ -1,6 +1,7 @@
 package com.nesrux.jmfood.domain.service;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -51,6 +52,12 @@ public class CadastroGrupoService {
 		Grupo grupo = acharOuFalahar(grupoId);
 
 		return grupo.getPermissoes().stream().toList();
+	}
+	
+	//Caso dee ero :C
+	public Set<Permissao> permissoesListar(Long grupoId){
+		Grupo grupo = acharOuFalahar(grupoId);
+		return  grupo.getPermissoes();
 	}
 
 	@Transactional

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.api.classconversion.assembler.GrupoOutputAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.GrupoModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.GrupoInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.grupo.GrupoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.grupo.GrupoModel;
@@ -31,7 +31,7 @@ public class GrupoController {
 	@Autowired
 	private GrupoInputDisassembler disassembler;
 	@Autowired
-	private GrupoOutputAssembler assembler;
+	private GrupoModelAssembler assembler;
 
 	@GetMapping
 	public List<GrupoModel> listar() {

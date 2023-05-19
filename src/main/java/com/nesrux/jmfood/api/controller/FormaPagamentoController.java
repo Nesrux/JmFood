@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.api.classconversion.assembler.FormaPagamentoOutputAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.FormaPagamentoModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.FormaPagamentoInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.formaPagamento.FormaPagamentoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.formaPagamento.FormaPagamentoModel;
@@ -34,7 +34,7 @@ public class FormaPagamentoController {
 	private FormaPagamentoInputDisassembler disassembler;
 
 	@Autowired
-	private FormaPagamentoOutputAssembler assembler;
+	private FormaPagamentoModelAssembler assembler;
 
 	@GetMapping
 	public List<FormaPagamentoModel> listar() {

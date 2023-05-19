@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.api.classconversion.assembler.CozinhaOutputAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.CozinhaModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.CozinhaInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.cozinha.CozinhaInputDto;
 import com.nesrux.jmfood.api.model.dto.output.cozinha.CozinhaModel;
@@ -32,7 +32,7 @@ public class CozinhaController {
 	@Autowired
 	private CozinhaInputDisassembler inputDisassembler;
 	@Autowired
-	private CozinhaOutputAssembler outputAssembler;
+	private CozinhaModelAssembler outputAssembler;
 
 	@GetMapping()
 	public List<CozinhaModel> listar() {
