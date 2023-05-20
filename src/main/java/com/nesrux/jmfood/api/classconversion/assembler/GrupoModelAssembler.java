@@ -1,5 +1,6 @@
 package com.nesrux.jmfood.api.classconversion.assembler;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,5 +25,9 @@ public class GrupoModelAssembler {
 				.map(grupo -> toModel(grupo)).collect(Collectors.toList());
 		}
 	
+	public List<GrupoModel> toCollectionDto(Collection<Grupo> grupos){
+		return grupos.stream()
+				.map(grupo -> toModel(grupo)).collect(Collectors.toList());
+		}
 	
 }
