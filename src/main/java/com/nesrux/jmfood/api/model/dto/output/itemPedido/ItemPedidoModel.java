@@ -16,7 +16,6 @@ public class ItemPedidoModel {
 	private Integer quantidade;
 	private BigDecimal precoUnitario;
 	private BigDecimal precoTotal;
-	//private PedidoModel pedido;
 	private ProdutoModel produto;
 	
 }
