@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nesrux.jmfood.api.classconversion.assembler.PedidoModelAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.PedidoResumoModelAssembler;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoModel;
+import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoResumoModel;
 import com.nesrux.jmfood.domain.model.pedido.Pedido;
 import com.nesrux.jmfood.domain.service.CadastroPedidoService;
 
@@ -20,10 +22,12 @@ public class PedidoController {
 	private CadastroPedidoService service;
 	@Autowired
 	private PedidoModelAssembler assembler;
+	@Autowired
+	private PedidoResumoModelAssembler resumoAssembler;
 
 	@GetMapping
-	public List<PedidoModel> listarPedidos() {
-		return assembler.toCollectionDto(service.Listar());
+	public List<PedidoResumoModel> listarPedidos() {
+		return resumoAssembler.toCollectionDto(service.Listar());
 	}
 
 	@GetMapping("/{pedidoId}")
