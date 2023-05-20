@@ -23,7 +23,7 @@ public class PedidoModel {
 	private BigDecimal taxaFrete;
 	private BigDecimal valorTotal;
 
-	private OffsetDateTime dataCricao;
+	private OffsetDateTime dataCriacao;
 	private OffsetDateTime dataConfirmacao;
 	private OffsetDateTime dataCancelamento;
 	private OffsetDateTime dataEntrega;

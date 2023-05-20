@@ -17,7 +17,7 @@ public class PedidoResumoModel {
 	private BigDecimal taxaFrete;
 	private BigDecimal valorTotal;
 	private String statusPedido;
-	private OffsetDateTime dataCricao;
+	private OffsetDateTime dataCriacao;
 	private RestauranteResumoModel restaurante;
 	private UsuarioModel cliente;
 }
