@@ -2,6 +2,7 @@ package com.nesrux.jmfood.api.model.dto.output.pedido;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.nesrux.jmfood.api.model.dto.output.endereco.EnderecoModel;
@@ -33,6 +34,6 @@ public class PedidoModel {
 	private RestauranteResumoModel restaurante;
 	private EnderecoModel endereco;
 	private FormaPagamentoModel formaPagamento;
-	private List<ItemPedido> itens;
+	private List<ItemPedido> itens = new ArrayList<>();
 
 }

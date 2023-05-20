@@ -13,6 +13,8 @@ delete from restaurante_forma_pagamento;
 delete from restaurante_usuario_responsavel;
 delete from usuario;
 delete from usuario_grupo;
+delete from pedido;
+delete from item_pedido;
 
 set foreign_key_checks = 1;
 
@@ -87,6 +89,7 @@ insert into usuario (id, nome, email, senha, data_cadastro) values
 insert into usuario_grupo (usuario_id, grupo_id) values (1, 1), (1, 2), (2, 2);
 
 insert into restaurante_usuario_responsavel (restaurante_id, usuario_id) values (1, 5), (3, 5);
+
 
 insert into pedido (id, restaurante_id, usuario_cliente_id, forma_pagamento_id, endereco_cidade_id, endereco_cep, 
                     endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro,
