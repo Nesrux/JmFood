@@ -1,7 +1,6 @@
 package com.nesrux.jmfood.domain.model.pedido;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +43,7 @@ public class Pedido {
 	 * data no banco de dados, ela só ativa uma vez
 	 */
 	@CreationTimestamp
-	private LocalDate dataCriacao;
+	private OffsetDateTime dataCriacao;
 
 	private OffsetDateTime dataConfirmacao;
 	private OffsetDateTime dataCancelamento;
@@ -71,5 +70,5 @@ public class Pedido {
 	private FormaPagamento formaPagamento;
 
 	@OneToMany(mappedBy = "pedido")
-	private List<ItemPedido> itemPedidos = new ArrayList<>();
+	private List<ItemPedido> itens = new ArrayList<>();
 }
