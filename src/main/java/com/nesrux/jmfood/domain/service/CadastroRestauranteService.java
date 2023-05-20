@@ -76,6 +76,17 @@ public class CadastroRestauranteService {
 	}
 
 	@Transactional
+	public void ativar(List<Long> restaurantesId) {
+		restaurantesId.forEach(this::ativar);
+	}
+	
+	@Transactional
+	public void desativar(List<Long> restaurantesId) {
+		restaurantesId.forEach(this::desativar);
+	}
+
+
+	@Transactional
 	public void desassociarFormaPagamento(Long restauranteID, Long formaPagamentoID) {
 		Restaurante restaurante = acharOuFalhar(restauranteID);
 		FormaPagamento formaPagamento = pagamentoService.acharOuFalhar(formaPagamentoID);

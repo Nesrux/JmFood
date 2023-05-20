@@ -22,6 +22,7 @@ import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteInputDto;
 import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteModel;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
+import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.RestauranteNaoEncontradoException;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.service.CadastroRestauranteService;
 
@@ -33,7 +34,7 @@ public class RestauranteController {
 	// validation
 
 	@Autowired
-	private CadastroRestauranteService restauranteService;
+	private CadastroRestauranteService service;
 	@Autowired
 	private RestauranteModeltAssembler restauranteAssembler;
 	@Autowired
@@ -41,12 +42,12 @@ public class RestauranteController {
 
 	@GetMapping()
 	public List<RestauranteModel> listar() {
-		return restauranteAssembler.toCollectionDto(restauranteService.acharTodos());
+		return restauranteAssembler.toCollectionDto(service.acharTodos());
 	}
 
 	@GetMapping("/{restauranteId}")
 	public RestauranteModel buscar(@PathVariable Long restauranteId) {
-		Restaurante restaurante = restauranteService.acharOuFalhar(restauranteId);
+		Restaurante restaurante = service.acharOuFalhar(restauranteId);
 
 		return restauranteAssembler.toModel(restaurante);
 	}
@@ -61,7 +62,7 @@ public class RestauranteController {
 		try {
 			Restaurante restaurante = restauranteDissasembler.toDomainObject(restauranteInputDTO);
 
-			return restauranteAssembler.toModel(restauranteService.salvar(restaurante));
+			return restauranteAssembler.toModel(service.salvar(restaurante));
 
 		} catch (EntidadeNaoEncontradaException e) {
 			throw new NegocioException(e.getMessage(), e);
@@ -72,37 +73,59 @@ public class RestauranteController {
 	public RestauranteModel atualizar(@PathVariable Long restauranteId,
 			@RequestBody @Valid RestauranteInputDto restauranteInputDto) {
 		try {
-			Restaurante restauranteAtual = restauranteService.acharOuFalhar(restauranteId);
+			Restaurante restauranteAtual = service.acharOuFalhar(restauranteId);
 
 			restauranteDissasembler.copyTodomainObject(restauranteInputDto, restauranteAtual);
 
-			return restauranteAssembler.toModel(restauranteService.salvar(restauranteAtual));
+			return restauranteAssembler.toModel(service.salvar(restauranteAtual));
 		} catch (EntidadeNaoEncontradaException e) {
 			throw new NegocioException(e.getMessage(), e);
 		}
 	}
 
+	@PutMapping("/ativacoes")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void ativarRestaurantes(@RequestBody List<Long> restauranteids) {
+		try {
+			service.ativar(restauranteids);
+		} catch (RestauranteNaoEncontradoException e) {
+			throw new NegocioException(e.getMessage(), e);
+		}
+	}
+
+	@DeleteMapping("/ativacoes")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void desativarRestaurantes(@RequestBody List<Long> restauranteids) {
+		try {
+			service.desativar(restauranteids);
+		} catch (RestauranteNaoEncontradoException e) {
+			throw new NegocioException(e.getMessage(), e);
+		}
+
+	}
+
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("/{restauranteId}/ativo")
 	public void ativarRestaurante(@PathVariable Long restauranteId) {
-		restauranteService.ativar(restauranteId);
+		service.ativar(restauranteId);
 	}
 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{restauranteId}/ativo")
 	public void desativarRestaurante(@PathVariable Long restauranteId) {
-		restauranteService.desativar(restauranteId);
+		service.desativar(restauranteId);
 	}
+
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("/{restauranteId}/fechamento")
 	public void fecharRestaurante(@PathVariable Long restauranteId) {
-		restauranteService.fechar(restauranteId);
+		service.fechar(restauranteId);
 	}
 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("/{restauranteId}/abertura")
 	public void abrirRestaurante(@PathVariable Long restauranteId) {
-		restauranteService.abrir(restauranteId);
+		service.abrir(restauranteId);
 	}
 
 }
