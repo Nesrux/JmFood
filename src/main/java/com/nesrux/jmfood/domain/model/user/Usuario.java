@@ -42,7 +42,7 @@ public class Usuario {
 	private OffsetDateTime dataCadastro;
 
 	@ManyToMany
-	@JoinTable(name = "usuario_grupos", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "grupo_id"))
+	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "grupo_id"))
 	private Set<Grupo> grupos = new HashSet<>();
 
 	// a anotação manyToMany cria uma tabela intermediaria que faz a ponte entre 2
