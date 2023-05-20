@@ -25,6 +25,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.nesrux.jmfood.domain.model.endereco.Endereco;
 import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
 import com.nesrux.jmfood.domain.model.pedido.Produto;
+import com.nesrux.jmfood.domain.model.user.Usuario;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -71,8 +72,16 @@ public class Restaurante {
 	private OffsetDateTime dataAtualizacao;
 
 	@ManyToMany
-	@JoinTable(name = "restaurante_forma_pagamento", joinColumns = @JoinColumn(name = "restaurante_id"), inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
+	@JoinTable(name = "restaurante_forma_pagamento",
+	joinColumns = @JoinColumn(name = "restaurante_id"),
+	inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
 	private Set<FormaPagamento> formasPagamento = new HashSet<>();
+
+	@ManyToMany
+	@JoinTable(name = "restaurante_usuario_responsavel",
+	joinColumns = @JoinColumn(name = "restaurante_id"),
+	inverseJoinColumns = @JoinColumn(name = "usuario_id"))
+	private Set<Usuario> usuarioResponsavel = new HashSet<>();
 
 	@OneToMany(mappedBy = "restaurante")
 	private List<Produto> produtos = new ArrayList<>();
