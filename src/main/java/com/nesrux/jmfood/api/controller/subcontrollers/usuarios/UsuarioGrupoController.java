@@ -1,7 +1,6 @@
 package com.nesrux.jmfood.api.controller.subcontrollers.usuarios;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nesrux.jmfood.api.classconversion.assembler.GrupoModelAssembler;
-import com.nesrux.jmfood.api.model.dto.output.grupo.GrupoModel;
 import com.nesrux.jmfood.domain.model.user.Grupo;
+import com.nesrux.jmfood.domain.model.user.Usuario;
 import com.nesrux.jmfood.domain.service.CadastroUsuarioService;
 
 @RestController
@@ -26,10 +25,12 @@ public class UsuarioGrupoController {
 	private GrupoModelAssembler grupoAssembler;
 
 	@GetMapping
-	public List<GrupoModel> listarGruposUsuario(@PathVariable Long usuarioId) {
-		Set<Grupo> grupos = usuarioService.listarGruposDoUsuario(usuarioId);
+	public List<Grupo> listarGruposUsuario(@PathVariable Long usuarioId) {
+//		List<Grupo> grupos = usuarioService.listarGrupos(usuarioId);
 
-		return grupoAssembler.toCollectionDto(grupos);
+		Usuario usuario = usuarioService.acharOuFalhar(usuarioId);
+
+		return usuario.getGrupos().stream().toList();
 	}
 
 	@PutMapping
