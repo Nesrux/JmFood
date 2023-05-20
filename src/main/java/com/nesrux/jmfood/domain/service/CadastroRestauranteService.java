@@ -12,6 +12,7 @@ import com.nesrux.jmfood.domain.model.endereco.Cidade;
 import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
+import com.nesrux.jmfood.domain.model.user.Usuario;
 import com.nesrux.jmfood.domain.repository.RestauranteRepository;
 
 @Service
@@ -29,6 +30,9 @@ public class CadastroRestauranteService {
 	@Autowired
 	private CadastroFormaPagamentoService pagamentoService;
 
+	@Autowired
+	private CadastroUsuarioService usuarioService;
+
 	public List<Restaurante> acharTodos() {
 		return restauranteRepository.findAll();
 	}
@@ -38,6 +42,11 @@ public class CadastroRestauranteService {
 				.orElseThrow(() -> new RestauranteNaoEncontradoException(restauranteId));
 
 		return restaurante;
+	}
+
+	public List<Usuario> listarUsuarios(Long restauranteId) {
+		Restaurante restaurante = acharOuFalhar(restauranteId);
+		return restaurante.getUsuarioResponsavel().stream().toList();
 	}
 
 	@Transactional
@@ -91,6 +100,23 @@ public class CadastroRestauranteService {
 	@Transactional
 	public void fechar(Long restauranteId) {
 		Restaurante restaurante = acharOuFalhar(restauranteId);
-		restaurante.fechar();	}
+		restaurante.fechar();
+	}
+
+	@Transactional
+	public void associarFuncionario(Long restauranteId, Long usuarioId) {
+		Restaurante restaurante = acharOuFalhar(restauranteId);
+		Usuario usuario = usuarioService.acharOuFalhar(usuarioId);
+
+		restaurante.associarUsuario(usuario);
+	}
+
+	@Transactional
+	public void desassociarFuncionario(Long restauranteId, Long usuarioId) {
+		Restaurante restaurante = acharOuFalhar(restauranteId);
+		Usuario usuario = usuarioService.acharOuFalhar(usuarioId);
+
+		restaurante.desassociarUsuario(usuario);
+	}
 
 }
