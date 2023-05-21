@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import com.nesrux.jmfood.api.model.dto.input.endereco.EnderecoInputDto;
 import com.nesrux.jmfood.api.model.dto.input.formaPagamento.FormaPagamentoID;
 import com.nesrux.jmfood.api.model.dto.input.itens.ItemPedidoInput;
-import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteInputDto;
+import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteIdInput;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +19,7 @@ public class PedidoInputDto {
 	
 	@Valid
 	@NotNull
-	private RestauranteInputDto restaurante;
+	private RestauranteIdInput restaurante;
 	
 	@Valid
 	@NotNull
