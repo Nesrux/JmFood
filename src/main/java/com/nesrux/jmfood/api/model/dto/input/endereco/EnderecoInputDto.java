@@ -29,4 +29,5 @@ public class EnderecoInputDto {
 	@NotNull
 	@Valid
 	private CidadeIDInput cidade;
+	
 }
