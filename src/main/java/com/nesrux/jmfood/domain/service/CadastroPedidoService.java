@@ -2,6 +2,8 @@ package com.nesrux.jmfood.domain.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +23,10 @@ public class CadastroPedidoService {
 	public Pedido acharOuFalhar(Long pedidoId) {
 		return repository.findById(pedidoId)
 				.orElseThrow(() -> new PedidoNaoEncontradoException(pedidoId));
+	}
+	@Transactional
+	public Pedido salvar(Pedido pedido) {
+		return repository.save(pedido);
 	}
 
 }
