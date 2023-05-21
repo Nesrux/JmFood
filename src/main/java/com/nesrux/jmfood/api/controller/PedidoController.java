@@ -57,7 +57,8 @@ public class PedidoController {
 		Pedido pedido = pedidoDisasselber.toDomainObject(inputDto);
 		pedido.setStatus(StatusPedido.CRIADO);
 		BigDecimal valor = new BigDecimal("10.50");
-
+		pedido.getItens().forEach(iten -> iten.setPrecoUnitario(valor));
+		pedido.getItens().forEach(iten -> iten.setPrecoTotal(valor));
 		pedido.setSubtotal(valor);
 		pedido.setTaxaFrete(valor);
 		pedido.setValorTotal(valor);
