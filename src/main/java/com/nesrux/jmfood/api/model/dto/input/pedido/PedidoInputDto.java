@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.nesrux.jmfood.api.model.dto.input.endereco.EnderecoInputDto;
 import com.nesrux.jmfood.api.model.dto.input.formaPagamento.FormaPagamentoID;
@@ -31,6 +32,7 @@ public class PedidoInputDto {
 	
 	@Valid
 	@NotNull
+	@Size(min = 1)
 	private List<ItemPedidoInput> itens;
 
 }

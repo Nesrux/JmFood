@@ -32,7 +32,7 @@ public class CadastroPedidoService {
 	private CadastroProdutoService produtoService;
 	@Autowired
 	private CadastroUsuarioService usuarioService;
-
+	//TODO aprende a usar o BIG decimal, PQ PQP VIU
 	public List<Pedido> Listar() {
 		return repository.findAll();
 	}
