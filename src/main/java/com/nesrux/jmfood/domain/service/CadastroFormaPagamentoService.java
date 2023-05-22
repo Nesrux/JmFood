@@ -7,14 +7,14 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeEmUsoException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.FormaPagamentoNaoEncontradaException;
 import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
 import com.nesrux.jmfood.domain.repository.FormaPagamentoRepository;
 
-@Component
+@Service
 public class CadastroFormaPagamentoService {
 
 	private static final String MSG_FORMAPAGAMENTO_EM_USO = "Forma de pagamento de código %d não pode ser removida, pois está em uso";

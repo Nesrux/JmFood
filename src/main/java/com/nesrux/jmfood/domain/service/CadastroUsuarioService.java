@@ -7,7 +7,7 @@ import java.util.Set;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.UsuarioNaoEncontradoException;
@@ -15,7 +15,7 @@ import com.nesrux.jmfood.domain.model.user.Grupo;
 import com.nesrux.jmfood.domain.model.user.Usuario;
 import com.nesrux.jmfood.domain.repository.UsuarioRepository;
 
-@Component
+@Service
 public class CadastroUsuarioService {
 	@Autowired
 	private UsuarioRepository repository;

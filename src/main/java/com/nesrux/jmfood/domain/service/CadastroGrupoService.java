@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeEmUsoException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.GrupoNaoEncontradoException;
@@ -16,7 +16,7 @@ import com.nesrux.jmfood.domain.model.user.Grupo;
 import com.nesrux.jmfood.domain.model.user.Permissao;
 import com.nesrux.jmfood.domain.repository.GrupoRepository;
 
-@Component
+@Service
 public class CadastroGrupoService {
 	@Autowired
 	private GrupoRepository repository;

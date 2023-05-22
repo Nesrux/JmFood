@@ -1,13 +1,13 @@
 package com.nesrux.jmfood.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.PermissaoNaoEncontradaException;
 import com.nesrux.jmfood.domain.model.user.Permissao;
 import com.nesrux.jmfood.domain.repository.PermissaoRepository;
 
-@Component
+@Service
 public class CadastroPermissaoService {
 	@Autowired
 	private PermissaoRepository repository;

@@ -3,14 +3,14 @@ package com.nesrux.jmfood.domain.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.ProdutoNaoEncontradoException;
 import com.nesrux.jmfood.domain.model.pedido.Produto;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.repository.ProdutoRepository;
 
-@Component
+@Service
 public class CadastroProdutoService {
 	@Autowired
 	private ProdutoRepository repository;
