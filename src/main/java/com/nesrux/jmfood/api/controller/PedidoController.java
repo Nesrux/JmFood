@@ -1,6 +1,5 @@
 package com.nesrux.jmfood.api.controller;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -22,7 +21,6 @@ import com.nesrux.jmfood.api.model.dto.input.pedido.PedidoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoModel;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoResumoModel;
 import com.nesrux.jmfood.domain.model.pedido.Pedido;
-import com.nesrux.jmfood.domain.model.pedido.StatusPedido;
 import com.nesrux.jmfood.domain.service.CadastroPedidoService;
 
 @RestController
@@ -55,15 +53,7 @@ public class PedidoController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public PedidoModel salvar(@Valid @RequestBody PedidoInputDto inputDto) {
 		Pedido pedido = pedidoDisasselber.toDomainObject(inputDto);
-		pedido.setStatus(StatusPedido.CRIADO);
-		BigDecimal valor = new BigDecimal("10.50");
-		pedido.getItens().forEach(iten -> iten.setPrecoUnitario(valor));
-		pedido.getItens().forEach(iten -> iten.setPrecoTotal(valor));
-		pedido.setSubtotal(valor);
-		pedido.setTaxaFrete(valor);
-		pedido.setValorTotal(valor);
-
-		return assembler.toModel(service.salvar(pedido));
+		return assembler.toModel(service.emitir(pedido));
 	}
 
 }

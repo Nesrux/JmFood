@@ -35,7 +35,7 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private BigDecimal subtotal;
 	private BigDecimal taxaFrete;
 	private BigDecimal valorTotal;
@@ -44,17 +44,17 @@ public class Pedido {
 	private Endereco endereco;
 	@Enumerated(EnumType.STRING)
 	private StatusPedido status;
-	
+
 	@CreationTimestamp
 	private OffsetDateTime dataCriacao;
 	private OffsetDateTime dataConfirmacao;
 	private OffsetDateTime dataCancelamento;
 	private OffsetDateTime dataEntrega;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(nullable = false)
 	private FormaPagamento formaPagamento;
-	
+
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Restaurante restaurante;
@@ -65,6 +65,16 @@ public class Pedido {
 
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private List<ItemPedido> itens = new ArrayList<>();
+
+	public void calcularValorTotal() {
+		getItens().forEach(ItemPedido::calcularPrecoTotal);
+
+		this.subtotal = getItens().stream()
+				.map(item -> item.getPrecoTotal())
+				.reduce(BigDecimal.ZERO, BigDecimal::add);
+	
+		this.valorTotal = this.subtotal.add(this.taxaFrete);
+	}
 
 	/*
 	 * a anotação Embedded faz com que a classe dessa propriedade faça parte da
