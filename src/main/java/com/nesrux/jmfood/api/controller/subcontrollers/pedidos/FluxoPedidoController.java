@@ -15,22 +15,21 @@ import com.nesrux.jmfood.domain.service.FluxoPedidoService;
 public class FluxoPedidoController {
 	@Autowired
 	private FluxoPedidoService fluxoService;
-
 	@PutMapping("/confirmar")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void confirmarPedido(@PathVariable Long PedidoId) {
-		fluxoService.confirmar(PedidoId);
+	public void confirmarPedido(@PathVariable Long pedidoId) {
+		fluxoService.confirmar(pedidoId);
 	}
 
 	@PutMapping("/entregar")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void entregarPedido(@PathVariable Long PedidoId) {
-		fluxoService.confirmar(PedidoId);
+	public void entregarPedido(@PathVariable Long pedidoId) {
+		fluxoService.confirmar(pedidoId);
 	}
 
 	@PutMapping("/cancelar")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void cancelarrPedido(@PathVariable Long PedidoId) {
-		fluxoService.confirmar(PedidoId);
+	public void cancelarrPedido(@PathVariable Long pedidoId) {
+		fluxoService.confirmar(pedidoId);
 	}
 }
