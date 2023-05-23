@@ -43,9 +43,9 @@ public class PedidoController {
 		return resumoAssembler.toCollectionDto(service.Listar());
 	}
 
-	@GetMapping("/{pedidoId}")
-	public PedidoModel buscar(@PathVariable Long pedidoId) {
-		Pedido pedido = service.acharOuFalhar(pedidoId);
+	@GetMapping("/{codigoPedido}")
+	public PedidoModel buscar(@PathVariable String codigoPedido) {
+		Pedido pedido = service.acharOuFalhar(codigoPedido);
 		return assembler.toModel(pedido);
 	}
 

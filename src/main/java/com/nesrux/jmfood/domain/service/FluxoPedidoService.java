@@ -13,22 +13,22 @@ public class FluxoPedidoService {
 	private CadastroPedidoService pedidoService;
 
 	@Transactional
-	public void confirmar(Long pedidoId) {
-		Pedido pedido = pedidoService.acharOuFalhar(pedidoId);
+	public void confirmar(String codigoPedido) {
+		Pedido pedido = pedidoService.acharOuFalhar(codigoPedido);
 		pedido.confirmarPedido();
 
 	}
 
 	@Transactional
-	public void entregar(Long pedidoId) {
-		Pedido pedido = pedidoService.acharOuFalhar(pedidoId);
+	public void entregar(String codigoPedido) {
+		Pedido pedido = pedidoService.acharOuFalhar(codigoPedido);
 		pedido.entregarPedido();
 
 	}
 
 	@Transactional
-	public void cancelar(Long pedidoId) {
-		Pedido pedido = pedidoService.acharOuFalhar(pedidoId);
+	public void cancelar(String codigoPedido) {
+		Pedido pedido = pedidoService.acharOuFalhar(codigoPedido);
 		pedido.cancelarPedido();
 	}
 

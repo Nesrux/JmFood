@@ -37,8 +37,9 @@ public class CadastroPedidoService {
 		return repository.findAll();
 	}
 
-	public Pedido acharOuFalhar(Long pedidoId) {
-		return repository.findById(pedidoId).orElseThrow(() -> new PedidoNaoEncontradoException(pedidoId));
+	public Pedido acharOuFalhar(String codigoPedido) {
+		return repository.findByCodigo(codigoPedido).
+				orElseThrow(() -> new PedidoNaoEncontradoException(codigoPedido));
 	}
 
 	@Transactional
