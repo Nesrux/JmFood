@@ -1,6 +1,7 @@
 package com.nesrux.jmfood.api.model.dto.output.cozinha;
 
-import javax.validation.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.nesrux.jmfood.api.model.dto.view.RestauranteView;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,9 +10,10 @@ import lombok.Setter;
 @Setter
 public class CozinhaModel {
 	
+	@JsonView(RestauranteView.resumo.class)
 	private Long id;
 	
-	@NotBlank
+	@JsonView(RestauranteView.resumo.class)
 	private String nome;
 
 }

@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.nesrux.jmfood.api.classconversion.assembler.RestauranteModeltAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.RestauranteInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteInputDto;
 import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteModel;
+import com.nesrux.jmfood.api.model.dto.view.RestauranteView;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.RestauranteNaoEncontradoException;
@@ -40,8 +42,15 @@ public class RestauranteController {
 	@Autowired
 	private RestauranteInputDisassembler restauranteDissasembler;
 
-	@GetMapping()
-	public List<RestauranteModel> listar() {
+	@JsonView(RestauranteView.resumo.class)
+	@GetMapping
+	public List<RestauranteModel> listarResumo() {
+		return restauranteAssembler.toCollectionDto(service.acharTodos());
+	}
+
+	@JsonView(RestauranteView.apenasNome.class)
+	@GetMapping(params = "projecao=apenas-nome")
+	public List<RestauranteModel> listarNomes() {
 		return restauranteAssembler.toCollectionDto(service.acharTodos());
 	}
 
@@ -51,10 +60,6 @@ public class RestauranteController {
 
 		return restauranteAssembler.toModel(restaurante);
 	}
-	// O @valid vai validar o objeto enviado na requisição na hora que ele chega no
-	// metodo adicionar, ao invés dele fazer isso na hora da persistencia de dados,
-	// ou seja, ele nem chega a ir para a camada de dominio, facilitando a
-	// manipulaçao das exceptions
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -127,5 +132,10 @@ public class RestauranteController {
 	public void abrirRestaurante(@PathVariable Long restauranteId) {
 		service.abrir(restauranteId);
 	}
+
+	// O @valid vai validar o objeto enviado na requisição na hora que ele chega no
+	// metodo adicionar, ao invés dele fazer isso na hora da persistencia de dados,
+	// ou seja, ele nem chega a ir para a camada de dominio, facilitando a
+	// manipulaçao das exceptions
 
 }
