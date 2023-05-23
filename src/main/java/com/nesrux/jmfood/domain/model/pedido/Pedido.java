@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.model.endereco.Endereco;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.model.user.Usuario;
@@ -69,11 +70,33 @@ public class Pedido {
 	public void calcularValorTotal() {
 		getItens().forEach(ItemPedido::calcularPrecoTotal);
 
-		this.subtotal = getItens().stream()
-				.map(item -> item.getPrecoTotal())
-				.reduce(BigDecimal.ZERO, BigDecimal::add);
-	
+		this.subtotal = getItens().stream().map(item -> item.getPrecoTotal()).reduce(BigDecimal.ZERO, BigDecimal::add);
+
 		this.valorTotal = this.subtotal.add(this.taxaFrete);
+	}
+
+	public void confirmarPedido() {
+		setStatus(StatusPedido.CONFIRMADO);
+		setDataConfirmacao(OffsetDateTime.now());
+	}
+
+	public void cancelarPedido() {
+		setStatus(StatusPedido.CONFIRMADO);
+		setDataCancelamento(OffsetDateTime.now());
+	}
+
+	public void entregarPedido() {
+		setStatus(StatusPedido.CONFIRMADO);
+		setDataEntrega(OffsetDateTime.now());
+	}
+
+	private void setStatus(StatusPedido novostatus) {
+		if (getStatus().naoPodeAlterarPara(novostatus)) {
+			throw new NegocioException(String.format("Status do pedido %d não pode ser alterado de %s para %s", getId(),
+					getStatus().getDescricao(), novostatus.getDescricao()));
+
+		}
+		this.status = novostatus;
 	}
 
 	/*
