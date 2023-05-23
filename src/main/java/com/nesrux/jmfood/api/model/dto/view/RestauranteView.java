@@ -34,7 +34,7 @@ public interface RestauranteView {
 
 	/*
 	 * @GetMapping("/test") public MappingJacksonValue
-	 * listarDinamicamente(@PathVariable(required = false) String resumo) {
+	 * listarDinamicamente(@requestParam(required = false) String resumo) {
 	 * List<Restaurante> restaurantes = service.acharTodos(); List<RestauranteModel>
 	 * listaRestauranteModel = restauranteAssembler.toCollectionDto(restaurantes);
 	 * 

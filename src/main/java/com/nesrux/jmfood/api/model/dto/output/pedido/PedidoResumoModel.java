@@ -3,6 +3,7 @@ package com.nesrux.jmfood.api.model.dto.output.pedido;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteResumoModel;
 import com.nesrux.jmfood.api.model.dto.output.usuario.UsuarioModel;
 
@@ -11,6 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@JsonFilter("pedidoFilter")
 public class PedidoResumoModel {
 	private String codigo;
 	private BigDecimal subtotal;
