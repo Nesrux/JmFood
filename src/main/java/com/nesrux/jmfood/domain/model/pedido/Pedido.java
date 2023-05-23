@@ -97,7 +97,7 @@ public class Pedido {
 
 	private void setStatus(StatusPedido novostatus) {
 		if (getStatus().naoPodeAlterarPara(novostatus)) {
-			throw new NegocioException(String.format("Status do pedido %d não pode ser alterado de %s para %s", getId(),
+			throw new NegocioException(String.format("Status do pedido %s não pode ser alterado de %s para %s", getCodigo(),
 					getStatus().getDescricao(), novostatus.getDescricao()));
 
 		}
