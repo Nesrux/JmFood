@@ -13,7 +13,6 @@ import com.nesrux.jmfood.domain.model.endereco.Cidade;
 import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
 import com.nesrux.jmfood.domain.model.pedido.Pedido;
 import com.nesrux.jmfood.domain.model.pedido.Produto;
-import com.nesrux.jmfood.domain.model.pedido.StatusPedido;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.model.user.Usuario;
 import com.nesrux.jmfood.domain.repository.PedidoRepository;
@@ -32,7 +31,8 @@ public class CadastroPedidoService {
 	private CadastroProdutoService produtoService;
 	@Autowired
 	private CadastroUsuarioService usuarioService;
-	//TODO aprende a usar o BIG decimal, PQ PQP VIU
+
+	// TODO aprende a usar o BIG decimal, PQ PQP VIU
 	public List<Pedido> Listar() {
 		return repository.findAll();
 	}
@@ -48,8 +48,7 @@ public class CadastroPedidoService {
 
 		pedido.setTaxaFrete(pedido.getRestaurante().getTaxaFrete());
 		pedido.calcularValorTotal();
-		pedido.setStatus(StatusPedido.CRIADO);
-		
+		pedido.criarPedido();
 		return repository.save(pedido);
 	}
 

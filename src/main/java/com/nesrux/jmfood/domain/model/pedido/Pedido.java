@@ -75,18 +75,22 @@ public class Pedido {
 		this.valorTotal = this.subtotal.add(this.taxaFrete);
 	}
 
+	public void criarPedido() {
+		this.status = StatusPedido.CRIADO;
+	}
+
 	public void confirmarPedido() {
 		setStatus(StatusPedido.CONFIRMADO);
 		setDataConfirmacao(OffsetDateTime.now());
 	}
 
 	public void cancelarPedido() {
-		setStatus(StatusPedido.CONFIRMADO);
+		setStatus(StatusPedido.CANCELADO);
 		setDataCancelamento(OffsetDateTime.now());
 	}
 
 	public void entregarPedido() {
-		setStatus(StatusPedido.CONFIRMADO);
+		setStatus(StatusPedido.ENTREGE);
 		setDataEntrega(OffsetDateTime.now());
 	}
 
