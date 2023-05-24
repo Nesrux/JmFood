@@ -21,6 +21,7 @@ import com.nesrux.jmfood.api.model.dto.input.pedido.PedidoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoModel;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoResumoModel;
 import com.nesrux.jmfood.domain.model.pedido.Pedido;
+import com.nesrux.jmfood.domain.repository.filter.PedidoFilter;
 import com.nesrux.jmfood.domain.service.CadastroPedidoService;
 
 @RestController
@@ -37,29 +38,10 @@ public class PedidoController {
 
 	@Autowired
 	private PedidoInputDisasselber pedidoDisasselber;
-//
-//	@GetMapping
-//	public MappingJacksonValue listar(@RequestParam(required = false) String campos) {
-//		List<Pedido> pedidos = service.Listar();
-//		List<PedidoResumoModel> pedidosModel = resumoAssembler.toCollectionDto(pedidos);
-//
-//		MappingJacksonValue pedidosWapper = new MappingJacksonValue(pedidosModel);
-//
-//		SimpleFilterProvider filterProvider = new SimpleFilterProvider();
-//		filterProvider.addFilter("pedidoFilter", SimpleBeanPropertyFilter.serializeAll());
-//
-//		if (StringUtils.isNotBlank(campos)) {
-//			filterProvider.addFilter("pedidoFilter", SimpleBeanPropertyFilter.filterOutAllExcept(campos.split(",")));
-//		}
-//
-//		pedidosWapper.setFilters(filterProvider);
-//
-//		return pedidosWapper;
-//	}
 
 	@GetMapping
-	public List<PedidoResumoModel> listarPedidos() {
-		return resumoAssembler.toCollectionDto(service.Listar());
+	public List<PedidoResumoModel> pesquisarPedidos(PedidoFilter filter) {
+		return resumoAssembler.toCollectionDto(service.Listar(filter));
 	}
 
 	@GetMapping("/{codigoPedido}")

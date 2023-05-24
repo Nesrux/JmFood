@@ -16,6 +16,8 @@ import com.nesrux.jmfood.domain.model.pedido.Produto;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.model.user.Usuario;
 import com.nesrux.jmfood.domain.repository.PedidoRepository;
+import com.nesrux.jmfood.domain.repository.filter.PedidoFilter;
+import com.nesrux.jmfood.infrastructure.repository.spec.PedidoSpecs;
 
 @Service
 public class CadastroPedidoService {
@@ -33,13 +35,14 @@ public class CadastroPedidoService {
 	private CadastroUsuarioService usuarioService;
 
 	// TODO aprende a usar o BIG decimal, PQ PQP VIU
-	public List<Pedido> Listar() {
-		return repository.findAll();
+	
+	
+	public List<Pedido> Listar(PedidoFilter pedido) {
+		return repository.findAll(PedidoSpecs.usandoFiltro(pedido));
 	}
 
 	public Pedido acharOuFalhar(String codigoPedido) {
-		return repository.findByCodigo(codigoPedido).
-				orElseThrow(() -> new PedidoNaoEncontradoException(codigoPedido));
+		return repository.findByCodigo(codigoPedido).orElseThrow(() -> new PedidoNaoEncontradoException(codigoPedido));
 	}
 
 	@Transactional
