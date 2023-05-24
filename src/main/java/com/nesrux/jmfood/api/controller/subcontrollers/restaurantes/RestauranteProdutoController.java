@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,10 +38,14 @@ public class RestauranteProdutoController {
 	private CadastroRestauranteService restauranteService;
 
 	@GetMapping
-	public List<ProdutoModel> listar(@PathVariable Long restauranteId) {
-
-		return assembler.toCollectionDto(service.listarProdutos(restauranteId));
-
+	public List<ProdutoModel> listar(@PathVariable Long restauranteId,
+			@RequestParam(required = false) boolean incluirInativos) {
+		Restaurante restaurante = restauranteService.acharOuFalhar(restauranteId);
+		if (incluirInativos) {
+			return assembler.toCollectionDto(service.acharTodos(restaurante));
+		} else {
+			return assembler.toCollectionDto(service.acharTodosAtivos(restaurante));
+		}
 	}
 
 	@GetMapping("/{produtoId}")
@@ -64,7 +69,7 @@ public class RestauranteProdutoController {
 	}
 
 	@PutMapping("/{produtoId}")
-	public ProdutoModel atualizar(@PathVariable Long produtoId,@Valid @RequestBody ProdutoInputDto inputDto) {
+	public ProdutoModel atualizar(@PathVariable Long produtoId, @Valid @RequestBody ProdutoInputDto inputDto) {
 		Produto produto = service.acharOuFalhar(produtoId);
 		disassembler.copyToDomainObject(inputDto, produto);
 		service.salvar(produto);
