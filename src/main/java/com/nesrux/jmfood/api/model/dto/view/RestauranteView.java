@@ -46,7 +46,26 @@ public interface RestauranteView {
 	 * if("apenas-nome".equals(resumo)) {
 	 * jacksonValue.setSerializationView(RestauranteView.apenasNome.class); }
 	 * 
-	 * return jacksonValue;
-	 * }
+	 * return jacksonValue; }
 	 */
+	//
+//	@GetMapping
+//	public MappingJacksonValue listar(@RequestParam(required = false) String campos) {
+//		List<Pedido> pedidos = service.Listar();
+//		List<PedidoResumoModel> pedidosModel = resumoAssembler.toCollectionDto(pedidos);
+//
+//		MappingJacksonValue pedidosWapper = new MappingJacksonValue(pedidosModel);
+//
+//		SimpleFilterProvider filterProvider = new SimpleFilterProvider();
+//		filterProvider.addFilter("pedidoFilter", SimpleBeanPropertyFilter.serializeAll());
+//
+//		if (StringUtils.isNotBlank(campos)) {
+//			filterProvider.addFilter("pedidoFilter", SimpleBeanPropertyFilter.filterOutAllExcept(campos.split(",")));
+//		}
+//
+//		pedidosWapper.setFilters(filterProvider);
+//
+//		return pedidosWapper;
+//	}
+
 }
