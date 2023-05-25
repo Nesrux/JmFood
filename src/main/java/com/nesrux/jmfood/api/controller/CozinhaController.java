@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,8 +38,14 @@ public class CozinhaController {
 	private CozinhaModelAssembler outputAssembler;
 
 	@GetMapping()
-	public List<CozinhaModel> listar(Pageable page) {
-		return outputAssembler.toCollectionDto(cozinhaService.acharTodas(page));
+	public Page<CozinhaModel> listar(Pageable page) {
+		Page<Cozinha> cozinhasPage = cozinhaService.acharTodas(page);
+
+		List<CozinhaModel> cozinhasModel = outputAssembler.toCollectionDto(cozinhasPage.getContent());
+
+		Page<CozinhaModel> cozinhasPageModel = new PageImpl<>(cozinhasModel, page, cozinhasPage.getTotalElements());
+
+		return cozinhasPageModel;
 	}
 
 	@GetMapping("/{cozinhaId}")
@@ -57,8 +65,7 @@ public class CozinhaController {
 	}
 
 	@PutMapping("/{cozinhaId}")
-	public CozinhaModel atualizar(@PathVariable Long cozinhaId,
-			@RequestBody @Valid CozinhaInputDto cozinhaInputDto) {
+	public CozinhaModel atualizar(@PathVariable Long cozinhaId, @RequestBody @Valid CozinhaInputDto cozinhaInputDto) {
 		Cozinha cozinhaAtual = cozinhaService.buscaOuFalha(cozinhaId);
 
 		// Importante

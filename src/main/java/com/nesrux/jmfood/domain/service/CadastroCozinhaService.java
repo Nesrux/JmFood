@@ -1,12 +1,11 @@
 package com.nesrux.jmfood.domain.service;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -44,8 +43,8 @@ public class CadastroCozinhaService {
 				() -> new CozinhaNaoEncontradaException(cozinhaId));
 	}
 
-	public List<Cozinha> acharTodas(Pageable page) {
-		return cozinhaRepository.findAll(page).getContent();
+	public Page<Cozinha> acharTodas(Pageable page) {
+		return cozinhaRepository.findAll(page);
 	}
 
 }
