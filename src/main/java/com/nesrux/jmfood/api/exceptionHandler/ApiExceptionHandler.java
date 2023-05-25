@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -33,12 +34,13 @@ import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontrada
 
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
-private static final String MSG_PROPRIEDADE_INVALIDA_NO_CORPO_REQUISICAO = "A propriedade '%s' não existe.  Corrija ou remova essa propriedade e tente novamente.";
-private static final String MSG_TIPO_INVALIDO_URL = "A propriedade '%s' recebeu o valor '%s', "
+	private static final String MSG_PROPRIEDADE_INVALIDA_NO_CORPO_REQUISICAO = "A propriedade '%s' não existe.  Corrija ou remova essa propriedade e tente novamente.";
+	private static final String MSG_TIPO_INVALIDO_URL = "A propriedade '%s' recebeu o valor '%s', "
 			+ "que é de um tipo inválido. Corrija e informe um valor compatível com o tipo %s.";
-private static final String MSG_PARAM_URL_INVALIDA = "O parâmetro de URL '%s' recebeu o valor '%s', "
+	private static final String MSG_PARAM_URL_INVALIDA = "O parâmetro de URL '%s' recebeu o valor '%s', "
 			+ "que é de um tipo inválido. Corrija e informe um valor compatível com o tipo %s.";
-	//ControllerAdvice é a anotação da classe para "avisar que essa classe" é expecializada em tratar exceptions
+	// ControllerAdvice é a anotação da classe para "avisar que essa classe" é
+	// expecializada em tratar exceptions
 	public static final String MSG_ERRO_GENERICA_USUARIO_FINAL = "Ocorreu um erro interno inesperado no sistema. Tente novamente e se "
 			+ "o problema persistir, entre em contato com o administrador do sistema.";
 	@Autowired
@@ -83,7 +85,7 @@ private static final String MSG_PARAM_URL_INVALIDA = "O parâmetro de URL '%s' r
 	}
 
 	@ExceptionHandler(NegocioException.class)
-	public ResponseEntity<?> handleNegocio(NegocioException ex, WebRequest request) {
+	public ResponseEntity<?> handleNegocioExeception(NegocioException ex, WebRequest request) {
 
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		TipoProblema problemType = TipoProblema.ERRO_DE_NEGOCIO;
@@ -103,38 +105,32 @@ private static final String MSG_PARAM_URL_INVALIDA = "O parâmetro de URL '%s' r
 		TipoProblema problema = TipoProblema.DADOS_INVALIDOS;
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		BindingResult bindingResult = ex.getBindingResult();
-		List<ErroApi.Object> camposProblema = bindingResult.getAllErrors().stream().
-				map(ObjectError -> {
-					String message = messageSource.getMessage(ObjectError, LocaleContextHolder.getLocale());
-					String name = ObjectError.getObjectName();
-					if (ObjectError instanceof FieldError) {
-						name = ((FieldError) ObjectError).getField();
-					}
-					
-					return ErroApi.Object.builder()
-							.nome(name)
-							.userMessage(message).
-							 build();})
-				.collect(Collectors.toList());
+		List<ErroApi.Object> camposProblema = bindingResult.getAllErrors().stream().map(ObjectError -> {
+			String message = messageSource.getMessage(ObjectError, LocaleContextHolder.getLocale());
+			String name = ObjectError.getObjectName();
+			if (ObjectError instanceof FieldError) {
+				name = ((FieldError) ObjectError).getField();
+			}
 
-		ErroApi erro = createProblemBuilder(status, problema, detail)
-				.userMessage(detail)
-				.objects(camposProblema)
+			return ErroApi.Object.builder().nome(name).userMessage(message).build();
+		}).collect(Collectors.toList());
+
+		ErroApi erro = createProblemBuilder(status, problema, detail).userMessage(detail).objects(camposProblema)
 				.build();
 		return handleExceptionInternal(ex, erro, new HttpHeaders(), status, request);
 
 	}
 
 	@Override
-	//Trata a exception de recurso invalido, quando tenta acessar uma URI que não existem EX
+	// Trata a exception de recurso invalido, quando tenta acessar uma URI que não
+	// existem EX
 	protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
 
 		TipoProblema problemType = TipoProblema.RECURSO_NAO_ENCONTRADO;
 		String detail = String.format("O recurso %s, que você tentou acessar, é inexistente.", ex.getRequestURL());
 
-		ErroApi problem = createProblemBuilder(status, problemType, detail)
-				.userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL)
+		ErroApi problem = createProblemBuilder(status, problemType, detail).userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL)
 				.build();
 
 		return handleExceptionInternal(ex, problem, headers, status, request);
@@ -172,32 +168,32 @@ private static final String MSG_PARAM_URL_INVALIDA = "O parâmetro de URL '%s' r
 	}
 
 	@Override
-	//TRAta a exeception de campos inválidos, a resposta fica como, cozinha.id = preencha uma cozinha valída
+	// trata a exeception de campos inválidos, a resposta fica como, cozinha.id =
+	// preencha uma cozinha valída
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 
+		return handleValidationInternal(ex, headers, status, request, ex.getBindingResult());
+	}
+
+	private ResponseEntity<Object> handleValidationInternal(Exception ex, HttpHeaders headers, HttpStatus status,
+			WebRequest request, BindingResult bindingResult) {
 		String detail = String
 				.format("Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.");
 		TipoProblema problema = TipoProblema.DADOS_INVALIDOS;
 
-		BindingResult bindingResult = ex.getBindingResult();
 		List<ErroApi.Object> camposProblema = bindingResult.getAllErrors().stream().map(ObjectError -> {
 			String message = messageSource.getMessage(ObjectError, LocaleContextHolder.getLocale());
-			
+
 			String name = ObjectError.getObjectName();
 			if (ObjectError instanceof FieldError) {
 				name = ((FieldError) ObjectError).getField();
 			}
 
-			return ErroApi.Object.builder()
-					.nome(name)
-					.userMessage(message)
-					.build();
+			return ErroApi.Object.builder().nome(name).userMessage(message).build();
 		}).collect(Collectors.toList());
 
-		ErroApi erro = createProblemBuilder(status, problema, detail)
-				.userMessage(detail)
-				.objects(camposProblema)
+		ErroApi erro = createProblemBuilder(status, problema, detail).userMessage(detail).objects(camposProblema)
 				.build();
 
 		return handleExceptionInternal(ex, erro, headers, status, request);
@@ -208,76 +204,77 @@ private static final String MSG_PARAM_URL_INVALIDA = "O parâmetro de URL '%s' r
 			HttpStatus status, WebRequest request) {
 
 		if (body == null) {
-			body = ErroApi.builder()
-					.timesStamp(OffsetDateTime.now())
-					.title(status.getReasonPhrase())
-					.status(status.value()).userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL)
-					.build();
+			body = ErroApi.builder().timesStamp(OffsetDateTime.now()).title(status.getReasonPhrase())
+					.status(status.value()).userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL).build();
 		} else if (body instanceof String) {
-			body = ErroApi.builder()
-					.timesStamp(OffsetDateTime.now())
-					.title((String) body)
-					.status(status.value())
+			body = ErroApi.builder().timesStamp(OffsetDateTime.now()).title((String) body).status(status.value())
 					.userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL).build();
 		}
 
 		return super.handleExceptionInternal(ex, body, headers, status, request);
 	}
-	//Trata A exeception de propriedade inválida no corpo da requisição
+
+	@Override
+	protected ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers, HttpStatus status,
+			WebRequest request) {
+
+		return handleValidationInternal(ex, headers, status, request, ex.getBindingResult());
+	}
+
+	// Trata A exeception de propriedade inválida no corpo da requisição
 	private ResponseEntity<Object> handlePropertyBinding(PropertyBindingException ex, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
 
 		String path = joinPath(ex.getPath());
 
 		TipoProblema problemType = TipoProblema.MENSAGEM_INCOMPREENSIVEL;
-		String detail = String
-				.format(MSG_PROPRIEDADE_INVALIDA_NO_CORPO_REQUISICAO, path);
+		String detail = String.format(MSG_PROPRIEDADE_INVALIDA_NO_CORPO_REQUISICAO, path);
 
 		ErroApi problem = createProblemBuilder(status, problemType, detail).userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL)
 				.build();
 
 		return handleExceptionInternal(ex, problem, headers, status, request);
 	}
-	//contrutor no formato builder de uma classe ErroAPI
+
+	// contrutor no formato builder de uma classe ErroAPI
 	private ErroApi.ErroApiBuilder createProblemBuilder(HttpStatus status, TipoProblema problemType, String detail) {
 
-		return ErroApi.builder()
-				.timesStamp(OffsetDateTime.now())
-				.status(status.value())
-				.type(problemType.getUri())
+		return ErroApi.builder().timesStamp(OffsetDateTime.now()).status(status.value()).type(problemType.getUri())
 				.title(problemType.getTitulo()).detail(detail);
 	}
 
 	private String joinPath(List<Reference> references) {
 		return references.stream().map(ref -> ref.getFieldName()).collect(Collectors.joining("."));
 	}
-	//Trata a Exeception de receber valores diferentes em um endo point, ex esperava um LoNG recebeu uma STRING
+
+	// Trata a Exeception de receber valores diferentes em um endo point, ex
+	// esperava um LoNG recebeu uma STRING
 	private ResponseEntity<Object> handleInvalidFormat(InvalidFormatException ex, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
 
 		String path = joinPath(ex.getPath());
 
 		TipoProblema problemType = TipoProblema.MENSAGEM_INCOMPREENSIVEL;
-		String detail = String.format(
-				MSG_TIPO_INVALIDO_URL,
-				path, ex.getValue(), ex.getTargetType().getSimpleName());
+		String detail = String.format(MSG_TIPO_INVALIDO_URL, path, ex.getValue(), ex.getTargetType().getSimpleName());
 
 		ErroApi problem = createProblemBuilder(status, problemType, detail).userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL)
 				.build();
 
 		return handleExceptionInternal(ex, problem, headers, status, request);
 	}
-	//Trata A exeception de valor errao na URL, EX: esperava um Jmfood/restaurantes/1
-	//Recebeu um jmfood/restaurantes/um "parametros inválidos na URL"
+
+	// Trata A exeception de valor errao na URL, EX: esperava um
+	// Jmfood/restaurantes/1
+	// Recebeu um jmfood/restaurantes/um "parametros inválidos na URL"
 	private ResponseEntity<Object> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 
 		TipoProblema problemType = TipoProblema.PARAMETRO_INVALIDO;
 
-		String detail = String.format(MSG_PARAM_URL_INVALIDA,ex.getName(), ex.getValue(), ex.getRequiredType().getSimpleName());
+		String detail = String.format(MSG_PARAM_URL_INVALIDA, ex.getName(), ex.getValue(),
+				ex.getRequiredType().getSimpleName());
 
-		ErroApi problem = createProblemBuilder(status, problemType, detail)
-				.userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL)
+		ErroApi problem = createProblemBuilder(status, problemType, detail).userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL)
 				.build();
 
 		return handleExceptionInternal(ex, problem, headers, status, request);
