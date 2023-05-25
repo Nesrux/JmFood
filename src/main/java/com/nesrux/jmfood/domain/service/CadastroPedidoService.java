@@ -1,10 +1,10 @@
 package com.nesrux.jmfood.domain.service;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.nesrux.jmfood.domain.exception.NegocioException;
@@ -35,10 +35,9 @@ public class CadastroPedidoService {
 	private CadastroUsuarioService usuarioService;
 
 	// TODO aprende a usar o BIG decimal, PQ PQP VIU
-	
-	
-	public List<Pedido> Listar(PedidoFilter pedido) {
-		return repository.findAll(PedidoSpecs.usandoFiltro(pedido));
+
+	public Page<Pedido> Listar(PedidoFilter pedido, Pageable page) {
+		return repository.findAll(PedidoSpecs.usandoFiltro(pedido), page);
 	}
 
 	public Pedido acharOuFalhar(String codigoPedido) {

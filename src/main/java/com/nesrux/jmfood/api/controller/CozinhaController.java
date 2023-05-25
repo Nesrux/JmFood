@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +39,9 @@ public class CozinhaController {
 	private CozinhaModelAssembler outputAssembler;
 
 	@GetMapping()
-	public Page<CozinhaModel> listar(Pageable page) {
+	// A anotação @PageableDefault muda o tamanho dos elementos de uma pagina, o
+	// padrão é 20
+	public Page<CozinhaModel> listar(@PageableDefault(size = 10) Pageable page) {
 		Page<Cozinha> cozinhasPage = cozinhaService.acharTodas(page);
 
 		List<CozinhaModel> cozinhasModel = outputAssembler.toCollectionDto(cozinhasPage.getContent());

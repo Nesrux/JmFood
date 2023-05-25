@@ -4,9 +4,12 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
+import com.nesrux.jmfood.domain.model.endereco.Endereco;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 
 public interface RestauranteRepository extends CustomJpaRepository<Restaurante, Long>, CustomizedRestauranteRepository,
@@ -29,5 +32,8 @@ public interface RestauranteRepository extends CustomJpaRepository<Restaurante, 
 	List<Restaurante> findTop2RestauranteByNomeContaining(String nome);
 
 	int countByCozinhaId(Long cozinhaId);
+	
+	//Para adicionar a paginação de um método implementado pelo jpa ele precisa retornar page e implementar o peagleble
+	Page<Restaurante> findByEndereco(Endereco endereco, Pageable pageable);
 
 }
