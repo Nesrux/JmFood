@@ -38,12 +38,51 @@ insert into cozinha (id, nome) values (4, 'Brasileira');
 insert into estado (id, nome) values (1, 'Minas Gerais');
 insert into estado (id, nome) values (2, 'São Paulo');
 insert into estado (id, nome) values (3, 'Ceará');
+INSERT INTO estado (id, nome) VALUES (4, 'Acre');
+INSERT INTO estado (id, nome) VALUES (5, 'Alagoas');
+INSERT INTO estado (id, nome) VALUES (6, 'Amapá');
+INSERT INTO estado (id, nome) VALUES (7, 'Amazonas');
+INSERT INTO estado (id, nome) VALUES (8, 'Bahia');
+INSERT INTO estado (id, nome) VALUES (9, 'Ceará');
+INSERT INTO estado (id, nome) VALUES (10, 'Distrito Federal');
+INSERT INTO estado (id, nome) VALUES (11, 'Espírito Santo');
+INSERT INTO estado (id, nome) VALUES (12, 'Goiás');
+INSERT INTO estado (id, nome) VALUES (13, 'Maranhão');
+
 
 insert into cidade (id, nome, estado_id) values (1, 'Uberlândia', 1);
 insert into cidade (id, nome, estado_id) values (2, 'Belo Horizonte', 1);
 insert into cidade (id, nome, estado_id) values (3, 'São Paulo', 2);
 insert into cidade (id, nome, estado_id) values (4, 'Campinas', 2);
 insert into cidade (id, nome, estado_id) values (5, 'Fortaleza', 3);
+INSERT INTO cidade (id, nome, estado_id) VALUES (6, 'Rio Branco', 4);
+INSERT INTO cidade (id, nome, estado_id) VALUES (7, 'Cruzeiro do Sul', 4);
+INSERT INTO cidade (id, nome, estado_id) VALUES (8, 'Sena Madureira', 4);
+INSERT INTO cidade (id, nome, estado_id) VALUES (9, 'Maceió', 5);
+INSERT INTO cidade (id, nome, estado_id) VALUES (10, 'Arapiraca', 5);
+INSERT INTO cidade (id, nome, estado_id) VALUES (11, 'Palmeira dos Índios', 5);
+INSERT INTO cidade (id, nome, estado_id) VALUES (12, 'Manaus', 6);
+INSERT INTO cidade (id, nome, estado_id) VALUES (13, 'Parintins', 6);
+INSERT INTO cidade (id, nome, estado_id) VALUES (14, 'Itacoatiara', 6);
+INSERT INTO cidade (id, nome, estado_id) VALUES (15, 'Salvador', 7);
+INSERT INTO cidade (id, nome, estado_id) VALUES (16, 'Feira de Santana', 7);
+INSERT INTO cidade (id, nome, estado_id) VALUES (17, 'Vitória da Conquista', 7);
+INSERT INTO cidade (id, nome, estado_id) VALUES (18, 'Fortaleza', 8);
+INSERT INTO cidade (id, nome, estado_id) VALUES (19, 'Caucaia', 8);
+INSERT INTO cidade (id, nome, estado_id) VALUES (20, 'Juazeiro do Norte', 8);
+INSERT INTO cidade (id, nome, estado_id) VALUES (21, 'Brasília', 9);
+INSERT INTO cidade (id, nome, estado_id) VALUES (22, 'Ceilândia', 9);
+INSERT INTO cidade (id, nome, estado_id) VALUES (23, 'Gama', 9);
+INSERT INTO cidade (id, nome, estado_id) VALUES (24, 'Vitória', 10);
+INSERT INTO cidade (id, nome, estado_id) VALUES (25, 'Vila Velha', 10);
+INSERT INTO cidade (id, nome, estado_id) VALUES (26, 'Serra', 10);
+INSERT INTO cidade (id, nome, estado_id) VALUES (27, 'Goiânia', 11);
+INSERT INTO cidade (id, nome, estado_id) VALUES (28, 'Aparecida de Goiânia', 11);
+INSERT INTO cidade (id, nome, estado_id) VALUES (29, 'Anápolis', 11);
+INSERT INTO cidade (id, nome, estado_id) VALUES (30, 'São Luís', 12);
+INSERT INTO cidade (id, nome, estado_id) VALUES (31, 'Imperatriz', 12);
+INSERT INTO cidade (id, nome, estado_id) VALUES (32, 'São José de Ribamar', 12);
+
 
 insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto, endereco_cidade_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_bairro) values (1, 'Elma maria pinto', 10, 1, utc_timestamp, utc_timestamp, true, true, 1, '38400-999', 'Rua João Pinheiro', '1000', 'Centro');
 insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (2, 'jalin rabei lanches', 9.50, 1, utc_timestamp, utc_timestamp, true, true);
@@ -51,10 +90,18 @@ insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_a
 insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (4, 'fizza now hamburgueria', 12, 3, utc_timestamp, utc_timestamp, true, true);
 insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (5, 'twopay pall alimentos', 11, 4, utc_timestamp, utc_timestamp, true, true);
 insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (6, 'Bar da Maria', 6, 4, utc_timestamp, utc_timestamp, true, true);
+INSERT INTO restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) VALUES (7, 'amir maei', 10, 1, UTC_TIMESTAMP, UTC_TIMESTAMP, true, true);
+INSERT INTO restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) VALUES (8, 'cleiton hasta  ', 9.50, 1, UTC_TIMESTAMP, UTC_TIMESTAMP, true, true);
+INSERT INTO restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) VALUES (9, 'OK burguer', 15, 2, UTC_TIMESTAMP, UTC_TIMESTAMP, true, true);
+INSERT INTO restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) VALUES (10, 'lima maria lanches', 12, 3, UTC_TIMESTAMP, UTC_TIMESTAMP, true, true);
+
 
 insert into forma_pagamento (id, descricao) values (1, 'Cartão de crédito');
 insert into forma_pagamento (id, descricao) values (2, 'Cartão de débito');
 insert into forma_pagamento (id, descricao) values (3, 'Dinheiro');
+INSERT INTO forma_pagamento (id, descricao) VALUES (4, 'Cartão de Crédito');
+INSERT INTO forma_pagamento (id, descricao) VALUES (5, 'Dinheiro');
+INSERT INTO forma_pagamento (id, descricao) VALUES (6, 'Pix');
 
 insert into permissao (id, nome, descricao) values (1, 'CONSULTAR_COZINHAS', 'Permite consultar cozinhas');
 insert into permissao (id, nome, descricao) values (2, 'EDITAR_COZINHAS', 'Permite editar cozinhas');
@@ -63,18 +110,19 @@ insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id) val
 
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Porco com molho agridoce', 'Deliciosa carne suína ao molho especial', 78.90, 0, 1);
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Camarão tailandês', '16 camarões grandes ao molho picante', 110, 1, 1);
-
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Salada picante com carne grelhada', 'Salada de folhas com cortes finos de carne bovina grelhada e nosso molho especial de pimenta vermelha', 87.20, 1, 2);
-
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Garlic Naan', 'Pão tradicional indiano com cobertura de alho', 21, 1, 3);
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Murg Curry', 'Cubos de frango preparados com molho curry e especiarias', 43, 1, 3);
-
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Bife Ancho', 'Corte macio e suculento, com dois dedos de espessura, retirado da parte dianteira do contrafilé', 79, 1, 4);
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('T-Bone', 'Corte muito saboroso, com um osso em formato de T, sendo de um lado o contrafilé e do outro o filé mignon', 89, 1, 4);
-
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Sanduíche X-Tudo', 'Sandubão com muito queijo, hamburger bovino, bacon, ovo, salada e maionese', 19, 1, 5);
-
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Espetinho de Cupim', 'Acompanha farinha, mandioca e vinagrete', 8, 1, 6);
+INSERT INTO produto (nome, descricao, preco, restaurante_id, ativo) VALUES ('Hambúrguer de Frango', 'Descrição 1 - Lorem Ipsum', 15.90, 1, true);
+INSERT INTO produto (nome, descricao, preco, restaurante_id, ativo) VALUES ('Batata Frita', 'Descrição 2 - Lorem Ipsum', 9.90, 1, true);
+INSERT INTO produto (nome, descricao, preco, restaurante_id, ativo) VALUES ('Pizza Margherita', 'Descrição 3 - Lorem Ipsum', 25.90, 2, true);
+INSERT INTO produto (nome, descricao, preco, restaurante_id, ativo) VALUES ('Lasanha à Bolonhesa', 'Descrição 4 - Lorem Ipsum', 19.90, 2, true);
+INSERT INTO produto (nome, descricao, preco, restaurante_id, ativo) VALUES ('Sushi Misto', 'Descrição 5 - Lorem Ipsum', 32.90, 3, true);
+INSERT INTO produto (nome, descricao, preco, restaurante_id, ativo) VALUES ('Yakissoba de Frango', 'Descrição 6 - Lorem Ipsum', 24.90, 3, true);
 
 
 insert into grupo (id, nome) values (1, 'Gerente'), (2, 'Vendedor'), (3, 'Secretária'), (4, 'Cadastrador');
