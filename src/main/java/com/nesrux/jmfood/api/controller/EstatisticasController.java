@@ -19,8 +19,9 @@ public class EstatisticasController {
 	private VendaQueryService vendaQueryService;
 
 	@GetMapping("/vendas-diarias")
-	public List<VendaDiaria> consultarVendasDiarias(VendaDiariaFilter filtro, @RequestParam(required = false, defaultValue = "+00:00") String timeOfSet) {
-		return vendaQueryService.consultarVendaDiarias(filtro,timeOfSet);
+	public List<VendaDiaria> consultarVendasDiarias(VendaDiariaFilter filtro,
+			@RequestParam(required = false, defaultValue = "+00:00") String timeOffset) {
+		return vendaQueryService.consultarVendaDiarias(filtro, timeOffset);
 	}
 
 }
