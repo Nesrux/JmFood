@@ -7,7 +7,7 @@ public enum StatusPedido {
 //TODO aprender a trabalhar melhor com enum
 	CRIADO("Criado"),
 	CONFIRMADO("Confirmado", CRIADO),
-	ENTREGE("Entregue", CONFIRMADO), 
+	ENTREGUE("Entregue", CONFIRMADO), 
 	CANCELADO("Cancelado",CRIADO, CONFIRMADO);
 
 	private String descricao;
