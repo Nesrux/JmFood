@@ -2,6 +2,9 @@ package com.nesrux.jmfood.domain.filter;
 
 import java.time.OffsetDateTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +13,10 @@ import lombok.Setter;
 public class VendaDiariaFilter {
 
 	private Long restauranteId;
+	
+	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private OffsetDateTime dataCriacao;
+	
+	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private OffsetDateTime dataFinalizacao;
 }
