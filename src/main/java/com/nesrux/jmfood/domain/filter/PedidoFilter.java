@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.domain.repository.filter;
+package com.nesrux.jmfood.domain.filter;
 
 import java.time.OffsetDateTime;
 

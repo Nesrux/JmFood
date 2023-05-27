@@ -26,8 +26,8 @@ import com.nesrux.jmfood.api.model.dto.input.pedido.PedidoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoModel;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoResumoModel;
 import com.nesrux.jmfood.core.data.PageableTranslator;
+import com.nesrux.jmfood.domain.filter.PedidoFilter;
 import com.nesrux.jmfood.domain.model.pedido.Pedido;
-import com.nesrux.jmfood.domain.repository.filter.PedidoFilter;
 import com.nesrux.jmfood.domain.service.CadastroPedidoService;
 
 @RestController

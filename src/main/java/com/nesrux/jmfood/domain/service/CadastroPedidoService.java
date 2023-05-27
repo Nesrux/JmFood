@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.PedidoNaoEncontradoException;
+import com.nesrux.jmfood.domain.filter.PedidoFilter;
 import com.nesrux.jmfood.domain.model.endereco.Cidade;
 import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
 import com.nesrux.jmfood.domain.model.pedido.Pedido;
@@ -16,7 +17,6 @@ import com.nesrux.jmfood.domain.model.pedido.Produto;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.model.user.Usuario;
 import com.nesrux.jmfood.domain.repository.PedidoRepository;
-import com.nesrux.jmfood.domain.repository.filter.PedidoFilter;
 import com.nesrux.jmfood.infrastructure.repository.spec.PedidoSpecs;
 
 @Service
