@@ -7,5 +7,5 @@ import com.nesrux.jmfood.domain.model.dto.VendaDiaria;
 
 public interface VendaQueryService {
 
-	List<VendaDiaria> consultarVendaDiarias(VendaDiariaFilter filtro);
+	List<VendaDiaria> consultarVendaDiarias(VendaDiariaFilter filtro, String timeOfSet);
 }
