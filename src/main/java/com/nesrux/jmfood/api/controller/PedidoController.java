@@ -26,8 +26,11 @@ import com.nesrux.jmfood.api.model.dto.input.pedido.PedidoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoModel;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoResumoModel;
 import com.nesrux.jmfood.core.data.PageableTranslator;
+import com.nesrux.jmfood.domain.exception.NegocioException;
+import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 import com.nesrux.jmfood.domain.filter.PedidoFilter;
 import com.nesrux.jmfood.domain.model.pedido.Pedido;
+import com.nesrux.jmfood.domain.model.user.Usuario;
 import com.nesrux.jmfood.domain.service.CadastroPedidoService;
 
 @RestController
@@ -64,16 +67,25 @@ public class PedidoController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public PedidoModel salvar(@Valid @RequestBody PedidoInputDto inputDto) {
-		Pedido pedido = pedidoDisasselber.toDomainObject(inputDto);
-		return assembler.toModel(service.emitir(pedido));
+	public PedidoModel adicionar(@Valid @RequestBody PedidoInputDto pedidoInput) {
+		try {
+			Pedido novoPedido = pedidoDisasselber.toDomainObject(pedidoInput);
+
+			// TODO pegar usuário autenticado
+			novoPedido.setCliente(new Usuario());
+			novoPedido.getCliente().setId(1L);
+
+			novoPedido = service.emitir(novoPedido);
+
+			return assembler.toModel(novoPedido);
+		} catch (EntidadeNaoEncontradaException e) {
+			throw new NegocioException(e.getMessage(), e);
+		}
 	}
 
 	private Pageable traduzirPageable(Pageable apiPageable) {
-		var mapeamento = ImmutableMap.of("codigo", "codigo",
-				"restaurante.nome", "restaurante.nome",
-				"cliente.nome", "cliente.nome",
-				"valorTotal", "valorTotal");
+		var mapeamento = ImmutableMap.of("codigo", "codigo", "restaurante.nome", "restaurante.nome", "cliente.nome",
+				"cliente.nome", "valorTotal", "valorTotal");
 
 		return PageableTranslator.translate(apiPageable, mapeamento);
 	}

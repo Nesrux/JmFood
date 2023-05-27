@@ -11,6 +11,7 @@ import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.PedidoNaoEncontradoException;
 import com.nesrux.jmfood.domain.filter.PedidoFilter;
 import com.nesrux.jmfood.domain.model.endereco.Cidade;
+import com.nesrux.jmfood.domain.model.endereco.Estado;
 import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
 import com.nesrux.jmfood.domain.model.pedido.Pedido;
 import com.nesrux.jmfood.domain.model.pedido.Produto;
@@ -33,6 +34,9 @@ public class CadastroPedidoService {
 	private CadastroProdutoService produtoService;
 	@Autowired
 	private CadastroUsuarioService usuarioService;
+	
+	@Autowired
+	private CadastroEstadoService estadoService;
 
 	// TODO aprende a usar o BIG decimal, PQ PQP VIU
 
@@ -48,7 +52,6 @@ public class CadastroPedidoService {
 	public Pedido emitir(Pedido pedido) {
 		validarPedido(pedido);
 		verificarItens(pedido);
-
 		pedido.setTaxaFrete(pedido.getRestaurante().getTaxaFrete());
 		pedido.calcularValorTotal();
 		pedido.criarPedido();
@@ -59,13 +62,13 @@ public class CadastroPedidoService {
 		Restaurante restautante = restauranteService.acharOuFalhar(pedido.getRestaurante().getId());
 		Cidade cidade = cidadeService.acharOuFalhar(pedido.getEndereco().getCidade().getId());
 		FormaPagamento formaPagamento = formaPagamentoService.acharOuFalhar(pedido.getFormaPagamento().getId());
-		Usuario usuario = usuarioService.acharOuFalhar(1L);
+		Usuario usuario = usuarioService.acharOuFalhar(pedido.getCliente().getId());
 
-		pedido.setCliente(usuario);
 		pedido.setRestaurante(restautante);
 		pedido.getRestaurante().getEndereco().setCidade(cidade);
 		pedido.setFormaPagamento(formaPagamento);
-
+		pedido.setCliente(usuario);
+		
 		if (restautante.naoAceitaFormaPagamento(formaPagamento)) {
 			throw new NegocioException(String.format("O restaurante de id %d não aceita %s como forma de pagamento",
 					restautante.getId(), formaPagamento.getDescricao()));
