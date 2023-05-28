@@ -11,7 +11,6 @@ import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.PedidoNaoEncontradoException;
 import com.nesrux.jmfood.domain.filter.PedidoFilter;
 import com.nesrux.jmfood.domain.model.endereco.Cidade;
-import com.nesrux.jmfood.domain.model.endereco.Estado;
 import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
 import com.nesrux.jmfood.domain.model.pedido.Pedido;
 import com.nesrux.jmfood.domain.model.pedido.Produto;
@@ -34,10 +33,6 @@ public class CadastroPedidoService {
 	private CadastroProdutoService produtoService;
 	@Autowired
 	private CadastroUsuarioService usuarioService;
-	
-	@Autowired
-	private CadastroEstadoService estadoService;
-
 	// TODO aprende a usar o BIG decimal, PQ PQP VIU
 
 	public Page<Pedido> Listar(PedidoFilter pedido, Pageable page) {
