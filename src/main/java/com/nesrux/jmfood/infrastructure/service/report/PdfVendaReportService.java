@@ -24,19 +24,21 @@ public class PdfVendaReportService implements VendaReportService {
 	@Override
 	public byte[] emitirVendasDiarias(VendaDiariaFilter filtro, String timeOffset) {
 		try {
-			var inputStream = this.getClass().getResourceAsStream("/relatorios/jmfoodport.jasper");
-
-			var params = new HashMap<String, Object>();
-			params.put("REPORT_LOCALE", new Locale("pt", "BR"));
-
+			var inputStream = this.getClass().getResourceAsStream(
+					"/relatorios/jmfoodReport.jasper");
+			
+			var parametros = new HashMap<String, Object>();
+			parametros.put("REPORT_LOCALE", new Locale("pt", "BR"));
+			
 			var vendasDiarias = vendaService.consultarVendaDiarias(filtro, timeOffset);
 			var dataSource = new JRBeanCollectionDataSource(vendasDiarias);
-
-			var jasperPrint = JasperFillManager.fillReport(inputStream, params, dataSource);
+			
+			var jasperPrint = JasperFillManager.fillReport(inputStream, parametros, dataSource);
+		
 			return JasperExportManager.exportReportToPdf(jasperPrint);
 		} catch (Exception e) {
-			throw new ReportException("Não foi possivel emitir o relatório de vendas", e.getCause());
+			throw new ReportException("Não foi possível emitir relatório de vendas diárias", e);
 		}
+		
 	}
-
 }
