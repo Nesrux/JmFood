@@ -1,13 +1,9 @@
 # JMFood
 
 <!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
-![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
-![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
-
-
-<!--<img src="restapi2.png" alt="exemplo imagem">-->
-
+<div align="center">
+  <img src="/docs/jmfoodLogo.png" alt="exemplo imagem" width=300px>
+</div>
 > Uma API Rest feita com Java e spring para simular um sistema de delivey de entrega de comida
 
 ### Ajustes e melhorias
