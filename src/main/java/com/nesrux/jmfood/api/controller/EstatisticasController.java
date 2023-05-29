@@ -21,7 +21,7 @@ import com.nesrux.jmfood.domain.service.VendaReportService;
 public class EstatisticasController {
 	@Autowired
 	private VendaQueryService vendaQueryService;
-	
+
 	@Autowired
 	private VendaReportService reportService;
 
@@ -30,21 +30,17 @@ public class EstatisticasController {
 			@RequestParam(required = false, defaultValue = "+00:00") String timeOffset) {
 		return vendaQueryService.consultarVendaDiarias(filtro, timeOffset);
 	}
-	
+
 	@GetMapping(path = "/vendas-diarias", produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<byte[]> consultarVendasDiariasPdf(VendaDiariaFilter filtro,
 			@RequestParam(required = false, defaultValue = "+00:00") String timeOffset) {
 
 		byte[] bytesPdf = reportService.emitirVendasDiarias(filtro, timeOffset);
-		
-		var header = new HttpHeaders();
-		header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=elmaMariaPinto.pdf");//HAHA comédias
-		
-		return ResponseEntity.ok()
-				.contentType(MediaType.APPLICATION_PDF)
-				.headers(header)
-				.body(bytesPdf);
-	}
 
+		var header = new HttpHeaders();
+		header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=elmaMariaPinto.pdf");// HAHA comédias
+
+		return ResponseEntity.ok().contentType(MediaType.APPLICATION_PDF).headers(header).body(bytesPdf);
+	}
 
 }
