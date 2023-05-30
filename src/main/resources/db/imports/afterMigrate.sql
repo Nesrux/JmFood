@@ -144,7 +144,7 @@ insert into pedido (id, codigo, restaurante_id, usuario_cliente_id, forma_pagame
                     endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro,
 	                status, data_criacao, subtotal, taxa_frete, valor_total)
 values (1, 'f9981ca4-5a5e-4da3-af04-933861df3e55', 1, 1, 1, 1, '38400-000', 'Rua Floriano Peixoto', '500', 'Apto 801', 'Brasil',
-        'CRIADO', utc_timestamp, 298.90, 10, 308.90);
+        'ENTREGUE', utc_timestamp, 298.90, 10, 308.90);
 
 insert into item_pedido (id, pedido_id, produto_id, quantidade, preco_unitario, preco_total, observacao)
 values (1, 1, 1, 1, 78.9, 78.9, null);
@@ -157,7 +157,7 @@ insert into pedido (id, codigo, restaurante_id, usuario_cliente_id, forma_pagame
                     endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro,
 	                status, data_criacao, subtotal, taxa_frete, valor_total)
 values (2, 'd178b637-a785-4768-a3cb-aa1ce5a8cdab', 4, 1, 2, 1, '38400-111', 'Rua Acre', '300', 'Casa 2', 'Centro',
-        'CRIADO', utc_timestamp, 79, 0, 79);
+        'ENTREGUE', utc_timestamp, 79, 0, 79);
 
 insert into item_pedido (id, pedido_id, produto_id, quantidade, preco_unitario, preco_total, observacao)
 values (3, 2, 6, 1, 79, 79, 'Ao ponto');
@@ -167,7 +167,7 @@ insert into pedido (id, codigo, restaurante_id, usuario_cliente_id, forma_pagame
                     endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro,
 	                status, data_criacao, data_confirmacao, data_entrega, subtotal, taxa_frete, valor_total)
 values (3, 'b5741512-8fbc-47fa-9ac1-b530354fc0ff', 1, 1, 1, 1, '38400-222', 'Rua Natal', '200', null, 'Brasil',
-        'CRIADO', '2019-10-30 21:10:00', '2019-10-30 21:10:45', '2019-10-30 21:55:44', 110, 10, 120);
+        'ENTREGUE', '2023-11-01 21:10:00', '2019-10-30 21:10:45', '2019-10-30 21:55:44', 110, 10, 120);
 
 insert into item_pedido (id, pedido_id, produto_id, quantidade, preco_unitario, preco_total, observacao)
 values (4, 3, 2, 1, 110, 110, null);
@@ -177,7 +177,7 @@ insert into pedido (id, codigo, restaurante_id, usuario_cliente_id, forma_pagame
                     endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro,
 	                status, data_criacao, data_confirmacao, data_entrega, subtotal, taxa_frete, valor_total)
 values (4, '5c621c9a-ba61-4454-8631-8aabefe58dc2', 1, 2, 1, 1, '38400-800', 'Rua Fortaleza', '900', 'Apto 504', 'Centro',
-        'CRIADO', '2019-11-05 20:34:04', '2019-11-02 20:35:10', '2019-11-02 21:10:32', 174.4, 5, 179.4);
+        'ENTREGUE', '2023-11-02 20:34:04', '2019-11-02 20:35:10', '2019-11-02 21:10:32', 174.4, 5, 179.4);
 
 insert into item_pedido (id, pedido_id, produto_id, quantidade, preco_unitario, preco_total, observacao)
 values (5, 4, 3, 2, 87.2, 174.4, null);
@@ -187,7 +187,7 @@ insert into pedido (id, codigo, restaurante_id, usuario_cliente_id, forma_pagame
                     endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro,
 	                status, data_criacao, data_confirmacao, data_entrega, subtotal, taxa_frete, valor_total)
 values (5, '8d774bcf-b238-42f3-aef1-5fb388754d63', 1, 3, 2, 1, '38400-200', 'Rua 10', '930', 'Casa 20', 'Martins',
-        'ENTREGUE', '2019-11-04 21:00:30', '2019-11-02 21:01:21', '2019-11-02 21:20:10', 87.2, 10, 97.2);
+        'ENTREGUE', '2023-11-02 21:00:30', '2019-11-02 21:01:21', '2019-11-02 21:20:10', 87.2, 10, 97.2);
 
 insert into item_pedido (id, pedido_id, produto_id, quantidade, preco_unitario, preco_total, observacao)
 values (6, 5, 3, 1, 87.2, 87.2, null);
@@ -196,7 +196,7 @@ insert into pedido (id, codigo, restaurante_id, usuario_cliente_id, forma_pagame
                     endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro,
 	                status, data_criacao, data_confirmacao, data_entrega, subtotal, taxa_frete, valor_total)
 values (7, 'cb276bc6-4841-4da7-853f-4d44905adc44', 1, 2, 1, 1, '38400-800', 'Rua Fortaleza', '900', 'Apto 504', 'Centro',
-        'ENTREGUE', '2019-11-03 20:34:04', '2019-11-02 20:35:10', '2019-11-02 21:10:32', 999, 5, 999);
+        'ENTREGUE', '2023-11-03 20:34:04', '2019-11-02 20:35:10', '2019-11-02 21:10:32', 999, 5, 999);
     
  insert into item_pedido (id, pedido_id, produto_id, quantidade, preco_unitario, preco_total, observacao)
 values (7, 7, 1, 1, 78.9, 78.9, null);
@@ -208,7 +208,7 @@ insert into pedido (id, codigo, restaurante_id, usuario_cliente_id, forma_pagame
                     endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro,
 	                status, data_criacao, data_confirmacao, data_entrega, subtotal, taxa_frete, valor_total)
 values (8, 'ce12f244-c01d-40e5-9e90-646d1bf43b9e', 2, 2, 1, 1, '38400-800', 'Rua Fortaleza', '900', 'Apto 504', 'Centro',
-        'ENTREGUE', '2023-11-01 20:34:04', '2019-11-02 20:35:10', '2019-11-02 21:10:32', 999, 5, 999);
+        'ENTREGUE', '2023-11-03 20:34:04', '2019-11-02 20:35:10', '2019-11-02 21:10:32', 999, 5, 999);
         
  insert into pedido (id, codigo, restaurante_id, usuario_cliente_id, forma_pagamento_id, endereco_cidade_id, endereco_cep, 
                     endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro,
@@ -220,18 +220,18 @@ values (9, '2af53ecc-20ec-4d13-bb16-f5383a30c597', 3, 2, 1, 1, '38400-800', 'Rua
                     endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro,
 	                status, data_criacao, data_confirmacao, data_entrega, subtotal, taxa_frete, valor_total)
 values (10, 'c7183a0f-c29d-494b-8004-d1864a3f47a7', 3, 2, 1, 1, '38400-800', 'Rua Fortaleza', '900', 'Apto 504', 'Centro',
-        'ENTREGUE', '2023-11-03 20:34:04', '2019-11-02 20:35:10', '2019-11-02 21:10:32', 999, 9, 999);
+        'ENTREGUE', '2023-11-05 20:34:04', '2019-11-02 20:35:10', '2019-11-02 21:10:32', 999, 9, 999);
      
 insert into pedido (id, codigo, restaurante_id, usuario_cliente_id, forma_pagamento_id, endereco_cidade_id, endereco_cep, 
                     endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro,
 	                status, data_criacao, data_confirmacao, data_entrega, subtotal, taxa_frete, valor_total)
 values (11, 'aace2828-6bc3-4d8d-b970-476bacd0cd60', 3, 2, 1, 1, '38400-800', 'Rua Fortaleza', '900', 'Apto 504', 'Centro',
-        'ENTREGUE', '2023-11-03 20:34:04', '2019-11-02 20:35:10', '2019-11-02 21:10:32', 999, 9, 999);
+        'ENTREGUE', '2023-11-05 20:34:04', '2019-11-02 20:35:10', '2019-11-02 21:10:32', 999, 9, 999);
 
 insert into pedido (id, codigo, restaurante_id, usuario_cliente_id, forma_pagamento_id, endereco_cidade_id, endereco_cep, 
                     endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro,
 	                status, data_criacao, data_confirmacao, data_entrega, subtotal, taxa_frete, valor_total)
 values (12, '210cc128-1808-4310-83e1-bf3991deaa14', 3, 2, 1, 1, '38400-800', 'Rua Fortaleza', '900', 'Apto 504', 'Centro',
-        'ENTREGUE', '2023-11-02 20:34:04', '2019-11-02 20:35:10', '2019-11-02 21:10:32', 999, 9, 999);
+        'ENTREGUE', '2023-11-05 20:34:04', '2019-11-02 20:35:10', '2019-11-02 21:10:32', 999, 9, 999);
 
         
