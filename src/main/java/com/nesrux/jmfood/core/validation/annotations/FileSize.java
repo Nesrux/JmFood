@@ -14,11 +14,11 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import com.nesrux.jmfood.core.validation.validators.MultiploValidator;
+import com.nesrux.jmfood.core.validation.validators.FileSizeValidator;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RUNTIME)
-@Constraint(validatedBy = {MultiploValidator.class})
+@Constraint(validatedBy = {FileSizeValidator.class})
 public @interface FileSize {
     String message() default "{Tamanho do arquivo inválido}";
 

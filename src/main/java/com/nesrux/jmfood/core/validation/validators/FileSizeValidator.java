@@ -1,34 +1,27 @@
 package com.nesrux.jmfood.core.validation.validators;
 
-import java.math.BigDecimal;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.nesrux.jmfood.core.validation.annotations.Multiplo;
+import org.springframework.util.unit.DataSize;
+import org.springframework.web.multipart.MultipartFile;
 
-public class FileSizeValidator implements ConstraintValidator<Multiplo, Number> {
+import com.nesrux.jmfood.core.validation.annotations.FileSize;
 
-    private int numeroMultiplo;
+public class FileSizeValidator implements ConstraintValidator<FileSize, MultipartFile> {
 
-    @Override
-    public void initialize(Multiplo constraintAnnotation) {
-	this.numeroMultiplo = constraintAnnotation.numero();
-    }
+	private DataSize maxSize;
 
-    @Override
-    public boolean isValid(Number value, ConstraintValidatorContext context) {
-	boolean valido = true;
-
-	if (value != null) {
-	    var valorDecimal = BigDecimal.valueOf(value.doubleValue());
-	    var multiploDecimal = BigDecimal.valueOf(this.numeroMultiplo);
-	    var resto = valorDecimal.remainder(multiploDecimal);
-	    
-	    valido = BigDecimal.ZERO.compareTo(resto) == 0;
+	@Override
+	public void initialize(FileSize constraintAnnotation) {
+		this.maxSize = DataSize.parse(constraintAnnotation.max());
 	}
 
-	return valido;
-    }
+	@Override
+	public boolean isValid(MultipartFile file, ConstraintValidatorContext context) {
+
+		return file == null || file.getSize() <= this.maxSize.toBytes();
+
+	}
 
 }
