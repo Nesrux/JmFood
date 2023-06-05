@@ -2,6 +2,7 @@ package com.nesrux.jmfood.domain.model.pedido;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
@@ -19,7 +20,7 @@ public class FotoProduto {
 	@Column(name = "produto_id")
 	private Long id;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@MapsId
 	private Produto produto;
 

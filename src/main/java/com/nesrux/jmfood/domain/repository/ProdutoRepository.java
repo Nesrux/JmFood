@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import com.nesrux.jmfood.domain.model.pedido.Produto;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 
-public interface ProdutoRepository extends CustomJpaRepository<Produto, Long> {
+public interface ProdutoRepository extends CustomJpaRepository<Produto, Long>, ProdutoRepositoryQueries{
 
 	List<Produto> findByRestaurante(Restaurante restaurante);// Retorna os produtos de restaurante
 
