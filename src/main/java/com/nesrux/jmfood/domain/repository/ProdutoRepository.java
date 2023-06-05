@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.nesrux.jmfood.domain.model.pedido.FotoProduto;
 import com.nesrux.jmfood.domain.model.pedido.Produto;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 
@@ -19,5 +20,9 @@ public interface ProdutoRepository extends CustomJpaRepository<Produto, Long>, P
 	@Query("FROM Produto p WHERE p.ativo = true AND p.restaurante = :restaurante")
 	List<Produto> findAtivosByRestaurante(Restaurante restaurante);
 	
+	@Query("select f from FotoProduto f join f.produto p "
+			+ "where p.restaurante.id = :restauranteId and f.produto.id = :produtoId")
+	Optional<FotoProduto> findFotoById(Long restauranteId, Long produtoId);
 
+	
 }
