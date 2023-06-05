@@ -24,7 +24,9 @@ public class FotoProduto {
 	@MapsId
 	private Produto produto;
 
+	@Column(name = "nome_arquivo")
 	private String nome;
+
 	private String descricao;
 	private String contentType;
 	private Long tamanho;
