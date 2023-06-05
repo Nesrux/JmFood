@@ -2,6 +2,7 @@ package com.nesrux.jmfood.infrastructure.repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,7 @@ public class ProdutoRepositoryImpl implements ProdutoRepositoryQueries {
 	@PersistenceContext
 	private EntityManager manager;
 
+	@Transactional
 	@Override
 	public FotoProduto save(FotoProduto foto) {
 		return manager.merge(foto);
