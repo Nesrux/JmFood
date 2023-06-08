@@ -17,8 +17,8 @@ import lombok.Setter;
 public class FotoProdutoInput {
 
 	@NotNull
-	@FileSize(max = "30KB")
-	@FileContentType(allowed = {MediaType.IMAGE_PNG_VALUE})
+	@FileSize(max = "60KB")
+	@FileContentType(allowed = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE})
 	private MultipartFile arquivo;
 	
 	@NotBlank

@@ -1,5 +1,7 @@
 package com.nesrux.jmfood.api.controller.subcontrollers.restaurantes;
 
+import java.io.IOException;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,7 @@ public class RestauranteFotoProdutoController {
 
 	@PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public FotoProdutoModel atualizarFoto(@PathVariable Long restauranteId, @PathVariable Long produtoId,
-			@Valid FotoProdutoInput fotoProdutoInput) {
+			@Valid FotoProdutoInput fotoProdutoInput) throws IOException {
 
 		Produto produto = produtoService.acharOuFalhar(produtoId);
 
@@ -43,7 +45,7 @@ public class RestauranteFotoProdutoController {
 		foto.setTamanho(tipoArquivo.getSize());
 		foto.setNome(tipoArquivo.getOriginalFilename());
 
-		FotoProduto fotoSalva = service.salvar(foto);
+		FotoProduto fotoSalva = service.salvar(foto, tipoArquivo.getInputStream());
 
 		return assembler.toModel(fotoSalva);
 	}
