@@ -20,10 +20,12 @@ public class CadastroEstadoService {
 
 	@Autowired
 	private EstadoRepository estadoRepository;
+
 	@Transactional
 	public Estado salvar(Estado estado) {
 		return estadoRepository.save(estado);
 	}
+
 	@Transactional
 	public void excluir(Long estadoId) {
 		try {

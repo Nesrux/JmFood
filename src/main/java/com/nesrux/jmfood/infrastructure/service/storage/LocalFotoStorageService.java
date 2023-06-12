@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
 import com.nesrux.jmfood.domain.service.FotoStorageService;
-import com.nesrux.jmfood.infrastructure.exception.StrorageException;
+import com.nesrux.jmfood.infrastructure.exception.StorageException;
 
 @Service
 public class LocalFotoStorageService implements FotoStorageService {
-	//TODO Injetar uma propriedade do application.properties com @value
-	//nessa versão do isso não esta funcionando
-	//dps a atualização apagar tudo oque vem deps do  = 
+	// TODO Injetar uma propriedade do application.properties com @value
+	// nessa versão do isso não esta funcionando
+	// dps a atualização apagar tudo oque vem deps do =
 	// e colocar um @Value("{jmfood.storage.local.diretorio-fotos}");
 	private Path diretorioFotosPath = Path.of("C:\\Users\\jucaj\\OneDrive\\Área de Trabalho\\BANCO_DE_FOTOS");
 
@@ -24,7 +24,17 @@ public class LocalFotoStorageService implements FotoStorageService {
 		try {
 			FileCopyUtils.copy(novafoto.getInputStream(), Files.newOutputStream(arquivoPath));
 		} catch (Exception e) {
-			throw new StrorageException("Não foi possivel armazenar a foto no disco Local", e);
+			throw new StorageException("Não foi possivel armazenar a foto no disco Local", e);
+		}
+	}
+
+	@Override
+	public void remover(String NomeFotoAntiga) {
+		try {
+			Path arquivoPath = getArquivoPath(NomeFotoAntiga);
+			Files.deleteIfExists(arquivoPath);
+		} catch (Exception e) {
+			throw new StorageException("não foi possivel excluir arquivo");
 		}
 	}
 

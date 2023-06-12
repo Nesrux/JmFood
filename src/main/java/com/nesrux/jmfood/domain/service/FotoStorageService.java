@@ -10,9 +10,19 @@ import lombok.Setter;
 public interface FotoStorageService {
 	void armazenar(NovaFoto novafoto);
 
+	void remover(String NomeFotoAntiga);
+
 	default String gerarNomeArquivo(String nomeOriginal) {
 		return UUID.randomUUID().toString() + "_" + nomeOriginal;
 
+	}
+
+	default void substituir(String nomeArquivoAntigo, NovaFoto novaFoto) {
+		this.armazenar(novaFoto);
+
+		if (nomeArquivoAntigo != null) {
+			this.remover(nomeArquivoAntigo);
+		}
 	}
 
 	@Getter

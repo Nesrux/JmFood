@@ -15,6 +15,7 @@ import com.nesrux.jmfood.domain.service.FluxoPedidoService;
 public class FluxoPedidoController {
 	@Autowired
 	private FluxoPedidoService fluxoService;
+
 	@PutMapping("/confirmar")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void confirmarPedido(@PathVariable String codigoPedido) {
