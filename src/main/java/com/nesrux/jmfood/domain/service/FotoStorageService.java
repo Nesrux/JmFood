@@ -12,6 +12,8 @@ public interface FotoStorageService {
 
 	void remover(String NomeFotoAntiga);
 
+	InputStream recuperar(String nomeArquivo);
+
 	default String gerarNomeArquivo(String nomeOriginal) {
 		return UUID.randomUUID().toString() + "_" + nomeOriginal;
 
