@@ -81,7 +81,9 @@ public class RestauranteFotoProdutoController {
 
 			InputStream inputStram = fotoStorage.recuperar(fotoProduto.getNome());
 
-			return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(inputStram));
+			return ResponseEntity.ok()
+					.contentType(mediaTypeFoto)
+					.body(new InputStreamResource(inputStram));
 
 		} catch (EntidadeNaoEncontradaException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
