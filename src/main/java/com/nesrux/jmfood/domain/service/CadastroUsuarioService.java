@@ -3,6 +3,7 @@ package com.nesrux.jmfood.domain.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -34,7 +35,7 @@ public class CadastroUsuarioService {
 	public List<Grupo> listarGrupos(Long usuarioId) {
 		Usuario usuario = acharOuFalhar(usuarioId);
 
-		return usuario.getGrupos().stream().toList();
+		return usuario.getGrupos().stream().collect(Collectors.toList());
 	}
 
 	// Para efeitos de teste

@@ -1,6 +1,7 @@
 package com.nesrux.jmfood.domain.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -46,7 +47,7 @@ public class CadastroRestauranteService {
 
 	public List<Usuario> listarUsuarios(Long restauranteId) {
 		Restaurante restaurante = acharOuFalhar(restauranteId);
-		return restaurante.getUsuarioResponsavel().stream().toList();
+		return restaurante.getUsuarioResponsavel().stream().collect(Collectors.toList());
 	}
 
 	@Transactional

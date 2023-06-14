@@ -2,6 +2,7 @@ package com.nesrux.jmfood.domain.service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -51,7 +52,7 @@ public class CadastroGrupoService {
 	public List<Permissao> listarPermissoes(Long grupoId) {
 		Grupo grupo = acharOuFalahar(grupoId);
 
-		return grupo.getPermissoes().stream().toList();
+		return grupo.getPermissoes().stream().collect(Collectors.toList());
 	}
 	
 	//Caso dee ero :C
