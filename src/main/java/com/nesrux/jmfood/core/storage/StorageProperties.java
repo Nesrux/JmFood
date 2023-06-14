@@ -15,12 +15,24 @@ import lombok.Setter;
 public class StorageProperties {
 
 	private Local local = new Local();
+	private S3 s3 = new S3();
 
 	@Getter
 	@Setter
 	public class Local {
-	//	private Path diretorioFotos = Path.of("C:\\Users\\jucaj\\OneDrive\\Área de Trabalho\\BANCO_DE_FOTOS");
+		// private Path diretorioFotos = Path.of("C:\\Users\\jucaj\\OneDrive\\Área de
+		// Trabalho\\BANCO_DE_FOTOS");
 		private Path diretorioFotos;
+	}
+
+	@Getter
+	@Setter
+	public class S3 {
+		private String idChaveAcesso;
+		private String chaveAcessoSecreta;
+		private String bucket;
+		private String regiao;
+		private String diretorioFotos;
 	}
 
 	// TODO por causa de erro de compatibilidade usar o @configurationProperties
