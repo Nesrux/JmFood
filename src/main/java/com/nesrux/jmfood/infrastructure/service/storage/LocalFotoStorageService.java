@@ -4,9 +4,11 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
+import com.nesrux.jmfood.core.storage.StorageProperties;
 import com.nesrux.jmfood.domain.service.FotoStorageService;
 import com.nesrux.jmfood.infrastructure.exception.StorageException;
 
@@ -16,7 +18,11 @@ public class LocalFotoStorageService implements FotoStorageService {
 	// nessa versão do isso não esta funcionando
 	// dps a atualização apagar tudo oque vem deps do =
 	// e colocar um @Value("{jmfood.storage.local.diretorio-fotos}");
-	private Path diretorioFotosPath = Path.of("C:\\Users\\jucaj\\OneDrive\\Área de Trabalho\\BANCO_DE_FOTOS");
+	// private Path diretorioFotosPath = Path.of("C:\\Users\\jucaj\\OneDrive\\Área
+	// de Trabalho\\BANCO_DE_FOTOS");
+
+	@Autowired
+	private StorageProperties storageProperties;
 
 	@Override
 	public void armazenar(NovaFoto novafoto) {
@@ -52,7 +58,7 @@ public class LocalFotoStorageService implements FotoStorageService {
 	}
 
 	private Path getArquivoPath(String Nomearquivo) {
-		return diretorioFotosPath.resolve(Path.of(Nomearquivo));
+		return storageProperties.getLocal().getDiretorioFotos().resolve(Path.of(Nomearquivo));
 	}
 
 }

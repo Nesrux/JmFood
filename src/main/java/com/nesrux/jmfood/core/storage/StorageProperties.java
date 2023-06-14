@@ -19,6 +19,10 @@ public class StorageProperties {
 	@Getter
 	@Setter
 	public class Local {
+	//	private Path diretorioFotos = Path.of("C:\\Users\\jucaj\\OneDrive\\Área de Trabalho\\BANCO_DE_FOTOS");
 		private Path diretorioFotos;
 	}
+
+	// TODO por causa de erro de compatibilidade usar o @configurationProperties
+	// esta dando erro, então quando atualizar o projeto mudar isso aqui
 }
