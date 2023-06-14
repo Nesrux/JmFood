@@ -12,11 +12,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -81,13 +83,19 @@ public class RestauranteFotoProdutoController {
 
 			InputStream inputStram = fotoStorage.recuperar(fotoProduto.getNome());
 
-			return ResponseEntity.ok()
-					.contentType(mediaTypeFoto)
-					.body(new InputStreamResource(inputStram));
+			return ResponseEntity.ok().contentType(mediaTypeFoto).body(new InputStreamResource(inputStram));
 
 		} catch (EntidadeNaoEncontradaException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
+	}
+
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@DeleteMapping
+	public void excluirFoto(@PathVariable Long restauranteId, @PathVariable Long produtoId) {
+		FotoProduto fotoProduto = service.buscarOuFalhar(restauranteId, produtoId);
+		fotoStorage.remover(fotoProduto.getNome());
+		service.apagarFoto(fotoProduto);
 	}
 
 	private void verificarMediaTypeFoto(MediaType mediaTypeFoto, List<MediaType> mediaTypeAceitas)

@@ -51,5 +51,9 @@ public class CadastroFotoProdutoService {
 		return produtoRepository.findFotoById(restauranteId, produtoId)
 				.orElseThrow(() -> new FotoNaoEncontradaException(restauranteId, produtoId));
 	}
+	
+	public void apagarFoto(FotoProduto fotoProduto) {
+		produtoRepository.delete(fotoProduto);
+	}
 
 }
