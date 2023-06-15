@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.nesrux.jmfood.core.storage.StorageProperties;
@@ -30,8 +31,11 @@ public class S3FotoStorageService implements FotoStorageService {
 			var objectMetadata = new ObjectMetadata();
 			objectMetadata.setContentType(novaFoto.getContentType());
 
-			var putObjectRequest = new PutObjectRequest(storageProperties.getS3().getBucket(), caminhoArquivo,
-					novaFoto.getInputStream(), objectMetadata).withCannedAcl(CannedAccessControlList.PublicRead);
+			var putObjectRequest = new PutObjectRequest(storageProperties.getS3().getBucket(),
+					caminhoArquivo,
+					novaFoto.getInputStream(),
+					objectMetadata)
+					.withCannedAcl(CannedAccessControlList.PublicRead);
 
 			amazonS3.putObject(putObjectRequest);
 		} catch (Exception e) {
@@ -41,8 +45,15 @@ public class S3FotoStorageService implements FotoStorageService {
 
 	@Override
 	public void remover(String NomeFotoAntiga) {
-		// TODO Auto-generated method stub
+		String caminhoArquivo = getCaminhoArquivo(NomeFotoAntiga);
+		try {
+			var deleteObjetRequest = new DeleteObjectRequest(storageProperties.getS3().getBucket(),
+					caminhoArquivo);
 
+			amazonS3.deleteObject(deleteObjetRequest);
+		} catch (Exception e) {
+			throw new StorageException("não foi possivel apagar arquivo para Amazon S3", e);
+		}
 	}
 
 	@Override
