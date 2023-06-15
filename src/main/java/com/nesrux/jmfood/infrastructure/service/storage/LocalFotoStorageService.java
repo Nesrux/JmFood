@@ -4,14 +4,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
 import com.nesrux.jmfood.core.storage.StorageProperties;
 import com.nesrux.jmfood.domain.service.FotoStorageService;
 import com.nesrux.jmfood.infrastructure.exception.StorageException;
 
-@Service
+
 public class LocalFotoStorageService implements FotoStorageService {
 	@Autowired
 	private StorageProperties storageProperties;
