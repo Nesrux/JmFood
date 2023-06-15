@@ -1,25 +1,18 @@
 package com.nesrux.jmfood.infrastructure.service.storage;
 
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
 import com.nesrux.jmfood.core.storage.StorageProperties;
 import com.nesrux.jmfood.domain.service.FotoStorageService;
 import com.nesrux.jmfood.infrastructure.exception.StorageException;
 
-//@Service
+@Service
 public class LocalFotoStorageService implements FotoStorageService {
-	// TODO Injetar uma propriedade do application.properties com @value
-	// nessa versão do isso não esta funcionando
-	// dps a atualização apagar tudo oque vem deps do =
-	// e colocar um @Value("{jmfood.storage.local.diretorio-fotos}");
-	// private Path diretorioFotosPath = Path.of("C:\\Users\\jucaj\\OneDrive\\Área
-	// de Trabalho\\BANCO_DE_FOTOS");
-
 	@Autowired
 	private StorageProperties storageProperties;
 
@@ -45,11 +38,13 @@ public class LocalFotoStorageService implements FotoStorageService {
 	}
 
 	@Override
-	public InputStream recuperar(String nomeArquivo) {
+	public FotoRecuperada recuperar(String nomeArquivo) {
 		Path arquivoPath = getArquivoPath(nomeArquivo);
-
 		try {
-			return Files.newInputStream(arquivoPath);
+			FotoRecuperada fotoRecuperada = FotoRecuperada.builder()
+					.inputStream(Files.newInputStream(arquivoPath))
+					.build();
+			return fotoRecuperada;
 		} catch (Exception e) {
 			throw new StorageException("não foi possivel recuperar o arquivo", e);
 

@@ -1,6 +1,6 @@
 package com.nesrux.jmfood.infrastructure.service.storage;
 
-import java.io.InputStream;
+import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import com.nesrux.jmfood.core.storage.StorageProperties;
 import com.nesrux.jmfood.domain.service.FotoStorageService;
 import com.nesrux.jmfood.infrastructure.exception.StorageException;
 
-@Service
+//@Service
 public class S3FotoStorageService implements FotoStorageService {
 
 	@Autowired
@@ -31,11 +31,8 @@ public class S3FotoStorageService implements FotoStorageService {
 			var objectMetadata = new ObjectMetadata();
 			objectMetadata.setContentType(novaFoto.getContentType());
 
-			var putObjectRequest = new PutObjectRequest(storageProperties.getS3().getBucket(),
-					caminhoArquivo,
-					novaFoto.getInputStream(),
-					objectMetadata)
-					.withCannedAcl(CannedAccessControlList.PublicRead);
+			var putObjectRequest = new PutObjectRequest(storageProperties.getS3().getBucket(), caminhoArquivo,
+					novaFoto.getInputStream(), objectMetadata).withCannedAcl(CannedAccessControlList.PublicRead);
 
 			amazonS3.putObject(putObjectRequest);
 		} catch (Exception e) {
@@ -47,8 +44,7 @@ public class S3FotoStorageService implements FotoStorageService {
 	public void remover(String NomeFotoAntiga) {
 		String caminhoArquivo = getCaminhoArquivo(NomeFotoAntiga);
 		try {
-			var deleteObjetRequest = new DeleteObjectRequest(storageProperties.getS3().getBucket(),
-					caminhoArquivo);
+			var deleteObjetRequest = new DeleteObjectRequest(storageProperties.getS3().getBucket(), caminhoArquivo);
 
 			amazonS3.deleteObject(deleteObjetRequest);
 		} catch (Exception e) {
@@ -57,9 +53,14 @@ public class S3FotoStorageService implements FotoStorageService {
 	}
 
 	@Override
-	public InputStream recuperar(String nomeArquivo) {
-		// TODO Auto-generated method stub
-		return null;
+	public FotoRecuperada recuperar(String nomeArquivo) {
+		String caminhoArquivo = getCaminhoArquivo(nomeArquivo);
+		URL url = amazonS3.getUrl(storageProperties.getS3().getBucket(),
+				caminhoArquivo);
+		
+		return FotoRecuperada.builder()
+				.url(url.toString())
+				.build();
 	}
 
 	private String getCaminhoArquivo(String nomeArquivo) {
