@@ -1,6 +1,36 @@
 <!DOCTYPE html>
 <html>
-	<body>
-		<p> ${pedido.cliente.nome} seu pedido foi confirmado </p>
-</body>
+	<body style="font: 14px Arial,Helvetica, sans-serif ">
+		<h1 style="color: red; font-size: 26px;">Seu pedido foi confirmado!</h1>
+		
+		<p>${pedido.cliente.nome}, seu pedido foi confirmado
+			 pelo restaurante e já está sendo preparado</p>
+			 
+		<h2 style="font-size: 20px">${pedido.restaurante.nome}</h2>
+		<table width="100%" border="0", cellspacing="0" cellpadding="0"
+			style="max-width: 600px; color: #6f6f6f" >
+				
+			<tr>
+				<td style="padding: 10px 0;">2 frangão de cria</td>
+				<td style="width: 30px;"> 10 pila</td>
+			</tr>
+			<tr>
+				<td style="padding: 10px 0;">2 frangão de cria</td>
+				<td style="width: 30px;"> 10 pila</td>
+			</tr>
+			<tr>
+				<td style="padding: 10px 0;">2 frangão de cria</td>
+				<td style="width: 30px;"> 10 pila</td>
+			</tr>
+			<tr>
+				<td style="padding: 10px 0;">Frete</td>
+				<td style="width: 30px;"> 10 pila</td>
+			</tr>
+			<tr style="font-weight: bold">
+				<td style="padding: 10px 0">Total</td>
+				<td>R$ 56,12</td>				
+			</tr>
+			
+		</table>	
+	</body>
 </html>
