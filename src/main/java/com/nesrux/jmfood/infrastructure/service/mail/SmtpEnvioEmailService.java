@@ -57,7 +57,7 @@ public class SmtpEnvioEmailService implements EnvioEmailService {
 				.processTemplateIntoString(template, mensagem.getVariaveis());
 
 		} catch (Exception e) {
-			throw new EmailException("Não foi possivel montar o template do e-mail");
+			throw new EmailException("BAZINGA!!!!");
 		}
 
 	}
