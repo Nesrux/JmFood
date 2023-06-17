@@ -17,6 +17,8 @@
 - [x] Criar as migrations com o flyway
 - [x] tratar exceptions
 - [x] fazer as validações com bean validation
+- [x] envio de PDF pronto
+- [ ] implementando o envio de email
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
