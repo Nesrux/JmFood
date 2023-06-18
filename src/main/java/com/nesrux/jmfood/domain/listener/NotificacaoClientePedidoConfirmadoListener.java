@@ -1,8 +1,8 @@
 package com.nesrux.jmfood.domain.listener;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 import com.nesrux.jmfood.domain.event.PedidoConfirmadoEvent;
 import com.nesrux.jmfood.domain.model.pedido.Pedido;
@@ -14,7 +14,7 @@ public class NotificacaoClientePedidoConfirmadoListener {
 	@Autowired
 	private EnvioEmailService emailService;
 
-	@EventListener
+	@TransactionalEventListener
 	public void quandoConfirmarPedido(PedidoConfirmadoEvent event) {
 		Pedido pedido = event.getPedido();
 		var mensagem = Mensagem.builder()
