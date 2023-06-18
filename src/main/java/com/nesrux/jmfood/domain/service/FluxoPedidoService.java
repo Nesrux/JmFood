@@ -19,7 +19,7 @@ public class FluxoPedidoService {
 	public void confirmar(String codigoPedido) {
 		Pedido pedido = pedidoService.acharOuFalhar(codigoPedido);
 		pedido.confirmarPedido();
-		
+
 		repository.save(pedido);
 	}
 
@@ -34,6 +34,8 @@ public class FluxoPedidoService {
 	public void cancelar(String codigoPedido) {
 		Pedido pedido = pedidoService.acharOuFalhar(codigoPedido);
 		pedido.cancelarPedido();
+		
+		repository.save(pedido);
 	}
 
 }

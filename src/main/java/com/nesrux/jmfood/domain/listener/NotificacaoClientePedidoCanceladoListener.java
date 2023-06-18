@@ -10,23 +10,21 @@ import com.nesrux.jmfood.domain.service.EnvioEmailService;
 import com.nesrux.jmfood.domain.service.EnvioEmailService.Mensagem;
 
 @Component
-public class NotificacaoClientePedidoConfirmadoListener {
+public class NotificacaoClientePedidoCanceladoListener {
 	@Autowired
 	private EnvioEmailService emailService;
 
 	@TransactionalEventListener
-	public void quandoConfirmarPedido(PedidoCanceladoEvent event) {
+	public void quandoCancelarPedido(PedidoCanceladoEvent event) {
 		Pedido pedido = event.getPedido();
 		var mensagem = Mensagem.builder()
-				.assunto(pedido.getRestaurante()
-				.getNome() + " - pedido confirmado")
-				.corpo("pedidoConfirmado.html")
+				.assunto(pedido.getRestaurante().getNome() + " - pedido cancelado")
+				.corpo("pedidoCancelado.html")
 				.variavel("pedido", pedido)
 				.destinatario(pedido.getCliente().getEmail())
 				.build();
 
 		emailService.enviar(mensagem);
-
-	}
+}
 
 }
