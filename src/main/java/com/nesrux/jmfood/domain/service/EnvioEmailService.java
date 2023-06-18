@@ -25,8 +25,5 @@ public interface EnvioEmailService {
 		@Singular(value = "variavel")
 		private Map<String, Object> variaveis;
 	}
-	
-	enum TipoImpl{
-		MOCK, PROD, SANDBOX
-	}
+
 }

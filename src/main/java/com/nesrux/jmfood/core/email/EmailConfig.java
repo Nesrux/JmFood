@@ -9,8 +9,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import com.nesrux.jmfood.core.email.EmailProperties.TipoImpl;
 import com.nesrux.jmfood.domain.service.EnvioEmailService;
-import com.nesrux.jmfood.domain.service.EnvioEmailService.TipoImpl;
 import com.nesrux.jmfood.infrastructure.service.mail.MockEnvioEmailService;
 import com.nesrux.jmfood.infrastructure.service.mail.SandBoxEnvioEmailService;
 import com.nesrux.jmfood.infrastructure.service.mail.SmtpEnvioEmailService;
