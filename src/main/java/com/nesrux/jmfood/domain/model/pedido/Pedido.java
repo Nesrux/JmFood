@@ -23,6 +23,7 @@ import javax.persistence.PrePersist;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.domain.AbstractAggregateRoot;
 
+import com.nesrux.jmfood.domain.event.PedidoCanceladoEvent;
 import com.nesrux.jmfood.domain.event.PedidoConfirmadoEvent;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.model.endereco.Endereco;
@@ -88,12 +89,13 @@ public class Pedido extends AbstractAggregateRoot<Pedido> {
 		setStatus(StatusPedido.CONFIRMADO);
 		setDataConfirmacao(OffsetDateTime.now());
 		registerEvent(new PedidoConfirmadoEvent(this));
-	
+
 	}
 
 	public void cancelarPedido() {
 		setStatus(StatusPedido.CANCELADO);
 		setDataCancelamento(OffsetDateTime.now());
+		registerEvent(new PedidoCanceladoEvent(this));
 	}
 
 	public void entregarPedido() {
@@ -103,13 +105,13 @@ public class Pedido extends AbstractAggregateRoot<Pedido> {
 
 	private void setStatus(StatusPedido novostatus) {
 		if (getStatus().naoPodeAlterarPara(novostatus)) {
-			throw new NegocioException(String.format("Status do pedido %s não pode ser alterado de %s para %s", getCodigo(),
-					getStatus().getDescricao(), novostatus.getDescricao()));
+			throw new NegocioException(String.format("Status do pedido %s não pode ser alterado de %s para %s",
+					getCodigo(), getStatus().getDescricao(), novostatus.getDescricao()));
 
 		}
 		this.status = novostatus;
 	}
-	
+
 	@PrePersist
 	private void gerarCodigo() {
 		setCodigo(UUID.randomUUID().toString());
