@@ -21,7 +21,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.domain.AbstractAggregateRoot;
 
+import com.nesrux.jmfood.domain.event.PedidoConfirmadoEvent;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.model.endereco.Endereco;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
@@ -31,9 +33,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Data
-public class Pedido {
+public class Pedido extends AbstractAggregateRoot<Pedido> {
 	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -85,6 +87,8 @@ public class Pedido {
 	public void confirmarPedido() {
 		setStatus(StatusPedido.CONFIRMADO);
 		setDataConfirmacao(OffsetDateTime.now());
+		registerEvent(new PedidoConfirmadoEvent(this));
+	
 	}
 
 	public void cancelarPedido() {
