@@ -9,9 +9,14 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import com.nesrux.jmfood.domain.service.EnvioEmailService;
+import com.nesrux.jmfood.domain.service.EnvioEmailService.TipoImpl;
+import com.nesrux.jmfood.infrastructure.service.mail.MockEnvioEmailService;
+import com.nesrux.jmfood.infrastructure.service.mail.SmtpEnvioEmailService;
+
 @Configuration
 @PropertySource("classpath:application.properties")
-public class EmailConfig {	
+public class EmailConfig {
 
 	@Autowired
 	private EmailProperties emailProperties;
@@ -34,6 +39,16 @@ public class EmailConfig {
 		mailSender.setJavaMailProperties(props);
 
 		return mailSender;
+
+	}
+
+	@Bean
+	public EnvioEmailService mailService() {
+		if (TipoImpl.PROD.equals(emailProperties.getTipo())) {
+			return new SmtpEnvioEmailService();
+		} else {
+			return new MockEnvioEmailService();
+		}
 
 	}
 }
