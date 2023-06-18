@@ -14,9 +14,11 @@ import com.nesrux.jmfood.infrastructure.exception.EmailException;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
-public class SmtpEnvioEmailService implements EnvioEmailService {
+public class MockEnvioEmailService implements EnvioEmailService {
 	@Autowired
 	private JavaMailSender mailSender;
 
@@ -43,22 +45,23 @@ public class SmtpEnvioEmailService implements EnvioEmailService {
 			// corpo, com a opção true, significa que vai enviar HTML
 			helper.setText(corpoEmHtml, true);
 
-			mailSender.send(mimeMessage);
+			log.info("O Email foi enviado com sucesso!");
+			
 		} catch (Exception e) {
 			throw new EmailException("Não foi possivel enviar o e-mail", e);
 		}
+
 	}
 
 	private String processarTemplate(Mensagem mensagem) {
 		try {
 			Template template = freemarkerConfig.getTemplate(mensagem.getCorpo());
 
-			return FreeMarkerTemplateUtils
-				.processTemplateIntoString(template, mensagem.getVariaveis());
-
+			return FreeMarkerTemplateUtils.processTemplateIntoString(template, mensagem.getVariaveis());
 		} catch (Exception e) {
 			throw new EmailException("Não foi possivel criar o template do email");
 		}
 
 	}
+
 }
