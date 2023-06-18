@@ -27,6 +27,6 @@ public interface EnvioEmailService {
 	}
 	
 	enum TipoImpl{
-		MOCK, PROD
+		MOCK, PROD, SANDBOX
 	}
 }

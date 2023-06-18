@@ -16,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EmailProperties {
-	
+
 	@NonNull
 	private String remetente;
 	@NonNull
@@ -25,8 +25,7 @@ public class EmailProperties {
 	private Integer port;
 	@NonNull
 	private String host;
-	
-	private TipoImpl tipo;
-	
+
+	private TipoImpl impl;
 
 }

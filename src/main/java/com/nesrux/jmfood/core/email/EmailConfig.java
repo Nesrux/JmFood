@@ -12,6 +12,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import com.nesrux.jmfood.domain.service.EnvioEmailService;
 import com.nesrux.jmfood.domain.service.EnvioEmailService.TipoImpl;
 import com.nesrux.jmfood.infrastructure.service.mail.MockEnvioEmailService;
+import com.nesrux.jmfood.infrastructure.service.mail.SandBoxEnvioEmailService;
 import com.nesrux.jmfood.infrastructure.service.mail.SmtpEnvioEmailService;
 
 @Configuration
@@ -44,8 +45,10 @@ public class EmailConfig {
 
 	@Bean
 	public EnvioEmailService mailService() {
-		if (TipoImpl.PROD.equals(emailProperties.getTipo())) {
+		if (TipoImpl.PROD.equals(emailProperties.getImpl())) {
 			return new SmtpEnvioEmailService();
+		} else if (TipoImpl.SANDBOX.equals(emailProperties.getImpl())) {
+			return new SandBoxEnvioEmailService();
 		} else {
 			return new MockEnvioEmailService();
 		}
