@@ -88,7 +88,7 @@ INSERT INTO cidade (id, nome, estado_id) VALUES (32, 'São José de Ribamar', 12
 insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto, endereco_cidade_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_bairro) values (1, 'EAI Lanches', 10, 1, utc_timestamp, utc_timestamp, true, true, 1, '38400-999', 'Rua João Pinheiro', '1000', 'Centro');
 insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (2, 'Hind gurmet', 9.50, 1, utc_timestamp, utc_timestamp, true, true);
 insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (3, 'takop alnasu akara', 15, 2, utc_timestamp, utc_timestamp, true, true);
-insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (4, 'fizza now hamburgueria', 12, 3, utc_timestamp, utc_timestamp, true, true);
+insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (4, 'BORA GRILL', 12, 3, utc_timestamp, utc_timestamp, true, true);
 insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (5, 'twopay pall alimentos', 11, 4, utc_timestamp, utc_timestamp, true, true);
 insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (6, 'Bar da Maria', 6, 4, utc_timestamp, utc_timestamp, true, true);
 INSERT INTO restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) VALUES (7, 'amir maei', 10, 1, UTC_TIMESTAMP, UTC_TIMESTAMP, true, true);
