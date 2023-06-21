@@ -1,11 +1,14 @@
 package com.nesrux.jmfood.api.controller;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,15 +40,26 @@ public class FormaPagamentoController {
 	private FormaPagamentoModelAssembler assembler;
 
 	@GetMapping
-	public List<FormaPagamentoModel> listar() {
-		return assembler.toCollectionDto(service.acharTodos());
+	public ResponseEntity<List<FormaPagamentoModel>> listar() {
+		List<FormaPagamento> formasPagamento = service.acharTodos();
+
+		List<FormaPagamentoModel> formasPagamentoModel = 
+				assembler.toCollectionDto(formasPagamento);
+
+		return ResponseEntity.ok()
+				.cacheControl(CacheControl.maxAge(15, TimeUnit.SECONDS))
+				.body(formasPagamentoModel);
 	}
 
 	@GetMapping("/{formaPagamentoID}")
-	public FormaPagamentoModel buscar(@PathVariable Long formaPagamentoID) {
+	public ResponseEntity<FormaPagamentoModel> buscar(@PathVariable Long formaPagamentoID) {
 		FormaPagamento formaPagamento = service.acharOuFalhar(formaPagamentoID);
 
-		return assembler.toModel(formaPagamento);
+		FormaPagamentoModel formaPagamentoModel = assembler.toModel(formaPagamento);
+
+		return ResponseEntity.ok()
+				.cacheControl(CacheControl.maxAge(15, TimeUnit.SECONDS))
+				.body(formaPagamentoModel);
 	}
 
 	@PostMapping
