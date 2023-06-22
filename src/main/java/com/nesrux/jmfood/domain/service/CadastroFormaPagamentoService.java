@@ -1,5 +1,6 @@
 package com.nesrux.jmfood.domain.service;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -28,6 +29,10 @@ public class CadastroFormaPagamentoService {
 
 	public List<FormaPagamento> acharTodos() {
 		return repository.findAll();
+	}
+	
+	public OffsetDateTime ultimaAtualizacao() {
+		return repository.getDataUltimaAtualizacao();
 	}
 
 	@Transactional

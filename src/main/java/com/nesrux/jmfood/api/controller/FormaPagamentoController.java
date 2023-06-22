@@ -1,5 +1,6 @@
 package com.nesrux.jmfood.api.controller;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.ServletWebRequest;
+import org.springframework.web.filter.ShallowEtagHeaderFilter;
 
 import com.nesrux.jmfood.api.classconversion.assembler.FormaPagamentoModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.FormaPagamentoInputDisassembler;
@@ -40,15 +43,27 @@ public class FormaPagamentoController {
 	private FormaPagamentoModelAssembler assembler;
 
 	@GetMapping
-	public ResponseEntity<List<FormaPagamentoModel>> listar() {
+	public ResponseEntity<List<FormaPagamentoModel>> listar(ServletWebRequest request) {
+		ShallowEtagHeaderFilter.disableContentCaching(request.getRequest());
+		
+		String eTag = "0";
+		
+		OffsetDateTime dataUltimaAtualizacao = service.ultimaAtualizacao();
+		if(dataUltimaAtualizacao != null) {
+			eTag = String.valueOf(dataUltimaAtualizacao.toEpochSecond());		
+		}
+		if(request.checkNotModified(eTag)) {
+			return null;
+		}
+		
 		List<FormaPagamento> formasPagamento = service.acharTodos();
 
 		List<FormaPagamentoModel> formasPagamentoModel = 
 				assembler.toCollectionDto(formasPagamento);
 
 		return ResponseEntity.ok()
-				.cacheControl(CacheControl.maxAge(15, TimeUnit.SECONDS)
-						.cachePublic())
+				.cacheControl(CacheControl.maxAge(15, TimeUnit.SECONDS).cachePublic())
+				.eTag(eTag)
 				.body(formasPagamentoModel);
 	}
 
