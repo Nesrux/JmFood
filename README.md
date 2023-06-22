@@ -56,10 +56,9 @@ jmfood.email.impl= Tipo de imlementação, prod, mock ou sandbox
 jmfood.email.sandbox.destinatario= Email para testes sandbox
 jmfood.email.password= {senha} Colocar a senha de 16 caracteres do gmail aqui
 ```
-`Caso possua alguma duvida, o arquivo application.properties tem exemplos de configurações, clique aqui para ver`
+Caso possua alguma duvida, o arquivo application.properties tem exemplos de configurações, clique <a href="https://github.com/Nesrux/JmFood/blob/main/src/main/resources/application.properties"> aqui </a> para ver
 
-Depois em sua IDE de preferencia, de Start no arquivo, que as dependencias vão ser baixadas automaticamente e a aplicação sera iniciada!
-
+`Por fim, execute o arquivo baixado na sua IDE de preferencia para poder aproveitar tudo que o JmFood tem a oferecer`
 ## 📫 Contribuindo para o JmFood
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
 Para contribuir com JmFood, siga estas etapas:
