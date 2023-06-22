@@ -86,6 +86,15 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
       </a>
     </td>
     <td align="center">
+      <a href="#">
+        <img src="https://avatars.githubusercontent.com/u/102268237?v=4" width="100px;" alt="Foto do joao marcos no GitHub"/><br>
+        <sub>
+          <b>João Marcos</b>
+        </sub>
+      </a>
+    </td>
+    https://avatars.githubusercontent.com/u/102268237?v=4
+    <td align="center">
 </table>
 
 ## 📝 Licença
