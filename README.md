@@ -46,8 +46,17 @@ spring.datasource.password= `Senha do banco de dados`
 ```
 jmfood.storage.tipo= "recebe dois valores, Local ou S3, se for local precisará indicar o caminho da pasta"				
 jmfood.storage.local.diretorio-fotos= "caminho absoluto da pasta onde vai ser salvo os arquivos."
-
 ```
+### Configuração de Envio de email
+```
+jmfood.email.remetente=
+jmfood.email.host=
+jmfood.email.port=
+jmfood.email.impl=
+jmfood.email.sandbox.destinatario=
+jmfood.email.password= {senha} Colocar a senha de 16 caracteres do gmail aqui
+```
+
 
 Depois em sua IDE de preferencia, de Start no arquivo, que as dependencias vão ser baixadas automaticamente e a aplicação sera iniciada!
 
