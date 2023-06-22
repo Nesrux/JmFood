@@ -10,8 +10,6 @@
 
 - [x] Criar o projeto e adicionar dependencias.
 - [x] Criar classes de dominio.
-- [x] Criar as classes de repositórios.
-- [x] Criar as classes de services.
 - [x] Criar as classes de controle
 - [x] mapear as entidades com JPA
 - [x] Criar as migrations com o flyway
@@ -19,6 +17,8 @@
 - [x] fazer as validações com bean validation
 - [x] envio de PDF pronto
 - [x] implementando o envio de email
+- [x] implementação do serviço de envio de imagens
+- [x] Implementação de cache
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
