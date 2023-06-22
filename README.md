@@ -49,14 +49,14 @@ jmfood.storage.local.diretorio-fotos= "caminho absoluto da pasta onde vai ser sa
 ```
 ### Configuração de Envio de email
 ```
-jmfood.email.remetente=
-jmfood.email.host=
-jmfood.email.port=
-jmfood.email.impl=
-jmfood.email.sandbox.destinatario=
+jmfood.email.remetente= de qual email será enviado os emails da jmfood
+jmfood.email.host= host Smtp
+jmfood.email.port= porta de serviço
+jmfood.email.impl= Tipo de imlementação, prod, mock ou sandbox
+jmfood.email.sandbox.destinatario= Email para testes sandbox
 jmfood.email.password= {senha} Colocar a senha de 16 caracteres do gmail aqui
 ```
-
+`Caso possua alguma duvida, o arquivo application.properties tem exemplos de configurações, clique aqui para ver`
 
 Depois em sua IDE de preferencia, de Start no arquivo, que as dependencias vão ser baixadas automaticamente e a aplicação sera iniciada!
 
