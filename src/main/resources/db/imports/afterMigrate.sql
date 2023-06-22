@@ -97,12 +97,12 @@ INSERT INTO restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_a
 INSERT INTO restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) VALUES (10, 'lima maria lanches', 12, 3, UTC_TIMESTAMP, UTC_TIMESTAMP, true, true);
 
 
-insert into forma_pagamento (id, descricao) values (1, 'Cartão de crédito');
-insert into forma_pagamento (id, descricao) values (2, 'Cartão de débito');
-insert into forma_pagamento (id, descricao) values (3, 'Dinheiro');
-INSERT INTO forma_pagamento (id, descricao) VALUES (4, 'Cartão de Crédito');
-INSERT INTO forma_pagamento (id, descricao) VALUES (5, 'Dinheiro');
-INSERT INTO forma_pagamento (id, descricao) VALUES (6, 'Pix');
+insert into forma_pagamento (id, descricao, data_atualizacao) values (1, 'Cartão de crédito', utc_timestamp);
+insert into forma_pagamento (id, descricao, data_atualizacao) values (2, 'Cartão de débito', utc_timestamp);
+insert into forma_pagamento (id, descricao, data_atualizacao) values (3, 'Dinheiro', utc_timestamp);
+INSERT INTO forma_pagamento (id, descricao, data_atualizacao) VALUES (4, 'skin de jogo online', utc_timestamp);
+INSERT INTO forma_pagamento (id, descricao, data_atualizacao) VALUES (5, 'roubo', utc_timestamp);
+INSERT INTO forma_pagamento (id, descricao, data_atualizacao) VALUES (6, 'emprestimo', utc_timestamp);
 
 insert into permissao (id, nome, descricao) values (1, 'CONSULTAR_COZINHAS', 'Permite consultar cozinhas');
 insert into permissao (id, nome, descricao) values (2, 'EDITAR_COZINHAS', 'Permite editar cozinhas');
