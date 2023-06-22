@@ -42,7 +42,7 @@ Além das configurações que ja estão no projeto, você precisará adicionar e
 spring.datasource.username= `Username do banco de dados`
 spring.datasource.password= `Senha do banco de dados`
 ```
-### Configuração do local da pasta local
+### Configuração da pasta local
 ```
 jmfood.storage.tipo= "recebe dois valores, Local ou S3, se for local precisará indicar o caminho da pasta"				
 jmfood.storage.local.diretorio-fotos= "caminho absoluto da pasta onde vai ser salvo os arquivos."
