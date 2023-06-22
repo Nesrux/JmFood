@@ -35,6 +35,19 @@ Git:
 ```
 $ git clone https://github.com/Nesrux/JmFood.git
 ```
+## Configurações importantes para a execução do projeto
+Além das configurações que ja estão no projeto, você precisará adicionar e modificar algumas, tais como
+### Configuração do banco de dados
+```
+spring.datasource.username= `Username do banco de dados`
+spring.datasource.password= `Senha do banco de dados`
+```
+### Configuração do local da pasta local
+```
+jmfood.storage.tipo= "recebe dois valores, Local ou S3, se for local precisará indicar o caminho da pasta"				
+jmfood.storage.local.diretorio-fotos= "caminho absoluto da pasta onde vai ser salvo os arquivos."
+
+```
 
 Depois em sua IDE de preferencia, de Start no arquivo, que as dependencias vão ser baixadas automaticamente e a aplicação sera iniciada!
 
