@@ -44,6 +44,7 @@ public class FormaPagamentoController {
 
 	@GetMapping
 	public ResponseEntity<List<FormaPagamentoModel>> listar(ServletWebRequest request) {
+		//Deep Etags
 		ShallowEtagHeaderFilter.disableContentCaching(request.getRequest());
 		
 		String eTag = "0";
@@ -68,9 +69,19 @@ public class FormaPagamentoController {
 	}
 
 	@GetMapping("/{formaPagamentoID}")
-	public ResponseEntity<FormaPagamentoModel> buscar(@PathVariable Long formaPagamentoID) {
-		FormaPagamento formaPagamento = service.acharOuFalhar(formaPagamentoID);
-
+	public ResponseEntity<FormaPagamentoModel> buscar(@PathVariable Long formaPagamentoID, ServletWebRequest request) {
+		ShallowEtagHeaderFilter.disableContentCaching(request.getRequest());
+		
+		String eTag = "0";
+		
+		OffsetDateTime dataUltimaAtualizacao = service.ultimaAtualizacao(formaPagamentoID);
+		if(dataUltimaAtualizacao != null) {
+			eTag = String.valueOf(dataUltimaAtualizacao.toEpochSecond());		
+		}
+		if(request.checkNotModified(eTag)) {
+			return null;
+		}
+		FormaPagamento formaPagamento = service.acharOuFalhar(formaPagamentoID);		
 		FormaPagamentoModel formaPagamentoModel = assembler.toModel(formaPagamento);
 
 		return ResponseEntity.ok()

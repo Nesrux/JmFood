@@ -45,12 +45,14 @@ public class RestauranteController {
 	@JsonView(RestauranteView.resumo.class)
 	@GetMapping
 	public List<RestauranteModel> listarResumo() {
+		//TODO adiconar deep Etags em listagem de Restaurante
 		return restauranteAssembler.toCollectionDto(service.acharTodos());
 	}
 
 	@JsonView(RestauranteView.apenasNome.class)
 	@GetMapping(params = "projecao=apenas-nome")
 	public List<RestauranteModel> listarNomes() {
+		//TODO adiocionar deep Etag nessa listagem também 
 		return restauranteAssembler.toCollectionDto(service.acharTodos());
 	}
 

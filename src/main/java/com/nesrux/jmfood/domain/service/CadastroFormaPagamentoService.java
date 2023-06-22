@@ -30,9 +30,13 @@ public class CadastroFormaPagamentoService {
 	public List<FormaPagamento> acharTodos() {
 		return repository.findAll();
 	}
-	
+	//ultima atualização geral, para listagem
 	public OffsetDateTime ultimaAtualizacao() {
 		return repository.getDataUltimaAtualizacao();
+	}
+	
+	public OffsetDateTime ultimaAtualizacao(Long formaPagamentoId) {
+		return repository.getDataAtualizacaoById(formaPagamentoId);
 	}
 
 	@Transactional
