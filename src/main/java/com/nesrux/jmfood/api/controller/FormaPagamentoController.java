@@ -47,7 +47,8 @@ public class FormaPagamentoController {
 				assembler.toCollectionDto(formasPagamento);
 
 		return ResponseEntity.ok()
-				.cacheControl(CacheControl.maxAge(15, TimeUnit.SECONDS))
+				.cacheControl(CacheControl.maxAge(15, TimeUnit.SECONDS)
+						.cachePublic())
 				.body(formasPagamentoModel);
 	}
 
