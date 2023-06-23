@@ -70,6 +70,7 @@ public class FormaPagamentoController {
 
 	@GetMapping("/{formaPagamentoID}")
 	public ResponseEntity<FormaPagamentoModel> buscar(@PathVariable Long formaPagamentoID, ServletWebRequest request) {
+		//é esse aqui que eu trnho que fazer na consulta de restaurantes
 		ShallowEtagHeaderFilter.disableContentCaching(request.getRequest());
 		
 		String eTag = "0";

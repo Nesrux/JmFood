@@ -20,6 +20,7 @@
 		<modelmapper.version>3.0.0</modelmapper.version>
 		<jasperreports.version>6.20.5</jasperreports.version>
 		<amazonSdk.version>1.11.671</amazonSdk.version>
+		<springfox.version>2.9.2</springfox.version>
 	</properties>
 	
 	<dependencies>
@@ -107,6 +108,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox.version}</version>
 		</dependency>
   </dependencies>
 
