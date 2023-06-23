@@ -26,6 +26,8 @@ import com.nesrux.jmfood.domain.model.endereco.Cidade;
 import com.nesrux.jmfood.domain.service.CadastroCidadeService;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @Api(tags = "Cidades")
 @RestController
 @RequestMapping(value = "/cidades")
@@ -38,11 +40,13 @@ public class CidadeController {
 	@Autowired
 	private CidadeModelAssembler cidadeAssembler;
 
+	@ApiOperation("Listagem de cidades")
 	@GetMapping
 	public List<CidadeModel> listar() {
 		return cidadeAssembler.toCollectionDto(cidadeService.acharTodas());
 	}
 
+	@ApiOperation("Busca de cidades")
 	@GetMapping("{cidadeId}")
 	@ResponseStatus(HttpStatus.OK)
 	public CidadeModel buscar(@PathVariable Long cidadeId) {
@@ -51,6 +55,7 @@ public class CidadeController {
 		return cidadeAssembler.toModel(cidade);
 	}
 
+	@ApiOperation("Cadastro de cidades")
 	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
 	public CidadeModel adicionar(@RequestBody @Valid CidadeInputDto cidadeInputDto) {
@@ -63,7 +68,7 @@ public class CidadeController {
 			throw new NegocioException(e.getMessage(), e);
 		}
 	}
-
+	@ApiOperation("Atualização de cidades")
 	@PutMapping("/{cidadeId}")
 	public CidadeModel atualizar(@PathVariable Long cidadeId, @RequestBody @Valid CidadeInputDto cidadeInputDto) {
 		try {
@@ -77,7 +82,7 @@ public class CidadeController {
 			throw new NegocioException(e.getMessage(), e);
 		}
 	}
-
+	@ApiOperation("Exclusão de cidades")
 	@DeleteMapping("{cidadeId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluir(@PathVariable Long cidadeId) {
