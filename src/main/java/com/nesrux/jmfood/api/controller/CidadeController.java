@@ -27,6 +27,7 @@ import com.nesrux.jmfood.domain.service.CadastroCidadeService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @Api(tags = "Cidades")
 @RestController
@@ -49,7 +50,7 @@ public class CidadeController {
 	@ApiOperation("Busca de cidades")
 	@GetMapping("{cidadeId}")
 	@ResponseStatus(HttpStatus.OK)
-	public CidadeModel buscar(@PathVariable Long cidadeId) {
+	public CidadeModel buscar(@ApiParam(value = "Id de uma Cidade", example = "1") @PathVariable Long cidadeId) {
 		Cidade cidade = cidadeService.acharOuFalhar(cidadeId);
 
 		return cidadeAssembler.toModel(cidade);
@@ -58,7 +59,8 @@ public class CidadeController {
 	@ApiOperation("Cadastro de cidades")
 	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
-	public CidadeModel adicionar(@RequestBody @Valid CidadeInputDto cidadeInputDto) {
+	public CidadeModel adicionar(
+			@ApiParam(name = "copo", value = "Representação de uma cidade") @RequestBody @Valid CidadeInputDto cidadeInputDto) {
 		try {
 			Cidade cidade = cidadeDisassembler.toDomainObject(cidadeInputDto);
 			cidadeService.salvar(cidade);
@@ -68,9 +70,11 @@ public class CidadeController {
 			throw new NegocioException(e.getMessage(), e);
 		}
 	}
+
 	@ApiOperation("Atualização de cidades")
 	@PutMapping("/{cidadeId}")
-	public CidadeModel atualizar(@PathVariable Long cidadeId, @RequestBody @Valid CidadeInputDto cidadeInputDto) {
+	public CidadeModel atualizar(@ApiParam(value = "Id de uma Cidade", example = "1") @PathVariable Long cidadeId,
+			@ApiParam(name = "copo", value = "Representação de uma cidade") @RequestBody @Valid CidadeInputDto cidadeInputDto) {
 		try {
 			Cidade cidadeAtual = cidadeService.acharOuFalhar(cidadeId);
 
@@ -82,10 +86,11 @@ public class CidadeController {
 			throw new NegocioException(e.getMessage(), e);
 		}
 	}
+
 	@ApiOperation("Exclusão de cidades")
 	@DeleteMapping("{cidadeId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void excluir(@PathVariable Long cidadeId) {
+	public void excluir(@ApiParam(value = "Id de uma Cidade", example = "1") @PathVariable Long cidadeId) {
 		cidadeService.excluir(cidadeId);
 	}
 }
