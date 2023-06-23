@@ -25,6 +25,8 @@ import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada
 import com.nesrux.jmfood.domain.model.endereco.Cidade;
 import com.nesrux.jmfood.domain.service.CadastroCidadeService;
 
+import io.swagger.annotations.Api;
+@Api(tags = "Cidades")
 @RestController
 @RequestMapping(value = "/cidades")
 public class CidadeController {
