@@ -23,6 +23,7 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.service.ResponseMessage;
 import springfox.documentation.service.Tag;
+import springfox.documentation.service.Tags;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -47,7 +48,10 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 				.globalResponseMessage(RequestMethod.PUT, globalPutResponsemessage())
 				.additionalModels(typeResolver.resolve(ErroApi.class))
 				.apiInfo(apiInfo())
-				.tags(new Tag("Cidades", "Gerencia as cidades"));
+				.tags(
+					new Tag("Cidades", "Gerencia as cidades"),
+					new Tag ("Grupos" , "Gerencia os grupos de usuarios")
+						);
 	}
 	
 	private ApiInfo apiInfo() {
@@ -97,6 +101,13 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 				.message("Requisição recusada porque o corpo está em um formato não suportado")
 				.build()
 				
+				);
+	}
+	
+	private List<Tag> tagsApi(){
+		return Arrays.asList(
+					new Tag("Cidades", "Gerencia as cidades"),
+					new Tag ("Grupos" , "Gerencia os grupos de usuarios")
 				);
 	}
 

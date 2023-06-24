@@ -25,9 +25,16 @@ public interface CidadeControllerOpenApi {
 	public CidadeModel buscar(@ApiParam(value = "Id de uma Cidade", example = "1") Long cidadeId);
 
 	@ApiOperation("Cadastro de cidades")
+	@ApiResponses({
+		@ApiResponse(code = 201, message = "Grupo cadastrado"),
+	})
 	public CidadeModel adicionar(@ApiParam(name = "corpo", value = "Representação de uma cidade") CidadeInputDto cidadeInputDto);
 
 	@ApiOperation("Atualização de cidades")
+	@ApiResponses({
+		@ApiResponse(code = 200, message = "Grupo atualizado"),
+		@ApiResponse(code = 404, message = "Grupo não encontrado", response = ErroApi.class)
+	})
 	public CidadeModel atualizar(@ApiParam(value = "Id de uma Cidade", example = "1") Long cidadeId,
 			@ApiParam(name = "copo", value = "Representação de uma cidade") CidadeInputDto cidadeInputDto);
 
