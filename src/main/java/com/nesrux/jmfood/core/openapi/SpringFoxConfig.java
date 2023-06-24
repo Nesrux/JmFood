@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.fasterxml.classmate.TypeResolver;
+import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
+
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -30,18 +33,20 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 
 	@Bean
 	public Docket apiDocket() {
+	 var typeResolver = new TypeResolver();
+		
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.nesrux.jmfood.api"))
-				.build()
+					.apis(RequestHandlerSelectors.basePackage("com.nesrux.jmfood.api"))
+					.build()
 				.useDefaultResponseMessages(false)
 				.globalResponseMessage(RequestMethod.GET, globalGetResponsemessage())
 				.globalResponseMessage(RequestMethod.DELETE, globalDeleteResponsemessage())
 				.globalResponseMessage(RequestMethod.POST, globalPostResponsemessage())
 				.globalResponseMessage(RequestMethod.PUT, globalPutResponsemessage())
-				
-			.apiInfo(apiInfo())
-			.tags(new Tag("Cidades", "Gerencia as cidades"));
+				.additionalModels(typeResolver.resolve(ErroApi.class))
+				.apiInfo(apiInfo())
+				.tags(new Tag("Cidades", "Gerencia as cidades"));
 	}
 	
 	private ApiInfo apiInfo() {
