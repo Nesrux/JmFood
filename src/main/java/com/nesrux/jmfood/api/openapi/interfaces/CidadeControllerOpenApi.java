@@ -25,7 +25,7 @@ public interface CidadeControllerOpenApi {
 	public CidadeModel buscar(@ApiParam(value = "Id de uma Cidade", example = "1") Long cidadeId);
 
 	@ApiOperation("Cadastro de cidades")
-	public CidadeModel adicionar(@ApiParam(name = "copo", value = "Representação de uma cidade") CidadeInputDto cidadeInputDto);
+	public CidadeModel adicionar(@ApiParam(name = "corpo", value = "Representação de uma cidade") CidadeInputDto cidadeInputDto);
 
 	@ApiOperation("Atualização de cidades")
 	public CidadeModel atualizar(@ApiParam(value = "Id de uma Cidade", example = "1") Long cidadeId,
