@@ -35,7 +35,11 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 				.apis(RequestHandlerSelectors.basePackage("com.nesrux.jmfood.api"))
 				.build()
 				.useDefaultResponseMessages(false)
-				.globalResponseMessage(RequestMethod.GET, globalGetResponsemessage() )
+				.globalResponseMessage(RequestMethod.GET, globalGetResponsemessage())
+				.globalResponseMessage(RequestMethod.DELETE, globalDeleteResponsemessage())
+				.globalResponseMessage(RequestMethod.POST, globalPostResponsemessage())
+				.globalResponseMessage(RequestMethod.PUT, globalPutResponsemessage())
+				
 			.apiInfo(apiInfo())
 			.tags(new Tag("Cidades", "Gerencia as cidades"));
 	}
@@ -47,8 +51,47 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 				.description("Uma Rest Api publica de um delivery de comida")
 				.contact(new Contact("Jmfood", "https://github.com/Nesrux/JmFood", "joaomarcosdevs@gmai.com"))
 				.build();
-				
+		
 	}
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("swagger-ui.html")
+			.addResourceLocations("classpath:/META-INF/resources/");
+		
+		registry.addResourceHandler("/webjars/**")
+		.addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+	}
+
+	
+	private List<ResponseMessage> globalPutResponsemessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private List<ResponseMessage> globalPostResponsemessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private List<ResponseMessage> globalDeleteResponsemessage() {
+		return Arrays.asList(
+				new ResponseMessageBuilder()
+					.code(HttpStatus.CONFLICT.value())
+					.message("O recurso que você tentou apagar está sendo usado por outra entidade")
+					.build(),
+				new ResponseMessageBuilder()
+					.code(HttpStatus.NOT_FOUND.value())
+					.message("O recuso que você tentou apagar não existe")
+					.build(),				
+				new ResponseMessageBuilder()
+					.code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+					.message("Erro interno no servidor")
+					.build()
+				);
+	}
+
 	private List<ResponseMessage> globalGetResponsemessage(){
 		return Arrays.asList(
 				new ResponseMessageBuilder()
@@ -65,14 +108,5 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 					.build()
 	);}
 
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("swagger-ui.html")
-			.addResourceLocations("classpath:/META-INF/resources/");
-		
-		registry.addResourceHandler("/webjars/**")
-		.addResourceLocations("classpath:/META-INF/resources/webjars/");
-
-	}
 
 }
