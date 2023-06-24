@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class EstadoIDInputDto {
 
-	@ApiModelProperty(example = "1")
+	@ApiModelProperty(example = "1", required = true)
 	@NotNull
 	private Long id;
 }
