@@ -26,7 +26,7 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 * Você instalou a versão `JDK 17`
 * Você instalou a versão de `MySql 8.0`
 * Você tem uma máquina `Windows`
-* Você instalou Uma IDE em seu computador
+* Você instalou Uma `IDE` em seu computador
 * Você instalou o `Lombok` em sua IDE
 
 ## 🚀 Instalando JmFood
