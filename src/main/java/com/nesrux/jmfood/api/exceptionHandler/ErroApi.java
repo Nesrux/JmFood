@@ -38,7 +38,7 @@ public class ErroApi {
 	@ApiModelProperty(example = "2023-06-24T19:34:53.3309101Z", position = 25)
 	private OffsetDateTime timesStamp;
 
-	@ApiModelProperty(value = "Objetos ou campos que geraram o Erro", position = 30)
+	@ApiModelProperty(value = "Objetos ou campos que geraram o Erro (opcional)", position = 30)
 	private List<Object> objects;
 
 	@ApiModel("Problemas")

@@ -18,6 +18,7 @@ import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.ResponseMessageBuilder;
+import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.service.ResponseMessage;
@@ -75,9 +76,11 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 			new ResponseMessageBuilder()
 				.code(HttpStatus.BAD_REQUEST.value())
 				.message("Requisição inválida (erro do cliente)")
+				.responseModel(new ModelRef("Problema"))
 				.build(),
 			new ResponseMessageBuilder()
 				.code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+				.responseModel(new ModelRef("Problema"))
 				.message("Erro interno no servidor")
 				.build(),
 			new ResponseMessageBuilder()
@@ -97,10 +100,17 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 			new ResponseMessageBuilder()
 				.code(HttpStatus.BAD_REQUEST.value())
 				.message("Requisição inválida (erro do cliente)")
+				.responseModel(new ModelRef("Problema"))
 				.build(),
 			new ResponseMessageBuilder()
 				.code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+				.responseModel(new ModelRef("Problema"))
 				.message("Erro interno no servidor")
+				.build(),
+			new ResponseMessageBuilder()
+				.code(HttpStatus.NOT_FOUND.value())
+				.responseModel(new ModelRef("Problema"))
+				.message("A entidade que você tentou atualizar não existe")
 				.build(),
 			new ResponseMessageBuilder()
 				.code(HttpStatus.NOT_ACCEPTABLE.value())
@@ -116,14 +126,17 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 		return Arrays.asList(
 				new ResponseMessageBuilder()
 					.code(HttpStatus.CONFLICT.value())
+					.responseModel(new ModelRef("Problema"))
 					.message("O recurso que você tentou apagar está sendo usado por outra entidade")
 					.build(),
 				new ResponseMessageBuilder()
 					.code(HttpStatus.NOT_FOUND.value())
+					.responseModel(new ModelRef("Problema"))
 					.message("O recuso que você tentou apagar não existe")
 					.build(),				
 				new ResponseMessageBuilder()
 					.code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+					.responseModel(new ModelRef("Problema"))
 					.message("Erro interno no servidor")
 					.build()
 				);
@@ -133,6 +146,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 		return Arrays.asList(
 				new ResponseMessageBuilder()
 					.code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+					.responseModel(new ModelRef("Problema"))
 					.message("Erro interno do servidor")
 					.build(),
 				new ResponseMessageBuilder()
@@ -141,7 +155,13 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 					.build(),
 				new ResponseMessageBuilder()
 					.code(HttpStatus.NOT_FOUND.value())
+					.responseModel(new ModelRef("Problema"))
 					.message("O recurso que você tentou procurar não existe")
+					.build(),
+				new ResponseMessageBuilder()
+					.code(HttpStatus.BAD_REQUEST.value())
+					.responseModel(new ModelRef("Problema"))
+					.message("A requisição feita, esta inválida")
 					.build()
 				);
 	}
