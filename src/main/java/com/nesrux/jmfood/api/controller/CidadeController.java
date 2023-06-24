@@ -20,19 +20,15 @@ import com.nesrux.jmfood.api.classconversion.assembler.CidadeModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.CidadeInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.cidade.CidadeInputDto;
 import com.nesrux.jmfood.api.model.dto.output.cidade.CidadeModel;
+import com.nesrux.jmfood.api.openapi.interfaces.CidadeControllerOpenApi;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.EstadoNaoEncontradoException;
 import com.nesrux.jmfood.domain.model.endereco.Cidade;
 import com.nesrux.jmfood.domain.service.CadastroCidadeService;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-
-@Api(tags = "Cidades")
 @RestController
 @RequestMapping(value = "/cidades")
-public class CidadeController {
+public class CidadeController implements CidadeControllerOpenApi {
 
 	@Autowired
 	private CadastroCidadeService cidadeService;
@@ -41,26 +37,22 @@ public class CidadeController {
 	@Autowired
 	private CidadeModelAssembler cidadeAssembler;
 
-	@ApiOperation("Listagem de cidades")
 	@GetMapping
 	public List<CidadeModel> listar() {
 		return cidadeAssembler.toCollectionDto(cidadeService.acharTodas());
 	}
 
-	@ApiOperation("Busca de cidades")
-	@GetMapping("{cidadeId}")
+	@GetMapping("/{cidadeId}")
 	@ResponseStatus(HttpStatus.OK)
-	public CidadeModel buscar(@ApiParam(value = "Id de uma Cidade", example = "1") @PathVariable Long cidadeId) {
+	public CidadeModel buscar(@PathVariable Long cidadeId) {
 		Cidade cidade = cidadeService.acharOuFalhar(cidadeId);
 
 		return cidadeAssembler.toModel(cidade);
 	}
 
-	@ApiOperation("Cadastro de cidades")
 	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
-	public CidadeModel adicionar(
-			@ApiParam(name = "copo", value = "Representação de uma cidade") @RequestBody @Valid CidadeInputDto cidadeInputDto) {
+	public CidadeModel adicionar(@RequestBody @Valid CidadeInputDto cidadeInputDto) {
 		try {
 			Cidade cidade = cidadeDisassembler.toDomainObject(cidadeInputDto);
 			cidadeService.salvar(cidade);
@@ -71,10 +63,8 @@ public class CidadeController {
 		}
 	}
 
-	@ApiOperation("Atualização de cidades")
 	@PutMapping("/{cidadeId}")
-	public CidadeModel atualizar(@ApiParam(value = "Id de uma Cidade", example = "1") @PathVariable Long cidadeId,
-			@ApiParam(name = "copo", value = "Representação de uma cidade") @RequestBody @Valid CidadeInputDto cidadeInputDto) {
+	public CidadeModel atualizar(@PathVariable Long cidadeId, @RequestBody @Valid CidadeInputDto cidadeInputDto) {
 		try {
 			Cidade cidadeAtual = cidadeService.acharOuFalhar(cidadeId);
 
@@ -87,10 +77,9 @@ public class CidadeController {
 		}
 	}
 
-	@ApiOperation("Exclusão de cidades")
 	@DeleteMapping("{cidadeId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void excluir(@ApiParam(value = "Id de uma Cidade", example = "1") @PathVariable Long cidadeId) {
+	public void excluir(@PathVariable Long cidadeId) {
 		cidadeService.excluir(cidadeId);
 	}
 }

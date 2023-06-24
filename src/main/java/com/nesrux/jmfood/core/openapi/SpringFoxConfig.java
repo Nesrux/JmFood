@@ -84,6 +84,11 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 				.message("Erro interno no servidor")
 				.build(),
 			new ResponseMessageBuilder()
+				.code(HttpStatus.NOT_FOUND.value())
+				.responseModel(new ModelRef("Problema"))
+				.message("A entidade que você tentou atualizar não existe")
+				.build(),
+			new ResponseMessageBuilder()
 				.code(HttpStatus.NOT_ACCEPTABLE.value())
 				.message("Recurso não possui representação que poderia ser aceita pelo consumidor")
 				.build(),
@@ -106,11 +111,6 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 				.code(HttpStatus.INTERNAL_SERVER_ERROR.value())
 				.responseModel(new ModelRef("Problema"))
 				.message("Erro interno no servidor")
-				.build(),
-			new ResponseMessageBuilder()
-				.code(HttpStatus.NOT_FOUND.value())
-				.responseModel(new ModelRef("Problema"))
-				.message("A entidade que você tentou atualizar não existe")
 				.build(),
 			new ResponseMessageBuilder()
 				.code(HttpStatus.NOT_ACCEPTABLE.value())
@@ -152,16 +152,6 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 				new ResponseMessageBuilder()
 					.code(HttpStatus.NOT_ACCEPTABLE.value())
 					.message("Recurso não possui representação que poderia ser aceito pelo consumidor")
-					.build(),
-				new ResponseMessageBuilder()
-					.code(HttpStatus.NOT_FOUND.value())
-					.responseModel(new ModelRef("Problema"))
-					.message("O recurso que você tentou procurar não existe")
-					.build(),
-				new ResponseMessageBuilder()
-					.code(HttpStatus.BAD_REQUEST.value())
-					.responseModel(new ModelRef("Problema"))
-					.message("A requisição feita, esta inválida")
 					.build()
 				);
 	}
