@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.fasterxml.classmate.TypeResolver;
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
-import com.nesrux.jmfood.core.openapi.model.PageableModelApi;
+import com.nesrux.jmfood.api.openapi.controller.PageableModelApi;
 
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;

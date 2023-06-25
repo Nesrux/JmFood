@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.api.openapi.interfaces;
+package com.nesrux.jmfood.api.openapi.model;
 
 import java.util.List;
 

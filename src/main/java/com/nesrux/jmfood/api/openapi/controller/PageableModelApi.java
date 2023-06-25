@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.core.openapi.model;
+package com.nesrux.jmfood.api.openapi.controller;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-@ApiModel("paginação")
+@ApiModel("Paginação")
 @Getter
 @Setter
 public class PageableModelApi {
