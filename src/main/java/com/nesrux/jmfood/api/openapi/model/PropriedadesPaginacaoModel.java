@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.api.openapi.controller;
+package com.nesrux.jmfood.api.openapi.model;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import lombok.Setter;
 @ApiModel("Paginação")
 @Getter
 @Setter
-public class PageableModelApi {
+public class PropriedadesPaginacaoModel {
 
 	@ApiModelProperty(example = "1", value = "Número da página (começa em 0)")
 	private int page;
