@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -52,13 +53,15 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 				.globalResponseMessage(RequestMethod.POST, globalPostResponsemessage())
 				.globalResponseMessage(RequestMethod.PUT, globalPutResponsemessage())
 				.additionalModels(typeResolver.resolve(ErroApi.class))
+				.ignoredParameterTypes(ServletWebRequest.class)
 				.directModelSubstitute(Pageable.class, PropriedadesPaginacaoModel.class)
 				.alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(Page.class, CozinhaModel.class),
 						CozinhasModelOpenApi.class))
 				.apiInfo(apiInfo())
 				.tags(
 					new Tag("Cidades", "Gerencia as cidades"),
-					new Tag ("Grupos" , "Gerencia os grupos de usuarios")
+					new Tag ("Grupos" , "Gerencia os grupos de usuarios"),
+					new Tag("Cozinhas", "gerencia as cozinhas")
 						);
 	}
 	
