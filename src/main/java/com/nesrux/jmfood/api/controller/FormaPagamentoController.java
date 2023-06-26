@@ -26,12 +26,13 @@ import com.nesrux.jmfood.api.classconversion.assembler.FormaPagamentoModelAssemb
 import com.nesrux.jmfood.api.classconversion.dissasembler.FormaPagamentoInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.formaPagamento.FormaPagamentoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.formaPagamento.FormaPagamentoModel;
+import com.nesrux.jmfood.api.openapi.controller.FormaPagamentoControllerOpenApi;
 import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
 import com.nesrux.jmfood.domain.service.CadastroFormaPagamentoService;
 
 @RestController
 @RequestMapping("/formas-pagamento")
-public class FormaPagamentoController {
+public class FormaPagamentoController implements FormaPagamentoControllerOpenApi {
 
 	@Autowired
 	private CadastroFormaPagamentoService service;

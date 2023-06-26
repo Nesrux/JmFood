@@ -1,10 +1,7 @@
 package com.nesrux.jmfood.api.openapi.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.input.cozinha.CozinhaInputDto;
@@ -39,7 +36,7 @@ public interface CozinhaControllerOpenApi {
 		@ApiResponse(code = 404, message = "Cozinha não foi encontrada")
 		})
 	@ApiOperation("Atualização de cozinhas")
-	public CozinhaModel atualizar(Long cozinhaId, @RequestBody @Valid CozinhaInputDto cozinhaInputDto);
+	public CozinhaModel atualizar(Long cozinhaId, CozinhaInputDto cozinhaInputDto);
 
 	@ApiOperation("Exclusão de cozinhas")
 	@ApiResponses({ 
