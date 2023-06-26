@@ -24,12 +24,13 @@ import com.nesrux.jmfood.api.classconversion.assembler.CozinhaModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.CozinhaInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.cozinha.CozinhaInputDto;
 import com.nesrux.jmfood.api.model.dto.output.cozinha.CozinhaModel;
+import com.nesrux.jmfood.api.openapi.controller.CozinhaControllerOpenApi;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.service.CadastroCozinhaService;
 
 @RestController
 @RequestMapping("/cozinhas")
-public class CozinhaController {
+public class CozinhaController implements CozinhaControllerOpenApi {
 
 	@Autowired
 	private CadastroCozinhaService cozinhaService;

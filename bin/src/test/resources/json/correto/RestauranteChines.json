@@ -1,0 +1,7 @@
+{
+	"nome" : "Taldo chines",
+	"taxaFrete" : 25.5,
+	"cozinha": {
+		"id" : 1
+	}
+}
