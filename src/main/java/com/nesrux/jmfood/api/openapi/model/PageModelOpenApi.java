@@ -3,10 +3,12 @@ package com.nesrux.jmfood.api.openapi.model;
 import java.util.List;
 
 import io.swagger.annotations.ApiModelProperty;
-
+import lombok.Getter;
+import lombok.Setter;
+@Getter
+@Setter
 public class PageModelOpenApi<T> {
 	
-	@SuppressWarnings("unused")
 	private List<T> content;
 	
 	@ApiModelProperty(example = "10", value = "Quantidade de registros por página")
