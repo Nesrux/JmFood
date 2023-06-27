@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,14 +23,19 @@ import com.nesrux.jmfood.api.classconversion.dissasembler.RestauranteInputDisass
 import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteInputDto;
 import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteModel;
 import com.nesrux.jmfood.api.model.dto.view.RestauranteView;
+import com.nesrux.jmfood.api.openapi.model.RestauranteBasicoOpenApi;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.RestauranteNaoEncontradoException;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.service.CadastroRestauranteService;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
-@RequestMapping("/restaurantes")
+@RequestMapping(path = "/restaurantes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestauranteController {
 
 	// private SmartValidator smartValidator; // Faz micro validacoes no bean
@@ -42,6 +48,11 @@ public class RestauranteController {
 	@Autowired
 	private RestauranteInputDisassembler restauranteDissasembler;
 
+	@ApiOperation(value ="Listagem de restaurantes", response = RestauranteBasicoOpenApi.class)
+	@ApiImplicitParams({
+		@ApiImplicitParam(value = "nome da projeção de pedidos", allowableValues = "apenas-nome",
+				name = "projeção", paramType = "query", type = "string")
+	})
 	@JsonView(RestauranteView.resumo.class)
 	@GetMapping
 	public List<RestauranteModel> listarResumo() {
@@ -49,6 +60,7 @@ public class RestauranteController {
 		return restauranteAssembler.toCollectionDto(service.acharTodos());
 	}
 
+	@ApiOperation(value ="Listagem de restaurantes", hidden =  true)
 	@JsonView(RestauranteView.apenasNome.class)
 	@GetMapping(params = "projecao=apenas-nome")
 	public List<RestauranteModel> listarNomes() {
