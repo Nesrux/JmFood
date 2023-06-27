@@ -22,14 +22,14 @@ public interface CozinhaControllerOpenApi {
 	@ApiOperation("Busca de cozinhas")
 	@ApiResponses({ @ApiResponse(code = 400, message = "Id da cozinha é inválido"),
 			@ApiResponse(code = 404, message = "Cozinha não encontrada") })
-	public CozinhaModel buscar(@ApiParam(value = "Id de uma cozinha", example = "1") Long cozinhaId);
+	public CozinhaModel buscar(@ApiParam(value = "Id de uma cozinha", example = "1", required = true) Long cozinhaId);
 
 	@ApiResponses({ 
 			@ApiResponse(code = 201, message = "Cozinha cadastrada com sucesso"),
 			@ApiResponse(code = 400, message = "Cozinha não foi cadastrada", response = ErroApi.class)
 			})
 	@ApiOperation("Cadastro de cozinhas")
-	public CozinhaModel adicionar(@ApiParam(name = "corpo", value = "Representação de uma cidade") CozinhaInputDto cozinhaInputDto);
+	public CozinhaModel adicionar(@ApiParam(name = "corpo", value = "Representação de uma cidade", required = true) CozinhaInputDto cozinhaInputDto);
 
 	@ApiResponses({ 
 		@ApiResponse(code = 200, message = "Cozinha atualizada com sucesso"),
@@ -37,8 +37,8 @@ public interface CozinhaControllerOpenApi {
 		@ApiResponse(code = 404, message = "Cozinha não foi encontrada")
 		})
 	@ApiOperation("Atualização de cozinhas")
-	public CozinhaModel atualizar(@ApiParam(value = "Id de uma cozinha", example = "1") Long cozinhaId,
-			@ApiParam(name = "corpo", value = "Representação de uma cidade")CozinhaInputDto cozinhaInputDto);
+	public CozinhaModel atualizar(@ApiParam(value = "Id de uma cozinha", example = "1", required = true) Long cozinhaId,
+			@ApiParam(name = "corpo", value = "Representação de uma cidade", required = true)CozinhaInputDto cozinhaInputDto);
 
 	@ApiOperation("Exclusão de cozinhas")
 	@ApiResponses({ 
@@ -47,6 +47,6 @@ public interface CozinhaControllerOpenApi {
 		@ApiResponse(code = 400, message = "codigo da cozinha inválido"),
 		@ApiResponse(code = 409, message = "não foi possivel apagar a cozinha, pois esta dando erro de conflito")
 	})
-	public void deletar(@ApiParam(value = "Id de uma cozinha", example = "1") Long cozinhaId);
+	public void deletar(@ApiParam(value = "Id de uma cozinha", example = "1", required = true) Long cozinhaId);
 
 }
