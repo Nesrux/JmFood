@@ -21,12 +21,13 @@ import com.nesrux.jmfood.api.classconversion.assembler.EstadoModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.EstadoInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.estado.EstadoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.estado.EstadoModel;
+import com.nesrux.jmfood.api.openapi.controller.EstadoControllerOpenapi;
 import com.nesrux.jmfood.domain.model.endereco.Estado;
 import com.nesrux.jmfood.domain.service.CadastroEstadoService;
 
 @RestController
 @RequestMapping(path = "/estados", produces = MediaType.APPLICATION_JSON_VALUE)
-public class EstadoController {
+public class EstadoController implements EstadoControllerOpenapi {
 
 	@Autowired
 	private CadastroEstadoService estadoService;
