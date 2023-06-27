@@ -2,17 +2,19 @@ package com.nesrux.jmfood.api.controller.subcontrollers.pedidos;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nesrux.jmfood.api.openapi.controller.FluxoPedidoControllerOpenApi;
 import com.nesrux.jmfood.domain.service.FluxoPedidoService;
 
 @RestController
-@RequestMapping("/pedidos/{codigoPedido}")
-public class FluxoPedidoController {
+@RequestMapping(path = "/pedidos/{codigoPedido}", produces = MediaType.APPLICATION_JSON_VALUE)
+public class FluxoPedidoController implements FluxoPedidoControllerOpenApi {
 	@Autowired
 	private FluxoPedidoService fluxoService;
 
@@ -30,7 +32,7 @@ public class FluxoPedidoController {
 
 	@PutMapping("/cancelar")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void cancelarrPedido(@PathVariable String codigoPedido) {
+	public void cancelarPedido(@PathVariable String codigoPedido) {
 		fluxoService.cancelar(codigoPedido);
 	}
 }
