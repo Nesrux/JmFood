@@ -36,7 +36,7 @@ public interface CidadeControllerOpenApi {
 		@ApiResponse(code = 404, message = "Grupo não encontrado", response = ErroApi.class)
 	})
 	public CidadeModel atualizar(@ApiParam(value = "Id de uma Cidade", example = "1", required = true) Long cidadeId,
-			@ApiParam(name = "copo", value = "Representação de uma cidade", required = true) CidadeInputDto cidadeInputDto);
+			@ApiParam(name = "corpo", value = "Representação de uma cidade", required = true) CidadeInputDto cidadeInputDto);
 
 	@ApiOperation("Exclusão de cidades")
 	public void excluir(@ApiParam(value = "Id de uma Cidade", example = "1", required = true) Long cidadeId);

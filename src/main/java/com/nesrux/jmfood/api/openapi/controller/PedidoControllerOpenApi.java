@@ -16,7 +16,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-@Api(tags = "Pedido")
+@Api(tags = "Pedidos")
 public interface PedidoControllerOpenApi {
 
 	@ApiImplicitParams({
@@ -25,7 +25,7 @@ public interface PedidoControllerOpenApi {
 					example = "codigo")})
 	@ApiOperation("Listagem de pedidos")
 	@ApiResponses({
-		@ApiResponse(code = 200,message = "Pedidos encontrados com sucesso")
+		@ApiResponse(code = 200,message = "Pedidos encontrados com sucesso"	)
 	})
 	public Page<PedidoResumoModel> pesquisarPedidos(PedidoFilter filter, Pageable page);
 

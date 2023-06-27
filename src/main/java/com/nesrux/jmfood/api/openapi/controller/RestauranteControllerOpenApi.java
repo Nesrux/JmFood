@@ -2,76 +2,58 @@ package com.nesrux.jmfood.api.openapi.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-import com.fasterxml.jackson.annotation.JsonView;
 import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteInputDto;
 import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteModel;
-import com.nesrux.jmfood.api.model.dto.view.RestauranteView;
 import com.nesrux.jmfood.api.openapi.model.RestauranteBasicoOpenApi;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
+@Api(tags = "Restaurantes")
 public interface RestauranteControllerOpenApi {
 
-	@ApiOperation(value ="Listagem de restaurantes", response = RestauranteBasicoOpenApi.class)
+	@ApiOperation(value = "Listagem de restaurantes", response = RestauranteBasicoOpenApi.class)
 	@ApiImplicitParams({
-		@ApiImplicitParam(value = "nome da projeção de pedidos", allowableValues = "apenas-nome",
-				name = "projeção", paramType = "query", type = "string")
-	})
-	@JsonView(RestauranteView.resumo.class)
-	@GetMapping
+			@ApiImplicitParam(value = "nome da projeção de pedidos",
+					allowableValues = "apenas-nome",
+					name = "projeção",
+					paramType = "query",
+					type = "string") })
 	public List<RestauranteModel> listarResumo();
 
-	@ApiOperation(value ="Listagem de restaurantes", hidden =  true)
-	@JsonView(RestauranteView.apenasNome.class)
-	@GetMapping(params = "projecao=apenas-nome")
+	@ApiOperation(value = "Listagem de restaurantes", hidden = true)
 	public List<RestauranteModel> listarNomes();
-
-	@GetMapping("/{restauranteId}")
-	public RestauranteModel buscar(@PathVariable Long restauranteId);
-	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	public RestauranteModel adicionar(@RequestBody @Valid RestauranteInputDto restauranteInputDTO);
-
-	@PutMapping("/{restauranteId}")
-	public RestauranteModel atualizar(@PathVariable Long restauranteId,
-			@RequestBody @Valid RestauranteInputDto restauranteInputDto);
-
-	@PutMapping("/ativacoes")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void ativarRestaurantes(@RequestBody List<Long> restaurantes);
-
-	@DeleteMapping("/ativacoes")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void desativarRestaurantes(@RequestBody List<Long> restauranteids);
-
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PutMapping("/{restauranteId}/ativo")
-	public void ativarRestaurante(@PathVariable Long restauranteId);
-
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@DeleteMapping("/{restauranteId}/ativo")
-	public void desativarRestaurante(@PathVariable Long restauranteId);
-
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PutMapping("/{restauranteId}/fechamento")
-	public void fecharRestaurante(@PathVariable Long restauranteId);
-
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PutMapping("/{restauranteId}/abertura")
-	public void abrirRestaurante(@PathVariable Long restauranteId);
-
+	
+	@ApiOperation("Busca de um unico restaurante")
+	public RestauranteModel buscar(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId);
+	
+	@ApiOperation("Cadastro de um restaurante")
+	public RestauranteModel adicionar(@ApiParam(name = "corpo", value = "Representação de um restaurante", required = true)
+		RestauranteInputDto restauranteInputDTO);
+	
+	@ApiOperation("Atualização de um restaurante")
+	public RestauranteModel atualizar(@ApiParam(value = "Id de um restaurante", example = "1", required = true)Long restauranteId,
+			@ApiParam(name = "corpo", value = "Representação de um restaurante", required = true) RestauranteInputDto restauranteInputDto);
+	
+	@ApiOperation("Ativação de restaurantes em massa")
+	public void ativarRestaurantes(List<Long> restaurantes);
+	
+	@ApiOperation("desativação de restaurantes em massa")
+	public void desativarRestaurantes(List<Long> restauranteids);
+	
+	@ApiOperation("Ativação de um unico restaurante")
+	public void ativarRestaurante(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId);
+	
+	@ApiOperation("Desativação de um unico restaurante")
+	public void desativarRestaurante(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId);
+	
+	@ApiOperation("Fechamento de um unico restaurante")
+	public void fecharRestaurante(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId);
+	
+	@ApiOperation("Abertura de um unico restaurante")
+	public void abrirRestaurante(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId);
 
 }
