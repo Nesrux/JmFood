@@ -22,7 +22,6 @@ import com.nesrux.jmfood.api.openapi.model.PropriedadesPaginacaoModel;
 
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.ResponseMessageBuilder;
 import springfox.documentation.schema.AlternateTypeRules;
@@ -53,14 +52,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 				.globalResponseMessage(RequestMethod.DELETE, globalDeleteResponsemessage())
 				.globalResponseMessage(RequestMethod.POST, globalPostResponsemessage())
 				.globalResponseMessage(RequestMethod.PUT, globalPutResponsemessage())
-				.globalOperationParameters(Arrays.asList(
-						new ParameterBuilder()
-							.name("campos")
-							.description("Nomes das propriedades para filtrar na resposta, separados por virgula")
-							.parameterType("query")
-							.modelRef(new ModelRef("string"))
-							.build()
-						))
+				//.globalOperationParameters() PARAMETROS GLOBAIS DA API 
 				.additionalModels(typeResolver.resolve(ErroApi.class))
 				.ignoredParameterTypes(ServletWebRequest.class)
 				.directModelSubstitute(Pageable.class, PropriedadesPaginacaoModel.class)

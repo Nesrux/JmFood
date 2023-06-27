@@ -33,6 +33,9 @@ import com.nesrux.jmfood.domain.model.pedido.Pedido;
 import com.nesrux.jmfood.domain.model.user.Usuario;
 import com.nesrux.jmfood.domain.service.CadastroPedidoService;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+
 @RestController
 @RequestMapping("/pedidos")
 public class PedidoController {
@@ -48,6 +51,11 @@ public class PedidoController {
 	@Autowired
 	private PedidoInputDisasselber pedidoDisasselber;
 
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "Campos",
+				value = "Nomes das propriedades para filtrar na resposta, separados por virgula",
+				paramType = "query", example = "codigo")
+	})
 	@GetMapping
 	public Page<PedidoResumoModel> pesquisarPedidos(PedidoFilter filter, @PageableDefault(size = 10) Pageable page) {
 		page = traduzirPageable(page);
@@ -59,6 +67,11 @@ public class PedidoController {
 		return pagePedidoModel;
 	}
 
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "Campos",
+				value = "Nomes das propriedades para filtrar na resposta, separados por virgula",
+				paramType = "query", example = "codigo")
+	})
 	@GetMapping("/{codigoPedido}")
 	public PedidoModel buscar(@PathVariable String codigoPedido) {
 		Pedido pedido = service.acharOuFalhar(codigoPedido);
