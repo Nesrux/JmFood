@@ -19,6 +19,7 @@
 - [x] implementando o envio de email
 - [x] implementação do serviço de envio de imagens
 - [x] Implementação de cache
+- [ ] Documentando a API
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
