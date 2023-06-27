@@ -7,6 +7,7 @@ import com.nesrux.jmfood.api.model.dto.output.cozinha.CozinhaModel;
 import com.nesrux.jmfood.api.model.dto.output.endereco.EnderecoModel;
 import com.nesrux.jmfood.api.model.dto.view.RestauranteView;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,12 +18,15 @@ import lombok.Setter;
  */
 public class RestauranteModel {
 	@JsonView({RestauranteView.resumo.class , RestauranteView.apenasNome.class})
+	@ApiModelProperty(value = "ID do restaurante", example = "1")
 	private Long id;
 
 	@JsonView({RestauranteView.resumo.class , RestauranteView.apenasNome.class})
+	@ApiModelProperty(value = "Nome do restaurante", example = "SUper Burguer")
 	private String nome;
 
 	@JsonView(RestauranteView.resumo.class)
+	@ApiModelProperty(value = "taxa do restaurante", example = "1")
 	private BigDecimal taxaFrete;
 
 	@JsonView(RestauranteView.resumo.class)
