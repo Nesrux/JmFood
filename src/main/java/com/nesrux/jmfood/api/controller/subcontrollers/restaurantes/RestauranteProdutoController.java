@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,14 +21,15 @@ import com.nesrux.jmfood.api.classconversion.assembler.ProdutoModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.ProdutoInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.produto.ProdutoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.produto.ProdutoModel;
+import com.nesrux.jmfood.api.openapi.controller.restaurante.RestauranteProdutoControllerOpenApi;
 import com.nesrux.jmfood.domain.model.pedido.Produto;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.service.CadastroProdutoService;
 import com.nesrux.jmfood.domain.service.CadastroRestauranteService;
 
 @RestController
-@RequestMapping("restaurantes/{restauranteId}/produtos")
-public class RestauranteProdutoController {
+@RequestMapping(path = "restaurantes/{restauranteId}/produtos", produces = MediaType.APPLICATION_JSON_VALUE)
+public class RestauranteProdutoController implements RestauranteProdutoControllerOpenApi{
 	@Autowired
 	private CadastroProdutoService service;
 	@Autowired
@@ -75,14 +77,6 @@ public class RestauranteProdutoController {
 		service.salvar(produto);
 
 		return assembler.toModel(produto);
-	}
-
-	@GetMapping("/test")
-	public List<ProdutoModel> listarDiferente(@PathVariable Long restauranteId) {
-		Restaurante restaurante = restauranteService.acharOuFalhar(restauranteId);
-
-		return assembler.toCollectionDto(restaurante.getProdutos());
-
 	}
 
 }
