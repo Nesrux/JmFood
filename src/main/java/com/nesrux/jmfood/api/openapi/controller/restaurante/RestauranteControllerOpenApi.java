@@ -64,7 +64,8 @@ public interface RestauranteControllerOpenApi {
 		@ApiResponse(code = 404, message = "Não foi possivel encontrar um restaurante com o id passado"),
 		@ApiResponse(code = 400, message = "Id do restaurante é invalido")
 	})
-	public void desativarRestaurantes(List<Long> restauranteids);
+	public void desativarRestaurantes(@ApiParam(value = "Lista de Ids que serão desativados", example = "1")
+		List<Long> restauranteids);
 	
 	@ApiOperation("Ativação de um unico restaurante")
 	@ApiResponses({

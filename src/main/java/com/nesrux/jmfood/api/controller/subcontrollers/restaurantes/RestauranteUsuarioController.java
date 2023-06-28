@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,12 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nesrux.jmfood.api.classconversion.assembler.UsuarioModelAssembler;
 import com.nesrux.jmfood.api.model.dto.output.usuario.UsuarioModel;
+import com.nesrux.jmfood.api.openapi.controller.restaurante.RestauranteUsuarioControllerOpenApi;
 import com.nesrux.jmfood.domain.model.user.Usuario;
 import com.nesrux.jmfood.domain.service.CadastroRestauranteService;
 
 @RestController
-@RequestMapping("/restaurantes/{restauranteId}/usuarios")
-public class RestauranteUsuarioController {
+@RequestMapping(path = "/restaurantes/{restauranteId}/usuarios", produces = MediaType.APPLICATION_JSON_VALUE)
+public class RestauranteUsuarioController implements RestauranteUsuarioControllerOpenApi {
 	@Autowired
 	private CadastroRestauranteService restauranteService;
 	@Autowired
