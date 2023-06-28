@@ -30,6 +30,8 @@ import com.nesrux.jmfood.domain.service.CadastroRestauranteService;
 @RestController
 @RequestMapping(path = "restaurantes/{restauranteId}/produtos", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestauranteProdutoController implements RestauranteProdutoControllerOpenApi{
+	//TODO Resolver o problema de formatação da hora da serialização para a documentação do projeto
+	//na implementação da interface
 	@Autowired
 	private CadastroProdutoService service;
 	@Autowired

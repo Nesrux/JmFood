@@ -18,11 +18,11 @@ public interface RestauranteProdutoControllerOpenApi {
 	@ApiOperation("Lista todos os produtos cadastrados em um restaurante")
 	@ApiResponses({
 		@ApiResponse(code = 400, message = "o código do restaurante esta inválido", response = ErroApi.class),
-		@ApiResponse(code = 404, message = "Não possivel nanananan pois não existe Restaurante ou produto com  este código", response = ErroApi.class),
+		@ApiResponse(code = 404, message = "Não possivel Listar pois não existe Restaurante com  este código", response = ErroApi.class),
 		@ApiResponse(code = 200, message = "Listagem feita com sucesso")
 	})
 	public List<ProdutoModel> listar(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId,
-			boolean incluirInativos);
+		@ApiParam(value = "boelano", example = "true")	boolean incluirInativos);
 	
 	
 	@ApiOperation("Busca um unico Produto cadastrado em um Restaurante")
@@ -32,7 +32,7 @@ public interface RestauranteProdutoControllerOpenApi {
 		@ApiResponse(code = 200, message = "Busca feita com sucesso")
 	})
 	public ProdutoModel buscar(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId,
-			@ApiParam(name = "Corpo", value = "Representação de um Produto") Long produtoId);
+			@ApiParam(value = "Representação de um Produto", example = "1", required = true) Long produtoId);
 	
 	
 	@ApiOperation("Salva um novo produto dentro de um restaurante")
