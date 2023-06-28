@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.api.openapi.controller;
+package com.nesrux.jmfood.api.openapi.controller.pedido;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

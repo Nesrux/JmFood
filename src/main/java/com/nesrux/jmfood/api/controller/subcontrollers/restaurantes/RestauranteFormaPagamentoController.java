@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.service.CadastroRestauranteService;
 
 @RestController
-@RequestMapping("/restaurantes/{restauranteId}/formas-pagamento")
+@RequestMapping(path = "/restaurantes/{restauranteId}/formas-pagamento", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestauranteFormaPagamentoController {
 
 	@Autowired
@@ -26,7 +27,6 @@ public class RestauranteFormaPagamentoController {
 	@Autowired
 	private FormaPagamentoModelAssembler formaPagamentoAssembler;
 
-	
 	@GetMapping()
 	public List<FormaPagamentoModel> listar(@PathVariable Long restauranteId) {
 		Restaurante restaurante = service.acharOuFalhar(restauranteId);
@@ -34,16 +34,17 @@ public class RestauranteFormaPagamentoController {
 		return formaPagamentoAssembler.toCollectionDto(restaurante.getFormasPagamento());
 
 	}
+
 	@DeleteMapping("/{formaPagamentoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void desassociarFormaPagamento(@PathVariable Long restauranteId, @PathVariable Long formaPagamentoId) {
 		service.desassociarFormaPagamento(restauranteId, formaPagamentoId);
-		}
-	
+	}
+
 	@PutMapping("/{formaPagamentoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void associarFormaPagamento(@PathVariable Long restauranteId, @PathVariable Long formaPagamentoId) {
 		service.associarFormaPagamento(restauranteId, formaPagamentoId);
-		}
+	}
 
 }

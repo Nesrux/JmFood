@@ -26,7 +26,7 @@ import com.nesrux.jmfood.api.classconversion.dissasembler.PedidoInputDisasselber
 import com.nesrux.jmfood.api.model.dto.input.pedido.PedidoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoModel;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoResumoModel;
-import com.nesrux.jmfood.api.openapi.controller.PedidoControllerOpenApi;
+import com.nesrux.jmfood.api.openapi.controller.pedido.PedidoControllerOpenApi;
 import com.nesrux.jmfood.core.data.PageableTranslator;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;

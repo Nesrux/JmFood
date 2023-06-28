@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.api.openapi.controller;
+package com.nesrux.jmfood.api.openapi.controller.pedido;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

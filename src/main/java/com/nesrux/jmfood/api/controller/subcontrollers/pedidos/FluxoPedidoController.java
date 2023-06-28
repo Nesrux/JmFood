@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.api.openapi.controller.FluxoPedidoControllerOpenApi;
+import com.nesrux.jmfood.api.openapi.controller.pedido.FluxoPedidoControllerOpenApi;
 import com.nesrux.jmfood.domain.service.FluxoPedidoService;
 
 @RestController
