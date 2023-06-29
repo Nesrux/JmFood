@@ -7,8 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GrupoModel {
-	@ApiModelProperty(example = "1", required = true, position = 5)
+	@ApiModelProperty(example = "1", position = 5)
 	private Long id;
-	@ApiModelProperty(example = "Administrativo", required = true, position = 5)
+	@ApiModelProperty(example = "Administrativo", position = 5)
 	private String nome;
 }

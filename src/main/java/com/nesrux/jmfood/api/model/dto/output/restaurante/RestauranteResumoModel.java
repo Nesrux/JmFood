@@ -7,9 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RestauranteResumoModel {
-	@ApiModelProperty(example = "1", required = true, position = 5)
+	@ApiModelProperty(example = "1", position = 5)
 	private Long restauranteId;
-	@ApiModelProperty(example = "thai gurmet", required = true, position = 10)
+	@ApiModelProperty(example = "thai gurmet", position = 10)
 	private String nome;
 
 }

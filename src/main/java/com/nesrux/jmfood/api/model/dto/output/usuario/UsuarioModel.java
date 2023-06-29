@@ -7,12 +7,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UsuarioModel {
-	@ApiModelProperty(example = "1", required = true, position = 5)
+	@ApiModelProperty(example = "1", position = 5)
 	private Long id;
-	@ApiModelProperty(example = "carlos", required = true, position = 10)
+	@ApiModelProperty(example = "carlos", position = 10)
 	private String nome;
-	@ApiModelProperty(example = "carlos@jmgfood.com", required = true, position = 15)
+	@ApiModelProperty(example = "carlos@jmgfood.com", position = 15)
 	private String Email;
-	
-}
 
+}

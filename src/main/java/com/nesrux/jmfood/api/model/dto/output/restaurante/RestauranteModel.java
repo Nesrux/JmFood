@@ -26,16 +26,16 @@ public class RestauranteModel {
 	private String nome;
 
 	@JsonView(RestauranteView.resumo.class)
-	@ApiModelProperty(value = "taxa do restaurante", example = "1", position = 15)
+	@ApiModelProperty(value = "taxa do restaurante", example = "10.50", position = 15)
 	private BigDecimal taxaFrete;
 
 	@JsonView(RestauranteView.resumo.class)
 	private CozinhaModel cozinha;
 	
-	@ApiModelProperty(value = "true", example = "1", position = 20)
+	@ApiModelProperty(value = "Indica se o restaurante esta ativo", example = "true", position = 20)
 	private boolean ativo;
 
-	@ApiModelProperty(value = "false", example = "1", position = 25)
+	@ApiModelProperty(value = "Indica se o restaurante esta aberto", example = "false", position = 25)
 	private boolean aberto;
 
 	private EnderecoModel endereco;
