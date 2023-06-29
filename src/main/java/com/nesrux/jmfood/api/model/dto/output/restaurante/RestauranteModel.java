@@ -17,23 +17,27 @@ import lombok.Setter;
  * Classe de saida de dados para controller de Restaurante
  */
 public class RestauranteModel {
-	@JsonView({RestauranteView.resumo.class , RestauranteView.apenasNome.class})
-	@ApiModelProperty(value = "ID do restaurante", example = "1")
+	@JsonView({ RestauranteView.resumo.class, RestauranteView.apenasNome.class })
+	@ApiModelProperty(value = "ID do restaurante", example = "1", position = 5)
 	private Long id;
 
-	@JsonView({RestauranteView.resumo.class , RestauranteView.apenasNome.class})
-	@ApiModelProperty(value = "Nome do restaurante", example = "SUper Burguer")
+	@JsonView({ RestauranteView.resumo.class, RestauranteView.apenasNome.class })
+	@ApiModelProperty(value = "Nome do restaurante", example = "SUper Burguer", position = 10)
 	private String nome;
 
 	@JsonView(RestauranteView.resumo.class)
-	@ApiModelProperty(value = "taxa do restaurante", example = "1")
+	@ApiModelProperty(value = "taxa do restaurante", example = "1", position = 15)
 	private BigDecimal taxaFrete;
 
 	@JsonView(RestauranteView.resumo.class)
 	private CozinhaModel cozinha;
-
+	
+	@ApiModelProperty(value = "true", example = "1", position = 20)
 	private boolean ativo;
+
+	@ApiModelProperty(value = "false", example = "1", position = 25)
 	private boolean aberto;
+
 	private EnderecoModel endereco;
 
 }

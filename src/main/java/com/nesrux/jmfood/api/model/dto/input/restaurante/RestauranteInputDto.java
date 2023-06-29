@@ -10,6 +10,7 @@ import javax.validation.constraints.PositiveOrZero;
 import com.nesrux.jmfood.api.model.dto.input.endereco.EnderecoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.cozinha.CozinhaIDInputDto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,12 +18,13 @@ import lombok.Setter;
 @Setter
 
 public class RestauranteInputDto {
-
+	@ApiModelProperty(example = "EAI burguer", required = true, position = 5)
 	@NotBlank
 	private String nome;
 
 	@PositiveOrZero
 	@NotNull
+	@ApiModelProperty(example = "15.50", required = true, position = 10)
 	private BigDecimal taxaFrete;
 
 	@Valid

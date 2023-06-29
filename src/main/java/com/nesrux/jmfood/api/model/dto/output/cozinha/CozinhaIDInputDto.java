@@ -2,6 +2,7 @@ package com.nesrux.jmfood.api.model.dto.output.cozinha;
 
 import javax.validation.constraints.NotNull;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,5 +10,6 @@ import lombok.Setter;
 @Setter
 public class CozinhaIDInputDto {
 	@NotNull
+	@ApiModelProperty(example = "1", required = true, position = 5)
 	private Long id;
 }
