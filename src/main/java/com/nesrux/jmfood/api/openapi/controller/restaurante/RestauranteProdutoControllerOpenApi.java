@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@Api(tags = "Restaurantes")
+@Api(tags = "Produtos")
 public interface RestauranteProdutoControllerOpenApi {
 
 	@ApiOperation("Lista todos os produtos cadastrados em um restaurante")
@@ -32,7 +32,7 @@ public interface RestauranteProdutoControllerOpenApi {
 		@ApiResponse(code = 200, message = "Busca feita com sucesso")
 	})
 	public ProdutoModel buscar(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId,
-			@ApiParam(value = "Representação de um Produto", example = "1", required = true) Long produtoId);
+			@ApiParam(value = "Id de um produto", example = "1", required = true) Long produtoId);
 	
 	
 	@ApiOperation("Salva um novo produto dentro de um restaurante")
