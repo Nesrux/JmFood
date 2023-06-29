@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.nesrux.jmfood.api.model.dto.input.fotoProduto.FotoProdutoInput;
 import com.nesrux.jmfood.api.model.dto.output.fotoProduto.FotoProdutoModel;
@@ -25,6 +26,7 @@ public interface RestauranteFotoProdutoControllerOpenApi {
 	})
 	public FotoProdutoModel atualizarFoto(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId,
 			@ApiParam(value = "Id de um produto", example = "1", required = true) Long produtoId,
+			@ApiParam(value = "Arquivo da foto do produto (max 500kb, apenas JPEG e PNG)", required = true) MultipartFile arquivo,
 			FotoProdutoInput fotoProdutoInput)
 			throws IOException;
 	
