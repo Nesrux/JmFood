@@ -22,12 +22,13 @@ import com.nesrux.jmfood.api.model.dto.input.usuario.TrocarSenhaInput;
 import com.nesrux.jmfood.api.model.dto.input.usuario.UsuarioInput;
 import com.nesrux.jmfood.api.model.dto.input.usuario.UsuarioInputAtualizar;
 import com.nesrux.jmfood.api.model.dto.output.usuario.UsuarioModel;
+import com.nesrux.jmfood.api.openapi.controller.usuarios.UsuarioControllerOpenApi;
 import com.nesrux.jmfood.domain.model.user.Usuario;
 import com.nesrux.jmfood.domain.service.CadastroUsuarioService;
 
 @RestController
 @RequestMapping(path = "/usuarios", produces = MediaType.APPLICATION_JSON_VALUE)
-public class UsuarioController {
+public class UsuarioController implements UsuarioControllerOpenApi {
 	@Autowired
 	private CadastroUsuarioService service;
 	@Autowired
