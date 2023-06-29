@@ -11,25 +11,40 @@ import com.nesrux.jmfood.api.model.dto.output.itemPedido.ItemPedidoModel;
 import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteResumoModel;
 import com.nesrux.jmfood.api.model.dto.output.usuario.UsuarioModel;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class PedidoModel {
+	@ApiModelProperty(example = "7ab753e5-1e1f-47c2-8f9d-aa611b7138c3", position = 5)
 	private String codigo;
-
-	private BigDecimal subtotal;
-	private BigDecimal taxaFrete;
-	private BigDecimal valorTotal;
-
-	private OffsetDateTime dataCriacao;
-	private OffsetDateTime dataConfirmacao;
-	private OffsetDateTime dataCancelamento;
-	private OffsetDateTime dataEntrega;
-
-	private String statusPedido;
 	
+	@ApiModelProperty(example = "250", position = 10)
+	private BigDecimal subtotal;
+	
+	@ApiModelProperty(example = "25.75", position = 15)
+	private BigDecimal taxaFrete;
+	
+	@ApiModelProperty(example = "275.75", position = 20)
+	private BigDecimal valorTotal;
+	
+	@ApiModelProperty(example = "2023-05-25T12:00:58Z", position = 25)
+	private OffsetDateTime dataCriacao;
+	
+	@ApiModelProperty(example = "2023-05-25T12:00:58Z", position = 30)
+	private OffsetDateTime dataConfirmacao;
+
+	@ApiModelProperty(example = "2023-05-25T12:00:58Z", position = 35)
+	private OffsetDateTime dataCancelamento;
+
+	@ApiModelProperty(example = "2023-05-25T12:00:58Z", position = 40)
+	private OffsetDateTime dataEntrega;
+	
+	@ApiModelProperty(example = "ENTREGUE", position = 45)
+	private String statusPedido;
+
 	private UsuarioModel cliente;
 	private RestauranteResumoModel restaurante;
 	private EnderecoModel endereco;
