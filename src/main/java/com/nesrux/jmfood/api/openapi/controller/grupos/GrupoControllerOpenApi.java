@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.api.openapi.controller.outros;
+package com.nesrux.jmfood.api.openapi.controller.grupos;
 
 import java.util.List;
 

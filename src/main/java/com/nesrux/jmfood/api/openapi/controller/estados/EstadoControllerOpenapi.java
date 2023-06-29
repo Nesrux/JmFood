@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.api.openapi.controller.endereco;
+package com.nesrux.jmfood.api.openapi.controller.estados;
 
 import java.util.List;
 
