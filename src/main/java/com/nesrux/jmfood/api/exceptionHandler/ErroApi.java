@@ -46,10 +46,10 @@ public class ErroApi {
 	@Builder
 	public static class Object {
 
-		@ApiModelProperty(example = "taxaFrete")
+		@ApiModelProperty(example = "Nome de propriedade que deu erro")
 		private String nome;
 
-		@ApiModelProperty(example = "taxaFrete é obrigatório")
+		@ApiModelProperty(example = "Exemplo de como resolver esse erro")
 		private String userMessage;
 	}
 }
