@@ -26,19 +26,29 @@ public interface CidadeControllerOpenApi {
 
 	@ApiOperation("Cadastro de cidades")
 	@ApiResponses({
-		@ApiResponse(code = 201, message = "Grupo cadastrado"),
+		@ApiResponse(code = 201, message = "Cidade cadastrada"),
+		@ApiResponse(code = 400, message = "Representação de cidade esta invalida", response = ErroApi.class),
+
 	})
 	public CidadeModel adicionar(@ApiParam(name = "corpo", value = "Representação de uma cidade", required = true) CidadeInputDto cidadeInputDto);
 
 	@ApiOperation("Atualização de cidades")
 	@ApiResponses({
-		@ApiResponse(code = 200, message = "Grupo atualizado"),
-		@ApiResponse(code = 404, message = "Grupo não encontrado", response = ErroApi.class)
+		@ApiResponse(code = 200, message = "Cidade Atualizada com sucesso"),
+		@ApiResponse(code = 404, message = "cidade não encontrado", response = ErroApi.class),
+		@ApiResponse(code = 400, message = "Id de cidade ou representação de cidade estão invalidos", response = ErroApi.class),
+
 	})
 	public CidadeModel atualizar(@ApiParam(value = "Id de uma Cidade", example = "1", required = true) Long cidadeId,
 			@ApiParam(name = "corpo", value = "Representação de uma cidade", required = true) CidadeInputDto cidadeInputDto);
 
 	@ApiOperation("Exclusão de cidades")
+	@ApiResponses({ 
+		@ApiResponse(code = 400, message = "ID da cidade é inválido", response = ErroApi.class),
+		@ApiResponse(code = 404, message = "Cidade não encontrada", response = ErroApi.class), 
+		@ApiResponse(code = 204, message = "Cidade removida com sucesso")
+	})
+
 	public void excluir(@ApiParam(value = "Id de uma Cidade", example = "1", required = true) Long cidadeId);
 
 }
