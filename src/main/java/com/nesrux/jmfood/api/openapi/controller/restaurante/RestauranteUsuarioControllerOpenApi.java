@@ -2,6 +2,7 @@ package com.nesrux.jmfood.api.openapi.controller.restaurante;
 
 import java.util.List;
 
+import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.output.usuario.UsuarioModel;
 
 import io.swagger.annotations.Api;
@@ -14,8 +15,8 @@ public interface RestauranteUsuarioControllerOpenApi {
 	
 	@ApiOperation("Listagem de funcionarios")
 	@ApiResponses({
-		@ApiResponse(code = 400, message = "Id de Restaurante esta inválido"),
-		@ApiResponse(code = 404, message = "Não existe Restaurante com o Id fornecido"),
+		@ApiResponse(code = 400, message = "Id de Restaurante esta inválido", response = ErroApi.class),
+		@ApiResponse(code = 404, message = "Não existe Restaurante com o Id fornecido", response = ErroApi.class),
 		@ApiResponse(code = 200, message = "Listagem feita com sucesso")
 	})
 	public List<UsuarioModel> listarFuncionariosRestaurante(@ApiParam(value = "Id de um restaurante", example = "1", required = true) 
@@ -23,8 +24,8 @@ public interface RestauranteUsuarioControllerOpenApi {
 	
 	@ApiOperation("Associação de funcionarios")
 	@ApiResponses({
-		@ApiResponse(code = 400, message = "Id de restaurante ou de usuario esta invalido"),
-		@ApiResponse(code = 404, message = "Id de restaurante ou de usuario não existem"),
+		@ApiResponse(code = 400, message = "Id de restaurante ou de usuario esta invalido", response = ErroApi.class),
+		@ApiResponse(code = 404, message = "Id de restaurante ou de usuario não existem", response = ErroApi.class),
 		@ApiResponse(code = 204, message = "Associação feita com sucesso")
 	})
 	public void associarFuncionarios(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId,
@@ -32,8 +33,8 @@ public interface RestauranteUsuarioControllerOpenApi {
 	
 	@ApiOperation("Desassociação de funcionarios")
 	@ApiResponses({
-		@ApiResponse(code = 400, message = "Id de restaurante ou de usuario esta invalido"),
-		@ApiResponse(code = 404, message = "Id de restaurante ou de usuario não existem"),
+		@ApiResponse(code = 400, message = "Id de restaurante ou de usuario esta invalido", response = ErroApi.class),
+		@ApiResponse(code = 404, message = "Id de restaurante ou de usuario não existem", response = ErroApi.class),
 		@ApiResponse(code = 204, message = "Desassociação feita com sucesso")
 	})
 	public void desassociarFuncionarios(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId,
