@@ -56,7 +56,7 @@
     	<dependency>
     		<groupId>org.projectlombok</groupId>
     		<artifactId>lombok</artifactId>
-    		<!--<version>1.18.22</version> para fazer os testes por linha de comando utilizando o ./mvnw verify-->	
+    		<!--<version>1.18.22</version>para fazer os testes por linha de comando utilizando o ./mvnw verify-->	
     	</dependency>
    		<dependency>
     		<groupId>org.flywaydb</groupId>
@@ -129,8 +129,7 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-bean-validators</artifactId>
 			<version>${springfox.version}</version>
-		</dependency>
-		
+		</dependency>		
   </dependencies>
 
 	<build>
