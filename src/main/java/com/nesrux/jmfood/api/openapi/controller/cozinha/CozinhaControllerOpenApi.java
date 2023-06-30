@@ -20,8 +20,11 @@ public interface CozinhaControllerOpenApi {
 	public Page<CozinhaModel> listar(Pageable page);
 
 	@ApiOperation("Busca de cozinhas")
-	@ApiResponses({ @ApiResponse(code = 400, message = "Id da cozinha é inválido"),
-			@ApiResponse(code = 404, message = "Cozinha não encontrada") })
+	@ApiResponses({ 
+			@ApiResponse(code = 400, message = "Id da cozinha é inválido", response = ErroApi.class),
+			@ApiResponse(code = 404, message = "Id de cozinha não Existe", response = ErroApi.class),
+			@ApiResponse(code = 200, message = "Cozinha encontrada com sucesso")
+	})
 	public CozinhaModel buscar(@ApiParam(value = "Id de uma cozinha", example = "1", required = true) Long cozinhaId);
 
 	@ApiResponses({ 
@@ -34,7 +37,7 @@ public interface CozinhaControllerOpenApi {
 	@ApiResponses({ 
 		@ApiResponse(code = 200, message = "Cozinha atualizada com sucesso"),
 		@ApiResponse(code = 400, message = "Cozinha não foi atualizada", response = ErroApi.class),
-		@ApiResponse(code = 404, message = "Cozinha não foi encontrada")
+		@ApiResponse(code = 404, message = "Id de cozinha não existe", response = ErroApi.class)
 		})
 	@ApiOperation("Atualização de cozinhas")
 	public CozinhaModel atualizar(@ApiParam(value = "Id de uma cozinha", example = "1", required = true) Long cozinhaId,
@@ -44,8 +47,8 @@ public interface CozinhaControllerOpenApi {
 	@ApiResponses({ 
 		@ApiResponse(code = 203, message = "Cozinha apagada com sucesso"),
 		@ApiResponse(code = 404, message = "Cozinha não foi encontrada", response = ErroApi.class),
-		@ApiResponse(code = 400, message = "codigo da cozinha inválido"),
-		@ApiResponse(code = 409, message = "não foi possivel apagar a cozinha, pois esta dando erro de conflito")
+		@ApiResponse(code = 400, message = "codigo da cozinha inválido", response = ErroApi.class),
+		@ApiResponse(code = 409, message = "não foi possivel apagar a cozinha, pois esta dando erro de conflito", response = ErroApi.class)
 	})
 	public void deletar(@ApiParam(value = "Id de uma cozinha", example = "1", required = true) Long cozinhaId);
 
