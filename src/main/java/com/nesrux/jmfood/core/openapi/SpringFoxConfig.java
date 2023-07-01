@@ -18,9 +18,9 @@ import com.fasterxml.classmate.TypeResolver;
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.output.cozinha.CozinhaModel;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoResumoModel;
-import com.nesrux.jmfood.api.openapi.model.CozinhasModelOpenApi;
-import com.nesrux.jmfood.api.openapi.model.PedidosModelOpenApi;
-import com.nesrux.jmfood.api.openapi.model.PropriedadesPaginacaoModel;
+import com.nesrux.jmfood.api.springFox.model.CozinhasModelOpenApi;
+import com.nesrux.jmfood.api.springFox.model.PedidosModelOpenApi;
+import com.nesrux.jmfood.api.springFox.model.PropriedadesPaginacaoModel;
 
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;

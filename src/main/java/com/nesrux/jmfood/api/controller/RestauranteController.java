@@ -23,7 +23,7 @@ import com.nesrux.jmfood.api.classconversion.dissasembler.RestauranteInputDisass
 import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteInputDto;
 import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteModel;
 import com.nesrux.jmfood.api.model.dto.view.RestauranteView;
-import com.nesrux.jmfood.api.openapi.controller.restaurante.RestauranteControllerOpenApi;
+import com.nesrux.jmfood.api.springFox.controller.restaurante.RestauranteControllerOpenApi;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.RestauranteNaoEncontradoException;

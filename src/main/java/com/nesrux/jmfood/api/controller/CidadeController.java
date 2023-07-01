@@ -21,7 +21,7 @@ import com.nesrux.jmfood.api.classconversion.assembler.CidadeModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.CidadeInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.cidade.CidadeInputDto;
 import com.nesrux.jmfood.api.model.dto.output.cidade.CidadeModel;
-import com.nesrux.jmfood.api.openapi.controller.cidades.CidadeControllerOpenApi;
+import com.nesrux.jmfood.api.springFox.controller.cidades.CidadeControllerOpenApi;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.EstadoNaoEncontradoException;
 import com.nesrux.jmfood.domain.model.endereco.Cidade;
