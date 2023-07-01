@@ -9,6 +9,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import lombok.experimental.UtilityClass;
+@UtilityClass
 public class UriUtils {
 	
 	public static void addUriResponseHandler(Object resourceId) {
