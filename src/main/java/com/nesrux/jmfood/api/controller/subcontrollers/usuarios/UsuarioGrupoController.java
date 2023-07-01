@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nesrux.jmfood.api.classconversion.assembler.GrupoModelAssembler;
 import com.nesrux.jmfood.api.model.dto.output.grupo.GrupoModel;
-import com.nesrux.jmfood.api.springFox.controller.usuarios.UsuarioGrupoControllerOpenApi;
+import com.nesrux.jmfood.api.openapi.controller.usuarios.UsuarioGrupoControllerOpenApi;
 import com.nesrux.jmfood.domain.model.user.Grupo;
 import com.nesrux.jmfood.domain.service.CadastroUsuarioService;
 

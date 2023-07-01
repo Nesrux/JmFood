@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nesrux.jmfood.api.classconversion.assembler.UsuarioModelAssembler;
 import com.nesrux.jmfood.api.model.dto.output.usuario.UsuarioModel;
-import com.nesrux.jmfood.api.springFox.controller.restaurante.RestauranteUsuarioControllerOpenApi;
+import com.nesrux.jmfood.api.openapi.controller.restaurante.RestauranteUsuarioControllerOpenApi;
 import com.nesrux.jmfood.domain.model.user.Usuario;
 import com.nesrux.jmfood.domain.service.CadastroRestauranteService;
 

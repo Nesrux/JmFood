@@ -26,7 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.nesrux.jmfood.api.classconversion.assembler.FotoProdutoModelAssembler;
 import com.nesrux.jmfood.api.model.dto.input.fotoProduto.FotoProdutoInput;
 import com.nesrux.jmfood.api.model.dto.output.fotoProduto.FotoProdutoModel;
-import com.nesrux.jmfood.api.springFox.controller.produtos.RestauranteFotoProdutoControllerOpenApi;
+import com.nesrux.jmfood.api.openapi.controller.produtos.RestauranteFotoProdutoControllerOpenApi;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 import com.nesrux.jmfood.domain.model.pedido.FotoProduto;
 import com.nesrux.jmfood.domain.model.pedido.Produto;

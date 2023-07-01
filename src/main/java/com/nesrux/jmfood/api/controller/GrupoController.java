@@ -21,7 +21,7 @@ import com.nesrux.jmfood.api.classconversion.assembler.GrupoModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.GrupoInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.grupo.GrupoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.grupo.GrupoModel;
-import com.nesrux.jmfood.api.springFox.controller.grupos.GrupoControllerOpenApi;
+import com.nesrux.jmfood.api.openapi.controller.grupos.GrupoControllerOpenApi;
 import com.nesrux.jmfood.domain.model.user.Grupo;
 import com.nesrux.jmfood.domain.service.CadastroGrupoService;
 

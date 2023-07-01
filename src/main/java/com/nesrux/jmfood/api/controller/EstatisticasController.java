@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.api.springFox.controller.estatisticas.EstatisticasControllerOpenApi;
+import com.nesrux.jmfood.api.openapi.controller.estatisticas.EstatisticasControllerOpenApi;
 import com.nesrux.jmfood.domain.filter.VendaDiariaFilter;
 import com.nesrux.jmfood.domain.model.dto.VendaDiaria;
 import com.nesrux.jmfood.domain.service.VendaQueryService;
