@@ -1,6 +1,6 @@
 package com.nesrux.jmfood.api.openapi.controller.restaurante;
 
-import java.util.List;
+import org.springframework.hateoas.CollectionModel;
 
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.output.usuario.UsuarioModel;
@@ -19,7 +19,7 @@ public interface RestauranteUsuarioControllerOpenApi {
 		@ApiResponse(code = 404, message = "Não existe Restaurante com o Id fornecido", response = ErroApi.class),
 		@ApiResponse(code = 200, message = "Listagem feita com sucesso")
 	})
-	public List<UsuarioModel> listarFuncionariosRestaurante(@ApiParam(value = "Id de um restaurante", example = "1", required = true) 
+	public CollectionModel<UsuarioModel> listarFuncionariosRestaurante(@ApiParam(value = "Id de um restaurante", example = "1", required = true) 
 		Long restauranteId);
 	
 	@ApiOperation("Associação de funcionarios")

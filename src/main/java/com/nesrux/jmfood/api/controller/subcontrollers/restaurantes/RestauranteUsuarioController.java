@@ -3,6 +3,7 @@ package com.nesrux.jmfood.api.controller.subcontrollers.restaurantes;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,7 +30,7 @@ public class RestauranteUsuarioController implements RestauranteUsuarioControlle
 
 	@Override
 	@GetMapping
-	public List<UsuarioModel> listarFuncionariosRestaurante(@PathVariable Long restauranteId) {
+	public CollectionModel<UsuarioModel> listarFuncionariosRestaurante(@PathVariable Long restauranteId) {
 		List<Usuario> usuarios = restauranteService.listarUsuarios(restauranteId);
 
 		return usuarioAssembler.toCollectionModel(usuarios);
