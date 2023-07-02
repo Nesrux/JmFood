@@ -1,6 +1,6 @@
 package com.nesrux.jmfood.api.openapi.controller.cidades;
 
-import java.util.List;
+import org.springframework.hateoas.CollectionModel;
 
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.input.cidade.CidadeInputDto;
@@ -16,7 +16,7 @@ import io.swagger.annotations.ApiResponses;
 public interface CidadeControllerOpenApi {
 
 	@ApiOperation("Listagem de cidades")
-	public List<CidadeModel> listar();
+	public CollectionModel<CidadeModel> listar();
 
 	@ApiOperation("Busca de cidades")
 	@ApiResponses({ 

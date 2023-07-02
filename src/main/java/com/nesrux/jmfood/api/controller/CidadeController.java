@@ -8,6 +8,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -42,11 +43,28 @@ public class CidadeController implements CidadeControllerOpenApi {
 	@Autowired
 	private CidadeModelAssembler cidadeAssembler;
 
+	@Override
 	@GetMapping
-	public List<CidadeModel> listar() {
-		return cidadeAssembler.toCollectionDto(cidadeService.acharTodas());
+	public CollectionModel<CidadeModel> listar() {
+		List<Cidade> cidadeList = cidadeService.acharTodas();
+		List<CidadeModel> collectionModelCidades = cidadeAssembler.toCollectionDto(cidadeList);
+
+		collectionModelCidades.forEach((cidadeModel) -> {
+			cidadeModel.add(linkTo(methodOn(CidadeController.class).buscar(cidadeModel.getId())).withSelfRel());
+
+			cidadeModel.add(linkTo(methodOn(CidadeController.class).listar()).withRel("Cidades"));
+
+			cidadeModel.getEstado().add(
+					linkTo(methodOn(EstadoController.class).buscar(cidadeModel.getEstado().getId())).withRel("Estado"));
+
+		});
+		var collectionModel = new CollectionModel<>(collectionModelCidades);
+		collectionModel.add(linkTo(methodOn(CidadeController.class).listar()).withSelfRel());
+
+		return collectionModel;
 	}
 
+	@Override
 	@GetMapping("/{cidadeId}")
 	@ResponseStatus(HttpStatus.OK)
 	public CidadeModel buscar(@PathVariable Long cidadeId) {
@@ -54,24 +72,20 @@ public class CidadeController implements CidadeControllerOpenApi {
 
 		CidadeModel cidadeModel = cidadeAssembler.toModel(cidade);
 
-		Link link = linkTo(methodOn(CidadeController.class)
-				.buscar(cidadeModel.getId()))
-				.withSelfRel();
+		Link link = linkTo(methodOn(CidadeController.class).buscar(cidadeModel.getId())).withSelfRel();
 		cidadeModel.add(link);
 
-		Link linkListagemCidade = linkTo(methodOn(CidadeController.class)
-				.listar())
-				.withRel("Cidades");
+		Link linkListagemCidade = linkTo(methodOn(CidadeController.class).listar()).withRel("Cidades");
 		cidadeModel.add(linkListagemCidade);
 
-		Link linkBuscaEstado = linkTo(methodOn(EstadoController.class)
-				.buscar(cidadeModel.getEstado().getId()))
+		Link linkBuscaEstado = linkTo(methodOn(EstadoController.class).buscar(cidadeModel.getEstado().getId()))
 				.withRel("Estado");
 		cidadeModel.getEstado().add(linkBuscaEstado);
-		
+
 		return cidadeModel;
 	}
 
+	@Override
 	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
 	public CidadeModel adicionar(@RequestBody @Valid CidadeInputDto cidadeInputDto) {
@@ -85,6 +99,7 @@ public class CidadeController implements CidadeControllerOpenApi {
 		}
 	}
 
+	@Override
 	@PutMapping("/{cidadeId}")
 	public CidadeModel atualizar(@PathVariable Long cidadeId, @RequestBody @Valid CidadeInputDto cidadeInputDto) {
 		try {
@@ -99,6 +114,7 @@ public class CidadeController implements CidadeControllerOpenApi {
 		}
 	}
 
+	@Override
 	@DeleteMapping("{cidadeId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluir(@PathVariable Long cidadeId) {
