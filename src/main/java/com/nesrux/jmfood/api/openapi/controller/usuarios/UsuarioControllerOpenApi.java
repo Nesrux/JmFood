@@ -1,6 +1,6 @@
 package com.nesrux.jmfood.api.openapi.controller.usuarios;
 
-import java.util.List;
+import org.springframework.hateoas.CollectionModel;
 
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.input.usuario.TrocarSenhaInput;
@@ -19,7 +19,7 @@ public interface UsuarioControllerOpenApi {
 
 	@ApiOperation("Listagem de usuarios")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Listagem feita com sucesso") })
-	public List<UsuarioModel> listar();
+	public CollectionModel<UsuarioModel> listar();
 
 	@ApiOperation("Busca de um unico usuario")
 	@ApiResponses({ @ApiResponse(code = 400, message = "Codigo de usuario inválido", response = ErroApi.class),

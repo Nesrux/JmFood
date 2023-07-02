@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,17 +37,23 @@ public class UsuarioController implements UsuarioControllerOpenApi {
 	@Autowired
 	private UsuarioModelAssembler assembler;
 
+	@Override
 	@GetMapping
-	public List<UsuarioModel> listar() {
-		return assembler.toCollectionDto(service.acharTodos());
+	public CollectionModel<UsuarioModel> listar() {
+		List<Usuario> usuariosList = service.acharTodos();
+
+		return assembler.toCollectionModel(usuariosList);
+
 	}
 
+	@Override
 	@GetMapping("{usuarioId}")
 	public UsuarioModel buscar(@PathVariable Long usuarioId) {
 		Usuario usuario = service.acharOuFalhar(usuarioId);
 		return assembler.toModel(usuario);
 	}
 
+	@Override
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public UsuarioModel salvar(@RequestBody @Valid UsuarioInput userInput) {
@@ -58,6 +65,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
 		return retornoUser;
 	}
 
+	@Override
 	@PutMapping("/{usuarioId}")
 	public UsuarioModel atualizar(@PathVariable Long usuarioId,
 			@RequestBody @Valid UsuarioInputAtualizar usuarioInput) {
@@ -70,6 +78,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
 		return assembler.toModel(usuario);
 	}
 
+	@Override
 	@PutMapping("/{usuarioId}/senha")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void atualizarSenha(@PathVariable Long usuarioId, @RequestBody @Valid TrocarSenhaInput senhainput) {

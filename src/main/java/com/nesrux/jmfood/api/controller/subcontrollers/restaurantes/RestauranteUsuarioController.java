@@ -27,19 +27,22 @@ public class RestauranteUsuarioController implements RestauranteUsuarioControlle
 	@Autowired
 	private UsuarioModelAssembler usuarioAssembler;
 
+	@Override
 	@GetMapping
 	public List<UsuarioModel> listarFuncionariosRestaurante(@PathVariable Long restauranteId) {
 		List<Usuario> usuarios = restauranteService.listarUsuarios(restauranteId);
 
-		return usuarioAssembler.toCollectionDto(usuarios);
+		return usuarioAssembler.toCollectionModel(usuarios);
 	}
 
+	@Override
 	@PutMapping("/{usuarioId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void associarFuncionarios(@PathVariable Long restauranteId, @PathVariable Long usuarioId) {
 		restauranteService.associarFuncionario(restauranteId, usuarioId);
 	}
 
+	@Override
 	@DeleteMapping("/{usuarioId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void desassociarFuncionarios(@PathVariable Long restauranteId, @PathVariable Long usuarioId) {

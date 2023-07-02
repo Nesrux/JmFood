@@ -43,10 +43,8 @@ public class CidadeController implements CidadeControllerOpenApi {
 	@GetMapping
 	public CollectionModel<CidadeModel> listar() {
 		List<Cidade> cidadeList = cidadeService.acharTodas();
-		 cidadeAssembler.toCollectionModel(cidadeList);
-
-
-		return  cidadeAssembler.toCollectionModel(cidadeList);
+		
+		return cidadeAssembler.toCollectionModel(cidadeList);
 	}
 
 	@Override
