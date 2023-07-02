@@ -35,7 +35,7 @@ public class UsuarioModelAssembler extends RepresentationModelAssemblerSupport<U
 		//Adiciona link para a URI /usuaios/{userId}/grupos
 		usuarioModel.add(linkTo(methodOn(UsuarioGrupoController.class).listarGruposUsuario(usuarioModel.getId())).withRel("grupos-usuarios"));
 		
-		return mapper.map(usuario, UsuarioModel.class);
+		return usuarioModel;
 	}
 
 	@Override
