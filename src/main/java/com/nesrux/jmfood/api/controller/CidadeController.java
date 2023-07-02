@@ -1,15 +1,11 @@
 package com.nesrux.jmfood.api.controller;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,21 +43,10 @@ public class CidadeController implements CidadeControllerOpenApi {
 	@GetMapping
 	public CollectionModel<CidadeModel> listar() {
 		List<Cidade> cidadeList = cidadeService.acharTodas();
-		List<CidadeModel> collectionModelCidades = cidadeAssembler.toCollectionDto(cidadeList);
+		 cidadeAssembler.toCollectionModel(cidadeList);
 
-		collectionModelCidades.forEach((cidadeModel) -> {
-			cidadeModel.add(linkTo(methodOn(CidadeController.class).buscar(cidadeModel.getId())).withSelfRel());
 
-			cidadeModel.add(linkTo(methodOn(CidadeController.class).listar()).withRel("Cidades"));
-
-			cidadeModel.getEstado().add(
-					linkTo(methodOn(EstadoController.class).buscar(cidadeModel.getEstado().getId())).withRel("Estado"));
-
-		});
-		var collectionModel = new CollectionModel<>(collectionModelCidades);
-		collectionModel.add(linkTo(methodOn(CidadeController.class).listar()).withSelfRel());
-
-		return collectionModel;
+		return  cidadeAssembler.toCollectionModel(cidadeList);
 	}
 
 	@Override
@@ -71,16 +56,6 @@ public class CidadeController implements CidadeControllerOpenApi {
 		Cidade cidade = cidadeService.acharOuFalhar(cidadeId);
 
 		CidadeModel cidadeModel = cidadeAssembler.toModel(cidade);
-
-		Link link = linkTo(methodOn(CidadeController.class).buscar(cidadeModel.getId())).withSelfRel();
-		cidadeModel.add(link);
-
-		Link linkListagemCidade = linkTo(methodOn(CidadeController.class).listar()).withRel("Cidades");
-		cidadeModel.add(linkListagemCidade);
-
-		Link linkBuscaEstado = linkTo(methodOn(EstadoController.class).buscar(cidadeModel.getEstado().getId()))
-				.withRel("Estado");
-		cidadeModel.getEstado().add(linkBuscaEstado);
 
 		return cidadeModel;
 	}
