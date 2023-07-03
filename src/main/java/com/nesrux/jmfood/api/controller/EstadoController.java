@@ -1,10 +1,9 @@
 package com.nesrux.jmfood.api.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,33 +37,37 @@ public class EstadoController implements EstadoControllerOpenapi {
 	@Autowired
 	private EstadoModelAssembler outputAssembler;
 
+	@Override
 	@GetMapping
-	public List<EstadoModel> listar() {
-		return outputAssembler.toCollectionDto(estadoService.acharTodos());
+	public CollectionModel<EstadoModel> listar() {
+		return outputAssembler.toCollectionModel(estadoService.acharTodos());
 	}
 
+	@Override
 	@GetMapping("/{estadoId}")
 	public EstadoModel buscar(@PathVariable Long estadoId) {
 		return outputAssembler.toModel(estadoService.acharOuFalhar(estadoId));
 	}
 
+	@Override
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public EstadoModel adicionar(@RequestBody @Valid EstadoInputDto estadoDto) {
 		Estado estado = inputDisassembler.toDomainObject(estadoDto);
 		estadoService.salvar(estado);
-		
+
 		EstadoModel outputDto = outputAssembler.toModel(estado);
-		
+
 		return outputDto;
 
 	}
 
+	@Override
 	@PutMapping("{estadoId}")
 	public Estado atualizar(@PathVariable Long estadoId, @RequestBody @Valid EstadoInputDto estado) {
 		Estado estadoAtual = estadoService.acharOuFalhar(estadoId);
 
-		//BeanUtils.copyProperties(estado, estadoAtual, "id");
+		// BeanUtils.copyProperties(estado, estadoAtual, "id");
 		inputDisassembler.copyTodomainObject(estado, estadoAtual);
 
 		Estado estadoSalvo = estadoService.salvar(estadoAtual);
@@ -73,6 +76,7 @@ public class EstadoController implements EstadoControllerOpenapi {
 
 	}
 
+	@Override
 	@DeleteMapping("{estadoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletar(@PathVariable Long estadoId) {

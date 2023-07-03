@@ -1,6 +1,6 @@
 package com.nesrux.jmfood.api.openapi.controller.estados;
 
-import java.util.List;
+import org.springframework.hateoas.CollectionModel;
 
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.input.estado.EstadoInputDto;
@@ -19,7 +19,7 @@ public interface EstadoControllerOpenapi {
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "Listagem do estado feito com sucesso" )
 	})
-	List<EstadoModel> listar();
+	CollectionModel<EstadoModel> listar();
 
 	@ApiOperation("Busca de um unico estado")
 	@ApiResponses({
