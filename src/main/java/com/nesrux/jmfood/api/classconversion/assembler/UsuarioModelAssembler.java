@@ -25,12 +25,15 @@ public class UsuarioModelAssembler extends RepresentationModelAssemblerSupport<U
 
 	@Override
 	public UsuarioModel toModel(Usuario usuario) {
-		UsuarioModel usuarioModel = createModelWithId(usuario.getId(), usuario);
+		UsuarioModel usuarioModel = mapper.map(usuario, UsuarioModel.class);
 		
-		mapper.map(usuario, usuarioModel);
+		
 		
 		//Adiciona links da propria coleção
 		usuarioModel.add(linkTo(methodOn(UsuarioController.class).listar()).withRel("Usuarios"));
+		
+		//Adiciona link para o a entidade unica de usuarios
+		usuarioModel.add(linkTo(methodOn(UsuarioController.class).buscar(usuario.getId())).withSelfRel());
 		
 		//Adiciona link para a URI /usuaios/{userId}/grupos
 		usuarioModel.add(linkTo(methodOn(UsuarioGrupoController.class).listarGruposUsuario(usuarioModel.getId())).withRel("grupos-usuarios"));
