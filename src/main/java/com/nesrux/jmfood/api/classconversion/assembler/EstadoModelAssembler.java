@@ -20,19 +20,19 @@ public class EstadoModelAssembler extends RepresentationModelAssemblerSupport<Es
 	private ModelMapper mapper;
 
 	public EstadoModelAssembler() {
-		super(Estado.class, EstadoModel.class);
+		super(EstadoController.class, EstadoModel.class);
 
 	}
 
 	public EstadoModel toModel(Estado estado) {
-		EstadoModel estadoModel = mapper.map(estado, EstadoModel.class);
+		EstadoModel estadoModel = createModelWithId(estado.getId(), estado);
+		mapper.map(estado, estadoModel);
 
- 
 		// Adiciona link da listagem de estados
 		estadoModel.add(linkTo(methodOn(EstadoController.class).listar()).withRel("estados"));
 
 		// Adiciona link do recurso do proprio Estado
-		estadoModel.add(linkTo(methodOn(EstadoController.class).buscar(estado.getId())).withSelfRel());
+		//estadoModel.add(linkTo(methodOn(EstadoController.class).buscar(estado.getId())).withSelfRel());
 
 		return estadoModel;
 	}

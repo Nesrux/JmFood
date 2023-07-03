@@ -46,7 +46,7 @@ public class CozinhaController implements CozinhaControllerOpenApi {
 	public Page<CozinhaModel> listar(@PageableDefault(size = 10) Pageable page) {
 		Page<Cozinha> cozinhasPage = cozinhaService.acharTodas(page);
 
-		List<CozinhaModel> cozinhasModel = outputAssembler.toCollectionDto(cozinhasPage.getContent());
+		List<CozinhaModel> cozinhasModel = outputAssembler.toCollectionModel(cozinhasPage.getContent());
 
 		Page<CozinhaModel> cozinhasPageModel = new PageImpl<>(cozinhasModel, page, cozinhasPage.getTotalElements());
 
