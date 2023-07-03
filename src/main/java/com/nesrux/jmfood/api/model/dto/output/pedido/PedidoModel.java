@@ -5,6 +5,9 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
+
 import com.nesrux.jmfood.api.model.dto.output.endereco.EnderecoModel;
 import com.nesrux.jmfood.api.model.dto.output.formaPagamento.FormaPagamentoModel;
 import com.nesrux.jmfood.api.model.dto.output.itemPedido.ItemPedidoModel;
@@ -17,7 +20,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PedidoModel {
+@Relation(collectionRelation = "Pedidos")
+public class PedidoModel extends RepresentationModel<PedidoModel> {
 	@ApiModelProperty(example = "7ab753e5-1e1f-47c2-8f9d-aa611b7138c3", position = 5)
 	private String codigo;
 	

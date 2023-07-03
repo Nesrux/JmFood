@@ -1,7 +1,7 @@
 package com.nesrux.jmfood.api.openapi.controller.pedido;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.PagedModel;
 
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.input.pedido.PedidoInputDto;
@@ -30,7 +30,7 @@ public interface PedidoControllerOpenApi {
 	@ApiOperation("Listagem de pedidos")
 	
 	@ApiResponses({ @ApiResponse(code = 200, message = "Pedidos encontrados com sucesso")})
-	public Page<PedidoResumoModel> pesquisarPedidos(PedidoFilter filter, Pageable page);
+	public PagedModel<PedidoResumoModel> pesquisarPedidos(PedidoFilter filter, Pageable page);
 
 	@ApiImplicitParams({
 			@ApiImplicitParam(
