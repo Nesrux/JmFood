@@ -45,7 +45,7 @@ public class CadastroRestauranteService {
 		return restaurante;
 	}
 
-	public List<Usuario> listarUsuarios(Long restauranteId) {
+	public List<Usuario> usuariosResponsaveis(Long restauranteId) {
 		Restaurante restaurante = acharOuFalhar(restauranteId);
 		return restaurante.getUsuarioResponsavel().stream().collect(Collectors.toList());
 	}
