@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Relation(collectionRelation = "cozinha")
+@Relation(collectionRelation = "cozinhaa")
 public class CozinhaModel extends RepresentationModel<CozinhaModel> {
 	
 	@JsonView(RestauranteView.resumo.class)

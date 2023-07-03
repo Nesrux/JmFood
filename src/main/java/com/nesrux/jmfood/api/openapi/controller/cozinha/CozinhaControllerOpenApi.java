@@ -1,7 +1,7 @@
 package com.nesrux.jmfood.api.openapi.controller.cozinha;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.PagedModel;
 
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.input.cozinha.CozinhaInputDto;
@@ -17,7 +17,7 @@ import io.swagger.annotations.ApiResponses;
 public interface CozinhaControllerOpenApi {
 
 	@ApiOperation("lisatagem de Cozinhas")
-	public Page<CozinhaModel> listar(Pageable page);
+	public PagedModel<CozinhaModel> listar(Pageable page);
 
 	@ApiOperation("Busca de cozinhas")
 	@ApiResponses({ 

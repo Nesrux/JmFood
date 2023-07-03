@@ -1,14 +1,13 @@
 package com.nesrux.jmfood.api.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,59 +29,63 @@ import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.service.CadastroCozinhaService;
 
 @RestController
-@RequestMapping(path ="/cozinhas", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/cozinhas", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CozinhaController implements CozinhaControllerOpenApi {
 
 	@Autowired
 	private CadastroCozinhaService cozinhaService;
 	@Autowired
-	private CozinhaInputDisassembler inputDisassembler;
+	private CozinhaInputDisassembler disassembler;
 	@Autowired
-	private CozinhaModelAssembler outputAssembler;
+	private CozinhaModelAssembler assembler;
+	@Autowired
+	private PagedResourcesAssembler<Cozinha> pagedModelAssembler;
 
 	@GetMapping()
 	// A anotação @PageableDefault muda o tamanho dos elementos de uma pagina, o
 	// padrão é 20
-	public Page<CozinhaModel> listar(@PageableDefault(size = 10) Pageable page) {
+	@Override
+	public PagedModel<CozinhaModel> listar(@PageableDefault(size = 10) Pageable page) {
 		Page<Cozinha> cozinhasPage = cozinhaService.acharTodas(page);
 
-		List<CozinhaModel> cozinhasModel = outputAssembler.toCollectionModel(cozinhasPage.getContent());
-
-		Page<CozinhaModel> cozinhasPageModel = new PageImpl<>(cozinhasModel, page, cozinhasPage.getTotalElements());
-
-		return cozinhasPageModel;
+		PagedModel<CozinhaModel> cozinhaPagedModel = pagedModelAssembler.toModel(cozinhasPage, assembler);
+		return cozinhaPagedModel;
 	}
 
+	@Override
 	@GetMapping("/{cozinhaId}")
 	public CozinhaModel buscar(@PathVariable Long cozinhaId) {
-		return outputAssembler.toModel(cozinhaService.buscaOuFalha(cozinhaId));
+		return assembler.toModel(cozinhaService.buscaOuFalha(cozinhaId));
 	}
 
+	@Override
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public CozinhaModel adicionar(@RequestBody @Valid CozinhaInputDto cozinhaInputDto) {
-		Cozinha cozinha = inputDisassembler.toDomainnObject(cozinhaInputDto);
+		Cozinha cozinha = disassembler.toDomainnObject(cozinhaInputDto);
 		cozinhaService.salvar(cozinha);
 
-		CozinhaModel cozinhaOutputDto = outputAssembler.toModel(cozinha);
+		CozinhaModel cozinhaOutputDto = assembler.toModel(cozinha);
 
 		return cozinhaOutputDto;
 	}
 
+	@Override
 	@PutMapping("/{cozinhaId}")
 	public CozinhaModel atualizar(@PathVariable Long cozinhaId, @RequestBody @Valid CozinhaInputDto cozinhaInputDto) {
 		Cozinha cozinhaAtual = cozinhaService.buscaOuFalha(cozinhaId);
 
 		// Importante
-		inputDisassembler.copyToDomainObject(cozinhaInputDto, cozinhaAtual);
+		disassembler.copyToDomainObject(cozinhaInputDto, cozinhaAtual);
 
 		Cozinha cozinhaSalva = cozinhaService.salvar(cozinhaAtual);
 
-		CozinhaModel outputDto = outputAssembler.toModel(cozinhaSalva);
+		CozinhaModel outputDto = assembler.toModel(cozinhaSalva);
 
 		return outputDto;
 	}
 
+	@Override
 	@DeleteMapping("/{cozinhaId}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void deletar(@PathVariable Long cozinhaId) {
