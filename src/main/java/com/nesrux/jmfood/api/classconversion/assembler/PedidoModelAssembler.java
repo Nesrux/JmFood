@@ -1,20 +1,12 @@
 package com.nesrux.jmfood.api.classconversion.assembler;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import com.nesrux.jmfood.api.controller.CidadeController;
-import com.nesrux.jmfood.api.controller.FormaPagamentoController;
 import com.nesrux.jmfood.api.controller.PedidoController;
-import com.nesrux.jmfood.api.controller.RestauranteController;
-import com.nesrux.jmfood.api.controller.UsuarioController;
-import com.nesrux.jmfood.api.controller.subcontrollers.restaurantes.RestauranteProdutoController;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoModel;
 import com.nesrux.jmfood.api.utils.JmFoodLinks;
 import com.nesrux.jmfood.domain.model.pedido.Pedido;
@@ -25,7 +17,7 @@ public class PedidoModelAssembler extends RepresentationModelAssemblerSupport<Pe
 	private ModelMapper mapper;
 	@Autowired
 	private JmFoodLinks jmFoodLinks;
-	
+
 	public PedidoModelAssembler() {
 		super(PedidoController.class, PedidoModel.class);
 	}
@@ -33,37 +25,26 @@ public class PedidoModelAssembler extends RepresentationModelAssemblerSupport<Pe
 	public PedidoModel toModel(Pedido pedido) {
 		PedidoModel pedidoModel = createModelWithId(pedido.getCodigo(), pedido);
 		mapper.map(pedido, pedidoModel);
-	
+
 		pedidoModel.add(jmFoodLinks.linkToPedidos());
-	
+
 		// código para o cliente
-		pedidoModel.getCliente()
-				.add(linkTo(methodOn(UsuarioController.class).buscar(pedido.getCliente().getId())).withSelfRel());
+		pedidoModel.getCliente().add(jmFoodLinks.linkToCliente(pedidoModel.getCliente().getId()));
 
 		// código para forma pagamento
-		pedidoModel.getFormaPagamento().add(
-				linkTo(methodOn(FormaPagamentoController.class).buscar(pedidoModel.getFormaPagamento().getId(), null))
-						.withSelfRel());
+		pedidoModel.getFormaPagamento().add(jmFoodLinks.linkToFormaPagamento(pedidoModel.getFormaPagamento().getId()));
 
 		// para cidade
 		pedidoModel.getEndereco().getCidade()
-				.add(linkTo(methodOn(CidadeController.class).buscar(pedidoModel.getEndereco().getCidade().getId()))
-						.withSelfRel());
+				.add(jmFoodLinks.linkToCidade(pedidoModel.getEndereco().getCidade().getId()));
 
 		// Para Restaurante
-		pedidoModel.getRestaurante().add(
-				linkTo(methodOn(RestauranteController.class).buscar(pedidoModel.getRestaurante().getRestauranteId()))
-						.withSelfRel());
-
-		// Para a listagem de pedidos <PedidoResumoModel>
-		// pedidoModel.add(linkTo(PedidoController.class).withSelfRel());
+		pedidoModel.getRestaurante()
+				.add(jmFoodLinks.linkToRestaurante(pedidoModel.getRestaurante().getRestauranteId()));
 
 		// Para um unico produto
-		pedidoModel.getItens()
-				.forEach(itemPedido -> itemPedido.getProduto()
-						.add(linkTo(methodOn(RestauranteProdutoController.class)
-								.buscar(pedidoModel.getRestaurante().getRestauranteId(), itemPedido.getId()))
-								.withSelfRel()));
+		pedidoModel.getItens().forEach(itemPedido -> itemPedido.getProduto()
+				.add(jmFoodLinks.linkToProduto(pedidoModel.getRestaurante().getRestauranteId(), itemPedido.getId())));
 
 		return pedidoModel;
 
@@ -71,7 +52,7 @@ public class PedidoModelAssembler extends RepresentationModelAssemblerSupport<Pe
 
 	@Override
 	public CollectionModel<PedidoModel> toCollectionModel(Iterable<? extends Pedido> entities) {
-		return super.toCollectionModel(entities).add(linkTo(PedidoController.class).withSelfRel());
+		return super.toCollectionModel(entities).add(jmFoodLinks.linkToPedidos());
 	}
 
 }
