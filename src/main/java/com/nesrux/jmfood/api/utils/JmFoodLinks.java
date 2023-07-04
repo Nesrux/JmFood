@@ -81,4 +81,9 @@ public class JmFoodLinks {
 		return linkTo(CidadeController.class).withRel("Cidades");
 	}
 
+	// Listagem de Estados
+	public Link linkToEstado() {
+		return linkTo(EstadoController.class).withRel("estados");
+	}
+
 }
