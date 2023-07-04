@@ -35,12 +35,23 @@ public class PedidoModelAssembler extends RepresentationModelAssemblerSupport<Pe
 	public PedidoModel toModel(Pedido pedido) {
 		PedidoModel pedidoModel = createModelWithId(pedido.getCodigo(), pedido);
 		mapper.map(pedido, pedidoModel);
+		
+		// parametros de paginação
 		TemplateVariables pagesVariables = new TemplateVariables(
 				new TemplateVariable("page", VariableType.REQUEST_PARAM),
 				new TemplateVariable("size", VariableType.REQUEST_PARAM),
 				new TemplateVariable("sort", VariableType.REQUEST_PARAM));
+		
+		//parametros de filtro das propriedades
+		TemplateVariables filtroVariable = new TemplateVariables(
+				new TemplateVariable("clienteId", VariableType.REQUEST_PARAM),
+				new TemplateVariable("restauranteId", VariableType.REQUEST_PARAM),
+				new TemplateVariable("dataCriacao", VariableType.REQUEST_PARAM),
+				new TemplateVariable("dataFinalizacao", VariableType.REQUEST_PARAM));
 
-		pedidoModel.add(new Link(UriTemplate.of("http://localhost:8080/pedidos", pagesVariables), "pedidos"));
+		String pedidoUrl = linkTo(PedidoController.class).toUri().toString();
+
+		pedidoModel.add(new Link(UriTemplate.of(pedidoUrl, pagesVariables.concat(filtroVariable)), "pedidos"));
 		// código para o cliente
 		pedidoModel.getCliente()
 				.add(linkTo(methodOn(UsuarioController.class).buscar(pedido.getCliente().getId())).withSelfRel());
