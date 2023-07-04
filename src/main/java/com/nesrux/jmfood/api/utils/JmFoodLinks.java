@@ -5,12 +5,13 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.TemplateVariable;
+import org.springframework.hateoas.TemplateVariable.VariableType;
 import org.springframework.hateoas.TemplateVariables;
 import org.springframework.hateoas.UriTemplate;
-import org.springframework.hateoas.TemplateVariable.VariableType;
 import org.springframework.stereotype.Component;
 
 import com.nesrux.jmfood.api.controller.CidadeController;
+import com.nesrux.jmfood.api.controller.CozinhaController;
 import com.nesrux.jmfood.api.controller.EstadoController;
 import com.nesrux.jmfood.api.controller.FormaPagamentoController;
 import com.nesrux.jmfood.api.controller.PedidoController;
@@ -62,6 +63,11 @@ public class JmFoodLinks {
 		return linkTo(methodOn(EstadoController.class).buscar(estadoId)).withSelfRel();
 	}
 
+	// Link para cozinha
+	public Link linkToCozinha(Long cozinhaId) {
+		return linkTo(methodOn(CozinhaController.class).buscar(cozinhaId)).withSelfRel();
+	}
+
 	// Link para Restaurante
 	public Link linkToRestaurante(Long restauranteId) {
 		return linkTo(methodOn(RestauranteController.class).buscar(restauranteId)).withSelfRel();
@@ -79,7 +85,7 @@ public class JmFoodLinks {
 
 	// Listagem de usuarios
 	public Link linktoUsuario() {
-		return linkTo(methodOn(UsuarioController.class).listar()).withRel("usuarios");
+		return linkTo((UsuarioController.class)).withRel("usuarios");
 	}
 
 	// Listagem de pedidos
@@ -100,6 +106,10 @@ public class JmFoodLinks {
 	// Listagem de grupos de um usuario
 	public Link linkToGrupoUsuario(Long usuarioId) {
 		return linkTo(methodOn(UsuarioGrupoController.class).listarGruposUsuario(usuarioId)).withRel("grupos-usuarios");
+	}
+	//Listagem de cozinhas 
+	public Link linkToCozinha() {
+		return linkTo((CozinhaController.class)).withRel("cozinhas");
 	}
 
 }
