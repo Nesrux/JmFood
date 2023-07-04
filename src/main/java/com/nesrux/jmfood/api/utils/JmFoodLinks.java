@@ -11,6 +11,7 @@ import org.springframework.hateoas.TemplateVariable.VariableType;
 import org.springframework.stereotype.Component;
 
 import com.nesrux.jmfood.api.controller.CidadeController;
+import com.nesrux.jmfood.api.controller.EstadoController;
 import com.nesrux.jmfood.api.controller.FormaPagamentoController;
 import com.nesrux.jmfood.api.controller.PedidoController;
 import com.nesrux.jmfood.api.controller.RestauranteController;
@@ -55,6 +56,11 @@ public class JmFoodLinks {
 		return linkTo(methodOn(CidadeController.class).buscar(cidadeId)).withSelfRel();
 	}
 
+	// Link para Estado
+	public Link linkToEstado(Long estadoId) {
+		return linkTo(methodOn(EstadoController.class).buscar(estadoId)).withSelfRel();
+	}
+
 	// Link para Restaurante
 	public Link linkToRestaurante(Long restauranteId) {
 		return linkTo(methodOn(RestauranteController.class).buscar(restauranteId)).withSelfRel();
@@ -68,6 +74,11 @@ public class JmFoodLinks {
 	// Listagem de pedidos
 	public Link linkToPedidos(Long RestauranteId, Long produtoId) {
 		return linkTo(PedidoController.class).withRel("Pedidos");
+	}
+
+	// Listagem de cidade
+	public Link linkToCidade() {
+		return linkTo(CidadeController.class).withRel("Cidades");
 	}
 
 }
