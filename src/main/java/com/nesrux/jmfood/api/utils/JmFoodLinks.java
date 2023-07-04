@@ -17,6 +17,7 @@ import com.nesrux.jmfood.api.controller.FormaPagamentoController;
 import com.nesrux.jmfood.api.controller.PedidoController;
 import com.nesrux.jmfood.api.controller.RestauranteController;
 import com.nesrux.jmfood.api.controller.UsuarioController;
+import com.nesrux.jmfood.api.controller.subcontrollers.pedidos.FluxoPedidoController;
 import com.nesrux.jmfood.api.controller.subcontrollers.restaurantes.RestauranteProdutoController;
 import com.nesrux.jmfood.api.controller.subcontrollers.restaurantes.RestauranteUsuarioController;
 import com.nesrux.jmfood.api.controller.subcontrollers.usuarios.UsuarioGrupoController;
@@ -117,6 +118,18 @@ public class JmFoodLinks {
 	public Link linkToUsuarioResponsavel(Long restauranteId) {
 		return linkTo(methodOn(RestauranteUsuarioController.class).listarFuncionariosRestaurante(restauranteId))
 				.withRel("Usuarios-Responsaveis");
+	}
+
+	public Link linkToConfirmarPedido(String codigoPedido) {
+		return linkTo(methodOn(FluxoPedidoController.class).confirmarPedido(codigoPedido)).withRel("confirmar-pedido");
+	}
+
+	public Link linkToEntregaPedido(String codigoPedido) {
+		return linkTo(methodOn(FluxoPedidoController.class).entregarPedido(codigoPedido)).withRel("entregar-pedido");
+	}
+
+	public Link linkToCancelarPedido(String codigoPedido) {
+		return linkTo(methodOn(FluxoPedidoController.class).cancelarPedido(codigoPedido)).withRel("cancelar-pedido");
 	}
 
 }
