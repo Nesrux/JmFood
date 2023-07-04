@@ -6,6 +6,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.TemplateVariable;
+import org.springframework.hateoas.TemplateVariable.VariableType;
+import org.springframework.hateoas.TemplateVariables;
+import org.springframework.hateoas.UriTemplate;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +35,12 @@ public class PedidoModelAssembler extends RepresentationModelAssemblerSupport<Pe
 	public PedidoModel toModel(Pedido pedido) {
 		PedidoModel pedidoModel = createModelWithId(pedido.getCodigo(), pedido);
 		mapper.map(pedido, pedidoModel);
+		TemplateVariables pagesVariables = new TemplateVariables(
+				new TemplateVariable("page", VariableType.REQUEST_PARAM),
+				new TemplateVariable("size", VariableType.REQUEST_PARAM),
+				new TemplateVariable("sort", VariableType.REQUEST_PARAM));
 
+		pedidoModel.add(new Link(UriTemplate.of("http://localhost:8080/pedidos", pagesVariables), "pedidos"));
 		// código para o cliente
 		pedidoModel.getCliente()
 				.add(linkTo(methodOn(UsuarioController.class).buscar(pedido.getCliente().getId())).withSelfRel());
@@ -51,7 +61,7 @@ public class PedidoModelAssembler extends RepresentationModelAssemblerSupport<Pe
 						.withSelfRel());
 
 		// Para a listagem de pedidos <PedidoResumoModel>
-		pedidoModel.add(linkTo(PedidoController.class).withSelfRel());
+		// pedidoModel.add(linkTo(PedidoController.class).withSelfRel());
 
 		// Para um unico produto
 		pedidoModel.getItens()
