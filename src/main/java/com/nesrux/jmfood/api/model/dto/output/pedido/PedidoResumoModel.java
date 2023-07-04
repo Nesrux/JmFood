@@ -3,6 +3,8 @@ package com.nesrux.jmfood.api.model.dto.output.pedido;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteResumoModel;
 import com.nesrux.jmfood.api.model.dto.output.usuario.UsuarioModel;
 
@@ -12,7 +14,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PedidoResumoModel {
+public class PedidoResumoModel extends RepresentationModel<PedidoModel> {
 	@ApiModelProperty(example = "d80c60f2-1505-4f15-b5bc-3cc6e398ee6d", position = 5)
 	private String codigo;
 	@ApiModelProperty(example = "152.50", position = 10)

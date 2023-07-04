@@ -1,14 +1,12 @@
 package com.nesrux.jmfood.api.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -50,17 +48,20 @@ public class PedidoController implements PedidoControllerOpenApi {
 
 	@Autowired
 	private PedidoInputDisasselber pedidoDisasselber;
+	
+
+	@Autowired
+	private PagedResourcesAssembler<Pedido> pagedResourcesAssembler;
 
 	@Override
 	@GetMapping
-	public PagedModel<PedidoResumoModel> pesquisarPedidos(PedidoFilter filter, @PageableDefault(size = 10) Pageable page) {
+	public PagedModel<PedidoResumoModel> pesquisarPedidos(PedidoFilter filter,
+			@PageableDefault(size = 10) Pageable page) {
 		page = traduzirPageable(page);
+		
 		Page<Pedido> pedidosPage = service.Listar(filter, page);
-		List<PedidoResumoModel> pedidosModel = resumoAssembler.toCollectionDto(pedidosPage.getContent());
 
-		Page<PedidoResumoModel> pagePedidoModel = new PageImpl<>(pedidosModel, page, pedidosPage.getTotalElements());
-
-		return null;
+		return pagedResourcesAssembler.toModel(pedidosPage, resumoAssembler);
 	}
 
 	@GetMapping("/{codigoPedido}")
