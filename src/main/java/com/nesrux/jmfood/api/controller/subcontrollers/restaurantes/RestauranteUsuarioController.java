@@ -1,8 +1,5 @@
 package com.nesrux.jmfood.api.controller.subcontrollers.restaurantes;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nesrux.jmfood.api.classconversion.assembler.UsuarioModelAssembler;
 import com.nesrux.jmfood.api.model.dto.output.usuario.UsuarioModel;
 import com.nesrux.jmfood.api.openapi.controller.restaurante.RestauranteUsuarioControllerOpenApi;
+import com.nesrux.jmfood.api.utils.JmFoodLinks;
 import com.nesrux.jmfood.domain.model.user.Usuario;
 import com.nesrux.jmfood.domain.service.CadastroRestauranteService;
 
@@ -30,6 +28,9 @@ public class RestauranteUsuarioController implements RestauranteUsuarioControlle
 	private CadastroRestauranteService restauranteService;
 	@Autowired
 	private UsuarioModelAssembler usuarioAssembler;
+	
+	@Autowired
+	private JmFoodLinks jmFoodLinks;
 
 	@Override
 	@GetMapping
@@ -38,9 +39,7 @@ public class RestauranteUsuarioController implements RestauranteUsuarioControlle
 		CollectionModel<UsuarioModel> usuarioModelList = usuarioAssembler.toCollectionModel(usuarios);
 
 		return usuarioModelList.removeLinks()
-				.add(linkTo(methodOn(RestauranteUsuarioController.class)
-						.listarFuncionariosRestaurante(restauranteId))
-						.withSelfRel());
+				.add(jmFoodLinks.linkToUsuarioResponsavel(restauranteId));
 	}
 
 	@Override

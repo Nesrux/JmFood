@@ -18,6 +18,7 @@ import com.nesrux.jmfood.api.controller.PedidoController;
 import com.nesrux.jmfood.api.controller.RestauranteController;
 import com.nesrux.jmfood.api.controller.UsuarioController;
 import com.nesrux.jmfood.api.controller.subcontrollers.restaurantes.RestauranteProdutoController;
+import com.nesrux.jmfood.api.controller.subcontrollers.restaurantes.RestauranteUsuarioController;
 import com.nesrux.jmfood.api.controller.subcontrollers.usuarios.UsuarioGrupoController;
 
 @Component
@@ -107,9 +108,15 @@ public class JmFoodLinks {
 	public Link linkToGrupoUsuario(Long usuarioId) {
 		return linkTo(methodOn(UsuarioGrupoController.class).listarGruposUsuario(usuarioId)).withRel("grupos-usuarios");
 	}
-	//Listagem de cozinhas 
+
+	// Listagem de cozinhas
 	public Link linkToCozinha() {
 		return linkTo((CozinhaController.class)).withRel("cozinhas");
+	}
+
+	public Link linkToUsuarioResponsavel(Long restauranteId) {
+		return linkTo(methodOn(RestauranteUsuarioController.class).listarFuncionariosRestaurante(restauranteId))
+				.withRel("Usuarios-Responsaveis");
 	}
 
 }
