@@ -26,6 +26,7 @@ import com.nesrux.jmfood.api.model.dto.input.pedido.PedidoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoModel;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoResumoModel;
 import com.nesrux.jmfood.api.openapi.controller.pedido.PedidoControllerOpenApi;
+import com.nesrux.jmfood.core.data.PageWrapper;
 import com.nesrux.jmfood.core.data.PageableTranslator;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
@@ -48,7 +49,6 @@ public class PedidoController implements PedidoControllerOpenApi {
 
 	@Autowired
 	private PedidoInputDisasselber pedidoDisasselber;
-	
 
 	@Autowired
 	private PagedResourcesAssembler<Pedido> pagedResourcesAssembler;
@@ -57,9 +57,11 @@ public class PedidoController implements PedidoControllerOpenApi {
 	@GetMapping
 	public PagedModel<PedidoResumoModel> pesquisarPedidos(PedidoFilter filter,
 			@PageableDefault(size = 10) Pageable page) {
-		page = traduzirPageable(page);
-		
-		Page<Pedido> pedidosPage = service.Listar(filter, page);
+		Pageable pageableTraduzido = traduzirPageable(page);
+
+		Page<Pedido> pedidosPage = service.Listar(filter, pageableTraduzido);
+
+		pedidosPage = new PageWrapper<>(pedidosPage, page);
 
 		return pagedResourcesAssembler.toModel(pedidosPage, resumoAssembler);
 	}
