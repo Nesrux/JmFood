@@ -2,8 +2,11 @@ package com.nesrux.jmfood.api.openapi.controller.restaurante;
 
 import java.util.List;
 
+import org.springframework.hateoas.CollectionModel;
+
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteInputDto;
+import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteBasicoModel;
 import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteModel;
 import com.nesrux.jmfood.api.openapi.model.RestauranteBasicoOpenApi;
 
@@ -22,7 +25,7 @@ public interface RestauranteControllerOpenApi {
 	@ApiImplicitParams({
 			@ApiImplicitParam(value = "nome da projeção de pedidos", allowableValues = "apenas-nome", name = "projeção", paramType = "query", type = "string") })
 	@ApiResponses({ @ApiResponse(code = 200, message = "A listagem de pedidos foi feito com sucesso") })
-	public List<RestauranteModel> listarResumo();
+	public CollectionModel<RestauranteBasicoModel> listarResumo();
 
 	@ApiOperation(value = "Listagem de restaurantes", hidden = true)
 	@ApiResponses({ @ApiResponse(code = 200, message = "A listagem de pedidos foi feito com sucesso") })

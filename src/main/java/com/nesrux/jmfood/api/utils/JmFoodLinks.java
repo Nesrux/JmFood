@@ -131,5 +131,9 @@ public class JmFoodLinks {
 	public Link linkToCancelarPedido(String codigoPedido) {
 		return linkTo(methodOn(FluxoPedidoController.class).cancelarPedido(codigoPedido)).withRel("cancelar-pedido");
 	}
+	public Link linkToRestaurante() {
+		return linkTo(RestauranteController.class).withSelfRel();
+	}
+
 
 }

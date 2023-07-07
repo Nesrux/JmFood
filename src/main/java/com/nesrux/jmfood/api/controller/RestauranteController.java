@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.nesrux.jmfood.api.classconversion.assembler.RestauranteBasicoAssembler;
 import com.nesrux.jmfood.api.classconversion.assembler.RestauranteModeltAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.RestauranteInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteInputDto;
+import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteBasicoModel;
 import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteModel;
 import com.nesrux.jmfood.api.model.dto.view.RestauranteView;
 import com.nesrux.jmfood.api.openapi.controller.restaurante.RestauranteControllerOpenApi;
@@ -32,7 +35,7 @@ import com.nesrux.jmfood.domain.service.CadastroRestauranteService;
 
 @RestController
 @RequestMapping(path = "/restaurantes", produces = MediaType.APPLICATION_JSON_VALUE)
-public class RestauranteController  implements RestauranteControllerOpenApi {
+public class RestauranteController implements RestauranteControllerOpenApi {
 
 	@Autowired
 	private CadastroRestauranteService service;
@@ -40,18 +43,19 @@ public class RestauranteController  implements RestauranteControllerOpenApi {
 	private RestauranteModeltAssembler restauranteAssembler;
 	@Autowired
 	private RestauranteInputDisassembler restauranteDissasembler;
+	@Autowired
+	private RestauranteBasicoAssembler basicoAssembler;
 
-	@JsonView(RestauranteView.resumo.class)
+	// @JsonView(RestauranteView.resumo.class)
 	@GetMapping
-	public List<RestauranteModel> listarResumo() {
-		//TODO adiconar deep Etags em listagem de Restaurante
-		return restauranteAssembler.toCollectionDto(service.acharTodos());
+	public CollectionModel<RestauranteBasicoModel> listarResumo() {
+		return basicoAssembler.toCollectionModel(service.acharTodos());
 	}
 
 	@JsonView(RestauranteView.apenasNome.class)
 	@GetMapping(params = "projecao=apenas-nome")
 	public List<RestauranteModel> listarNomes() {
-		//TODO adiocionar deep Etag nessa listagem também 
+		// TODO adiocionar deep Etag nessa listagem também
 		return restauranteAssembler.toCollectionDto(service.acharTodos());
 	}
 
