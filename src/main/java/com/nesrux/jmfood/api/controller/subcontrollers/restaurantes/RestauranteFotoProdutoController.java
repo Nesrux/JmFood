@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.nesrux.jmfood.api.classconversion.assembler.FotoProdutoModelAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.produto.FotoProdutoModelAssembler;
 import com.nesrux.jmfood.api.model.dto.input.fotoProduto.FotoProdutoInput;
 import com.nesrux.jmfood.api.model.dto.output.fotoProduto.FotoProdutoModel;
 import com.nesrux.jmfood.api.openapi.controller.produtos.RestauranteFotoProdutoControllerOpenApi;

@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
 
-import com.nesrux.jmfood.api.classconversion.assembler.FormaPagamentoModelAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.restaurante.FormaPagamentoModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.FormaPagamentoInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.formaPagamento.FormaPagamentoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.formaPagamento.FormaPagamentoModel;

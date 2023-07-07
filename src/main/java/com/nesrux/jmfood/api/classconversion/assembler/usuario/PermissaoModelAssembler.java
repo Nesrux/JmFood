@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.api.classconversion.assembler;
+package com.nesrux.jmfood.api.classconversion.assembler.usuario;
 
 import java.util.Collection;
 import java.util.List;

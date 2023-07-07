@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.api.classconversion.assembler.FormaPagamentoModelAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.restaurante.FormaPagamentoModelAssembler;
 import com.nesrux.jmfood.api.model.dto.output.formaPagamento.FormaPagamentoModel;
 import com.nesrux.jmfood.api.openapi.controller.restaurante.RestauranteFormaPagamentoControllerOpenApi;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;

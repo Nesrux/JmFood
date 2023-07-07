@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.api.classconversion.assembler;
+package com.nesrux.jmfood.api.classconversion.assembler.pedido;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

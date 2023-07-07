@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.api.classconversion.assembler;
+package com.nesrux.jmfood.api.classconversion.assembler.produto;
 
 import java.util.List;
 import java.util.stream.Collectors;

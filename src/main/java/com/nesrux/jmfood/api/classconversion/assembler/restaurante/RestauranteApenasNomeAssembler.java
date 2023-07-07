@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.api.classconversion.assembler;
+package com.nesrux.jmfood.api.classconversion.assembler.restaurante;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 

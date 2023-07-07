@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.api.classconversion.assembler.ProdutoModelAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.produto.ProdutoModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.ProdutoInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.produto.ProdutoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.produto.ProdutoModel;

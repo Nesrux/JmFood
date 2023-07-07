@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.api.classconversion.assembler.UsuarioModelAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.usuario.UsuarioModelAssembler;
 import com.nesrux.jmfood.api.model.dto.output.usuario.UsuarioModel;
 import com.nesrux.jmfood.api.openapi.controller.restaurante.RestauranteUsuarioControllerOpenApi;
 import com.nesrux.jmfood.api.utils.JmFoodLinks;

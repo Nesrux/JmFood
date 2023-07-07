@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.api.classconversion.assembler.CidadeModelAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.endereco.CidadeModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.CidadeInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.cidade.CidadeInputDto;
 import com.nesrux.jmfood.api.model.dto.output.cidade.CidadeModel;

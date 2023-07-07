@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.api.classconversion.assembler.PermissaoModelAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.usuario.PermissaoModelAssembler;
 import com.nesrux.jmfood.api.model.dto.output.permissao.PermissaoModel;
 import com.nesrux.jmfood.api.openapi.controller.grupos.GrupoPermissaoControllerOpenapi;
 import com.nesrux.jmfood.domain.model.user.Permissao;

@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.api.classconversion.assembler.RestauranteApenasNomeAssembler;
-import com.nesrux.jmfood.api.classconversion.assembler.RestauranteBasicoAssembler;
-import com.nesrux.jmfood.api.classconversion.assembler.RestauranteModelAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.restaurante.RestauranteApenasNomeAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.restaurante.RestauranteBasicoAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.restaurante.RestauranteModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.RestauranteInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteInputDto;
 import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteApenasNomeModel;

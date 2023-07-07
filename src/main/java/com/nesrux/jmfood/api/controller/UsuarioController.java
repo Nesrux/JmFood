@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.api.classconversion.assembler.UsuarioModelAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.usuario.UsuarioModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.UsuarioInputDissasembler;
 import com.nesrux.jmfood.api.model.dto.input.usuario.TrocarSenhaInput;
 import com.nesrux.jmfood.api.model.dto.input.usuario.UsuarioInput;

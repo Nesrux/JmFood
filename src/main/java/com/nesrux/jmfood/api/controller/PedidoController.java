@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.collect.ImmutableMap;
-import com.nesrux.jmfood.api.classconversion.assembler.PedidoModelAssembler;
-import com.nesrux.jmfood.api.classconversion.assembler.PedidoResumoModelAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.pedido.PedidoModelAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.pedido.PedidoResumoModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.PedidoInputDisasselber;
 import com.nesrux.jmfood.api.model.dto.input.pedido.PedidoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoModel;
