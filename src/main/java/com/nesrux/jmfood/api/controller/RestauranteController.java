@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nesrux.jmfood.api.classconversion.assembler.RestauranteApenasNomeAssembler;
 import com.nesrux.jmfood.api.classconversion.assembler.RestauranteBasicoAssembler;
-import com.nesrux.jmfood.api.classconversion.assembler.RestauranteModeltAssembler;
+import com.nesrux.jmfood.api.classconversion.assembler.RestauranteModelAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.RestauranteInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteInputDto;
 import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteApenasNomeModel;
@@ -40,7 +40,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	@Autowired
 	private CadastroRestauranteService service;
 	@Autowired
-	private RestauranteModeltAssembler restauranteAssembler;
+	private RestauranteModelAssembler restauranteAssembler;
 	@Autowired
 	private RestauranteInputDisassembler restauranteDissasembler;
 	@Autowired

@@ -2,6 +2,9 @@ package com.nesrux.jmfood.api.model.dto.output.restaurante;
 
 import java.math.BigDecimal;
 
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
+
 import com.nesrux.jmfood.api.model.dto.output.cozinha.CozinhaModel;
 import com.nesrux.jmfood.api.model.dto.output.endereco.EnderecoModel;
 
@@ -11,10 +14,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-/**
- * Classe de saida de dados para controller de Restaurante
- */
-public class RestauranteModel {
+@Relation(collectionRelation = "restaurantes")
+public class RestauranteModel extends RepresentationModel<RestauranteModel>{
 	@ApiModelProperty(value = "ID do restaurante", example = "1", position = 5)
 	private Long id;
 
