@@ -6,6 +6,7 @@ import org.springframework.hateoas.CollectionModel;
 
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteInputDto;
+import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteApenasNomeModel;
 import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteBasicoModel;
 import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteModel;
 import com.nesrux.jmfood.api.openapi.model.RestauranteBasicoOpenApi;
@@ -29,7 +30,7 @@ public interface RestauranteControllerOpenApi {
 
 	@ApiOperation(value = "Listagem de restaurantes", hidden = true)
 	@ApiResponses({ @ApiResponse(code = 200, message = "A listagem de pedidos foi feito com sucesso") })
-	public List<RestauranteModel> listarNomes();
+	public CollectionModel<RestauranteApenasNomeModel> listarNomes();
 
 	@ApiOperation("Busca de um unico restaurante")
 	@ApiResponses({ @ApiResponse(code = 404, message = "Não foi possivel encontrar um restaurante com o id informado"),

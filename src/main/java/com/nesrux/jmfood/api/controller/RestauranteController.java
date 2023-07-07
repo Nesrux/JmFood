@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonView;
+import com.nesrux.jmfood.api.classconversion.assembler.RestauranteApenasNomeAssembler;
 import com.nesrux.jmfood.api.classconversion.assembler.RestauranteBasicoAssembler;
 import com.nesrux.jmfood.api.classconversion.assembler.RestauranteModeltAssembler;
 import com.nesrux.jmfood.api.classconversion.dissasembler.RestauranteInputDisassembler;
 import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteInputDto;
+import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteApenasNomeModel;
 import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteBasicoModel;
 import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteModel;
-import com.nesrux.jmfood.api.model.dto.view.RestauranteView;
 import com.nesrux.jmfood.api.openapi.controller.restaurante.RestauranteControllerOpenApi;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
@@ -45,20 +45,22 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	private RestauranteInputDisassembler restauranteDissasembler;
 	@Autowired
 	private RestauranteBasicoAssembler basicoAssembler;
+	@Autowired
+	private RestauranteApenasNomeAssembler nomeAssembler;
 
-	// @JsonView(RestauranteView.resumo.class)
+	@Override
 	@GetMapping
 	public CollectionModel<RestauranteBasicoModel> listarResumo() {
 		return basicoAssembler.toCollectionModel(service.acharTodos());
 	}
 
-	@JsonView(RestauranteView.apenasNome.class)
+	@Override
 	@GetMapping(params = "projecao=apenas-nome")
-	public List<RestauranteModel> listarNomes() {
-		// TODO adiocionar deep Etag nessa listagem também
-		return restauranteAssembler.toCollectionDto(service.acharTodos());
+	public CollectionModel<RestauranteApenasNomeModel> listarNomes() {
+		return nomeAssembler.toCollectionModel(service.acharTodos());
 	}
 
+	@Override
 	@GetMapping("/{restauranteId}")
 	public RestauranteModel buscar(@PathVariable Long restauranteId) {
 		Restaurante restaurante = service.acharOuFalhar(restauranteId);
@@ -66,6 +68,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 		return restauranteAssembler.toModel(restaurante);
 	}
 
+	@Override
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public RestauranteModel adicionar(@RequestBody @Valid RestauranteInputDto restauranteInputDTO) {
@@ -79,6 +82,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 		}
 	}
 
+	@Override
 	@PutMapping("/{restauranteId}")
 	public RestauranteModel atualizar(@PathVariable Long restauranteId,
 			@RequestBody @Valid RestauranteInputDto restauranteInputDto) {
@@ -93,6 +97,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 		}
 	}
 
+	@Override
 	@PutMapping("/ativacoes")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void ativarRestaurantes(@RequestBody List<Long> restauranteids) {
@@ -103,6 +108,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 		}
 	}
 
+	@Override
 	@DeleteMapping("/ativacoes")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void desativarRestaurantes(@RequestBody List<Long> restauranteids) {
@@ -114,24 +120,28 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 
 	}
 
+	@Override
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("/{restauranteId}/ativo")
 	public void ativarRestaurante(@PathVariable Long restauranteId) {
 		service.ativar(restauranteId);
 	}
 
+	@Override
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{restauranteId}/ativo")
 	public void desativarRestaurante(@PathVariable Long restauranteId) {
 		service.desativar(restauranteId);
 	}
 
+	@Override
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("/{restauranteId}/fechamento")
 	public void fecharRestaurante(@PathVariable Long restauranteId) {
 		service.fechar(restauranteId);
 	}
 
+	@Override
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("/{restauranteId}/abertura")
 	public void abrirRestaurante(@PathVariable Long restauranteId) {
