@@ -32,9 +32,9 @@ public class RestauranteBasicoAssembler
 		mapper.map(restaurante, restauranteModel);
 
 		restauranteModel.add(links.linkToRestaurante());
-		restauranteModel.add(links.linkToCozinha(restauranteModel.getId()));
+		restauranteModel.getCozinha().add(links.linkToCozinha(restauranteModel.getId()));
 
-		return null;
+		return restauranteModel;
 	}
 
 	@Override

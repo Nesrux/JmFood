@@ -51,7 +51,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	@Override
 	@GetMapping
 	public CollectionModel<RestauranteBasicoModel> listarResumo() {
-		return basicoAssembler.toCollectionModel(service.acharTodos());
+	return basicoAssembler.toCollectionModel(service.acharTodos());
 	}
 
 	@Override

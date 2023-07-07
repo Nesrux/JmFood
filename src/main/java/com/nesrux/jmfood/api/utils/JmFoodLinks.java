@@ -58,7 +58,7 @@ public class JmFoodLinks {
 
 	// Link forma-pagamento de um restaurnte
 	public Link linkToFormaPagamentoRestaurante(Long restauranteid) {
-		return linkTo(methodOn(RestauranteFormaPagamentoController.class).listar(restauranteid)).withSelfRel();
+		return linkTo(methodOn(RestauranteFormaPagamentoController.class).listar(restauranteid)).withRel("formas-pagamento");
 	}
 
 	// Link cidade
@@ -139,7 +139,7 @@ public class JmFoodLinks {
 	}
 
 	public Link linkToRestaurante() {
-		return linkTo(RestauranteController.class).withSelfRel();
+		return linkTo(RestauranteController.class).withRel("restaurantes");
 	}
 
 }
