@@ -30,16 +30,16 @@ public class RestauranteModelAssembler extends RepresentationModelAssemblerSuppo
 		RestauranteModel restauranteModel = createModelWithId(restaurante.getId(), restaurante);
 		mapper.map(restaurante, restauranteModel);
 
-		restauranteModel.add(links.linkToUsuarioResponsavel(restauranteModel.getId()));
+		restauranteModel.add(links.linkToUsuarioResponsavel(restauranteModel.getId(), "usuario-resposavel"));
 		restauranteModel.getCozinha().add(links.linkToCozinha(restauranteModel.getCozinha().getId()));
-		restauranteModel.add(links.linkToFormaPagamentoRestaurante(restaurante.getId()));
-		restauranteModel.add(links.linkToRestaurante());
+		restauranteModel.add(links.linkToFormaPagamentoRestaurante(restaurante.getId(), "forma-pagamento"));
+		restauranteModel.add(links.linkToRestaurante("restaurantes"));
 		return restauranteModel;
 	}
 	
 	@Override
 	public CollectionModel<RestauranteModel> toCollectionModel(Iterable<? extends Restaurante> entities) {
-		return super.toCollectionModel(entities).add(links.linkToRestaurante());
+		return super.toCollectionModel(entities).add(links.linkToRestaurante("restaurantes"));
 	}
 
 }

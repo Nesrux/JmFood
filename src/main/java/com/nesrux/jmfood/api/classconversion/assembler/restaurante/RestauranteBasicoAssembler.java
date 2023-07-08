@@ -31,7 +31,7 @@ public class RestauranteBasicoAssembler
 		RestauranteBasicoModel restauranteModel = createModelWithId(restaurante.getId(), restaurante);
 		mapper.map(restaurante, restauranteModel);
 
-		restauranteModel.add(links.linkToRestaurante());
+		restauranteModel.add(links.linkToRestaurante("restaurantes"));
 		restauranteModel.getCozinha().add(links.linkToCozinha(restauranteModel.getId()));
 
 		return restauranteModel;

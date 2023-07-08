@@ -30,10 +30,7 @@ public class JmFoodLinks {
 			new TemplateVariable("size", VariableType.REQUEST_PARAM),
 			new TemplateVariable("sort", VariableType.REQUEST_PARAM));
 
-	public Link linkToPedidos() {
-		// parametros de paginação
-
-		// parametros de filtro das propriedades
+	public Link linkToPedidos(String rel) {
 		TemplateVariables filtroVariable = new TemplateVariables(
 				new TemplateVariable("clienteId", VariableType.REQUEST_PARAM),
 				new TemplateVariable("restauranteId", VariableType.REQUEST_PARAM),
@@ -42,10 +39,63 @@ public class JmFoodLinks {
 
 		String pedidoUrl = linkTo(PedidoController.class).toUri().toString();
 
-		return new Link(UriTemplate.of(pedidoUrl, pagesVariables.concat(filtroVariable)), "pedidos");
+		return new Link(UriTemplate.of(pedidoUrl, pagesVariables.concat(filtroVariable)), rel);
 
 	}
 
+	// Listagem de usuarios
+	public Link linktoUsuario(String rel) {
+		return linkTo((UsuarioController.class)).withRel(rel);
+	}
+
+	// Listagem de pedidos
+	public Link linkToPedidos(Long RestauranteId, Long produtoId, String rel) {
+		return linkTo(PedidoController.class).withRel(rel);
+	}
+
+	// Listagem de cidade
+	public Link linkToCidade(String rel) {
+		return linkTo(CidadeController.class).withRel(rel);
+	}
+
+	// Listagem de Estados
+	public Link linkToEstado(String rel) {
+		return linkTo(EstadoController.class).withRel(rel);
+	}
+
+	// Listagem de grupos de um usuario
+	public Link linkToGrupoUsuario(Long usuarioId, String rel) {
+		return linkTo(methodOn(UsuarioGrupoController.class).listarGruposUsuario(usuarioId)).withRel(rel);
+	}
+
+	// Listagem de cozinhas
+	public Link linkToCozinha(String rel) {
+		return linkTo((CozinhaController.class)).withRel(rel);
+	}
+
+	public Link linkToUsuarioResponsavel(Long restauranteId, String rel) {
+		return linkTo(methodOn(RestauranteUsuarioController.class).listarFuncionariosRestaurante(restauranteId))
+				.withRel(rel);
+	}
+
+	public Link linkToConfirmarPedido(String codigoPedido, String rel) {
+		return linkTo(methodOn(FluxoPedidoController.class).confirmarPedido(codigoPedido)).withRel(rel);
+	}
+
+	public Link linkToEntregaPedido(String codigoPedido, String rel) {
+		return linkTo(methodOn(FluxoPedidoController.class).entregarPedido(codigoPedido)).withRel(rel);
+	}
+
+	public Link linkToCancelarPedido(String codigoPedido, String rel) {
+		return linkTo(methodOn(FluxoPedidoController.class).cancelarPedido(codigoPedido)).withRel(rel);
+	}
+
+	public Link linkToRestaurante(String rel) {
+		return linkTo(RestauranteController.class).withRel(rel);
+	}
+
+	// ================================== SELF
+	// ===============================================
 	// Link cliente
 	public Link linkToCliente(Long clienteId) {
 		return linkTo((methodOn(UsuarioController.class).buscar(clienteId))).withSelfRel();
@@ -57,8 +107,8 @@ public class JmFoodLinks {
 	}
 
 	// Link forma-pagamento de um restaurnte
-	public Link linkToFormaPagamentoRestaurante(Long restauranteid) {
-		return linkTo(methodOn(RestauranteFormaPagamentoController.class).listar(restauranteid)).withRel("formas-pagamento");
+	public Link linkToFormaPagamentoRestaurante(Long restauranteid, String rel) {
+		return linkTo(methodOn(RestauranteFormaPagamentoController.class).listar(restauranteid)).withRel(rel);
 	}
 
 	// Link cidade
@@ -89,57 +139,6 @@ public class JmFoodLinks {
 	// Link para usuario
 	public Link linktoUsuario(Long usuarioId) {
 		return linkTo(methodOn(UsuarioController.class).buscar(usuarioId)).withSelfRel();
-	}
-
-	// Listagem de usuarios
-	public Link linktoUsuario() {
-		return linkTo((UsuarioController.class)).withRel("usuarios");
-	}
-
-	// Listagem de pedidos
-	public Link linkToPedidos(Long RestauranteId, Long produtoId) {
-		return linkTo(PedidoController.class).withRel("Pedidos");
-	}
-
-	// Listagem de cidade
-	public Link linkToCidade() {
-		return linkTo(CidadeController.class).withRel("Cidades");
-	}
-
-	// Listagem de Estados
-	public Link linkToEstado() {
-		return linkTo(EstadoController.class).withRel("estados");
-	}
-
-	// Listagem de grupos de um usuario
-	public Link linkToGrupoUsuario(Long usuarioId) {
-		return linkTo(methodOn(UsuarioGrupoController.class).listarGruposUsuario(usuarioId)).withRel("grupos-usuarios");
-	}
-
-	// Listagem de cozinhas
-	public Link linkToCozinha() {
-		return linkTo((CozinhaController.class)).withRel("cozinhas");
-	}
-
-	public Link linkToUsuarioResponsavel(Long restauranteId) {
-		return linkTo(methodOn(RestauranteUsuarioController.class).listarFuncionariosRestaurante(restauranteId))
-				.withRel("Usuarios-Responsaveis");
-	}
-
-	public Link linkToConfirmarPedido(String codigoPedido) {
-		return linkTo(methodOn(FluxoPedidoController.class).confirmarPedido(codigoPedido)).withRel("confirmar-pedido");
-	}
-
-	public Link linkToEntregaPedido(String codigoPedido) {
-		return linkTo(methodOn(FluxoPedidoController.class).entregarPedido(codigoPedido)).withRel("entregar-pedido");
-	}
-
-	public Link linkToCancelarPedido(String codigoPedido) {
-		return linkTo(methodOn(FluxoPedidoController.class).cancelarPedido(codigoPedido)).withRel("cancelar-pedido");
-	}
-
-	public Link linkToRestaurante() {
-		return linkTo(RestauranteController.class).withRel("restaurantes");
 	}
 
 }

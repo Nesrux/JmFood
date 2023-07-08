@@ -28,7 +28,7 @@ public class RestauranteUsuarioController implements RestauranteUsuarioControlle
 	private CadastroRestauranteService restauranteService;
 	@Autowired
 	private UsuarioModelAssembler usuarioAssembler;
-	
+
 	@Autowired
 	private JmFoodLinks jmFoodLinks;
 
@@ -39,7 +39,7 @@ public class RestauranteUsuarioController implements RestauranteUsuarioControlle
 		CollectionModel<UsuarioModel> usuarioModelList = usuarioAssembler.toCollectionModel(usuarios);
 
 		return usuarioModelList.removeLinks()
-				.add(jmFoodLinks.linkToUsuarioResponsavel(restauranteId));
+				.add(jmFoodLinks.linkToUsuarioResponsavel(restauranteId, "usuario-responsavel"));
 	}
 
 	@Override

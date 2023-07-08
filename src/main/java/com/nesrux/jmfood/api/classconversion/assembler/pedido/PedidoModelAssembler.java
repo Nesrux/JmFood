@@ -26,7 +26,7 @@ public class PedidoModelAssembler extends RepresentationModelAssemblerSupport<Pe
 		PedidoModel pedidoModel = createModelWithId(pedido.getCodigo(), pedido);
 		mapper.map(pedido, pedidoModel);
 
-		pedidoModel.add(jmFoodLinks.linkToPedidos());
+		pedidoModel.add(jmFoodLinks.linkToPedidos("pedidos"));
 
 		// código para o cliente
 		pedidoModel.getCliente().add(jmFoodLinks.linkToCliente(pedidoModel.getCliente().getId()));
@@ -48,16 +48,16 @@ public class PedidoModelAssembler extends RepresentationModelAssemblerSupport<Pe
 
 		// para confimrar pedido
 		if (pedido.podeSerConfirmado()) {
-			pedidoModel.add(jmFoodLinks.linkToConfirmarPedido(pedidoModel.getCodigo()));
+			pedidoModel.add(jmFoodLinks.linkToConfirmarPedido(pedidoModel.getCodigo(), "confirmar-pedido"));
 		}
 
 		// Entregar pedido
 		if (pedido.podeSerEntegue()) {
-			pedidoModel.add(jmFoodLinks.linkToEntregaPedido(pedidoModel.getCodigo()));
+			pedidoModel.add(jmFoodLinks.linkToEntregaPedido(pedidoModel.getCodigo(), "entregar-pedido"));
 		}
 		// Cancelar Pedido
 		if (pedido.podeSerCancelado()) {
-			pedidoModel.add(jmFoodLinks.linkToCancelarPedido(pedidoModel.getCodigo()));
+			pedidoModel.add(jmFoodLinks.linkToCancelarPedido(pedidoModel.getCodigo(), "cancelar-pedido"));
 
 		}
 		return pedidoModel;
@@ -66,7 +66,7 @@ public class PedidoModelAssembler extends RepresentationModelAssemblerSupport<Pe
 
 	@Override
 	public CollectionModel<PedidoModel> toCollectionModel(Iterable<? extends Pedido> entities) {
-		return super.toCollectionModel(entities).add(jmFoodLinks.linkToPedidos());
+		return super.toCollectionModel(entities).add(jmFoodLinks.linkToPedidos("pedidos"));
 	}
 
 }

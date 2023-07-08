@@ -28,13 +28,13 @@ public class CozinhaModelAssembler extends RepresentationModelAssemblerSupport<C
 		CozinhaModel cozinhaModel = createModelWithId(cozinha.getId(), cozinha);
 		modelMapper.map(cozinha, cozinhaModel);
 
-		cozinhaModel.add(jmFoodLinks.linkToCozinha());
+		cozinhaModel.add(jmFoodLinks.linkToCozinha("cozinhas"));
 
 		return cozinhaModel;
 	}
 
 	@Override
 	public CollectionModel<CozinhaModel> toCollectionModel(Iterable<? extends Cozinha> entities) {
-		return super.toCollectionModel(entities).add(jmFoodLinks.linkToCozinha());
+		return super.toCollectionModel(entities).add(jmFoodLinks.linkToCozinha("cozinhas"));
 	}
 }
