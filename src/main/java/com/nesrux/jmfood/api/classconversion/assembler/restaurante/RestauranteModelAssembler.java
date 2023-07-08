@@ -33,13 +33,13 @@ public class RestauranteModelAssembler extends RepresentationModelAssemblerSuppo
 		restauranteModel.add(links.linkToUsuarioResponsavel(restauranteModel.getId(), "usuario-resposavel"));
 		restauranteModel.getCozinha().add(links.linkToCozinha(restauranteModel.getCozinha().getId()));
 		restauranteModel.add(links.linkToFormaPagamentoRestaurante(restaurante.getId(), "forma-pagamento"));
-		restauranteModel.add(links.linkToRestaurante("restaurantes"));
+		restauranteModel.add(links.linkToRestaurantes("restaurantes"));
 		return restauranteModel;
 	}
 	
 	@Override
 	public CollectionModel<RestauranteModel> toCollectionModel(Iterable<? extends Restaurante> entities) {
-		return super.toCollectionModel(entities).add(links.linkToRestaurante("restaurantes"));
+		return super.toCollectionModel(entities).add(links.linkToRestaurantes());
 	}
 
 }

@@ -40,7 +40,7 @@ public class UsuarioModelAssembler extends RepresentationModelAssemblerSupport<U
 
 	@Override
 	public CollectionModel<UsuarioModel> toCollectionModel(Iterable<? extends Usuario> entities) {
-		return super.toCollectionModel(entities).add(links.linktoUsuario("usuarios"));
+		return super.toCollectionModel(entities).add(links.linktoUsuario());
 	}
 
 }

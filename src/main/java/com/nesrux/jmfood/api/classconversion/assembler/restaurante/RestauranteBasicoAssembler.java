@@ -1,7 +1,5 @@
 package com.nesrux.jmfood.api.classconversion.assembler.restaurante;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
@@ -31,7 +29,7 @@ public class RestauranteBasicoAssembler
 		RestauranteBasicoModel restauranteModel = createModelWithId(restaurante.getId(), restaurante);
 		mapper.map(restaurante, restauranteModel);
 
-		restauranteModel.add(links.linkToRestaurante("restaurantes"));
+		restauranteModel.add(links.linkToRestaurantes("restaurantes"));
 		restauranteModel.getCozinha().add(links.linkToCozinha(restauranteModel.getId()));
 
 		return restauranteModel;
@@ -39,6 +37,6 @@ public class RestauranteBasicoAssembler
 
 	@Override
 	public CollectionModel<RestauranteBasicoModel> toCollectionModel(Iterable<? extends Restaurante> entities) {
-		return super.toCollectionModel(entities).add(linkTo(RestauranteController.class).withSelfRel());
+		return super.toCollectionModel(entities).add(links.linkToRestaurantes());
 	}
 }

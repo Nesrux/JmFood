@@ -43,7 +43,7 @@ public class JmFoodLinks {
 
 	}
 
-	public Link linkToRestaurante(String rel) {
+	public Link linkToRestaurantes(String rel) {
 		TemplateVariables projecaoRestaurante = new TemplateVariables(
 				new TemplateVariable("projecao=apenas-nome", VariableType.REQUEST_PARAM));
 
@@ -51,9 +51,17 @@ public class JmFoodLinks {
 		return new Link(UriTemplate.of(ListagemRestaurante, projecaoRestaurante), rel);
 	}
 
+	public Link linkToRestaurantes() {
+		return linkTo((UsuarioController.class)).withSelfRel();
+	}
+
 	// Listagem de usuarios
 	public Link linktoUsuario(String rel) {
 		return linkTo((UsuarioController.class)).withRel(rel);
+	}
+
+	public Link linktoUsuario() {
+		return linkTo((UsuarioController.class)).withSelfRel();
 	}
 
 	// Listagem de pedidos
