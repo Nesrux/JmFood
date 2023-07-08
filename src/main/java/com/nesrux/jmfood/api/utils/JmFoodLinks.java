@@ -43,6 +43,14 @@ public class JmFoodLinks {
 
 	}
 
+	public Link linkToRestaurante(String rel) {
+		TemplateVariables projecaoRestaurante = new TemplateVariables(
+				new TemplateVariable("projecao=apenas-nome", VariableType.REQUEST_PARAM));
+
+		String ListagemRestaurante = linkTo(RestauranteController.class).toUri().toString();
+		return new Link(UriTemplate.of(ListagemRestaurante, projecaoRestaurante), rel);
+	}
+
 	// Listagem de usuarios
 	public Link linktoUsuario(String rel) {
 		return linkTo((UsuarioController.class)).withRel(rel);
@@ -90,8 +98,9 @@ public class JmFoodLinks {
 		return linkTo(methodOn(FluxoPedidoController.class).cancelarPedido(codigoPedido)).withRel(rel);
 	}
 
-	public Link linkToRestaurante(String rel) {
-		return linkTo(RestauranteController.class).withRel(rel);
+	// Link forma-pagamento de um restaurnte
+	public Link linkToFormaPagamentoRestaurante(Long restauranteid, String rel) {
+		return linkTo(methodOn(RestauranteFormaPagamentoController.class).listar(restauranteid)).withRel(rel);
 	}
 
 	// ================================== SELF
@@ -104,11 +113,6 @@ public class JmFoodLinks {
 	// Link forma-pagamento
 	public Link linkToFormaPagamento(Long formaPagamentoId) {
 		return linkTo(methodOn(FormaPagamentoController.class).buscar(formaPagamentoId, null)).withSelfRel();
-	}
-
-	// Link forma-pagamento de um restaurnte
-	public Link linkToFormaPagamentoRestaurante(Long restauranteid, String rel) {
-		return linkTo(methodOn(RestauranteFormaPagamentoController.class).listar(restauranteid)).withRel(rel);
 	}
 
 	// Link cidade
