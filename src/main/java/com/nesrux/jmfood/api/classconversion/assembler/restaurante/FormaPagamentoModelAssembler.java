@@ -1,27 +1,40 @@
 package com.nesrux.jmfood.api.classconversion.assembler.restaurante;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
+import com.nesrux.jmfood.api.controller.FormaPagamentoController;
 import com.nesrux.jmfood.api.model.dto.output.formaPagamento.FormaPagamentoModel;
+import com.nesrux.jmfood.api.utils.JmFoodLinks;
 import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
 
 @Component
-public class FormaPagamentoModelAssembler {
+public class FormaPagamentoModelAssembler
+		extends RepresentationModelAssemblerSupport<FormaPagamento, FormaPagamentoModel> {
 	@Autowired
 	private ModelMapper mapper;
+	@Autowired
+	private JmFoodLinks links;
 
-	public List<FormaPagamentoModel> toCollectionDto(Collection<FormaPagamento> formaPagamentos) {
-		return formaPagamentos.stream().map(formaPagamento -> toModel(formaPagamento)).collect(Collectors.toList());
+	public FormaPagamentoModelAssembler() {
+		super(FormaPagamentoController.class, FormaPagamentoModel.class);
 	}
 
+	@Override
 	public FormaPagamentoModel toModel(FormaPagamento formaPagamento) {
-		return mapper.map(formaPagamento, FormaPagamentoModel.class);
+		FormaPagamentoModel formaPagamentoModel = createModelWithId(formaPagamento.getId(), formaPagamento);
+		mapper.map(formaPagamento, formaPagamentoModel);
+	
+		formaPagamentoModel.add(links.linkToFormasPagamentos("formas-pagamentos"));
+		return formaPagamentoModel;
+	}
+
+	@Override
+	public CollectionModel<FormaPagamentoModel> toCollectionModel(Iterable<? extends FormaPagamento> entities) {
+		return super.toCollectionModel(entities).add(links.linkToFormasPagamentos());
 	}
 
 }

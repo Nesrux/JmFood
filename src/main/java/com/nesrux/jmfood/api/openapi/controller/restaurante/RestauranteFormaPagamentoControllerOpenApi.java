@@ -1,6 +1,6 @@
 package com.nesrux.jmfood.api.openapi.controller.restaurante;
 
-import java.util.List;
+import org.springframework.hateoas.CollectionModel;
 
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.output.formaPagamento.FormaPagamentoModel;
@@ -19,7 +19,7 @@ public interface RestauranteFormaPagamentoControllerOpenApi {
 		@ApiResponse(code = 404, message = "Codigo do Restaurante ou da forma de pagamento não existe", response = ErroApi.class),
 		@ApiResponse(code = 200, message = "Listagem feita com sucesso")
 	})
-	public List<FormaPagamentoModel> listar(@ApiParam(value = "Id de um restaurante", example = "1", required = true)
+	public CollectionModel<FormaPagamentoModel> listar(@ApiParam(value = "Id de um restaurante", example = "1", required = true)
 			Long restauranteId);
 
 	@ApiOperation("Desassocia uma forma de pagamento de um restaurante")

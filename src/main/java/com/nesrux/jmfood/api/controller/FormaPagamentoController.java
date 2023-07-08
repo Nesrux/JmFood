@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -44,54 +45,52 @@ public class FormaPagamentoController implements FormaPagamentoControllerOpenApi
 	@Autowired
 	private FormaPagamentoModelAssembler assembler;
 
+	@Override
 	@GetMapping
-	public ResponseEntity<List<FormaPagamentoModel>> listar(ServletWebRequest request) {
-		//Deep Etags
+	public ResponseEntity<CollectionModel<FormaPagamentoModel>> listar(ServletWebRequest request) {
+		// Deep Etags
 		ShallowEtagHeaderFilter.disableContentCaching(request.getRequest());
-		
+
 		String eTag = "0";
-		
+
 		OffsetDateTime dataUltimaAtualizacao = service.ultimaAtualizacao();
-		if(dataUltimaAtualizacao != null) {
-			eTag = String.valueOf(dataUltimaAtualizacao.toEpochSecond());		
+		if (dataUltimaAtualizacao != null) {
+			eTag = String.valueOf(dataUltimaAtualizacao.toEpochSecond());
 		}
-		if(request.checkNotModified(eTag)) {
+		if (request.checkNotModified(eTag)) {
 			return null;
 		}
-		
+
 		List<FormaPagamento> formasPagamento = service.acharTodos();
 
-		List<FormaPagamentoModel> formasPagamentoModel = 
-				assembler.toCollectionDto(formasPagamento);
+		CollectionModel<FormaPagamentoModel> formasPagamentoModel = assembler.toCollectionModel(formasPagamento);
 
-		return ResponseEntity.ok()
-				.cacheControl(CacheControl.maxAge(15, TimeUnit.SECONDS).cachePublic())
-				.eTag(eTag)
+		return ResponseEntity.ok().cacheControl(CacheControl.maxAge(15, TimeUnit.SECONDS).cachePublic()).eTag(eTag)
 				.body(formasPagamentoModel);
 	}
 
+	@Override
 	@GetMapping("/{formaPagamentoID}")
 	public ResponseEntity<FormaPagamentoModel> buscar(@PathVariable Long formaPagamentoID, ServletWebRequest request) {
-		//é esse aqui que eu trnho que fazer na consulta de restaurantes
+		// é esse aqui que eu trnho que fazer na consulta de restaurantes
 		ShallowEtagHeaderFilter.disableContentCaching(request.getRequest());
-		
+
 		String eTag = "0";
-		
+
 		OffsetDateTime dataUltimaAtualizacao = service.ultimaAtualizacao(formaPagamentoID);
-		if(dataUltimaAtualizacao != null) {
-			eTag = String.valueOf(dataUltimaAtualizacao.toEpochSecond());		
+		if (dataUltimaAtualizacao != null) {
+			eTag = String.valueOf(dataUltimaAtualizacao.toEpochSecond());
 		}
-		if(request.checkNotModified(eTag)) {
+		if (request.checkNotModified(eTag)) {
 			return null;
 		}
-		FormaPagamento formaPagamento = service.acharOuFalhar(formaPagamentoID);		
+		FormaPagamento formaPagamento = service.acharOuFalhar(formaPagamentoID);
 		FormaPagamentoModel formaPagamentoModel = assembler.toModel(formaPagamento);
 
-		return ResponseEntity.ok()
-				.cacheControl(CacheControl.maxAge(15, TimeUnit.SECONDS))
-				.body(formaPagamentoModel);
+		return ResponseEntity.ok().cacheControl(CacheControl.maxAge(15, TimeUnit.SECONDS)).body(formaPagamentoModel);
 	}
 
+	@Override
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public FormaPagamentoModel adicionar(@RequestBody @Valid FormaPagamentoInputDto inputDto) {
@@ -102,6 +101,7 @@ public class FormaPagamentoController implements FormaPagamentoControllerOpenApi
 		return outputDto;
 	}
 
+	@Override
 	@PutMapping("/{formaPagamentoId}")
 	public FormaPagamentoModel atualizar(@RequestBody @Valid FormaPagamentoInputDto inputDto,
 			@PathVariable Long formaPagamentoId) {
@@ -112,6 +112,7 @@ public class FormaPagamentoController implements FormaPagamentoControllerOpenApi
 		return assembler.toModel(formaPagamento);
 	}
 
+	@Override
 	@DeleteMapping("/{formaPagamentoID}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluir(@PathVariable Long formaPagamentoID) {

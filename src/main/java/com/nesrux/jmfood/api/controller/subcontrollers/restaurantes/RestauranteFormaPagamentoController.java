@@ -1,8 +1,7 @@
 package com.nesrux.jmfood.api.controller.subcontrollers.restaurantes;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,20 +27,23 @@ public class RestauranteFormaPagamentoController implements RestauranteFormaPaga
 	@Autowired
 	private FormaPagamentoModelAssembler formaPagamentoAssembler;
 
+	@Override
 	@GetMapping()
-	public List<FormaPagamentoModel> listar(@PathVariable Long restauranteId) {
+	public CollectionModel<FormaPagamentoModel> listar(@PathVariable Long restauranteId) {
 		Restaurante restaurante = service.acharOuFalhar(restauranteId);
 
-		return formaPagamentoAssembler.toCollectionDto(restaurante.getFormasPagamento());
+		return formaPagamentoAssembler.toCollectionModel(restaurante.getFormasPagamento());
 
 	}
 
+	@Override
 	@DeleteMapping("/{formaPagamentoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void desassociarFormaPagamento(@PathVariable Long restauranteId, @PathVariable Long formaPagamentoId) {
 		service.desassociarFormaPagamento(restauranteId, formaPagamentoId);
 	}
 
+	@Override
 	@PutMapping("/{formaPagamentoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void associarFormaPagamento(@PathVariable Long restauranteId, @PathVariable Long formaPagamentoId) {

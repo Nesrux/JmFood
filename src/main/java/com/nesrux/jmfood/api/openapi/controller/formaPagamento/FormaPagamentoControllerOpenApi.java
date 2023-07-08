@@ -1,7 +1,6 @@
 package com.nesrux.jmfood.api.openapi.controller.formaPagamento;
 
-import java.util.List;
-
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.ServletWebRequest;
 
@@ -19,7 +18,7 @@ import io.swagger.annotations.ApiResponses;
 public interface FormaPagamentoControllerOpenApi {
 
 	@ApiOperation("Lista as formas de pagamento")
-	ResponseEntity<List<FormaPagamentoModel>> listar(ServletWebRequest request);
+	ResponseEntity<CollectionModel<FormaPagamentoModel>> listar(ServletWebRequest request);
 
 	@ApiOperation("Busca apenas 1 forma de pagamento")
 	@ApiResponses({ @ApiResponse(code = 400, message = "Id da Forma de pagamento é inválido", response = ErroApi.class),

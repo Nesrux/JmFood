@@ -196,5 +196,12 @@ public class JmFoodLinks {
 	public Link linkToPedidos() {
 		return linkToPedidos(IanaLinkRelations.SELF.value());
 	}
+	public Link linkToFormasPagamentos(String rel) {
+		return linkTo(methodOn(FormaPagamentoController.class).listar(null)).withRel(rel);
+	}
+	public Link linkToFormasPagamentos() {
+		return linkToFormasPagamentos(IanaLinkRelations.SELF.value());
+	}
+	
 
 }
