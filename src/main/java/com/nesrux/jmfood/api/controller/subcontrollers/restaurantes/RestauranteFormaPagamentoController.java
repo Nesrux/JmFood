@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nesrux.jmfood.api.classconversion.assembler.restaurante.FormaPagamentoModelAssembler;
 import com.nesrux.jmfood.api.model.dto.output.formaPagamento.FormaPagamentoModel;
 import com.nesrux.jmfood.api.openapi.controller.restaurante.RestauranteFormaPagamentoControllerOpenApi;
+import com.nesrux.jmfood.api.utils.JmFoodLinks;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.service.CadastroRestauranteService;
 
@@ -27,12 +28,19 @@ public class RestauranteFormaPagamentoController implements RestauranteFormaPaga
 	@Autowired
 	private FormaPagamentoModelAssembler formaPagamentoAssembler;
 
+	@Autowired
+	private JmFoodLinks links;
+
 	@Override
 	@GetMapping()
 	public CollectionModel<FormaPagamentoModel> listar(@PathVariable Long restauranteId) {
+
 		Restaurante restaurante = service.acharOuFalhar(restauranteId);
 
-		return formaPagamentoAssembler.toCollectionModel(restaurante.getFormasPagamento());
+		CollectionModel<FormaPagamentoModel> formasPagamentoModel = formaPagamentoAssembler
+				.toCollectionModel(restaurante.getFormasPagamento());
+
+		return formasPagamentoModel.removeLinks().add(links.linkToRestauranteFormasPagamento(restauranteId));
 
 	}
 

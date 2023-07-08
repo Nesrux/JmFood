@@ -67,6 +67,9 @@ public class JmFoodLinks {
 	public Link linkToRestauranteFormasPagamento(Long restauranteId, String rel) {
 		return linkTo(methodOn(RestauranteFormaPagamentoController.class).listar(restauranteId)).withRel(rel);
 	}
+	public Link linkToRestauranteFormasPagamento(Long restauranteId) {
+		return linkToRestauranteFormasPagamento(restauranteId, IanaLinkRelations.SELF.value());
+	}
 
 	public Link linkToRestauranteAbertura(Long restauranteId, String rel) {
 		return linkTo(methodOn(RestauranteController.class).abrirRestaurante(restauranteId)).withRel(rel);
