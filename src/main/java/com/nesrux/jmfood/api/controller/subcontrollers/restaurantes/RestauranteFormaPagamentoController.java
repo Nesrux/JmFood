@@ -41,9 +41,12 @@ public class RestauranteFormaPagamentoController implements RestauranteFormaPaga
 		CollectionModel<FormaPagamentoModel> formasPagamentoModel = formaPagamentoAssembler
 				.toCollectionModel(restaurante.getFormasPagamento());
 
-		formasPagamentoModel.removeLinks().add(links.linkToRestauranteFormasPagamento(restauranteId));
+		formasPagamentoModel.removeLinks().add(links.linkToRestauranteFormasPagamento(restauranteId))
+				.add(links.linktoRestauranteFormaPagamentoAssociar(restauranteId, "associar"));
+
 		formasPagamentoModel.getContent().forEach(formaPagamento -> {
-			formaPagamento.add(links.linktoRestauranteFormaPagamentoDesassociacao(restauranteId, formaPagamento.getId(), "desassociar"));
+			formaPagamento.add(links.linktoRestauranteFormaPagamentoDesassociacao(restauranteId, formaPagamento.getId(),
+					"desassociar"));
 		});
 
 		return formasPagamentoModel;
