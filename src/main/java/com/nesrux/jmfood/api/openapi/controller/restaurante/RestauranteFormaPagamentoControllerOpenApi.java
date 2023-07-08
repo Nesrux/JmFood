@@ -1,6 +1,7 @@
 package com.nesrux.jmfood.api.openapi.controller.restaurante;
 
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.ResponseEntity;
 
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.output.formaPagamento.FormaPagamentoModel;
@@ -28,7 +29,7 @@ public interface RestauranteFormaPagamentoControllerOpenApi {
 		@ApiResponse(code = 404, message = "Codigo do Restaurante ou da forma de pagamento não existe", response = ErroApi.class),
 		@ApiResponse(code = 204, message = "Dessasiciação feita com sucesso")
 	})
-	public void desassociarFormaPagamento(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId,
+	public ResponseEntity<Void> desassociarFormaPagamento(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId,
 			@ApiParam(value = "Id de uma Forma de pagamento", example = "1", required = true)	Long formaPagamentoId);
 
 	@ApiOperation("Associa uma forma de pagamento a um restaurante")
@@ -37,7 +38,7 @@ public interface RestauranteFormaPagamentoControllerOpenApi {
 		@ApiResponse(code = 404, message = "Codigo do Restaurante ou da forma de pagamento não existe", response = ErroApi.class),
 		@ApiResponse(code = 204, message = "Associação feita com sucesso")
 	})
-	public void associarFormaPagamento(@ApiParam(value = "Id de um restaurante", example = "1", required = true)Long restauranteId,
+	public ResponseEntity<Void> associarFormaPagamento(@ApiParam(value = "Id de um restaurante", example = "1", required = true)Long restauranteId,
 			@ApiParam(value = "Id de uma Forma de pagamento", example = "1", required = true) Long formaPagamentoId);
 
 }

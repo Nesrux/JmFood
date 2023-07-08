@@ -67,8 +67,21 @@ public class JmFoodLinks {
 	public Link linkToRestauranteFormasPagamento(Long restauranteId, String rel) {
 		return linkTo(methodOn(RestauranteFormaPagamentoController.class).listar(restauranteId)).withRel(rel);
 	}
+
 	public Link linkToRestauranteFormasPagamento(Long restauranteId) {
 		return linkToRestauranteFormasPagamento(restauranteId, IanaLinkRelations.SELF.value());
+	}
+
+	public Link linktoRestauranteFormaPagamentoDesassociacao(Long restauranteid, Long formaPagamentoId, String rel) {
+
+		return linkTo(methodOn(RestauranteFormaPagamentoController.class).desassociarFormaPagamento(restauranteid,
+				formaPagamentoId)).withRel(rel);
+	}
+
+	public Link linktoRestauranteFormaPagamentoDesassociacao(Long restauranteid, Long formaPagamentoId) {
+
+		return linktoRestauranteFormaPagamentoDesassociacao(restauranteid, formaPagamentoId,
+				IanaLinkRelations.SELF.value());
 	}
 
 	public Link linkToRestauranteAbertura(Long restauranteId, String rel) {
@@ -195,16 +208,17 @@ public class JmFoodLinks {
 	public Link linkToPedidos(String rel) {
 		return linkTo(methodOn(PedidoController.class).pesquisarPedidos(null, null)).withRel(rel);
 	}
-	
+
 	public Link linkToPedidos() {
 		return linkToPedidos(IanaLinkRelations.SELF.value());
 	}
+
 	public Link linkToFormasPagamentos(String rel) {
 		return linkTo(methodOn(FormaPagamentoController.class).listar(null)).withRel(rel);
 	}
+
 	public Link linkToFormasPagamentos() {
 		return linkToFormasPagamentos(IanaLinkRelations.SELF.value());
 	}
-	
 
 }
