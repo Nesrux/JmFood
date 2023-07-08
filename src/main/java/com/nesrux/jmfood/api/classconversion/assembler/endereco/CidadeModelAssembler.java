@@ -30,7 +30,7 @@ public class CidadeModelAssembler extends RepresentationModelAssemblerSupport<Ci
 		
 		modelMapper.map(cidade, cidadeModel);
 		
-		cidadeModel.add(jmFoodLinks.linkToCidade("cidades"));
+		cidadeModel.add(jmFoodLinks.linkToCidades("cidades"));
 		
 		cidadeModel.getEstado().add(jmFoodLinks.linkToEstado(cidadeModel.getEstado().getId()));
 		return cidadeModel;
@@ -38,6 +38,6 @@ public class CidadeModelAssembler extends RepresentationModelAssemblerSupport<Ci
 
 	@Override
 	public CollectionModel<CidadeModel> toCollectionModel(Iterable<? extends Cidade> entities) {
-		return super.toCollectionModel(entities).add(jmFoodLinks.linkToCidade("cidades"));
+		return super.toCollectionModel(entities).add(jmFoodLinks.linkToCidades());
 	}
 }

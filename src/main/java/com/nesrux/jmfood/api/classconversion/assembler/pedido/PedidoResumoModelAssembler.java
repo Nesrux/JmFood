@@ -28,7 +28,7 @@ public class PedidoResumoModelAssembler extends RepresentationModelAssemblerSupp
 
 		pedidoResumoModel.add(jmFoodLinks.linkToPedidos("pedidos"));
 
-		pedidoResumoModel.getCliente().add(jmFoodLinks.linkToCliente(pedidoResumoModel.getCliente().getId()));
+		pedidoResumoModel.getCliente().add(jmFoodLinks.linkToUsuario(pedidoResumoModel.getCliente().getId()));
 
 		pedidoResumoModel.getRestaurante()
 				.add(jmFoodLinks.linkToRestaurante(pedidoResumoModel.getRestaurante().getRestauranteId()));

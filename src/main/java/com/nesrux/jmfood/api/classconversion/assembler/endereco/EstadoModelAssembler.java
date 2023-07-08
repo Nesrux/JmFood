@@ -30,7 +30,7 @@ public class EstadoModelAssembler extends RepresentationModelAssemblerSupport<Es
 		mapper.map(estado, estadoModel);
 
 		// Adiciona link da listagem de estados
-		estadoModel.add(jmFoodLinks.linkToEstado("estados"));
+		estadoModel.add(jmFoodLinks.linkToEstados("estados"));
 
 		// Adiciona link do recurso do proprio Estado
 		// estadoModel.add(linkTo(methodOn(EstadoController.class).buscar(estado.getId())).withSelfRel());
@@ -40,7 +40,7 @@ public class EstadoModelAssembler extends RepresentationModelAssemblerSupport<Es
 
 	@Override
 	public CollectionModel<EstadoModel> toCollectionModel(Iterable<? extends Estado> entities) {
-		return super.toCollectionModel(entities).add(jmFoodLinks.linkToEstado("estados"));
+		return super.toCollectionModel(entities).add(jmFoodLinks.linkToEstados());
 	}
 
 }

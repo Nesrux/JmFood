@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -100,9 +101,10 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	@Override
 	@PutMapping("/ativacoes")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void ativarRestaurantes(@RequestBody List<Long> restauranteids) {
+	public ResponseEntity<Void> ativarRestaurantes(@RequestBody List<Long> restauranteids) {
 		try {
 			service.ativar(restauranteids);
+			return ResponseEntity.noContent().build();
 		} catch (RestauranteNaoEncontradoException e) {
 			throw new NegocioException(e.getMessage(), e);
 		}
@@ -111,9 +113,11 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	@Override
 	@DeleteMapping("/ativacoes")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void desativarRestaurantes(@RequestBody List<Long> restauranteids) {
+	public ResponseEntity<Void> desativarRestaurantes(@RequestBody List<Long> restauranteids) {
 		try {
 			service.desativar(restauranteids);
+			return ResponseEntity.noContent().build();
+
 		} catch (RestauranteNaoEncontradoException e) {
 			throw new NegocioException(e.getMessage(), e);
 		}
@@ -123,29 +127,37 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	@Override
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("/{restauranteId}/ativo")
-	public void ativarRestaurante(@PathVariable Long restauranteId) {
+	public ResponseEntity<Void> ativarRestaurante(@PathVariable Long restauranteId) {
 		service.ativar(restauranteId);
+		return ResponseEntity.noContent().build();
+
 	}
 
 	@Override
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{restauranteId}/ativo")
-	public void desativarRestaurante(@PathVariable Long restauranteId) {
+	public ResponseEntity<Void> desativarRestaurante(@PathVariable Long restauranteId) {
 		service.desativar(restauranteId);
+		return ResponseEntity.noContent().build();
+
 	}
 
 	@Override
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("/{restauranteId}/fechamento")
-	public void fecharRestaurante(@PathVariable Long restauranteId) {
+	public ResponseEntity<Void> fecharRestaurante(@PathVariable Long restauranteId) {
 		service.fechar(restauranteId);
+		return ResponseEntity.noContent().build();
+
 	}
 
 	@Override
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("/{restauranteId}/abertura")
-	public void abrirRestaurante(@PathVariable Long restauranteId) {
+	public ResponseEntity<Void> abrirRestaurante(@PathVariable Long restauranteId) {
 		service.abrir(restauranteId);
+		return ResponseEntity.noContent().build();
+
 	}
 
 	// O @valid vai validar o objeto enviado na requisição na hora que ele chega no

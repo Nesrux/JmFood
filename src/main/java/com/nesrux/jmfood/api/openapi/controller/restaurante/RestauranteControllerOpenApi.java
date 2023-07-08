@@ -3,6 +3,7 @@ package com.nesrux.jmfood.api.openapi.controller.restaurante;
 import java.util.List;
 
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.ResponseEntity;
 
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.input.restaurante.RestauranteInputDto;
@@ -59,14 +60,14 @@ public interface RestauranteControllerOpenApi {
 			@ApiResponse(code = 404, message = "Não foi possivel encontrar um restaurante com o id informado", response = ErroApi.class),
 			@ApiResponse(code = 400, message = "Id do restaurante esta invalido", response = ErroApi.class),
 			@ApiResponse(code = 204, message = "Restaurantes ativados com sucesso") })
-	public void ativarRestaurantes(List<Long> restaurantes);
+	public ResponseEntity<Void> ativarRestaurantes(List<Long> restaurantes);
 
 	@ApiOperation("desativação de restaurantes em massa")
 	@ApiResponses({
 			@ApiResponse(code = 404, message = "Não foi possivel encontrar um restaurante com o id passado", response = ErroApi.class),
 			@ApiResponse(code = 400, message = "Id do restaurante é invalido", response = ErroApi.class),
 			@ApiResponse(code = 204, message = "Desativação de restaurantes feito com sucesso") })
-	public void desativarRestaurantes(
+	public ResponseEntity<Void> desativarRestaurantes(
 			@ApiParam(value = "Lista de Ids que serão desativados", example = "1") List<Long> restauranteids);
 
 	@ApiOperation("Ativação de um unico restaurante")
@@ -74,7 +75,7 @@ public interface RestauranteControllerOpenApi {
 			@ApiResponse(code = 404, message = "Não foi possivel encontrar um restaurante com o id passado", response = ErroApi.class),
 			@ApiResponse(code = 400, message = "Id do restaurante é invalido", response = ErroApi.class),
 			@ApiResponse(code = 204, message = "Ativação de restaurante feito com sucesso") })
-	public void ativarRestaurante(
+	public ResponseEntity<Void> ativarRestaurante(
 			@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId);
 
 	@ApiOperation("Desativação de um unico restaurante")
@@ -82,7 +83,7 @@ public interface RestauranteControllerOpenApi {
 			@ApiResponse(code = 404, message = "Não foi possivel encontrar um restaurante com o id passado", response = ErroApi.class),
 			@ApiResponse(code = 400, message = "Id do restaurante é invalido", response = ErroApi.class),
 			@ApiResponse(code = 204, message = "Desativação de restaurante feito com sucesso") })
-	public void desativarRestaurante(
+	public ResponseEntity<Void> desativarRestaurante(
 			@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId);
 
 	@ApiOperation("Fechamento de um unico restaurante")
@@ -90,7 +91,7 @@ public interface RestauranteControllerOpenApi {
 			@ApiResponse(code = 404, message = "Não foi possivel encontrar um restaurante com o id passado", response = ErroApi.class),
 			@ApiResponse(code = 400, message = "Id do restaurante é invalido", response = ErroApi.class),
 			@ApiResponse(code = 400, message = "Fechamendo do restaurante feito com sucesso") })
-	public void fecharRestaurante(
+	public ResponseEntity<Void> fecharRestaurante(
 			@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId);
 
 	@ApiOperation("Abertura de um unico restaurante")
@@ -98,7 +99,7 @@ public interface RestauranteControllerOpenApi {
 			@ApiResponse(code = 404, message = "Não foi possivel encontrar um restaurante com o id passado", response = ErroApi.class),
 			@ApiResponse(code = 400, message = "Id do restaurante é invalido", response = ErroApi.class),
 			@ApiResponse(code = 204, message = "Abertura de restaurante feito com sucesso") })
-	public void abrirRestaurante(
+	public ResponseEntity<Void> abrirRestaurante(
 			@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId);
 
 }

@@ -39,7 +39,7 @@ public class RestauranteUsuarioController implements RestauranteUsuarioControlle
 		CollectionModel<UsuarioModel> usuarioModelList = usuarioAssembler.toCollectionModel(usuarios);
 
 		return usuarioModelList.removeLinks()
-				.add(jmFoodLinks.linkToUsuarioResponsavel(restauranteId, "usuario-responsavel"));
+				.add(jmFoodLinks.linkToRestauranteResponsaveis(restauranteId, "usuario-responsavel"));
 	}
 
 	@Override

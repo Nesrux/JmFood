@@ -30,17 +30,17 @@ public class UsuarioModelAssembler extends RepresentationModelAssemblerSupport<U
 		mapper.map(usuario, usuarioModel);
 
 		// Adiciona links da propria coleção
-		usuarioModel.add(links.linktoUsuario("usuarios"));
+		usuarioModel.add(links.linkToUsuarios("usuarios"));
 
 		// Adiciona link para a URI /usuaios/{userId}/grupos
-		usuarioModel.add(links.linkToGrupoUsuario(usuarioModel.getId(), "grupo-usuario"));
+		usuarioModel.add(links.linkToGruposUsuario(usuarioModel.getId(), "grupo-usuario"));
 
 		return usuarioModel;
 	}
 
 	@Override
 	public CollectionModel<UsuarioModel> toCollectionModel(Iterable<? extends Usuario> entities) {
-		return super.toCollectionModel(entities).add(links.linktoUsuario());
+		return super.toCollectionModel(entities).add(links.linkToUsuarios());
 	}
 
 }
