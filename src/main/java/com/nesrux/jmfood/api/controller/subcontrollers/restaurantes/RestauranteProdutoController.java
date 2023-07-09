@@ -1,10 +1,9 @@
 package com.nesrux.jmfood.api.controller.subcontrollers.restaurantes;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +21,7 @@ import com.nesrux.jmfood.api.classconversion.dissasembler.ProdutoInputDisassembl
 import com.nesrux.jmfood.api.model.dto.input.produto.ProdutoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.produto.ProdutoModel;
 import com.nesrux.jmfood.api.openapi.controller.restaurante.RestauranteProdutoControllerOpenApi;
+import com.nesrux.jmfood.api.utils.JmFoodLinks;
 import com.nesrux.jmfood.domain.model.pedido.Produto;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.service.CadastroProdutoService;
@@ -39,17 +39,25 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
 	private ProdutoModelAssembler assembler;
 	@Autowired
 	private CadastroRestauranteService restauranteService;
+	@Autowired
+	private JmFoodLinks links;
 
 	@Override
 	@GetMapping
-	public List<ProdutoModel> listar(@PathVariable Long restauranteId,
-			@RequestParam(required = false) Boolean incluirInativos) {
+	public CollectionModel<ProdutoModel> listar(@PathVariable Long restauranteId,
+			@RequestParam(required = false, defaultValue = "false") Boolean incluirInativos) {
 		Restaurante restaurante = restauranteService.acharOuFalhar(restauranteId);
+		
+		CollectionModel<ProdutoModel> produtosModel = null;
+		
 		if (incluirInativos) {
-			return assembler.toCollectionDto(service.acharTodos(restaurante));
+			produtosModel = assembler.toCollectionModel(service.acharTodos(restaurante));
+
 		} else {
-			return assembler.toCollectionDto(service.acharTodosAtivos(restaurante));
+			produtosModel = assembler.toCollectionModel(service.acharTodosAtivos(restaurante));
 		}
+		return produtosModel.add(links.linkToProdutos(restauranteId));
+
 	}
 
 	@Override

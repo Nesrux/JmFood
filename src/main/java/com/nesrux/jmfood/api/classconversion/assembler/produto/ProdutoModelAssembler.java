@@ -1,26 +1,40 @@
 package com.nesrux.jmfood.api.classconversion.assembler.produto;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
+import com.nesrux.jmfood.api.controller.subcontrollers.restaurantes.RestauranteProdutoController;
 import com.nesrux.jmfood.api.model.dto.output.produto.ProdutoModel;
+import com.nesrux.jmfood.api.utils.JmFoodLinks;
 import com.nesrux.jmfood.domain.model.pedido.Produto;
 
 @Component
-public class ProdutoModelAssembler {
+public class ProdutoModelAssembler extends RepresentationModelAssemblerSupport<Produto, ProdutoModel> {
 	@Autowired
 	private ModelMapper mapper;
 
+	@Autowired
+	private JmFoodLinks links;
+
+	public ProdutoModelAssembler() {
+		super(RestauranteProdutoController.class, ProdutoModel.class);
+	}
+
+	@Override
 	public ProdutoModel toModel(Produto produto) {
-		return mapper.map(produto, ProdutoModel.class);
+		ProdutoModel produtoModel = createModelWithId(produto.getId(), produto, produto.getRestaurante().getId());
+		mapper.map(produto, produtoModel);
+
+		produtoModel.add(links.linkToProdutos(produto.getRestaurante().getId(), "produtos"));
+
+		return produtoModel;
 	}
 
-	public List<ProdutoModel> toCollectionDto(List<Produto> produtos) {
-		return produtos.stream().map(produto -> toModel(produto)).collect(Collectors.toList());
+	@Override
+	public CollectionModel<ProdutoModel> toCollectionModel(Iterable<? extends Produto> entities) {
+		return super.toCollectionModel(entities);
 	}
-
 }

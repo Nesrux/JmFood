@@ -1,6 +1,6 @@
 package com.nesrux.jmfood.api.openapi.controller.restaurante;
 
-import java.util.List;
+import org.springframework.hateoas.CollectionModel;
 
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.input.produto.ProdutoInputDto;
@@ -21,7 +21,7 @@ public interface RestauranteProdutoControllerOpenApi {
 		@ApiResponse(code = 404, message = "Não possivel Listar pois não existe Restaurante com  este código", response = ErroApi.class),
 		@ApiResponse(code = 200, message = "Listagem feita com sucesso")
 	})
-	public List<ProdutoModel> listar(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId,
+	public CollectionModel<ProdutoModel> listar(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId,
 		@ApiParam(value = "boelano", example = "true")	Boolean incluirInativos);
 	
 	
