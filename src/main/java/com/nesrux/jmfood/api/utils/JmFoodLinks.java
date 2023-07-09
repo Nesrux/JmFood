@@ -139,6 +139,20 @@ public class JmFoodLinks {
 		return linkToRestauranteResponsaveis(restauranteId, IanaLinkRelations.SELF.value());
 	}
 
+	public Link linkToUsuarioDesassociar(Long restauranteId, Long usuarioId, String rel) {
+		return linkTo(methodOn(RestauranteUsuarioController.class).desassociarFuncionarios(restauranteId, usuarioId))
+				.withRel(rel);
+	}
+
+	public Link linkToUsuarioDesassociar(Long restauranteId, Long usuarioId) {
+		return linkToUsuarioDesassociar(restauranteId, usuarioId, IanaLinkRelations.SELF.value());
+	}
+
+	public Link linkToUsuarioAssociar(Long restauranteId, String rel) {
+		return linkTo(methodOn(RestauranteUsuarioController.class).associarFuncionarios(restauranteId, null))
+				.withRel(rel);
+	}
+
 	public Link linkToFormaPagamento(Long formaPagamentoId, String rel) {
 		return linkTo(methodOn(FormaPagamentoController.class).buscar(formaPagamentoId, null)).withRel(rel);
 	}

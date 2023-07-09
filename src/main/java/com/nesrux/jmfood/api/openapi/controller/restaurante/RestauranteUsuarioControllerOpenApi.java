@@ -1,6 +1,7 @@
 package com.nesrux.jmfood.api.openapi.controller.restaurante;
 
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.ResponseEntity;
 
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.output.usuario.UsuarioModel;
@@ -28,7 +29,7 @@ public interface RestauranteUsuarioControllerOpenApi {
 		@ApiResponse(code = 404, message = "Id de restaurante ou de usuario não existem", response = ErroApi.class),
 		@ApiResponse(code = 204, message = "Associação feita com sucesso")
 	})
-	public void associarFuncionarios(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId,
+	public ResponseEntity<Void> associarFuncionarios(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId,
 			@ApiParam(value = "id de um funcionario", example = "1", required = true)	Long usuarioId);
 	
 	@ApiOperation("Desassociação de funcionarios")
@@ -37,7 +38,7 @@ public interface RestauranteUsuarioControllerOpenApi {
 		@ApiResponse(code = 404, message = "Id de restaurante ou de usuario não existem", response = ErroApi.class),
 		@ApiResponse(code = 204, message = "Desassociação feita com sucesso")
 	})
-	public void desassociarFuncionarios(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId,
+	public ResponseEntity<Void> desassociarFuncionarios(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId,
 			@ApiParam(value = "id de um funcionario", example = "1", required = true) Long usuarioId);
 
 }
