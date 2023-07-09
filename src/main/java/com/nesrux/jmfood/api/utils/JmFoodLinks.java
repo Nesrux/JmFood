@@ -20,6 +20,7 @@ import com.nesrux.jmfood.api.controller.RestauranteController;
 import com.nesrux.jmfood.api.controller.UsuarioController;
 import com.nesrux.jmfood.api.controller.subcontrollers.pedidos.FluxoPedidoController;
 import com.nesrux.jmfood.api.controller.subcontrollers.restaurantes.RestauranteFormaPagamentoController;
+import com.nesrux.jmfood.api.controller.subcontrollers.restaurantes.RestauranteFotoProdutoController;
 import com.nesrux.jmfood.api.controller.subcontrollers.restaurantes.RestauranteProdutoController;
 import com.nesrux.jmfood.api.controller.subcontrollers.restaurantes.RestauranteUsuarioController;
 import com.nesrux.jmfood.api.controller.subcontrollers.usuarios.UsuarioGrupoController;
@@ -209,6 +210,12 @@ public class JmFoodLinks {
 		return linkToProdutos(restauranteId, IanaLinkRelations.SELF.value());
 	}
 
+	public Link linkToFotoProduto(Long restauranteId, Long produtoId, String rel) {
+		return linkTo(methodOn(RestauranteFotoProdutoController.class).buscarFoto(restauranteId, produtoId)).withRel(rel);
+	}
+	public Link linkToFotoProduto(Long restauranteId, Long produtoId) {
+		return linkToFotoProduto(restauranteId, produtoId, IanaLinkRelations.SELF.value());
+	} 
 	public Link linkToCozinhas(String rel) {
 		return linkTo(CozinhaController.class).withRel(rel);
 	}
