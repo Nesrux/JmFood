@@ -114,15 +114,15 @@ public class JmFoodLinks {
 	}
 
 	public Link linkToGrupo(Long grupoId) {
-		return linkToGrupos(grupoId, IanaLinkRelations.SELF.value());
+		return linkToGrupo(grupoId, IanaLinkRelations.SELF.value());
 	}
 
-	public Link linkToGrupos(Long grupoId, String rel) {
+	public Link linkToGrupos(String rel) {
 		return linkTo(methodOn(GrupoController.class).listar()).withRel(rel);
 	}
 
-	public Link linkToGrupos(Long grupoId) {
-		return linkToGrupos(grupoId, IanaLinkRelations.SELF.value());
+	public Link linkToGrupos() {
+		return linkToGrupos(IanaLinkRelations.SELF.value());
 	}
 
 	public Link linkToGrupoPermissao(Long grupoId, String rel) {
