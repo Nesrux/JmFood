@@ -22,7 +22,7 @@ public interface RestauranteProdutoControllerOpenApi {
 		@ApiResponse(code = 200, message = "Listagem feita com sucesso")
 	})
 	public List<ProdutoModel> listar(@ApiParam(value = "Id de um restaurante", example = "1", required = true) Long restauranteId,
-		@ApiParam(value = "boelano", example = "true")	boolean incluirInativos);
+		@ApiParam(value = "boelano", example = "true")	Boolean incluirInativos);
 	
 	
 	@ApiOperation("Busca um unico Produto cadastrado em um Restaurante")

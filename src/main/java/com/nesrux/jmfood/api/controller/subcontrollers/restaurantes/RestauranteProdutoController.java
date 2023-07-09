@@ -29,9 +29,8 @@ import com.nesrux.jmfood.domain.service.CadastroRestauranteService;
 
 @RestController
 @RequestMapping(path = "restaurantes/{restauranteId}/produtos", produces = MediaType.APPLICATION_JSON_VALUE)
-public class RestauranteProdutoController implements RestauranteProdutoControllerOpenApi{
-	//TODO Resolver o problema de formatação da hora da serialização para a documentação do projeto
-	//na implementação da interface
+public class RestauranteProdutoController implements RestauranteProdutoControllerOpenApi {
+
 	@Autowired
 	private CadastroProdutoService service;
 	@Autowired
@@ -41,9 +40,10 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
 	@Autowired
 	private CadastroRestauranteService restauranteService;
 
+	@Override
 	@GetMapping
 	public List<ProdutoModel> listar(@PathVariable Long restauranteId,
-			@RequestParam(required = false) boolean incluirInativos) {
+			@RequestParam(required = false) Boolean incluirInativos) {
 		Restaurante restaurante = restauranteService.acharOuFalhar(restauranteId);
 		if (incluirInativos) {
 			return assembler.toCollectionDto(service.acharTodos(restaurante));
@@ -52,6 +52,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
 		}
 	}
 
+	@Override
 	@GetMapping("/{produtoId}")
 	public ProdutoModel buscar(@PathVariable Long restauranteId, @PathVariable Long produtoId) {
 		Produto produto = service.acharOuFalhar(restauranteId, produtoId);
@@ -59,6 +60,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
 		return assembler.toModel(produto);
 	}
 
+	@Override
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ProdutoModel salvar(@PathVariable Long restauranteId, @Valid @RequestBody ProdutoInputDto inputDto) {
@@ -72,6 +74,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
 		return assembler.toModel(produto);
 	}
 
+	@Override
 	@PutMapping("/{produtoId}")
 	public ProdutoModel atualizar(@PathVariable Long produtoId, @Valid @RequestBody ProdutoInputDto inputDto) {
 		Produto produto = service.acharOuFalhar(produtoId);

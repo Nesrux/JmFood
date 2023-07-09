@@ -19,11 +19,10 @@ public class RestauranteModelAssembler extends RepresentationModelAssemblerSuppo
 
 	@Autowired
 	private JmFoodLinks links;
-	
+
 	public RestauranteModelAssembler() {
 		super(RestauranteController.class, RestauranteModel.class);
 	}
-
 
 	@Override
 	public RestauranteModel toModel(Restaurante restaurante) {
@@ -31,18 +30,24 @@ public class RestauranteModelAssembler extends RepresentationModelAssemblerSuppo
 		mapper.map(restaurante, restauranteModel);
 
 		restauranteModel.add(links.linkToRestauranteResponsaveis(restauranteModel.getId(), "resposaveis"));
-		
+
 		restauranteModel.getCozinha().add(links.linkToCozinha(restauranteModel.getCozinha().getId()));
-		
-		
+
 		restauranteModel.add(links.linkToRestauranteFormasPagamento(restaurante.getId(), "forma-pagamento"));
-		
+
+		if (restaurante.verificaEnderecoNulo()) {
+
+			restauranteModel.getEndereco().getCidade()
+					.add(links.linkToCidade(restauranteModel.getEndereco().getCidade().getId()));
+		}
+
+		restauranteModel.add(links.linkToProdutos(restauranteModel.getId(), "produtos"));
+
 		restauranteModel.add(links.linkToRestaurantes("restaurantes"));
-		
-		
+
 		return restauranteModel;
 	}
-	
+
 	@Override
 	public CollectionModel<RestauranteModel> toCollectionModel(Iterable<? extends Restaurante> entities) {
 		return super.toCollectionModel(entities).add(links.linkToRestaurantes());

@@ -124,5 +124,8 @@ public class Restaurante {
 	public boolean desassociarUsuario(Usuario usuario) {
 		return getUsuarioResponsavel().remove(usuario);
 	}
+	public boolean verificaEnderecoNulo() {
+		return getEndereco() != null && getEndereco().getCidade() != null;
+	}
 
 }
