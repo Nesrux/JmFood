@@ -15,9 +15,11 @@ import com.nesrux.jmfood.api.controller.CidadeController;
 import com.nesrux.jmfood.api.controller.CozinhaController;
 import com.nesrux.jmfood.api.controller.EstadoController;
 import com.nesrux.jmfood.api.controller.FormaPagamentoController;
+import com.nesrux.jmfood.api.controller.GrupoController;
 import com.nesrux.jmfood.api.controller.PedidoController;
 import com.nesrux.jmfood.api.controller.RestauranteController;
 import com.nesrux.jmfood.api.controller.UsuarioController;
+import com.nesrux.jmfood.api.controller.subcontrollers.grupo.GrupoPermissaoController;
 import com.nesrux.jmfood.api.controller.subcontrollers.pedidos.FluxoPedidoController;
 import com.nesrux.jmfood.api.controller.subcontrollers.restaurantes.RestauranteFormaPagamentoController;
 import com.nesrux.jmfood.api.controller.subcontrollers.restaurantes.RestauranteFotoProdutoController;
@@ -105,6 +107,30 @@ public class JmFoodLinks {
 
 	public Link linkToRestauranteAtivacao(Long restauranteId, String rel) {
 		return linkTo(methodOn(RestauranteController.class).ativarRestaurante(restauranteId)).withRel(rel);
+	}
+
+	public Link linkToGrupo(Long grupoId, String rel) {
+		return linkTo(methodOn(GrupoController.class).buscar(grupoId)).withRel(rel);
+	}
+
+	public Link linkToGrupo(Long grupoId) {
+		return linkToGrupos(grupoId, IanaLinkRelations.SELF.value());
+	}
+
+	public Link linkToGrupos(Long grupoId, String rel) {
+		return linkTo(methodOn(GrupoController.class).listar()).withRel(rel);
+	}
+
+	public Link linkToGrupos(Long grupoId) {
+		return linkToGrupos(grupoId, IanaLinkRelations.SELF.value());
+	}
+
+	public Link linkToGrupoPermissao(Long grupoId, String rel) {
+		return linkTo(methodOn(GrupoPermissaoController.class).ListarPermissoes(grupoId)).withRel(rel);
+	}
+
+	public Link linkToGrupoPermissao(Long grupoId) {
+		return linkToGrupoPermissao(grupoId, IanaLinkRelations.SELF.value());
 	}
 
 	public Link linkToUsuario(Long usuarioId, String rel) {
@@ -211,11 +237,14 @@ public class JmFoodLinks {
 	}
 
 	public Link linkToFotoProduto(Long restauranteId, Long produtoId, String rel) {
-		return linkTo(methodOn(RestauranteFotoProdutoController.class).buscarFoto(restauranteId, produtoId)).withRel(rel);
+		return linkTo(methodOn(RestauranteFotoProdutoController.class).buscarFoto(restauranteId, produtoId))
+				.withRel(rel);
 	}
+
 	public Link linkToFotoProduto(Long restauranteId, Long produtoId) {
 		return linkToFotoProduto(restauranteId, produtoId, IanaLinkRelations.SELF.value());
-	} 
+	}
+
 	public Link linkToCozinhas(String rel) {
 		return linkTo(CozinhaController.class).withRel(rel);
 	}

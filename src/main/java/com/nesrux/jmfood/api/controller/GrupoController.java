@@ -1,10 +1,9 @@
 package com.nesrux.jmfood.api.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,9 +34,10 @@ public class GrupoController implements GrupoControllerOpenApi {
 	@Autowired
 	private GrupoModelAssembler assembler;
 
+	@Override
 	@GetMapping
-	public List<GrupoModel> listar() {
-		return assembler.toCollectionDto(service.acharTodos());
+	public CollectionModel<GrupoModel> listar() {
+		return assembler.toCollectionModel(service.acharTodos());
 	}
 
 	@GetMapping("/{grupoId}")
@@ -47,6 +47,7 @@ public class GrupoController implements GrupoControllerOpenApi {
 		return assembler.toModel(grupo);
 	}
 
+	@Override
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public GrupoModel salvar(@Valid @RequestBody GrupoInputDto inpDto) {
@@ -56,21 +57,23 @@ public class GrupoController implements GrupoControllerOpenApi {
 		return assembler.toModel(grupo);
 	}
 
+	@Override
 	@DeleteMapping("/{grupoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluir(@PathVariable Long grupoId) {
 		service.excluir(grupoId);
 	}
 
+	@Override
 	@PutMapping("/{grupoId}")
 	public GrupoModel atualizar(@Valid @RequestBody GrupoInputDto inputDto, @PathVariable Long grupoId) {
 		Grupo grupo = service.acharOuFalahar(grupoId);
 		disassembler.copyToDomainObject(inputDto, grupo);
-		
+
 		service.salvar(grupo);
 
 		return assembler.toModel(grupo);
-		
+
 	}
 
 }

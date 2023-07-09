@@ -1,9 +1,9 @@
 package com.nesrux.jmfood.api.controller.subcontrollers.usuarios;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,28 +21,30 @@ import com.nesrux.jmfood.domain.model.user.Grupo;
 import com.nesrux.jmfood.domain.service.CadastroUsuarioService;
 
 @RestController
-@RequestMapping(path =  "/usuarios/{usuarioId}/grupos", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/usuarios/{usuarioId}/grupos", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UsuarioGrupoController implements UsuarioGrupoControllerOpenApi {
 	@Autowired
 	private CadastroUsuarioService usuarioService;
-	
+
 	@Autowired
 	private GrupoModelAssembler grupoAssembler;
 
+	@Override
 	@GetMapping
-	public List<GrupoModel> listarGruposUsuario(@PathVariable Long usuarioId) {
+	public CollectionModel<GrupoModel> listarGruposUsuario(@PathVariable Long usuarioId) {
 		Set<Grupo> grupos = usuarioService.listarGruposDoUsuario(usuarioId);
-		
-		
-		return grupoAssembler.toCollectionDto(grupos);
+
+		return grupoAssembler.toCollectionModel(grupos);
 	}
 
+	@Override
 	@PutMapping("/{grupoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void associarGrupo(@PathVariable Long usuarioId, @PathVariable Long grupoId) {
 		usuarioService.associarGrupo(usuarioId, grupoId);
 	}
 
+	@Override
 	@DeleteMapping("/{grupoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void desassociarGrupo(@PathVariable Long usuarioId, @PathVariable Long grupoId) {

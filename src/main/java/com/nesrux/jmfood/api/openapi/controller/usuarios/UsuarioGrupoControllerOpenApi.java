@@ -2,6 +2,8 @@ package com.nesrux.jmfood.api.openapi.controller.usuarios;
 
 import java.util.List;
 
+import org.springframework.hateoas.CollectionModel;
+
 import com.nesrux.jmfood.api.model.dto.output.grupo.GrupoModel;
 
 import io.swagger.annotations.Api;
@@ -19,7 +21,7 @@ public interface UsuarioGrupoControllerOpenApi {
 		@ApiResponse(code = 404, message = "Id de usuario não existe"),
 		@ApiResponse(code = 200, message = "Listagem de grupos feito com sucesso")
 	})
-	public List<GrupoModel> listarGruposUsuario(@ApiParam(example = "1", required = true) Long usuarioId);
+	public CollectionModel<GrupoModel> listarGruposUsuario(@ApiParam(example = "1", required = true) Long usuarioId);
 
 	@ApiOperation("Associa um usuario a um grupo")
 	@ApiResponses({

@@ -2,6 +2,8 @@ package com.nesrux.jmfood.api.openapi.controller.grupos;
 
 import java.util.List;
 
+import org.springframework.hateoas.CollectionModel;
+
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.input.grupo.GrupoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.grupo.GrupoModel;
@@ -17,7 +19,7 @@ public interface GrupoControllerOpenApi {
 	@ApiOperation("Listagem de grupos")
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "Listagem feita com sucesso") })
-	public List<GrupoModel> listar();
+	public CollectionModel<GrupoModel> listar();
 
 	@ApiOperation("Busca de um grupo")
 	@ApiResponses({ 
