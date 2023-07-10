@@ -28,6 +28,8 @@ public class RootEntryPointController {
 		root.add(links.linkToUsuarios("usuarios"));
 		root.add(links.linkToPermissoes("permissoes"));
 		root.add(links.linkToGrupos("grupos"));
+		root.add(links.linkToEstatisticas("estatisticas"));
+		
 		return root;
 	}
 

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import com.nesrux.jmfood.api.controller.CidadeController;
 import com.nesrux.jmfood.api.controller.CozinhaController;
 import com.nesrux.jmfood.api.controller.EstadoController;
+import com.nesrux.jmfood.api.controller.EstatisticasController;
 import com.nesrux.jmfood.api.controller.FormaPagamentoController;
 import com.nesrux.jmfood.api.controller.GrupoController;
 import com.nesrux.jmfood.api.controller.PedidoController;
@@ -309,6 +310,13 @@ public class JmFoodLinks {
 
 	public Link linkToFormasPagamentos() {
 		return linkToFormasPagamentos(IanaLinkRelations.SELF.value());
+	}
+	
+	public Link linkToVendasDiarias(String rel) {
+		return linkTo(methodOn(EstatisticasController.class).consultarVendasDiarias(null, null)).withRel(rel);
+	}
+	public Link linkToEstatisticas(String rel) {
+		return linkTo(methodOn(EstatisticasController.class).estatisticasLinks()).withRel(rel);
 	}
 
 }
