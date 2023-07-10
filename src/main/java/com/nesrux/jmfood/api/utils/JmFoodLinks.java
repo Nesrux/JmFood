@@ -39,6 +39,11 @@ public class JmFoodLinks {
 	public static final TemplateVariables PROJECAO_VARIABLES = new TemplateVariables(
 			new TemplateVariable("projecao", VariableType.REQUEST_PARAM));
 
+	public static final TemplateVariables QUERYVENDADIARIA = new TemplateVariables(
+			new TemplateVariable("restauranteId", VariableType.REQUEST_PARAM),
+			new TemplateVariable("dataCriacao", VariableType.REQUEST_PARAM),
+			new TemplateVariable("dataFinalizacao", VariableType.REQUEST_PARAM));
+
 	public Link linkToConfirmacaoPedido(String codigoPedido, String rel) {
 		return linkTo(methodOn(FluxoPedidoController.class).confirmarPedido(codigoPedido)).withRel(rel);
 	}
@@ -311,12 +316,14 @@ public class JmFoodLinks {
 	public Link linkToFormasPagamentos() {
 		return linkToFormasPagamentos(IanaLinkRelations.SELF.value());
 	}
-	
+
 	public Link linkToVendasDiarias(String rel) {
 		return linkTo(methodOn(EstatisticasController.class).consultarVendasDiarias(null, null)).withRel(rel);
 	}
+
 	public Link linkToEstatisticas(String rel) {
-		return linkTo(methodOn(EstatisticasController.class).estatisticasLinks()).withRel(rel);
+		String uriEstatisticas = linkTo(EstatisticasController.class).toUri().toString();
+		return new Link(UriTemplate.of(uriEstatisticas, QUERYVENDADIARIA), rel);
 	}
 
 }
