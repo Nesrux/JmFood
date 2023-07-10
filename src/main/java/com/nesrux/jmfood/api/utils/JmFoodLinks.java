@@ -17,6 +17,7 @@ import com.nesrux.jmfood.api.controller.EstadoController;
 import com.nesrux.jmfood.api.controller.FormaPagamentoController;
 import com.nesrux.jmfood.api.controller.GrupoController;
 import com.nesrux.jmfood.api.controller.PedidoController;
+import com.nesrux.jmfood.api.controller.PermissaoController;
 import com.nesrux.jmfood.api.controller.RestauranteController;
 import com.nesrux.jmfood.api.controller.UsuarioController;
 import com.nesrux.jmfood.api.controller.subcontrollers.grupo.GrupoPermissaoController;
@@ -123,6 +124,14 @@ public class JmFoodLinks {
 
 	public Link linkToGrupos() {
 		return linkToGrupos(IanaLinkRelations.SELF.value());
+	}
+
+	public Link linkToPermissoes(String rel) {
+		return linkTo(methodOn(PermissaoController.class).listarPermissoes()).withRel(rel);
+	}
+
+	public Link linkToPermissoes() {
+		return linkToPermissoes(IanaLinkRelations.SELF.value());
 	}
 
 	public Link linkToGrupoPermissao(Long grupoId, String rel) {

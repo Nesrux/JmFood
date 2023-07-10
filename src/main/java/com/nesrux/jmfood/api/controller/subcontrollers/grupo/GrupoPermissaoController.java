@@ -1,8 +1,7 @@
 package com.nesrux.jmfood.api.controller.subcontrollers.grupo;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,8 +20,8 @@ import com.nesrux.jmfood.domain.service.CadastroGrupoService;
 import com.nesrux.jmfood.domain.service.CadastroPermissaoService;
 
 @RestController
-@RequestMapping( path = "/grupos/{grupoId}/permissoes", produces = MediaType.APPLICATION_JSON_VALUE)
-public class GrupoPermissaoController implements GrupoPermissaoControllerOpenapi{
+@RequestMapping(path = "/grupos/{grupoId}/permissoes", produces = MediaType.APPLICATION_JSON_VALUE)
+public class GrupoPermissaoController implements GrupoPermissaoControllerOpenapi {
 	@Autowired
 	private CadastroGrupoService grupoService;
 
@@ -33,11 +32,13 @@ public class GrupoPermissaoController implements GrupoPermissaoControllerOpenapi
 	private PermissaoModelAssembler assembler;
 
 	@GetMapping
-	public List<PermissaoModel> ListarPermissoes(@PathVariable Long grupoId) {
+	@Override
+	public CollectionModel<PermissaoModel> ListarPermissoes(@PathVariable Long grupoId) {
 		return assembler.toCollectionModel(grupoService.listarPermissoes(grupoId));
 	}
 
 	@GetMapping("/{permissaoId}")
+	@Override
 	public PermissaoModel buscarPermissao(@PathVariable Long grupoId, @PathVariable Long permissaoId) {
 
 		Permissao permissao = permissaoService.acharOuFalhar(permissaoId);
@@ -47,12 +48,14 @@ public class GrupoPermissaoController implements GrupoPermissaoControllerOpenapi
 
 	@DeleteMapping("/{permissaoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@Override
 	public void dessassociarPermissao(@PathVariable Long grupoId, @PathVariable Long permissaoId) {
 		grupoService.deassociarPermissao(grupoId, permissaoId);
 	}
 
 	@PutMapping("/{permissaoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@Override
 	public void associarPermissao(@PathVariable Long grupoId, @PathVariable Long permissaoId) {
 		grupoService.associarPermissao(grupoId, permissaoId);
 

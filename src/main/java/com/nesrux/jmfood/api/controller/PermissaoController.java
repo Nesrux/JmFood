@@ -22,6 +22,7 @@ public class PermissaoController implements PermissaoControllerOpenApi {
 	@Autowired
 	private CadastroPermissaoService service;
 
+	@Override
 	@GetMapping
 	public CollectionModel<PermissaoModel> listarPermissoes() {
 		return assembler.toCollectionModel(service.listar());

@@ -1,6 +1,6 @@
 package com.nesrux.jmfood.api.openapi.controller.grupos;
 
-import java.util.List;
+import org.springframework.hateoas.CollectionModel;
 
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.output.permissao.PermissaoModel;
@@ -20,7 +20,7 @@ public interface GrupoPermissaoControllerOpenapi {
 		@ApiResponse(code = 200, message = "Listagem feita com sucesso")
 	})	
 	@ApiOperation("Lista todas as permissoes de um grupo")
-	public List<PermissaoModel> ListarPermissoes(Long grupoId);
+	public CollectionModel<PermissaoModel> ListarPermissoes(Long grupoId);
 
 	@ApiOperation("Busca uma permissão de um grupo")
 	@ApiResponses({
