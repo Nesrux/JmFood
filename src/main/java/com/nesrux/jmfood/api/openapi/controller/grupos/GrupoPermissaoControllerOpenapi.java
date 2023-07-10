@@ -1,6 +1,7 @@
 package com.nesrux.jmfood.api.openapi.controller.grupos;
 
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.ResponseEntity;
 
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.output.permissao.PermissaoModel;
@@ -39,7 +40,7 @@ public interface GrupoPermissaoControllerOpenapi {
 		@ApiResponse(code = 204, message = "Desassociação feita com sucesso")
 	})
 	@ApiOperation("Desassocia uma permissão de um grupo")
-	public void dessassociarPermissao(
+	public ResponseEntity<Void> dessassociarPermissao(
 			@ApiParam(example = "1", value = "Id de um grupo", required = true) Long grupoId,
 			@ApiParam(example = "1", value = "Id de uma permissao", required = true) Long permissaoId);
 
@@ -50,7 +51,7 @@ public interface GrupoPermissaoControllerOpenapi {
 		@ApiResponse(code = 204, message = "Associação feita com sucesso")
 	})
 	@ApiOperation("Associa uma permissão a um grupo")
-	public void associarPermissao(
+	public ResponseEntity<Void> associarPermissao(
 			@ApiParam(example = "1", value = "Id de um grupo", required = true) Long grupoId,
 			@ApiParam(example = "1", value = "Id de uma permissao", required = true) Long permissaoId);
 
