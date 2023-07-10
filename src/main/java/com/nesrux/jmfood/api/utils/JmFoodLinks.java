@@ -126,6 +126,14 @@ public class JmFoodLinks {
 		return linkToGrupos(IanaLinkRelations.SELF.value());
 	}
 
+	public Link linkToAssociarGrupo(Long usuarioId, String rel) {
+		return linkTo(methodOn(UsuarioGrupoController.class).associarGrupo(usuarioId, null)).withRel(rel);
+	}
+
+	public Link linkToDesassociargrupo(Long grupoId, Long usuarioId, String rel) {
+		return linkTo(methodOn(UsuarioGrupoController.class).desassociarGrupo(usuarioId, grupoId)).withRel(rel);
+	}
+
 	public Link linkToPermissoes(String rel) {
 		return linkTo(methodOn(PermissaoController.class).listarPermissoes()).withRel(rel);
 	}

@@ -1,6 +1,7 @@
 package com.nesrux.jmfood.api.openapi.controller.usuarios;
 
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.ResponseEntity;
 
 import com.nesrux.jmfood.api.model.dto.output.grupo.GrupoModel;
 
@@ -27,7 +28,7 @@ public interface UsuarioGrupoControllerOpenApi {
 		@ApiResponse(code = 404, message = "Id de usuario ou de grupo não existem"),
 		@ApiResponse(code = 204, message = "Associação feita com sucesso")
 	})
-	public void associarGrupo(@ApiParam(example = "1", required = true) Long usuarioId,
+	public ResponseEntity<Void> associarGrupo(@ApiParam(example = "1", required = true) Long usuarioId,
 			@ApiParam(example = "1", value = "Id de uma permissao", required = true) Long grupoId);
 
 	@ApiOperation("desassocia um grupo a um usuario")
@@ -36,7 +37,7 @@ public interface UsuarioGrupoControllerOpenApi {
 		@ApiResponse(code = 404, message = "Id de usuario ou de grupo não existem"),
 		@ApiResponse(code = 204, message = "Desassociação feita com sucesso")
 	})
-	public void desassociarGrupo(@ApiParam(example = "1", required = true) Long usuarioId,
+	public ResponseEntity<Void> desassociarGrupo(@ApiParam(example = "1", required = true) Long usuarioId,
 			@ApiParam(example = "1", value = "Id de uma permissao", required = true) Long grupoId);
 
 }
