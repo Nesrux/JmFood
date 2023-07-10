@@ -46,7 +46,7 @@ public class GrupoPermissaoController implements GrupoPermissaoControllerOpenapi
 		permissoesModel.add(links.linkToAssociarPermissão(grupoId, "associar"));
 		
 		permissoesModel.getContent().forEach(permissao -> {
-			permissao.add(links.linktoDesassociarPermissao(grupoId, grupoId, "desassociar"));
+			permissao.add(links.linktoDesassociarPermissao(grupoId, permissao.getId(), "desassociar"));
 		});
 
 		return permissoesModel;
