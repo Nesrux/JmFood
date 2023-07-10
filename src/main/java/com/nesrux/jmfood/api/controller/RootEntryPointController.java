@@ -19,15 +19,15 @@ public class RootEntryPointController {
 	public RootEntryPointoModel rootEntryPoint() {
 		RootEntryPointoModel root = new RootEntryPointoModel();
 
-		root.add(links.linkToRestaurantes("restaurantes"));
 		root.add(links.linkToCozinhas("cozinhas"));
+		root.add(links.linkToRestaurantes("restaurantes"));
+		root.add(links.linkToFormasPagamentos("formas-pagamentos"));
+		root.add(links.linkToPedidos("pedidos"));
 		root.add(links.linkToCidades("cidades"));
 		root.add(links.linkToEstados("estados"));
 		root.add(links.linkToUsuarios("usuarios"));
-		root.add(links.linkToFormasPagamentos("formas-pagamentos"));
 		root.add(links.linkToPermissoes("permissoes"));
 		root.add(links.linkToGrupos("grupos"));
-		root.add(links.linkToPedidos("pedidos"));
 		return root;
 	}
 
