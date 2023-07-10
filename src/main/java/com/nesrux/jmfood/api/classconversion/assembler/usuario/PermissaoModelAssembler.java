@@ -1,31 +1,30 @@
 package com.nesrux.jmfood.api.classconversion.assembler.usuario;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
+import com.nesrux.jmfood.api.controller.PermissaoController;
 import com.nesrux.jmfood.api.model.dto.output.permissao.PermissaoModel;
 import com.nesrux.jmfood.domain.model.user.Permissao;
 
 @Component
-public class PermissaoModelAssembler {
+public class PermissaoModelAssembler extends RepresentationModelAssemblerSupport<Permissao, PermissaoModel> {
 
 	@Autowired
 	private ModelMapper mapper;
 
-	public PermissaoModel toModel(Permissao permissao) {
-		return mapper.map(permissao, PermissaoModel.class);
+	public PermissaoModelAssembler() {
+		super(PermissaoController.class, PermissaoModel.class);
 	}
 
-	public List<PermissaoModel> toCollectionDto(List<Permissao> permissoes) {
-		return permissoes.stream().map(permissao -> toModel(permissao)).collect(Collectors.toList());
+	public PermissaoModel toModel(Permissao permissao) {
+		PermissaoModel permissaoModel = createModelWithId(permissao.getId(), permissao);
+
+		mapper.map(permissao, permissaoModel);
+
+		return permissaoModel;
 	}
-	//Caso de algo de errado, esse foi feito copiando da aula
-	public List<PermissaoModel> toCollectionDto(Collection<Permissao> permissoes) {
-		return permissoes.stream().map(permissao -> toModel(permissao)).collect(Collectors.toList());
-	}
+
 }

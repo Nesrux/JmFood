@@ -1,7 +1,5 @@
 package com.nesrux.jmfood.api.openapi.controller.usuarios;
 
-import java.util.List;
-
 import org.springframework.hateoas.CollectionModel;
 
 import com.nesrux.jmfood.api.model.dto.output.grupo.GrupoModel;

@@ -1,5 +1,7 @@
 package com.nesrux.jmfood.domain.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +13,12 @@ import com.nesrux.jmfood.domain.repository.PermissaoRepository;
 public class CadastroPermissaoService {
 	@Autowired
 	private PermissaoRepository repository;
-	
-	public Permissao acharOuFalhar(Long permissaoId) {
-		return repository.findById(permissaoId)
-				.orElseThrow(() -> new PermissaoNaoEncontradaException(permissaoId));
-	}
-	
 
+	public Permissao acharOuFalhar(Long permissaoId) {
+		return repository.findById(permissaoId).orElseThrow(() -> new PermissaoNaoEncontradaException(permissaoId));
+	}
+
+	public List<Permissao> listar() {
+		return repository.findAll();
+	}
 }

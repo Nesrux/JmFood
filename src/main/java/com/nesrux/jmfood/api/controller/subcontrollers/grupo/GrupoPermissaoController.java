@@ -34,7 +34,7 @@ public class GrupoPermissaoController implements GrupoPermissaoControllerOpenapi
 
 	@GetMapping
 	public List<PermissaoModel> ListarPermissoes(@PathVariable Long grupoId) {
-		return assembler.toCollectionDto(grupoService.listarPermissoes(grupoId));
+		return assembler.toCollectionModel(grupoService.listarPermissoes(grupoId));
 	}
 
 	@GetMapping("/{permissaoId}")
