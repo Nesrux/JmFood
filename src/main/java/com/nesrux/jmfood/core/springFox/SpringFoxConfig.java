@@ -26,6 +26,7 @@ import com.nesrux.jmfood.api.model.dto.output.grupo.GrupoModel;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoResumoModel;
 import com.nesrux.jmfood.api.model.dto.output.permissao.PermissaoModel;
 import com.nesrux.jmfood.api.model.dto.output.produto.ProdutoModel;
+import com.nesrux.jmfood.api.model.dto.output.restaurante.RestauranteResumoModel;
 import com.nesrux.jmfood.api.openapi.model.LinksModelOpenApi;
 import com.nesrux.jmfood.api.openapi.model.PedidosModelOpenApi;
 import com.nesrux.jmfood.api.openapi.model.PropriedadesPaginacaoModel;
@@ -36,6 +37,7 @@ import com.nesrux.jmfood.api.openapi.model.collectionModel.GrupoCollectionOpenAp
 import com.nesrux.jmfood.api.openapi.model.collectionModel.PedidosPageCollectionOpenApi.PedidosEmbeddedModelOpenApi;
 import com.nesrux.jmfood.api.openapi.model.collectionModel.PermissoesCollectionOpenApi;
 import com.nesrux.jmfood.api.openapi.model.collectionModel.ProdutosCollectionOpenApi;
+import com.nesrux.jmfood.api.openapi.model.collectionModel.RestauranteCollectionOpenApi;
 
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -90,6 +92,8 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 						PedidosEmbeddedModelOpenApi.class))
 				.alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(CollectionModel.class, ProdutoModel.class),
 						ProdutosCollectionOpenApi.class))
+				.alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(CollectionModel.class, RestauranteResumoModel.class),
+						RestauranteCollectionOpenApi.class))
 				.apiInfo(apiInfo())
 				.tags(
 					new Tag("Cidades", "Gerencia as cidades"),
