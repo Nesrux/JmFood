@@ -318,12 +318,13 @@ public class JmFoodLinks {
 	}
 
 	public Link linkToVendasDiarias(String rel) {
-		return linkTo(methodOn(EstatisticasController.class).consultarVendasDiarias(null, null)).withRel(rel);
+		String uriEstatisticas = linkTo(EstatisticasController.class).toUri().toString();
+		return new Link(UriTemplate.of(uriEstatisticas, QUERYVENDADIARIA), rel);
+	
 	}
 
 	public Link linkToEstatisticas(String rel) {
-		String uriEstatisticas = linkTo(EstatisticasController.class).toUri().toString();
-		return new Link(UriTemplate.of(uriEstatisticas, QUERYVENDADIARIA), rel);
+		return linkTo(methodOn(EstatisticasController.class).estatisticasLinks()).withRel(rel);
 	}
 
 }
