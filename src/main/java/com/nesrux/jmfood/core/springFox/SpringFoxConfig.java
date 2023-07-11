@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Links;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,12 +18,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.fasterxml.classmate.TypeResolver;
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
+import com.nesrux.jmfood.api.model.dto.output.cidade.CidadeModel;
 import com.nesrux.jmfood.api.model.dto.output.cozinha.CozinhaModel;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoResumoModel;
 import com.nesrux.jmfood.api.openapi.model.CozinhasModelOpenApi;
 import com.nesrux.jmfood.api.openapi.model.LinksModelOpenApi;
 import com.nesrux.jmfood.api.openapi.model.PedidosModelOpenApi;
 import com.nesrux.jmfood.api.openapi.model.PropriedadesPaginacaoModel;
+import com.nesrux.jmfood.api.openapi.model.collectionModel.CidadesCollectionOpenApi;
 
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -65,6 +68,8 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 						CozinhasModelOpenApi.class))
 				.alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(Page.class, PedidoResumoModel.class),
 						PedidosModelOpenApi.class))
+				.alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(CollectionModel.class, CidadeModel.class),
+						CidadesCollectionOpenApi.class))
 				.apiInfo(apiInfo())
 				.tags(
 					new Tag("Cidades", "Gerencia as cidades"),
