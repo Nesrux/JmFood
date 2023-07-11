@@ -32,6 +32,7 @@ import com.nesrux.jmfood.api.openapi.model.collectionModel.CidadesCollectionOpen
 import com.nesrux.jmfood.api.openapi.model.collectionModel.CozinhasModelOpenApi;
 import com.nesrux.jmfood.api.openapi.model.collectionModel.EstadosCollectionOpenApi;
 import com.nesrux.jmfood.api.openapi.model.collectionModel.GrupoCollectionOpenApi;
+import com.nesrux.jmfood.api.openapi.model.collectionModel.PedidosPageCollectionOpenApi.PedidosEmbeddedModelOpenApi;
 import com.nesrux.jmfood.api.openapi.model.collectionModel.PermissoesCollectionOpenApi;
 
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
@@ -83,6 +84,8 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 						GrupoCollectionOpenApi.class))
 				.alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(CollectionModel.class, PermissaoModel.class),
 						PermissoesCollectionOpenApi.class))
+				.alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(CollectionModel.class, PedidoResumoModel.class),
+						PedidosEmbeddedModelOpenApi.class))
 				.apiInfo(apiInfo())
 				.tags(
 					new Tag("Cidades", "Gerencia as cidades"),

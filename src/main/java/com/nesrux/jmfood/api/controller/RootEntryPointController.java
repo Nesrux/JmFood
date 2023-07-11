@@ -13,6 +13,7 @@ import io.swagger.annotations.Api;
 
 @RestController
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(tags = "RootEntryPoint")
 public class RootEntryPointController {
 	@Autowired
 	private JmFoodLinks links;
@@ -35,7 +36,6 @@ public class RootEntryPointController {
 		return root;
 	}
 
-	@Api(tags = "RootEntryPoint")
 	private static class RootEntryPointoModel extends RepresentationModel<RootEntryPointoModel> {
 	}
 
