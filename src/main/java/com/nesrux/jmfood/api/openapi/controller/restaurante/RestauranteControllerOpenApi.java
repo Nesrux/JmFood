@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import springfox.documentation.annotations.ApiIgnore;
 
 @Api(tags = "Restaurantes")
 public interface RestauranteControllerOpenApi {
@@ -29,6 +30,7 @@ public interface RestauranteControllerOpenApi {
 	@ApiResponses({ @ApiResponse(code = 200, message = "A listagem de pedidos foi feito com sucesso") })
 	public CollectionModel<RestauranteBasicoModel> listarResumo();
 
+	@ApiIgnore
 	@ApiOperation(value = "Listagem de restaurantes", hidden = true)
 	@ApiResponses({ @ApiResponse(code = 200, message = "A listagem de pedidos foi feito com sucesso") })
 	public CollectionModel<RestauranteApenasNomeModel> listarNomes();
