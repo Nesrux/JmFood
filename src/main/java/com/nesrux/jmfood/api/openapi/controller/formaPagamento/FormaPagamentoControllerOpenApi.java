@@ -7,6 +7,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.input.formaPagamento.FormaPagamentoInputDto;
 import com.nesrux.jmfood.api.model.dto.output.formaPagamento.FormaPagamentoModel;
+import com.nesrux.jmfood.api.openapi.model.collectionModel.FormaPagamentoCollectionOpenApi;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,7 +18,7 @@ import io.swagger.annotations.ApiResponses;
 @Api(tags = "Formas de pagamento")
 public interface FormaPagamentoControllerOpenApi {
 
-	@ApiOperation("Lista as formas de pagamento")
+	@ApiOperation(value = "Lista as formas de pagamento", response = FormaPagamentoCollectionOpenApi.class)
 	ResponseEntity<CollectionModel<FormaPagamentoModel>> listar(ServletWebRequest request);
 
 	@ApiOperation("Busca apenas 1 forma de pagamento")
