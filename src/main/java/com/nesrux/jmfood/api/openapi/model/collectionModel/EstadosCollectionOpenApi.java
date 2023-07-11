@@ -9,7 +9,12 @@ import com.nesrux.jmfood.api.model.dto.output.estado.EstadoModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@ApiModel("EstadosModel")
+@Getter
+@Setter
 public class EstadosCollectionOpenApi {
 	@ApiModelProperty(position = 1)
 	private EstadoEmbeddedModelOpenApi _embedded;

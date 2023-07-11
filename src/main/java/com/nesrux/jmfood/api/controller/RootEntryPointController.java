@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nesrux.jmfood.api.utils.JmFoodLinks;
 
+import io.swagger.annotations.Api;
+
 @RestController
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class RootEntryPointController {
@@ -29,10 +31,11 @@ public class RootEntryPointController {
 		root.add(links.linkToPermissoes("permissoes"));
 		root.add(links.linkToGrupos("grupos"));
 		root.add(links.linkToEstatisticas("estatisticas"));
-		
+
 		return root;
 	}
 
+	@Api(tags = "RootEntryPoint")
 	private static class RootEntryPointoModel extends RepresentationModel<RootEntryPointoModel> {
 	}
 
