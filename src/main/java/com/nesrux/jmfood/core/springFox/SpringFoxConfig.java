@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.Links;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -19,6 +20,7 @@ import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.model.dto.output.cozinha.CozinhaModel;
 import com.nesrux.jmfood.api.model.dto.output.pedido.PedidoResumoModel;
 import com.nesrux.jmfood.api.openapi.model.CozinhasModelOpenApi;
+import com.nesrux.jmfood.api.openapi.model.LinksModelOpenApi;
 import com.nesrux.jmfood.api.openapi.model.PedidosModelOpenApi;
 import com.nesrux.jmfood.api.openapi.model.PropriedadesPaginacaoModel;
 
@@ -58,6 +60,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 				.additionalModels(typeResolver.resolve(ErroApi.class))
 				.ignoredParameterTypes(ServletWebRequest.class)
 				.directModelSubstitute(Pageable.class, PropriedadesPaginacaoModel.class)
+				.directModelSubstitute(Links.class, LinksModelOpenApi.class)
 				.alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(Page.class, CozinhaModel.class),
 						CozinhasModelOpenApi.class))
 				.alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(Page.class, PedidoResumoModel.class),
