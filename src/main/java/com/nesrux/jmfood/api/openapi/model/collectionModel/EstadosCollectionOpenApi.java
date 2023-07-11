@@ -4,25 +4,22 @@ import java.util.List;
 
 import org.springframework.hateoas.Links;
 
-import com.nesrux.jmfood.api.model.dto.output.cidade.CidadeModel;
+import com.nesrux.jmfood.api.model.dto.output.estado.EstadoModel;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-@Data
-@ApiModel("cidadesModel")
-public class CidadesCollectionOpenApi {
-	
+public class EstadosCollectionOpenApi {
 	@ApiModelProperty(position = 1)
-	private CidadeEmbeddedModelOpenApi _embedded;
-	
+	private EstadoEmbeddedModelOpenApi _embedded;
+
 	@ApiModelProperty(position = 5)
 	private Links _links;
 
 	@ApiModel("cidadesEmbeddedModel")
 	@Data
-	public class CidadeEmbeddedModelOpenApi {
-		private List<CidadeModel> cidades;
+	public class EstadoEmbeddedModelOpenApi {
+		private List<EstadoModel> Estados;
 	}
 }

@@ -11,13 +11,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Relation(collectionRelation = "Cidades") //Muda o nome da colecction em json
+@Relation(collectionRelation = "Cidades") // Muda o nome da colecction em json
 public class CidadeModel extends RepresentationModel<CidadeModel> {
-	@ApiModelProperty(value = "ID da cidade", example = "1")
+	@ApiModelProperty(value = "ID da cidade", example = "1", position = 1)
 	private Long id;
 
-	@ApiModelProperty(example = "São paulo")
+	@ApiModelProperty(example = "São paulo", position = 5)
 	private String nome;
-
+	@ApiModelProperty(position = 10)
 	private EstadoModel estado;
 }

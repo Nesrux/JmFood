@@ -1,6 +1,7 @@
 package com.nesrux.jmfood.api.openapi.model;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +15,9 @@ public class LinksModelOpenApi {
 	@Setter
 	@ApiModel("Link")
 	private class LinkModel {
+		@ApiModelProperty(example = "localhost:8080/**", position = 1)
 		private String href;
+		@ApiModelProperty(example = "false", position = 2)
 		private boolean templated;
 	}
 }
