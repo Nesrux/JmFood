@@ -20,7 +20,8 @@
 - [x] implementação do serviço de envio de imagens
 - [x] Implementação de cache
 - [x] documentação da API
-- [ ] implementando Hatoas
+- [x] Implementação de hatoas
+- [ ] Versionando a API
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
