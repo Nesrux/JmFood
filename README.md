@@ -64,6 +64,11 @@ jmfood.email.password= {senha} Colocar a senha de 16 caracteres do gmail aqui
 Caso possua alguma duvida, o arquivo application.properties tem exemplos de configurações, clique <a href="https://github.com/Nesrux/JmFood/blob/main/src/main/resources/application.properties"> aqui </a> para ver
 
 `Por fim, execute o arquivo baixado na sua IDE de preferencia para poder aproveitar tudo que o JmFood tem a oferecer`
+## 🫡 Vídeos do funcionamento da API
+* Criação da Api : https://www.linkedin.com/posts/joaomarcosdev_java-data-security-activity-7069045829155663872-Lp_n
+* Adicionando novas features : https://www.linkedin.com/posts/joaomarcosdev_java-springboot-desenvolvimento-activity-7076613656939044864-Otlt/
+* implementação de hatoas : https://www.linkedin.com/posts/joaomarcosdev_opensource-git-github-activity-7084653583190634496-fEke
+
 ## 📫 Contribuindo para o JmFood
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
 Para contribuir com JmFood, siga estas etapas:
