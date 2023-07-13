@@ -6,12 +6,14 @@ import javax.validation.constraints.NotNull;
 
 import com.nesrux.jmfood.api.v1.model.dto.input.estado.EstadoIDInputDto;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@ApiModel("CidadeInput")
 public class CidadeInputDtoV2 {
 	
 	@ApiModelProperty(example = "Sorocaba", required = true)

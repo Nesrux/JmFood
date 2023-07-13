@@ -65,8 +65,8 @@ public class SpringFoxConfigV2 implements WebMvcConfigurer {
 					CozinhasModelOpenApi.class))
 			
 			.tags(
-					new Tag("Cozinha", "Gerencia os endpoints de cozinhas"),
-					new Tag("Cidade", "Gerencia os endpoints de cidades")
+					new Tag("Cozinhas", "Gerencia os endpoints de cozinhas"),
+					new Tag("Cidades", "Gerencia os endpoints de cidades")
 				)
 			
 			.apiInfo(apiInfoV2());
