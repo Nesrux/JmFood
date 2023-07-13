@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CozinhaInputDto {
+public class CozinhaInputDtoV2 {
 	
 	@NotBlank
 	@ApiModelProperty(example = "Brasileira", required = true, position = 5)

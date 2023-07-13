@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Relation(collectionRelation = "cozinhas")
-public class CozinhaModel extends RepresentationModel<CozinhaModel> {
+public class CozinhaModelV2 extends RepresentationModel<CozinhaModelV2> {
 
 	// @JsonView(RestauranteView.resumo.class)
 	@ApiModelProperty(example = "1")

@@ -12,7 +12,7 @@ import com.nesrux.jmfood.api.v1.utils.JmFoodLinks;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 
 @Component
-public class CozinhaModelAssembler extends RepresentationModelAssemblerSupport<Cozinha, CozinhaModel> {
+public class CozinhaModelAssemblerV2 extends RepresentationModelAssemblerSupport<Cozinha, CozinhaModel> {
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -20,7 +20,7 @@ public class CozinhaModelAssembler extends RepresentationModelAssemblerSupport<C
 	@Autowired
 	private JmFoodLinks jmFoodLinks;
 
-	public CozinhaModelAssembler() {
+	public CozinhaModelAssemblerV2() {
 		super(CozinhaController.class, CozinhaModel.class);
 	}
 

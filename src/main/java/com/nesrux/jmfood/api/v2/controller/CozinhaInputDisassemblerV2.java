@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.api.v2.classconversion.dissassembler;
+package com.nesrux.jmfood.api.v2.controller;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,7 @@ import com.nesrux.jmfood.api.v1.model.dto.input.cozinha.CozinhaInputDto;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 
 @Component
-public class CozinhaInputDisassembler {
+public class CozinhaInputDisassemblerV2 {
 	@Autowired
 	private ModelMapper modelMapper;
 
