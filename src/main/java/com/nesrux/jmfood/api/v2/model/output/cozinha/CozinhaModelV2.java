@@ -14,10 +14,10 @@ public class CozinhaModelV2 extends RepresentationModel<CozinhaModelV2> {
 
 	// @JsonView(RestauranteView.resumo.class)
 	@ApiModelProperty(example = "1")
-	private Long id;
+	private Long cozinhaId;
 
 	// @JsonView(RestauranteView.resumo.class)
 	@ApiModelProperty(example = "Tailandesa")
-	private String nome;
+	private String cozinhaNome;
 
 }

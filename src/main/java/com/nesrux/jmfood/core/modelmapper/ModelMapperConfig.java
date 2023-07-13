@@ -28,11 +28,14 @@ public class ModelMapperConfig {
 
 		var enderecoModelTypeMap = modelMapper.createTypeMap(Endereco.class, EnderecoModel.class);
 		var enderecoModel = modelMapper.createTypeMap(EnderecoInputDto.class, Endereco.class);
+	
 		modelMapper.createTypeMap(ItemPedidoInput.class, ItemPedido.class)
+				.addMappings(mapper -> mapper.skip(ItemPedido::setId));
 		
-		.addMappings(mapper -> mapper.skip(ItemPedido::setId));
+		
+		
 		enderecoModel.addMapping(EnderecoInputDto::getBairro, Endereco::setBairro);
-		
+
 		enderecoModelTypeMap.<String>addMapping(src -> src.getCidade().getEstado().getNome(),
 				(dest, value) -> dest.getCidade().setEstado(value));
 
