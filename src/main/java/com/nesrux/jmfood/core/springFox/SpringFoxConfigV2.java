@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.Links;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -17,12 +18,15 @@ import com.fasterxml.classmate.TypeResolver;
 import com.nesrux.jmfood.api.exceptionHandler.ErroApi;
 import com.nesrux.jmfood.api.v1.openapi.model.LinksModelOpenApi;
 import com.nesrux.jmfood.api.v1.openapi.model.PropriedadesPaginacaoModel;
+import com.nesrux.jmfood.api.v1.openapi.model.collectionModel.CozinhasModelOpenApi;
+import com.nesrux.jmfood.api.v2.model.output.cozinha.CozinhaModelV2;
 
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.ResponseMessageBuilder;
+import springfox.documentation.schema.AlternateTypeRules;
 import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
@@ -51,11 +55,15 @@ public class SpringFoxConfigV2 implements WebMvcConfigurer {
 			.globalResponseMessage(RequestMethod.DELETE, globalDeleteResponsemessage())
 			.globalResponseMessage(RequestMethod.POST, globalPostResponsemessage())
 			.globalResponseMessage(RequestMethod.PUT, globalPutResponsemessage())
-				// .globalOperationParameters() PARAMETROS GLOBAIS DA API
+			// .globalOperationParameters() PARAMETROS GLOBAIS DA API
 			.additionalModels(typeResolver.resolve(ErroApi.class))
 			.ignoredParameterTypes(ServletWebRequest.class)
 			.directModelSubstitute(Pageable.class, PropriedadesPaginacaoModel.class)
 			.directModelSubstitute(Links.class, LinksModelOpenApi.class)
+			.alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(PagedModel.class, CozinhaModelV2.class),
+					CozinhasModelOpenApi.class))
+			
+			
 			.apiInfo(apiInfoV2());
 	}
 
