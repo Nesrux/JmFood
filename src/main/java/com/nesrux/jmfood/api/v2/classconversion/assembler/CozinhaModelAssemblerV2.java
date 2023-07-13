@@ -6,26 +6,26 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import com.nesrux.jmfood.api.v1.controller.CozinhaController;
-import com.nesrux.jmfood.api.v1.model.dto.output.cozinha.CozinhaModel;
-import com.nesrux.jmfood.api.v1.utils.JmFoodLinks;
+import com.nesrux.jmfood.api.v2.controller.CozinhaControllerV2;
+import com.nesrux.jmfood.api.v2.model.output.cozinha.CozinhaModelV2;
+import com.nesrux.jmfood.api.v2.utils.JmFoodLinksV2;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 
 @Component
-public class CozinhaModelAssemblerV2 extends RepresentationModelAssemblerSupport<Cozinha, CozinhaModel> {
+public class CozinhaModelAssemblerV2 extends RepresentationModelAssemblerSupport<Cozinha, CozinhaModelV2> {
 
 	@Autowired
 	private ModelMapper modelMapper;
 
 	@Autowired
-	private JmFoodLinks jmFoodLinks;
+	private JmFoodLinksV2 jmFoodLinks;
 
 	public CozinhaModelAssemblerV2() {
-		super(CozinhaController.class, CozinhaModel.class);
+		super(CozinhaControllerV2.class, CozinhaModelV2.class);
 	}
 
-	public CozinhaModel toModel(Cozinha cozinha) {
-		CozinhaModel cozinhaModel = createModelWithId(cozinha.getId(), cozinha);
+	public CozinhaModelV2 toModel(Cozinha cozinha) {
+		CozinhaModelV2 cozinhaModel = createModelWithId(cozinha.getId(), cozinha);
 		modelMapper.map(cozinha, cozinhaModel);
 
 		cozinhaModel.add(jmFoodLinks.linkToCozinhas("cozinhas"));
@@ -34,7 +34,7 @@ public class CozinhaModelAssemblerV2 extends RepresentationModelAssemblerSupport
 	}
 
 	@Override
-	public CollectionModel<CozinhaModel> toCollectionModel(Iterable<? extends Cozinha> entities) {
+	public CollectionModel<CozinhaModelV2> toCollectionModel(Iterable<? extends Cozinha> entities) {
 		return super.toCollectionModel(entities).add(jmFoodLinks.linkToCozinhas());
 	}
 }
