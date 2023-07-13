@@ -32,7 +32,7 @@ public class CidadeModelAssemblerV2 extends RepresentationModelAssemblerSupport<
 
 		cidadeModel.add(jmFoodLinks.linkToCidades("cidades"));
 
-		cidadeModel.getEstado().add(jmFoodLinks.linkToEstado(cidadeModel.getEstado().getId()));
+	//	cidadeModel.getEstado().add(jmFoodLinks.linkToEstado(cidadeModel.getEstado().getId()));
 		return cidadeModel;
 	}
 
