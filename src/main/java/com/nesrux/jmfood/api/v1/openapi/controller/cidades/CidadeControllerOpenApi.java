@@ -37,7 +37,6 @@ public interface CidadeControllerOpenApi {
 		@ApiResponse(code = 200, message = "Cidade Atualizada com sucesso"),
 		@ApiResponse(code = 404, message = "cidade não encontrado", response = ErroApi.class),
 		@ApiResponse(code = 400, message = "Id de cidade ou representação de cidade estão invalidos", response = ErroApi.class),
-
 	})
 	public CidadeModel atualizar(@ApiParam(value = "Id de uma Cidade", example = "1", required = true) Long cidadeId,
 			@ApiParam(name = "corpo", value = "Representação de uma cidade", required = true) CidadeInputDto cidadeInputDto);
@@ -48,7 +47,6 @@ public interface CidadeControllerOpenApi {
 		@ApiResponse(code = 404, message = "Cidade não encontrada", response = ErroApi.class), 
 		@ApiResponse(code = 204, message = "Cidade removida com sucesso")
 	})
-
 	public void excluir(@ApiParam(value = "Id de uma Cidade", example = "1", required = true) Long cidadeId);
 
 }
