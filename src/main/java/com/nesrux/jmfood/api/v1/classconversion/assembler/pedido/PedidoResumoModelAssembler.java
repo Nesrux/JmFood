@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import com.nesrux.jmfood.api.v1.controller.PedidoController;
+import com.nesrux.jmfood.api.v1.controller.main.PedidoController;
 import com.nesrux.jmfood.api.v1.model.dto.output.pedido.PedidoResumoModel;
 import com.nesrux.jmfood.api.v1.utils.JmFoodLinks;
 import com.nesrux.jmfood.domain.model.pedido.Pedido;

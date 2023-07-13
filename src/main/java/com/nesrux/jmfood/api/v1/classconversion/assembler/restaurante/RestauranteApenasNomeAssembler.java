@@ -8,7 +8,7 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import com.nesrux.jmfood.api.v1.controller.RestauranteController;
+import com.nesrux.jmfood.api.v1.controller.main.RestauranteController;
 import com.nesrux.jmfood.api.v1.model.dto.output.restaurante.RestauranteApenasNomeModel;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 @Component

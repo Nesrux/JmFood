@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.api.v1.controller;
+package com.nesrux.jmfood.api.v1.controller.main;
 
 import java.time.OffsetDateTime;
 import java.util.List;

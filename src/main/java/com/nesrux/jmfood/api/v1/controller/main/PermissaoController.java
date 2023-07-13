@@ -1,4 +1,4 @@
-package com.nesrux.jmfood.api.v1.controller;
+package com.nesrux.jmfood.api.v1.controller.main;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;

@@ -6,7 +6,7 @@ import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 
-import com.nesrux.jmfood.api.v1.controller.CidadeController;
+import com.nesrux.jmfood.api.v1.controller.main.CidadeController;
 import com.nesrux.jmfood.api.v2.controller.CozinhaControllerV2;
 
 @Service
