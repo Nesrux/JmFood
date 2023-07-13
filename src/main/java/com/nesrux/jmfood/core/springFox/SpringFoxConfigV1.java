@@ -117,42 +117,11 @@ public class SpringFoxConfigV1 implements WebMvcConfigurer {
 						);
 	}
 	
-	@Bean
-	public Docket apiDocketV2() {
-	 var typeResolver = new TypeResolver();
 		
-		return new Docket(DocumentationType.SWAGGER_2)
-				.groupName("v2")
-				.select()
-					.apis(RequestHandlerSelectors.basePackage("com.nesrux.jmfood.api"))
-					.paths(PathSelectors.ant("/v2/**"))
-					.build()
-				.useDefaultResponseMessages(false)
-				.globalResponseMessage(RequestMethod.GET, globalGetResponsemessage())
-				.globalResponseMessage(RequestMethod.DELETE, globalDeleteResponsemessage())
-				.globalResponseMessage(RequestMethod.POST, globalPostResponsemessage())
-				.globalResponseMessage(RequestMethod.PUT, globalPutResponsemessage())
-				//.globalOperationParameters() PARAMETROS GLOBAIS DA API 
-				.additionalModels(typeResolver.resolve(ErroApi.class))
-				.ignoredParameterTypes(ServletWebRequest.class)
-				.directModelSubstitute(Pageable.class, PropriedadesPaginacaoModel.class)
-				.directModelSubstitute(Links.class, LinksModelOpenApi.class)
-				.apiInfo(apiInfoV2());}
-	
 	private ApiInfo apiInfoV1() {
 		return new ApiInfoBuilder()
 				.title("Jmfood API")
 				.version("1")
-				.description("Uma Rest Api publica de um delivery de comida")
-				.contact(new Contact("Jmfood", "https://github.com/Nesrux/JmFood", "joaomarcosdevs@gmai.com"))
-				.build();
-		
-	}
-	
-	private ApiInfo apiInfoV2() {
-		return new ApiInfoBuilder()
-				.title("Jmfood API")
-				.version("2")
 				.description("Uma Rest Api publica de um delivery de comida")
 				.contact(new Contact("Jmfood", "https://github.com/Nesrux/JmFood", "joaomarcosdevs@gmai.com"))
 				.build();
