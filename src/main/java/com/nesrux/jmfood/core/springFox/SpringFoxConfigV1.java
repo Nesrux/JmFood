@@ -43,6 +43,7 @@ import com.nesrux.jmfood.api.v1.openapi.model.collectionModel.PedidosPageCollect
 
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.ResponseMessageBuilder;
 import springfox.documentation.schema.AlternateTypeRules;
@@ -58,15 +59,17 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 @Import(BeanValidatorPluginsConfiguration.class)
-public class SpringFoxConfig implements WebMvcConfigurer {
+public class SpringFoxConfigV1 implements WebMvcConfigurer {
 
 	@Bean
-	public Docket apiDocket() {
+	public Docket apiDocketV1() {
 	 var typeResolver = new TypeResolver();
 		
 		return new Docket(DocumentationType.SWAGGER_2)
+				.groupName("v1")
 				.select()
 					.apis(RequestHandlerSelectors.basePackage("com.nesrux.jmfood.api"))
+					.paths(PathSelectors.ant("/v1/**"))
 					.build()
 				.useDefaultResponseMessages(false)
 				.globalResponseMessage(RequestMethod.GET, globalGetResponsemessage())
@@ -98,7 +101,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 						RestauranteCollectionOpenApi.class))
 				.alternateTypeRules(AlternateTypeRules.newRule(typeResolver.resolve(CollectionModel.class, UsuarioModel.class),
 						UsuarioCollectionOpenApi.class))
-				.apiInfo(apiInfo())
+				.apiInfo(apiInfoV1())
 				.tags(
 					new Tag("Cidades", "Gerencia as cidades"),
 					new Tag ("Grupos" , "Gerencia os grupos de usuarios"),
@@ -114,10 +117,42 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 						);
 	}
 	
-	private ApiInfo apiInfo() {
+	@Bean
+	public Docket apiDocketV2() {
+	 var typeResolver = new TypeResolver();
+		
+		return new Docket(DocumentationType.SWAGGER_2)
+				.groupName("v2")
+				.select()
+					.apis(RequestHandlerSelectors.basePackage("com.nesrux.jmfood.api"))
+					.paths(PathSelectors.ant("/v2/**"))
+					.build()
+				.useDefaultResponseMessages(false)
+				.globalResponseMessage(RequestMethod.GET, globalGetResponsemessage())
+				.globalResponseMessage(RequestMethod.DELETE, globalDeleteResponsemessage())
+				.globalResponseMessage(RequestMethod.POST, globalPostResponsemessage())
+				.globalResponseMessage(RequestMethod.PUT, globalPutResponsemessage())
+				//.globalOperationParameters() PARAMETROS GLOBAIS DA API 
+				.additionalModels(typeResolver.resolve(ErroApi.class))
+				.ignoredParameterTypes(ServletWebRequest.class)
+				.directModelSubstitute(Pageable.class, PropriedadesPaginacaoModel.class)
+				.directModelSubstitute(Links.class, LinksModelOpenApi.class)
+				.apiInfo(apiInfoV2());}
+	
+	private ApiInfo apiInfoV1() {
 		return new ApiInfoBuilder()
 				.title("Jmfood API")
-				.version("1.0.0")
+				.version("1")
+				.description("Uma Rest Api publica de um delivery de comida")
+				.contact(new Contact("Jmfood", "https://github.com/Nesrux/JmFood", "joaomarcosdevs@gmai.com"))
+				.build();
+		
+	}
+	
+	private ApiInfo apiInfoV2() {
+		return new ApiInfoBuilder()
+				.title("Jmfood API")
+				.version("2")
 				.description("Uma Rest Api publica de um delivery de comida")
 				.contact(new Contact("Jmfood", "https://github.com/Nesrux/JmFood", "joaomarcosdevs@gmai.com"))
 				.build();
