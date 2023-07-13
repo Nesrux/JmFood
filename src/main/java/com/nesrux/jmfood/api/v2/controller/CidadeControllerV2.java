@@ -41,6 +41,7 @@ public class CidadeControllerV2 implements CidadeControllerOpenApiV2 {
 
 	@Override
 	@GetMapping
+	@Deprecated
 	public CollectionModel<CidadeModelV2> listar() {
 		List<Cidade> cidadeList = cidadeService.acharTodas();
 
@@ -50,6 +51,7 @@ public class CidadeControllerV2 implements CidadeControllerOpenApiV2 {
 	@Override
 	@GetMapping("/{cidadeId}")
 	@ResponseStatus(HttpStatus.OK)
+	@Deprecated
 	public CidadeModelV2 buscar(@PathVariable Long cidadeId) {
 		Cidade cidade = cidadeService.acharOuFalhar(cidadeId);
 
@@ -61,6 +63,7 @@ public class CidadeControllerV2 implements CidadeControllerOpenApiV2 {
 	@Override
 	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
+	@Deprecated
 	public CidadeModelV2 adicionar(@RequestBody @Valid CidadeInputDtoV2 cidadeInputDto) {
 		try {
 			Cidade cidade = cidadeDisassembler.toDomainObject(cidadeInputDto);
@@ -74,6 +77,7 @@ public class CidadeControllerV2 implements CidadeControllerOpenApiV2 {
 
 	@Override
 	@PutMapping("/{cidadeId}")
+	@Deprecated
 	public CidadeModelV2 atualizar(@PathVariable Long cidadeId, @RequestBody @Valid CidadeInputDtoV2 cidadeInputDto) {
 		try {
 			Cidade cidadeAtual = cidadeService.acharOuFalhar(cidadeId);
@@ -90,6 +94,7 @@ public class CidadeControllerV2 implements CidadeControllerOpenApiV2 {
 	@Override
 	@DeleteMapping("{cidadeId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@Deprecated
 	public void excluir(@PathVariable Long cidadeId) {
 		cidadeService.excluir(cidadeId);
 	}

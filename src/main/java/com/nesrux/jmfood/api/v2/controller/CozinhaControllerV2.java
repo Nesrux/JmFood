@@ -43,6 +43,7 @@ public class CozinhaControllerV2 implements CozinhaControllerOpenApiV2 {
 
 	@Override
 	@GetMapping()
+	@Deprecated
 	public PagedModel<CozinhaModelV2> listar(@PageableDefault(size = 10) Pageable page) {
 		Page<Cozinha> cozinhasPage = cozinhaService.acharTodas(page);
 
@@ -52,6 +53,7 @@ public class CozinhaControllerV2 implements CozinhaControllerOpenApiV2 {
 
 	@Override
 	@GetMapping("/{cozinhaId}")
+	@Deprecated
 	public CozinhaModelV2 buscar(@PathVariable Long cozinhaId) {
 		return assembler.toModel(cozinhaService.buscaOuFalha(cozinhaId));
 	}
@@ -59,6 +61,7 @@ public class CozinhaControllerV2 implements CozinhaControllerOpenApiV2 {
 	@Override
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
+	@Deprecated
 	public CozinhaModelV2 adicionar(@RequestBody @Valid CozinhaInputDtoV2 cozinhaInputDto) {
 		Cozinha cozinha = disassembler.toDomainnObject(cozinhaInputDto);
 		cozinhaService.salvar(cozinha);
@@ -70,6 +73,7 @@ public class CozinhaControllerV2 implements CozinhaControllerOpenApiV2 {
 
 	@Override
 	@PutMapping("/{cozinhaId}")
+	@Deprecated
 	public CozinhaModelV2 atualizar(@PathVariable Long cozinhaId,
 			@RequestBody @Valid CozinhaInputDtoV2 cozinhaInputDto) {
 		Cozinha cozinhaAtual = cozinhaService.buscaOuFalha(cozinhaId);
@@ -87,6 +91,7 @@ public class CozinhaControllerV2 implements CozinhaControllerOpenApiV2 {
 	@Override
 	@DeleteMapping("/{cozinhaId}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	@Deprecated
 	public void deletar(@PathVariable Long cozinhaId) {
 
 		cozinhaService.excluir(cozinhaId);
