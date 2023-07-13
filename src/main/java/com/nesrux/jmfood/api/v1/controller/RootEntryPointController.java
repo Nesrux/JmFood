@@ -12,7 +12,7 @@ import com.nesrux.jmfood.api.v1.utils.JmFoodLinks;
 import io.swagger.annotations.Api;
 
 @RestController
-@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1", produces = MediaType.APPLICATION_JSON_VALUE)
 @Api(tags = "RootEntryPoint")
 public class RootEntryPointController {
 	@Autowired

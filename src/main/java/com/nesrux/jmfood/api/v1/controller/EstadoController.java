@@ -25,7 +25,7 @@ import com.nesrux.jmfood.domain.model.endereco.Estado;
 import com.nesrux.jmfood.domain.service.CadastroEstadoService;
 
 @RestController
-@RequestMapping(path = "/estados", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/estados", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EstadoController implements EstadoControllerOpenapi {
 
 	@Autowired

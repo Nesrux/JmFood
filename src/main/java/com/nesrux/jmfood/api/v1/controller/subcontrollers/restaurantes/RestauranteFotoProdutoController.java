@@ -36,7 +36,7 @@ import com.nesrux.jmfood.domain.service.FotoStorageService;
 import com.nesrux.jmfood.domain.service.FotoStorageService.FotoRecuperada;
 
 @RestController
-@RequestMapping(path = "/restaurantes/{restauranteId}/produtos/{produtoId}/foto", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/restaurantes/{restauranteId}/produtos/{produtoId}/foto", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestauranteFotoProdutoController implements RestauranteFotoProdutoControllerOpenApi {
 	@Autowired
 	private CadastroFotoProdutoService service;

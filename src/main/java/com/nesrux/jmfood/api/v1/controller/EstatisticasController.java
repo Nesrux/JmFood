@@ -20,7 +20,7 @@ import com.nesrux.jmfood.domain.service.VendaQueryService;
 import com.nesrux.jmfood.domain.service.VendaReportService;
 
 @RestController
-@RequestMapping(path = "/estatisticas")
+@RequestMapping(path = "/v1/estatisticas")
 public class EstatisticasController implements EstatisticasControllerOpenApi {
 	@Autowired
 	private VendaQueryService vendaQueryService;

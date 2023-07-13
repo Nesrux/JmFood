@@ -13,7 +13,7 @@ import com.nesrux.jmfood.api.v1.openapi.controller.permissao.PermissaoController
 import com.nesrux.jmfood.domain.service.CadastroPermissaoService;
 
 @RestController
-@RequestMapping(path = "/permissoes", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/permissoes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PermissaoController implements PermissaoControllerOpenApi {
 
 	@Autowired

@@ -22,7 +22,7 @@ import com.nesrux.jmfood.domain.service.CadastroGrupoService;
 import com.nesrux.jmfood.domain.service.CadastroPermissaoService;
 
 @RestController
-@RequestMapping(path = "/grupos/{grupoId}/permissoes", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/grupos/{grupoId}/permissoes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class GrupoPermissaoController implements GrupoPermissaoControllerOpenapi {
 	@Autowired
 	private CadastroGrupoService grupoService;
