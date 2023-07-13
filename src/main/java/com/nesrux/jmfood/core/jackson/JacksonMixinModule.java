@@ -3,8 +3,8 @@ package com.nesrux.jmfood.core.jackson;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.nesrux.jmfood.api.model.mixin.CidadeMixin;
-import com.nesrux.jmfood.api.model.mixin.ProdutoMixin;
+import com.nesrux.jmfood.api.v1.model.mixin.CidadeMixin;
+import com.nesrux.jmfood.api.v1.model.mixin.ProdutoMixin;
 import com.nesrux.jmfood.domain.model.endereco.Cidade;
 import com.nesrux.jmfood.domain.model.pedido.Produto;
 
