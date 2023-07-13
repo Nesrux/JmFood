@@ -18,50 +18,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nesrux.jmfood.api.v1.classconversion.assembler.endereco.CidadeModelAssembler;
-import com.nesrux.jmfood.api.v1.classconversion.dissasembler.CidadeInputDisassembler;
-import com.nesrux.jmfood.api.v1.model.dto.input.cidade.CidadeInputDto;
-import com.nesrux.jmfood.api.v1.model.dto.output.cidade.CidadeModel;
-import com.nesrux.jmfood.api.v1.openapi.controller.cidades.CidadeControllerOpenApi;
+import com.nesrux.jmfood.api.v2.classconversion.assembler.CidadeModelAssemblerV2;
+import com.nesrux.jmfood.api.v2.classconversion.dissassembler.CidadeInputDisassemblerV2;
+import com.nesrux.jmfood.api.v2.model.input.cidade.CidadeInputDtoV2;
+import com.nesrux.jmfood.api.v2.model.output.cidade.CidadeModelV2;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.EstadoNaoEncontradoException;
 import com.nesrux.jmfood.domain.model.endereco.Cidade;
 import com.nesrux.jmfood.domain.service.CadastroCidadeService;
 
 @RestController
-@RequestMapping(path = "/cidades", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CidadeControllerV2 implements CidadeControllerOpenApi {
+@RequestMapping(path = "/v2/cidades", produces = MediaType.APPLICATION_JSON_VALUE)
+public class CidadeControllerV2 {
 
 	@Autowired
 	private CadastroCidadeService cidadeService;
 	@Autowired
-	private CidadeInputDisassembler cidadeDisassembler;
+	private CidadeInputDisassemblerV2 cidadeDisassembler;
 	@Autowired
-	private CidadeModelAssembler cidadeAssembler;
+	private CidadeModelAssemblerV2 cidadeAssembler;
 
-	@Override
 	@GetMapping
-	public CollectionModel<CidadeModel> listar() {
+	public CollectionModel<CidadeModelV2> listar() {
 		List<Cidade> cidadeList = cidadeService.acharTodas();
-		
+
 		return cidadeAssembler.toCollectionModel(cidadeList);
 	}
 
-	@Override
 	@GetMapping("/{cidadeId}")
 	@ResponseStatus(HttpStatus.OK)
-	public CidadeModel buscar(@PathVariable Long cidadeId) {
+	public CidadeModelV2 buscar(@PathVariable Long cidadeId) {
 		Cidade cidade = cidadeService.acharOuFalhar(cidadeId);
 
-		CidadeModel cidadeModel = cidadeAssembler.toModel(cidade);
+		CidadeModelV2 cidadeModel = cidadeAssembler.toModel(cidade);
 
 		return cidadeModel;
 	}
 
-	@Override
 	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
-	public CidadeModel adicionar(@RequestBody @Valid CidadeInputDto cidadeInputDto) {
+	public CidadeModelV2 adicionar(@RequestBody @Valid CidadeInputDtoV2 cidadeInputDto) {
 		try {
 			Cidade cidade = cidadeDisassembler.toDomainObject(cidadeInputDto);
 			cidadeService.salvar(cidade);
@@ -72,9 +68,8 @@ public class CidadeControllerV2 implements CidadeControllerOpenApi {
 		}
 	}
 
-	@Override
 	@PutMapping("/{cidadeId}")
-	public CidadeModel atualizar(@PathVariable Long cidadeId, @RequestBody @Valid CidadeInputDto cidadeInputDto) {
+	public CidadeModelV2 atualizar(@PathVariable Long cidadeId, @RequestBody @Valid CidadeInputDtoV2 cidadeInputDto) {
 		try {
 			Cidade cidadeAtual = cidadeService.acharOuFalhar(cidadeId);
 
@@ -87,7 +82,6 @@ public class CidadeControllerV2 implements CidadeControllerOpenApi {
 		}
 	}
 
-	@Override
 	@DeleteMapping("{cidadeId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluir(@PathVariable Long cidadeId) {
