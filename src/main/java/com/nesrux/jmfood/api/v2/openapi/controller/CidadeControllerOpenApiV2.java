@@ -11,7 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-@Api(tags = "Cidades")
+@Api(tags = "Cidade")
 public interface CidadeControllerOpenApiV2 {
 
 	CollectionModel<CidadeModelV2> listar();
