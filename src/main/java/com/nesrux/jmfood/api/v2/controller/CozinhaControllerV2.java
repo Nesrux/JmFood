@@ -24,12 +24,13 @@ import com.nesrux.jmfood.api.v2.classconversion.assembler.CozinhaModelAssemblerV
 import com.nesrux.jmfood.api.v2.classconversion.dissassembler.CozinhaInputDisassemblerV2;
 import com.nesrux.jmfood.api.v2.model.input.cozinha.CozinhaInputDtoV2;
 import com.nesrux.jmfood.api.v2.model.output.cozinha.CozinhaModelV2;
+import com.nesrux.jmfood.api.v2.openapi.controller.CozinhaControllerOpenApiV2;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 import com.nesrux.jmfood.domain.service.CadastroCozinhaService;
 
 @RestController
 @RequestMapping(path = "/v2/cozinhas", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CozinhaControllerV2 {
+public class CozinhaControllerV2 implements CozinhaControllerOpenApiV2 {
 
 	@Autowired
 	private CadastroCozinhaService cozinhaService;
@@ -40,6 +41,7 @@ public class CozinhaControllerV2 {
 	@Autowired
 	private PagedResourcesAssembler<Cozinha> pagedModelAssembler;
 
+	@Override
 	@GetMapping()
 	public PagedModel<CozinhaModelV2> listar(@PageableDefault(size = 10) Pageable page) {
 		Page<Cozinha> cozinhasPage = cozinhaService.acharTodas(page);
@@ -48,11 +50,13 @@ public class CozinhaControllerV2 {
 		return cozinhaPagedModel;
 	}
 
+	@Override
 	@GetMapping("/{cozinhaId}")
 	public CozinhaModelV2 buscar(@PathVariable Long cozinhaId) {
 		return assembler.toModel(cozinhaService.buscaOuFalha(cozinhaId));
 	}
 
+	@Override
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public CozinhaModelV2 adicionar(@RequestBody @Valid CozinhaInputDtoV2 cozinhaInputDto) {
@@ -64,6 +68,7 @@ public class CozinhaControllerV2 {
 		return cozinhaOutputDto;
 	}
 
+	@Override
 	@PutMapping("/{cozinhaId}")
 	public CozinhaModelV2 atualizar(@PathVariable Long cozinhaId,
 			@RequestBody @Valid CozinhaInputDtoV2 cozinhaInputDto) {
@@ -79,6 +84,7 @@ public class CozinhaControllerV2 {
 		return outputDto;
 	}
 
+	@Override
 	@DeleteMapping("/{cozinhaId}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void deletar(@PathVariable Long cozinhaId) {

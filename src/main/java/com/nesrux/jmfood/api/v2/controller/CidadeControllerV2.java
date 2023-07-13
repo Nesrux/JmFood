@@ -22,6 +22,7 @@ import com.nesrux.jmfood.api.v2.classconversion.assembler.CidadeModelAssemblerV2
 import com.nesrux.jmfood.api.v2.classconversion.dissassembler.CidadeInputDisassemblerV2;
 import com.nesrux.jmfood.api.v2.model.input.cidade.CidadeInputDtoV2;
 import com.nesrux.jmfood.api.v2.model.output.cidade.CidadeModelV2;
+import com.nesrux.jmfood.api.v2.openapi.controller.CidadeControllerOpenApiV2;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.EstadoNaoEncontradoException;
 import com.nesrux.jmfood.domain.model.endereco.Cidade;
@@ -29,7 +30,7 @@ import com.nesrux.jmfood.domain.service.CadastroCidadeService;
 
 @RestController
 @RequestMapping(path = "/v2/cidades", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CidadeControllerV2 {
+public class CidadeControllerV2 implements CidadeControllerOpenApiV2 {
 
 	@Autowired
 	private CadastroCidadeService cidadeService;
@@ -38,6 +39,7 @@ public class CidadeControllerV2 {
 	@Autowired
 	private CidadeModelAssemblerV2 cidadeAssembler;
 
+	@Override
 	@GetMapping
 	public CollectionModel<CidadeModelV2> listar() {
 		List<Cidade> cidadeList = cidadeService.acharTodas();
@@ -45,6 +47,7 @@ public class CidadeControllerV2 {
 		return cidadeAssembler.toCollectionModel(cidadeList);
 	}
 
+	@Override
 	@GetMapping("/{cidadeId}")
 	@ResponseStatus(HttpStatus.OK)
 	public CidadeModelV2 buscar(@PathVariable Long cidadeId) {
@@ -55,6 +58,7 @@ public class CidadeControllerV2 {
 		return cidadeModel;
 	}
 
+	@Override
 	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
 	public CidadeModelV2 adicionar(@RequestBody @Valid CidadeInputDtoV2 cidadeInputDto) {
@@ -68,6 +72,7 @@ public class CidadeControllerV2 {
 		}
 	}
 
+	@Override
 	@PutMapping("/{cidadeId}")
 	public CidadeModelV2 atualizar(@PathVariable Long cidadeId, @RequestBody @Valid CidadeInputDtoV2 cidadeInputDto) {
 		try {
@@ -82,6 +87,7 @@ public class CidadeControllerV2 {
 		}
 	}
 
+	@Override
 	@DeleteMapping("{cidadeId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluir(@PathVariable Long cidadeId) {
