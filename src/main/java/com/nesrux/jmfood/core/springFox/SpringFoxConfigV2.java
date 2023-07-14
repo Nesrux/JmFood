@@ -74,9 +74,11 @@ public class SpringFoxConfigV2 implements WebMvcConfigurer {
 
 	private ApiInfo apiInfoV2() {
 		return new ApiInfoBuilder()
-				.title("Jmfood API")
+				.title("Jmfood API(depreciada)")
 				.version("2")
-				.description("Uma Rest Api publica de um delivery de comida")
+				.description("Uma Rest Api publica de um delivery de comida <br>"
+						+ "<strong>Essa versão da api esta depreciada, e deixará de funcionar a partir de 31/12/2023</strong>"
+						+ "use a versão mais aintiga da APi")
 				.contact(new Contact("Jmfood", "https://github.com/Nesrux/JmFood", "joaomarcosdevs@gmai.com"))
 				.build();
 
