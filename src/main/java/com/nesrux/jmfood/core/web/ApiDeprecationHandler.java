@@ -3,6 +3,7 @@ package com.nesrux.jmfood.core.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -16,7 +17,10 @@ public class ApiDeprecationHandler extends HandlerInterceptorAdapter {
 		if (request.getRequestURI().startsWith("/v1/")) {
 			response.addHeader("X-JmfoodDeprecated", "Essa versão da api esta depreciada,"
 					+ " e deixará de funcionar a partir de 31/12/2023 "
-					+ "use a versão mais aintiga da Api");
+					+ "use a versão mais antiga da Api");
+			
+			response.setStatus(HttpStatus.GONE.value());
+					return false;
 		}
 
 		return true;
