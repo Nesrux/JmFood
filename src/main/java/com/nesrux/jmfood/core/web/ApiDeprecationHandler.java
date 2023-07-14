@@ -14,7 +14,7 @@ public class ApiDeprecationHandler extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		if (request.getRequestURI().startsWith("/v1/")) {
+		if (request.getRequestURI().startsWith("/v2/")) {
 			response.addHeader("X-JmfoodDeprecated", "Essa versão da api esta depreciada,"
 					+ " e deixará de funcionar a partir de 31/12/2023 "
 					+ "use a versão mais antiga da Api");

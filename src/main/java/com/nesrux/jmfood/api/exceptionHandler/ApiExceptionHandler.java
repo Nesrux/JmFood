@@ -33,7 +33,10 @@ import com.nesrux.jmfood.domain.exception.ValidacaoException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeEmUsoException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 
+import lombok.extern.slf4j.Slf4j;
+
 @ControllerAdvice
+@Slf4j
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	private static final String MSG_PROPRIEDADE_INVALIDA_NO_CORPO_REQUISICAO = "A propriedade '%s' não existe.  Corrija ou remova essa propriedade e tente novamente.";
 	private static final String MSG_TIPO_INVALIDO_URL = "A propriedade '%s' recebeu o valor '%s', "
@@ -54,8 +57,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		TipoProblema problemType = TipoProblema.ERRO_DE_SISTEMA;
 		String detail = MSG_ERRO_GENERICA_USUARIO_FINAL;
 
-		ex.printStackTrace();
-
+		log.error(ex.getMessage(), ex);
+		
 		ErroApi problem = createProblemBuilder(status, problemType, detail).userMessage(detail).build();
 
 		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
