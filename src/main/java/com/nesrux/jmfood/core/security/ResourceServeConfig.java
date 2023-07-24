@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class ResourceServeConfig extends WebSecurityConfigurerAdapter {
 
 	//Configuração do Basic http
 	@Override
