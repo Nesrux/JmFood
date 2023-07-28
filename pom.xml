@@ -73,8 +73,8 @@
     </dependency>
     
 	<dependency>
-		<groupId>org.modelmapper</groupId>
-		<artifactId>modelmapper</artifactId>
+		<groupId>org.modelmapper.extensions</groupId>
+		<artifactId>modelmapper-spring</artifactId>
 		<version>${modelmapper.version}</version>
 	</dependency>
 	
