@@ -62,6 +62,10 @@ public class Usuario {
 		return !senhaIgualA(senha);
 	}
 	
+	public boolean isNovo() {
+		return getDataCadastro() == null;
+	}
+	
 	public void associar(Grupo grupo) {
 		this.grupos.add(grupo);
 	}

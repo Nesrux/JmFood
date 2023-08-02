@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.nesrux.jmfood.domain.exception.NegocioException;
@@ -23,6 +24,9 @@ public class CadastroUsuarioService {
 
 	@Autowired
 	private CadastroGrupoService grupoService;
+	
+	@Autowired
+	private PasswordEncoder passEncoder;
 
 	public List<Usuario> acharTodos() {
 		return repository.findAll();
@@ -44,21 +48,22 @@ public class CadastroUsuarioService {
 
 		return usuario.getGrupos();
 	}
+
 	@Transactional
 	public void associarGrupo(Long usuarioId, Long grupoId) {
 		Usuario usuario = acharOuFalhar(usuarioId);
 		Grupo grupo = grupoService.acharOuFalahar(grupoId);
-		
+
 		usuario.associar(grupo);
 	}
+
 	@Transactional
 	public void desassociarGrupo(Long usuarioId, Long grupoId) {
 		Usuario usuario = acharOuFalhar(usuarioId);
 		Grupo grupo = grupoService.acharOuFalahar(grupoId);
-		
+
 		usuario.desassociar(grupo);
 	}
-
 
 	@Transactional
 	public Usuario salvar(Usuario usuario) {
@@ -70,19 +75,23 @@ public class CadastroUsuarioService {
 			throw new NegocioException(
 					String.format("ja exisre um usuário cadastrado com o email %s", usuario.getEmail()));
 		}
-
+		if(usuario.isNovo()) {
+			usuario.setSenha(passEncoder.encode(usuario.getSenha()));
+		}
+	
 		return repository.save(usuario);
 	}
 
 	@Transactional
 	public void alterarSenha(Long userID, String senhaAtual, String novaSenha) {
 		Usuario usuario = acharOuFalhar(userID);
-
-		if (usuario.senhaNaoConhecideCom(senhaAtual)) {
+		
+		if (!passEncoder.matches(senhaAtual, usuario.getSenha())) {
 			throw new NegocioException("A senha atual esta inválida, por favor preencha corretamente e tente de novo.");
 
 		}
-		usuario.setSenha(novaSenha);
+		
+		usuario.setSenha(passEncoder.encode(novaSenha));
 	}
 
 }
