@@ -122,6 +122,9 @@ insert into permissao (id, nome, descricao) values (15, 'CONSULTAR_PEDIDOS', 'Pe
 insert into permissao (id, nome, descricao) values (16, 'GERENCIAR_PEDIDOS', 'Permite gerenciar pedidos');
 insert into permissao (id, nome, descricao) values (17, 'GERAR_RELATORIOS', 'Permite gerar relatórios');
 
+
+
+
 insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id) values (1, 1), (1, 2), (1, 3), (2, 3), (3, 2), (3, 3), (4, 1), (4, 2), (5, 1), (5, 2), (6, 3);
 
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Porco com molho agridoce', 'Deliciosa carne suína ao molho especial', 78.90, 0, 1);
@@ -143,7 +146,25 @@ INSERT INTO produto (nome, descricao, preco, restaurante_id, ativo) VALUES ('Yak
 
 insert into grupo (id, nome) values (1, 'Gerente'), (2, 'Vendedor'), (3, 'Secretária'), (4, 'Cadastrador');
 
-insert into grupo_permissao (grupo_id, permissao_id) values (1, 1), (1, 2), (2, 1), (2, 2), (3, 1); 
+# Adiciona todas as permissoes no grupo do gerente
+insert into grupo_permissao (grupo_id, permissao_id)
+select 1, id from permissao;
+
+# Adiciona permissoes no grupo do vendedor
+insert into grupo_permissao (grupo_id, permissao_id)
+select 2, id from permissao where nome like 'CONSULTAR_%';
+
+insert into grupo_permissao (grupo_id, permissao_id) values (2, 14);
+
+# Adiciona permissoes no grupo do auxiliar
+insert into grupo_permissao (grupo_id, permissao_id)
+select 3, id from permissao where nome like 'CONSULTAR_%';
+
+# Adiciona permissoes no grupo cadastrador
+insert into grupo_permissao (grupo_id, permissao_id)
+select 4, id from permissao where nome like '%_RESTAURANTES' or nome like '%_PRODUTOS';
+ 
+
 
 insert into usuario (id, nome, email, senha, data_cadastro) values
 (1, 'João da Silva', 'joao.ger@algafood.com', '$2y$12$NSsM4gEOR7MKogflKR7GMeYugkttjNhAJMvFdHrBLaLp2HzlggP5W', utc_timestamp),
