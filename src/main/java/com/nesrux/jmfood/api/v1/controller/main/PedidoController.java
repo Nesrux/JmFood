@@ -28,6 +28,7 @@ import com.nesrux.jmfood.api.v1.model.dto.output.pedido.PedidoResumoModel;
 import com.nesrux.jmfood.api.v1.openapi.controller.pedido.PedidoControllerOpenApi;
 import com.nesrux.jmfood.core.data.PageWrapper;
 import com.nesrux.jmfood.core.data.PageableTranslator;
+import com.nesrux.jmfood.core.security.JmfoodSecurity;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 import com.nesrux.jmfood.domain.filter.PedidoFilter;
@@ -49,6 +50,9 @@ public class PedidoController implements PedidoControllerOpenApi {
 
 	@Autowired
 	private PedidoInputDisasselber pedidoDisasselber;
+	
+	@Autowired
+	private JmfoodSecurity securityUtil;
 
 	@Autowired
 	private PagedResourcesAssembler<Pedido> pagedResourcesAssembler;
@@ -80,9 +84,9 @@ public class PedidoController implements PedidoControllerOpenApi {
 		try {
 			Pedido novoPedido = pedidoDisasselber.toDomainObject(pedidoInput);
 
-			// TODO pegar usuário autenticado
+			
 			novoPedido.setCliente(new Usuario());
-			novoPedido.getCliente().setId(1L);
+			novoPedido.getCliente().setId(securityUtil.getUsuarioId());
 
 			novoPedido = service.emitir(novoPedido);
 
