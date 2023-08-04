@@ -130,7 +130,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		HttpStatus status = HttpStatus.FORBIDDEN;
 		TipoProblema tipoProblema = TipoProblema.ACESSO_NEGADO;
 		
-		ErroApi problem =  createProblemBuilder(status, tipoProblema, detail).userMessage("Você não possui permissao para realizar esta ação").build();
+		ErroApi problem =  createProblemBuilder(status, tipoProblema, detail).userMessage("Você não possui permissão para realizar esta ação").build();
 		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
 		
 	}
