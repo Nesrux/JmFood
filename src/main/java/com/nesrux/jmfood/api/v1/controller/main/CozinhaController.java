@@ -10,6 +10,7 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,9 +42,8 @@ public class CozinhaController implements CozinhaControllerOpenApi {
 	@Autowired
 	private PagedResourcesAssembler<Cozinha> pagedModelAssembler;
 
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping()
-	// A anotação @PageableDefault muda o tamanho dos elementos de uma pagina, o
-	// padrão é 20
 	@Override
 	public PagedModel<CozinhaModel> listar(@PageableDefault(size = 10) Pageable page) {
 		Page<Cozinha> cozinhasPage = cozinhaService.acharTodas(page);
@@ -52,12 +52,15 @@ public class CozinhaController implements CozinhaControllerOpenApi {
 		return cozinhaPagedModel;
 	}
 
+	@PreAuthorize("isAuthenticated()")
 	@Override
 	@GetMapping("/{cozinhaId}")
 	public CozinhaModel buscar(@PathVariable Long cozinhaId) {
 		return assembler.toModel(cozinhaService.buscaOuFalha(cozinhaId));
 	}
+	
 
+	@PreAuthorize("hasAuthority('EDITAR_COZINHAS')")
 	@Override
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
@@ -69,7 +72,7 @@ public class CozinhaController implements CozinhaControllerOpenApi {
 
 		return cozinhaOutputDto;
 	}
-
+	@PreAuthorize("hasAuthority('EDITAR_COZINHAS')")
 	@Override
 	@PutMapping("/{cozinhaId}")
 	public CozinhaModel atualizar(@PathVariable Long cozinhaId, @RequestBody @Valid CozinhaInputDto cozinhaInputDto) {
@@ -84,7 +87,7 @@ public class CozinhaController implements CozinhaControllerOpenApi {
 
 		return outputDto;
 	}
-
+	@PreAuthorize("hasAuthority('EDITAR_COZINHAS')")
 	@Override
 	@DeleteMapping("/{cozinhaId}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
