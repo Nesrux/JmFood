@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -100,8 +101,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
 	}
 
-	// TODO Refatorar esse codigo futuramente para usar o mesmo codigo de
-	// handleMethodArgumentNotValid
+
 	@ExceptionHandler({ ValidacaoException.class })
 	public ResponseEntity<Object> handleValidacaoException(ValidacaoException ex, WebRequest request) {
 		String detail = String
@@ -123,6 +123,16 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 				.build();
 		return handleExceptionInternal(ex, erro, new HttpHeaders(), status, request);
 
+	}
+	@ExceptionHandler({AccessDeniedException.class})
+	public ResponseEntity<Object> handleAccessDeniedException(AccessDeniedException ex, WebRequest request){
+		String detail = ex.getMessage();
+		HttpStatus status = HttpStatus.FORBIDDEN;
+		TipoProblema tipoProblema = TipoProblema.ACESSO_NEGADO;
+		
+		ErroApi problem =  createProblemBuilder(status, tipoProblema, detail).userMessage("Você não possui permissao para realizar esta ação").build();
+		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+		
 	}
 
 	@Override
