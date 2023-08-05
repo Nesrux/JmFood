@@ -48,7 +48,7 @@ public class RestauranteFotoProdutoController implements RestauranteFotoProdutoC
 	@Autowired
 	private FotoStorageService fotoStorage;
 
-	@CheckSecurity.restaurantes.podeEditar
+	@CheckSecurity.restaurantes.podeGerenciarCadastro
 	@PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public FotoProdutoModel atualizarFoto(@PathVariable Long restauranteId, @PathVariable Long produtoId,
 			@RequestPart(required = true) MultipartFile arquivo, @Valid FotoProdutoInput fotoProdutoInput)
@@ -104,7 +104,7 @@ public class RestauranteFotoProdutoController implements RestauranteFotoProdutoC
 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping
-	@CheckSecurity.restaurantes.podeEditar
+	@CheckSecurity.restaurantes.podeGerenciarCadastro
 	public void excluirFoto(@PathVariable Long restauranteId, @PathVariable Long produtoId) {
 		FotoProduto fotoProduto = service.buscarOuFalhar(restauranteId, produtoId);
 		fotoStorage.remover(fotoProduto.getNome());

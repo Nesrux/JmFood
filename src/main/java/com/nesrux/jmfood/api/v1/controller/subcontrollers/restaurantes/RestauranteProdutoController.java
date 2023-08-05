@@ -74,7 +74,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
 	@Override
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	@CheckSecurity.restaurantes.podeEditar
+	@CheckSecurity.restaurantes.podeGerenciarCadastro
 	public ProdutoModel salvar(@PathVariable Long restauranteId, @Valid @RequestBody ProdutoInputDto inputDto) {
 		Produto produto = disassembler.toDomainObject(inputDto);
 		Restaurante restaurante = restauranteService.acharOuFalhar(restauranteId);
@@ -88,7 +88,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
 
 	@Override
 	@PutMapping("/{produtoId}")
-	@CheckSecurity.restaurantes.podeEditar
+	@CheckSecurity.restaurantes.podeGerenciarCadastro
 	public ProdutoModel atualizar(@PathVariable Long produtoId, @Valid @RequestBody ProdutoInputDto inputDto) {
 		Produto produto = service.acharOuFalhar(produtoId);
 		disassembler.copyToDomainObject(inputDto, produto);
