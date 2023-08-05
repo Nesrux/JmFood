@@ -14,9 +14,16 @@ public @interface CheckSecurity {
 		@PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDITAR_COZINHAS')")
 		@Retention(RUNTIME)
 		@Target(METHOD)
-		public @interface PodeEditar {
+		public @interface PodeEditar {}
+		
 
-		}
+	}
+	
+	public @interface restaurantes{
+		@PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDITAR_RESTAURANTES')")
+		@Retention(RUNTIME)
+		@Target(METHOD)		
+		public @interface podeEditar{}
 	}
 
 	@PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")

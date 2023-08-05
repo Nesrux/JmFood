@@ -28,6 +28,7 @@ import com.nesrux.jmfood.api.v1.model.dto.output.restaurante.RestauranteApenasNo
 import com.nesrux.jmfood.api.v1.model.dto.output.restaurante.RestauranteBasicoModel;
 import com.nesrux.jmfood.api.v1.model.dto.output.restaurante.RestauranteModel;
 import com.nesrux.jmfood.api.v1.openapi.controller.restaurante.RestauranteControllerOpenApi;
+import com.nesrux.jmfood.core.security.anotations.CheckSecurity;
 import com.nesrux.jmfood.domain.exception.NegocioException;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 import com.nesrux.jmfood.domain.exception.negocioException.entidadeNaoEncontrada.RestauranteNaoEncontradoException;
@@ -51,18 +52,21 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 
 	@Override
 	@GetMapping
+	@CheckSecurity.AutenticadosPodemConsultar
 	public CollectionModel<RestauranteBasicoModel> listarResumo() {
 		return basicoAssembler.toCollectionModel(service.acharTodos());
 	}
 
 	@Override
 	@GetMapping(params = "projecao=apenas-nome")
+	@CheckSecurity.AutenticadosPodemConsultar
 	public CollectionModel<RestauranteApenasNomeModel> listarNomes() {
 		return nomeAssembler.toCollectionModel(service.acharTodos());
 	}
 
 	@Override
 	@GetMapping("/{restauranteId}")
+	@CheckSecurity.AutenticadosPodemConsultar
 	public RestauranteModel buscar(@PathVariable Long restauranteId) {
 		Restaurante restaurante = service.acharOuFalhar(restauranteId);
 
@@ -72,6 +76,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	@Override
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@CheckSecurity.restaurantes.podeEditar
 	public RestauranteModel adicionar(@RequestBody @Valid RestauranteInputDto restauranteInputDTO) {
 		try {
 			Restaurante restaurante = restauranteDissasembler.toDomainObject(restauranteInputDTO);
@@ -85,6 +90,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 
 	@Override
 	@PutMapping("/{restauranteId}")
+	@CheckSecurity.restaurantes.podeEditar
 	public RestauranteModel atualizar(@PathVariable Long restauranteId,
 			@RequestBody @Valid RestauranteInputDto restauranteInputDto) {
 		try {
@@ -101,6 +107,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	@Override
 	@PutMapping("/ativacoes")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@CheckSecurity.restaurantes.podeEditar
 	public ResponseEntity<Void> ativarRestaurantes(@RequestBody List<Long> restauranteids) {
 		try {
 			service.ativar(restauranteids);
@@ -113,6 +120,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	@Override
 	@DeleteMapping("/ativacoes")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@CheckSecurity.restaurantes.podeEditar
 	public ResponseEntity<Void> desativarRestaurantes(@RequestBody List<Long> restauranteids) {
 		try {
 			service.desativar(restauranteids);
@@ -127,6 +135,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	@Override
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("/{restauranteId}/ativo")
+	@CheckSecurity.restaurantes.podeEditar
 	public ResponseEntity<Void> ativarRestaurante(@PathVariable Long restauranteId) {
 		service.ativar(restauranteId);
 		return ResponseEntity.noContent().build();
@@ -136,6 +145,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	@Override
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{restauranteId}/ativo")
+	@CheckSecurity.restaurantes.podeEditar
 	public ResponseEntity<Void> desativarRestaurante(@PathVariable Long restauranteId) {
 		service.desativar(restauranteId);
 		return ResponseEntity.noContent().build();
@@ -145,6 +155,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	@Override
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("/{restauranteId}/fechamento")
+	@CheckSecurity.restaurantes.podeEditar
 	public ResponseEntity<Void> fecharRestaurante(@PathVariable Long restauranteId) {
 		service.fechar(restauranteId);
 		return ResponseEntity.noContent().build();
@@ -154,6 +165,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	@Override
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("/{restauranteId}/abertura")
+	@CheckSecurity.restaurantes.podeEditar
 	public ResponseEntity<Void> abrirRestaurante(@PathVariable Long restauranteId) {
 		service.abrir(restauranteId);
 		return ResponseEntity.noContent().build();
