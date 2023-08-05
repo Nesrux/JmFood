@@ -139,6 +139,7 @@ INSERT INTO produto (nome, descricao, preco, restaurante_id, ativo) VALUES ('Yak
 
 insert into grupo (id, nome) values (1, 'Gerente'), (2, 'Vendedor'), (3, 'Secretária'), (4, 'Cadastrador');
 
+
 # Adiciona todas as permissoes no grupo do gerente
 insert into grupo_permissao (grupo_id, permissao_id)
 select 1, id from permissao;
@@ -147,7 +148,8 @@ select 1, id from permissao;
 insert into grupo_permissao (grupo_id, permissao_id)
 select 2, id from permissao where nome like 'CONSULTAR_%';
 
-insert into grupo_permissao (grupo_id, permissao_id) values (2, 14);
+insert into grupo_permissao (grupo_id, permissao_id)
+select 2, id from permissao where nome = 'EDITAR_RESTAURANTES';
 
 # Adiciona permissoes no grupo do auxiliar
 insert into grupo_permissao (grupo_id, permissao_id)
@@ -155,8 +157,7 @@ select 3, id from permissao where nome like 'CONSULTAR_%';
 
 # Adiciona permissoes no grupo cadastrador
 insert into grupo_permissao (grupo_id, permissao_id)
-select 4, id from permissao where nome like '%_RESTAURANTES' or nome like '%_PRODUTOS';
- 
+select 4, id from permissao where nome like '%_RESTAURANTES';
 
 
 insert into usuario (id, nome, email, senha, data_cadastro) values
