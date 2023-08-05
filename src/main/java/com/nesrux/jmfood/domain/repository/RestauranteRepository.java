@@ -22,7 +22,8 @@ public interface RestauranteRepository extends CustomJpaRepository<Restaurante, 
 	// bind desse método com a consulta que ele tem que fazer
 	List<Restaurante> consultarPorNome(String nome, Long id);
 
-	@Query("from Restaurante r join fetch r.cozinha") //left join fetch r.formasPagamento <- para fazer o join com formas de pagamento!
+	@Query("from Restaurante r join fetch r.cozinha") // left join fetch r.formasPagamento <- para fazer o join com
+														// formas de pagamento!
 	List<Restaurante> findAll();
 
 //	List<Restaurante> findByNomeContainingAndCozinhaId(String nome, Long cozinhaId);
@@ -32,8 +33,12 @@ public interface RestauranteRepository extends CustomJpaRepository<Restaurante, 
 	List<Restaurante> findTop2RestauranteByNomeContaining(String nome);
 
 	int countByCozinhaId(Long cozinhaId);
-	
-	//Para adicionar a paginação de um método implementado pelo jpa ele precisa retornar page e implementar o peagleble
+
+	// Para adicionar a paginação de um método implementado pelo jpa ele precisa
+	// retornar page e implementar o peagleble
 	Page<Restaurante> findByEndereco(Endereco endereco, Pageable pageable);
+
+	//@Query("select case when count(1) > 0 then true else false end from Restaurante rest\r\n join rest.responsaveis resp\r\n where rest.id = :restauranteId	and resp.id = :usuarioId")
+	boolean existsResponsavel(Long restauranteId, Long usuarioId);
 
 }

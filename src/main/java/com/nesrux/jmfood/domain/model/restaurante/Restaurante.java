@@ -77,7 +77,7 @@ public class Restaurante {
 
 	@ManyToMany
 	@JoinTable(name = "restaurante_usuario_responsavel", joinColumns = @JoinColumn(name = "restaurante_id"), inverseJoinColumns = @JoinColumn(name = "usuario_id"))
-	private Set<Usuario> usuarioResponsavel = new HashSet<>();
+	private Set<Usuario> responsaveis  = new HashSet<>();
 
 	@OneToMany(mappedBy = "restaurante")
 	private List<Produto> produtos = new ArrayList<>();
@@ -118,11 +118,11 @@ public class Restaurante {
 	}
 
 	public boolean associarUsuario(Usuario usuario) {
-		return getUsuarioResponsavel().add(usuario);
+		return getResponsaveis().add(usuario);
 	}
 
 	public boolean desassociarUsuario(Usuario usuario) {
-		return getUsuarioResponsavel().remove(usuario);
+		return getResponsaveis().remove(usuario);
 	}
 	public boolean verificaEnderecoNulo() {
 		return getEndereco() != null && getEndereco().getCidade() != null;
