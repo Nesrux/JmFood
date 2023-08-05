@@ -17,6 +17,7 @@ import com.nesrux.jmfood.api.v1.classconversion.assembler.restaurante.FormaPagam
 import com.nesrux.jmfood.api.v1.model.dto.output.formaPagamento.FormaPagamentoModel;
 import com.nesrux.jmfood.api.v1.openapi.controller.restaurante.RestauranteFormaPagamentoControllerOpenApi;
 import com.nesrux.jmfood.api.v1.utils.JmFoodLinks;
+import com.nesrux.jmfood.core.security.anotations.CheckSecurity;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.service.CadastroRestauranteService;
 
@@ -34,6 +35,7 @@ public class RestauranteFormaPagamentoController implements RestauranteFormaPaga
 
 	@Override
 	@GetMapping()
+	@CheckSecurity.AutenticadosPodemConsultar
 	public CollectionModel<FormaPagamentoModel> listar(@PathVariable Long restauranteId) {
 
 		Restaurante restaurante = service.acharOuFalhar(restauranteId);
@@ -55,6 +57,7 @@ public class RestauranteFormaPagamentoController implements RestauranteFormaPaga
 	@Override
 	@DeleteMapping("/{formaPagamentoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@CheckSecurity.restaurantes.podeEditar
 	public ResponseEntity<Void> desassociarFormaPagamento(@PathVariable Long restauranteId,
 			@PathVariable Long formaPagamentoId) {
 		service.desassociarFormaPagamento(restauranteId, formaPagamentoId);
@@ -64,6 +67,7 @@ public class RestauranteFormaPagamentoController implements RestauranteFormaPaga
 	@Override
 	@PutMapping("/{formaPagamentoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@CheckSecurity.restaurantes.podeEditar
 	public ResponseEntity<Void> associarFormaPagamento(@PathVariable Long restauranteId,
 			@PathVariable Long formaPagamentoId) {
 		service.associarFormaPagamento(restauranteId, formaPagamentoId);

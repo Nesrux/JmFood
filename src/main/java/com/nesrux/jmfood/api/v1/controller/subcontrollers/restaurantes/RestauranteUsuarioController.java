@@ -19,6 +19,7 @@ import com.nesrux.jmfood.api.v1.classconversion.assembler.usuario.UsuarioModelAs
 import com.nesrux.jmfood.api.v1.model.dto.output.usuario.UsuarioModel;
 import com.nesrux.jmfood.api.v1.openapi.controller.restaurante.RestauranteUsuarioControllerOpenApi;
 import com.nesrux.jmfood.api.v1.utils.JmFoodLinks;
+import com.nesrux.jmfood.core.security.anotations.CheckSecurity;
 import com.nesrux.jmfood.domain.model.user.Usuario;
 import com.nesrux.jmfood.domain.service.CadastroRestauranteService;
 
@@ -35,6 +36,7 @@ public class RestauranteUsuarioController implements RestauranteUsuarioControlle
 
 	@Override
 	@GetMapping
+	@CheckSecurity.AutenticadosPodemConsultar
 	public CollectionModel<UsuarioModel> listarFuncionariosRestaurante(@PathVariable Long restauranteId) {
 		List<Usuario> usuarios = restauranteService.usuariosResponsaveis(restauranteId);
 		CollectionModel<UsuarioModel> usuarioModelList = usuarioAssembler.toCollectionModel(usuarios);
@@ -52,6 +54,7 @@ public class RestauranteUsuarioController implements RestauranteUsuarioControlle
 	@Override
 	@PutMapping("/{usuarioId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@CheckSecurity.restaurantes.podeEditar
 	public ResponseEntity<Void> associarFuncionarios(@PathVariable Long restauranteId, @PathVariable Long usuarioId) {
 		restauranteService.associarFuncionario(restauranteId, usuarioId);
 		return ResponseEntity.noContent().build();
@@ -60,6 +63,7 @@ public class RestauranteUsuarioController implements RestauranteUsuarioControlle
 	@Override
 	@DeleteMapping("/{usuarioId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@CheckSecurity.restaurantes.podeEditar
 	public ResponseEntity<Void> desassociarFuncionarios(@PathVariable Long restauranteId,
 			@PathVariable Long usuarioId) {
 		restauranteService.desassociarFuncionario(restauranteId, usuarioId);

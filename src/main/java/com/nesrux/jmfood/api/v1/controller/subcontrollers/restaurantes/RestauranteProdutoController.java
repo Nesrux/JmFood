@@ -22,6 +22,7 @@ import com.nesrux.jmfood.api.v1.model.dto.input.produto.ProdutoInputDto;
 import com.nesrux.jmfood.api.v1.model.dto.output.produto.ProdutoModel;
 import com.nesrux.jmfood.api.v1.openapi.controller.restaurante.RestauranteProdutoControllerOpenApi;
 import com.nesrux.jmfood.api.v1.utils.JmFoodLinks;
+import com.nesrux.jmfood.core.security.anotations.CheckSecurity;
 import com.nesrux.jmfood.domain.model.pedido.Produto;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 import com.nesrux.jmfood.domain.service.CadastroProdutoService;
@@ -44,6 +45,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
 
 	@Override
 	@GetMapping
+	@CheckSecurity.AutenticadosPodemConsultar
 	public CollectionModel<ProdutoModel> listar(@PathVariable Long restauranteId,
 			@RequestParam(required = false, defaultValue = "false") Boolean incluirInativos) {
 		Restaurante restaurante = restauranteService.acharOuFalhar(restauranteId);
@@ -62,6 +64,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
 
 	@Override
 	@GetMapping("/{produtoId}")
+	@CheckSecurity.AutenticadosPodemConsultar
 	public ProdutoModel buscar(@PathVariable Long restauranteId, @PathVariable Long produtoId) {
 		Produto produto = service.acharOuFalhar(restauranteId, produtoId);
 
@@ -71,6 +74,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
 	@Override
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@CheckSecurity.restaurantes.podeEditar
 	public ProdutoModel salvar(@PathVariable Long restauranteId, @Valid @RequestBody ProdutoInputDto inputDto) {
 		Produto produto = disassembler.toDomainObject(inputDto);
 		Restaurante restaurante = restauranteService.acharOuFalhar(restauranteId);
@@ -84,6 +88,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
 
 	@Override
 	@PutMapping("/{produtoId}")
+	@CheckSecurity.restaurantes.podeEditar
 	public ProdutoModel atualizar(@PathVariable Long produtoId, @Valid @RequestBody ProdutoInputDto inputDto) {
 		Produto produto = service.acharOuFalhar(produtoId);
 		disassembler.copyToDomainObject(inputDto, produto);

@@ -27,6 +27,7 @@ import com.nesrux.jmfood.api.v1.classconversion.assembler.produto.FotoProdutoMod
 import com.nesrux.jmfood.api.v1.model.dto.input.fotoProduto.FotoProdutoInput;
 import com.nesrux.jmfood.api.v1.model.dto.output.fotoProduto.FotoProdutoModel;
 import com.nesrux.jmfood.api.v1.openapi.controller.produtos.RestauranteFotoProdutoControllerOpenApi;
+import com.nesrux.jmfood.core.security.anotations.CheckSecurity;
 import com.nesrux.jmfood.domain.exception.negocioException.EntidadeNaoEncontradaException;
 import com.nesrux.jmfood.domain.model.pedido.FotoProduto;
 import com.nesrux.jmfood.domain.model.pedido.Produto;
@@ -47,6 +48,7 @@ public class RestauranteFotoProdutoController implements RestauranteFotoProdutoC
 	@Autowired
 	private FotoStorageService fotoStorage;
 
+	@CheckSecurity.restaurantes.podeEditar
 	@PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public FotoProdutoModel atualizarFoto(@PathVariable Long restauranteId, @PathVariable Long produtoId,
 			@RequestPart(required = true) MultipartFile arquivo, @Valid FotoProdutoInput fotoProdutoInput)
@@ -69,12 +71,14 @@ public class RestauranteFotoProdutoController implements RestauranteFotoProdutoC
 	}
 
 	@GetMapping
+	@CheckSecurity.AutenticadosPodemConsultar
 	public FotoProdutoModel buscarFoto(@PathVariable Long restauranteId, @PathVariable Long produtoId) {
 		FotoProduto fotoProduto = service.buscarOuFalhar(restauranteId, produtoId);
 		return assembler.toModel(fotoProduto);
 	}
 
 	@GetMapping(produces = MediaType.ALL_VALUE)
+	@CheckSecurity.AutenticadosPodemConsultar
 	public ResponseEntity<?> servirFoto(@PathVariable Long restauranteId, @PathVariable Long produtoId,
 			@RequestHeader(name = "accept") String acceptHeader) throws HttpMediaTypeNotAcceptableException {
 		try {
@@ -100,6 +104,7 @@ public class RestauranteFotoProdutoController implements RestauranteFotoProdutoC
 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping
+	@CheckSecurity.restaurantes.podeEditar
 	public void excluirFoto(@PathVariable Long restauranteId, @PathVariable Long produtoId) {
 		FotoProduto fotoProduto = service.buscarOuFalhar(restauranteId, produtoId);
 		fotoStorage.remover(fotoProduto.getNome());
