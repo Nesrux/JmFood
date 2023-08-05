@@ -52,21 +52,21 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 
 	@Override
 	@GetMapping
-	@CheckSecurity.AutenticadosPodemConsultar
+	@CheckSecurity.restaurantes.PodeConsultar
 	public CollectionModel<RestauranteBasicoModel> listarResumo() {
 		return basicoAssembler.toCollectionModel(service.acharTodos());
 	}
 
 	@Override
 	@GetMapping(params = "projecao=apenas-nome")
-	@CheckSecurity.AutenticadosPodemConsultar
+	@CheckSecurity.restaurantes.PodeConsultar
 	public CollectionModel<RestauranteApenasNomeModel> listarNomes() {
 		return nomeAssembler.toCollectionModel(service.acharTodos());
 	}
 
 	@Override
 	@GetMapping("/{restauranteId}")
-	@CheckSecurity.AutenticadosPodemConsultar
+	@CheckSecurity.restaurantes.PodeConsultar
 	public RestauranteModel buscar(@PathVariable Long restauranteId) {
 		Restaurante restaurante = service.acharOuFalhar(restauranteId);
 

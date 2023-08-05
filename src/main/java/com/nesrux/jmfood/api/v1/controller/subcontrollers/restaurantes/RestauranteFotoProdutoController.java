@@ -71,14 +71,14 @@ public class RestauranteFotoProdutoController implements RestauranteFotoProdutoC
 	}
 
 	@GetMapping
-	@CheckSecurity.AutenticadosPodemConsultar
+	@CheckSecurity.restaurantes.PodeConsultar
 	public FotoProdutoModel buscarFoto(@PathVariable Long restauranteId, @PathVariable Long produtoId) {
 		FotoProduto fotoProduto = service.buscarOuFalhar(restauranteId, produtoId);
 		return assembler.toModel(fotoProduto);
 	}
 
 	@GetMapping(produces = MediaType.ALL_VALUE)
-	@CheckSecurity.AutenticadosPodemConsultar
+	@CheckSecurity.restaurantes.PodeConsultar
 	public ResponseEntity<?> servirFoto(@PathVariable Long restauranteId, @PathVariable Long produtoId,
 			@RequestHeader(name = "accept") String acceptHeader) throws HttpMediaTypeNotAcceptableException {
 		try {

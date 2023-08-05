@@ -16,6 +16,10 @@ public @interface CheckSecurity {
 		@Target(METHOD)
 		public @interface PodeEditar {}
 		
+		@PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
+		@Retention(RUNTIME)
+		@Target(METHOD)
+		public @interface PodeConsultar {}
 
 	}
 	
@@ -24,12 +28,13 @@ public @interface CheckSecurity {
 		@Retention(RUNTIME)
 		@Target(METHOD)		
 		public @interface podeEditar{}
+		
+		@PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
+		@Retention(RUNTIME)
+		@Target(METHOD)
+		public @interface PodeConsultar {}
+
 	}
 
-	@PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
-	@Retention(RUNTIME)
-	@Target(METHOD)
-	public @interface AutenticadosPodemConsultar {
 
-	}
 }

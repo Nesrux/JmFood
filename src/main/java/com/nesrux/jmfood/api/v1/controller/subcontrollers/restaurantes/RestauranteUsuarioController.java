@@ -36,7 +36,7 @@ public class RestauranteUsuarioController implements RestauranteUsuarioControlle
 
 	@Override
 	@GetMapping
-	@CheckSecurity.AutenticadosPodemConsultar
+	@CheckSecurity.restaurantes.PodeConsultar
 	public CollectionModel<UsuarioModel> listarFuncionariosRestaurante(@PathVariable Long restauranteId) {
 		List<Usuario> usuarios = restauranteService.usuariosResponsaveis(restauranteId);
 		CollectionModel<UsuarioModel> usuarioModelList = usuarioAssembler.toCollectionModel(usuarios);

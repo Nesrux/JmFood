@@ -45,7 +45,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
 
 	@Override
 	@GetMapping
-	@CheckSecurity.AutenticadosPodemConsultar
+	@CheckSecurity.restaurantes.PodeConsultar
 	public CollectionModel<ProdutoModel> listar(@PathVariable Long restauranteId,
 			@RequestParam(required = false, defaultValue = "false") Boolean incluirInativos) {
 		Restaurante restaurante = restauranteService.acharOuFalhar(restauranteId);
@@ -64,7 +64,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
 
 	@Override
 	@GetMapping("/{produtoId}")
-	@CheckSecurity.AutenticadosPodemConsultar
+	@CheckSecurity.restaurantes.PodeConsultar
 	public ProdutoModel buscar(@PathVariable Long restauranteId, @PathVariable Long produtoId) {
 		Produto produto = service.acharOuFalhar(restauranteId, produtoId);
 

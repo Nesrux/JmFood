@@ -43,7 +43,7 @@ public class CozinhaController implements CozinhaControllerOpenApi {
 	@Autowired
 	private PagedResourcesAssembler<Cozinha> pagedModelAssembler;
 
-	@CheckSecurity.AutenticadosPodemConsultar
+	@CheckSecurity.Cozinhas.PodeConsultar
 	@GetMapping()
 	@Override
 	public PagedModel<CozinhaModel> listar(@PageableDefault(size = 10) Pageable page) {
@@ -54,7 +54,7 @@ public class CozinhaController implements CozinhaControllerOpenApi {
 		PagedModel<CozinhaModel> cozinhaPagedModel = pagedModelAssembler.toModel(cozinhasPage, assembler);
 		return cozinhaPagedModel;
 	}
-	@CheckSecurity.AutenticadosPodemConsultar
+	@CheckSecurity.Cozinhas.PodeConsultar
 	@Override
 	@GetMapping("/{cozinhaId}")
 	public CozinhaModel buscar(@PathVariable Long cozinhaId) {

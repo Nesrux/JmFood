@@ -35,7 +35,7 @@ public class RestauranteFormaPagamentoController implements RestauranteFormaPaga
 
 	@Override
 	@GetMapping()
-	@CheckSecurity.AutenticadosPodemConsultar
+	@CheckSecurity.restaurantes.PodeConsultar
 	public CollectionModel<FormaPagamentoModel> listar(@PathVariable Long restauranteId) {
 
 		Restaurante restaurante = service.acharOuFalhar(restauranteId);
