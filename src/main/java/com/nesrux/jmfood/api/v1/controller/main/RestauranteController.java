@@ -135,7 +135,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	@Override
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("/{restauranteId}/ativo")
-	@CheckSecurity.restaurantes.podeGerenciarCadastro
+	@CheckSecurity.restaurantes.PodeGerenciarFuncionamento
 	public ResponseEntity<Void> ativarRestaurante(@PathVariable Long restauranteId) {
 		service.ativar(restauranteId);
 		return ResponseEntity.noContent().build();
@@ -145,7 +145,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	@Override
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{restauranteId}/ativo")
-	@CheckSecurity.restaurantes.podeGerenciarCadastro
+	@CheckSecurity.restaurantes.PodeGerenciarFuncionamento
 	public ResponseEntity<Void> desativarRestaurante(@PathVariable Long restauranteId) {
 		service.desativar(restauranteId);
 		return ResponseEntity.noContent().build();
@@ -155,7 +155,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	@Override
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("/{restauranteId}/fechamento")
-	@CheckSecurity.restaurantes.podeGerenciarCadastro
+	@CheckSecurity.restaurantes.PodeGerenciarFuncionamento
 	public ResponseEntity<Void> fecharRestaurante(@PathVariable Long restauranteId) {
 		service.fechar(restauranteId);
 		return ResponseEntity.noContent().build();
@@ -165,7 +165,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	@Override
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("/{restauranteId}/abertura")
-	@CheckSecurity.restaurantes.podeGerenciarCadastro
+	@CheckSecurity.restaurantes.PodeGerenciarFuncionamento
 	public ResponseEntity<Void> abrirRestaurante(@PathVariable Long restauranteId) {
 		service.abrir(restauranteId);
 		return ResponseEntity.noContent().build();
