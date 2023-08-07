@@ -13,4 +13,7 @@ public interface PedidoRepository extends CustomJpaRepository<Pedido, Long> , Jp
 	List<Pedido> findAll();
 
 	Optional<Pedido> findByCodigo(String codigo);
+	
+	boolean isPedidoGerenciadoPor(String codigoPedido, Long usuarioId);
+
 }

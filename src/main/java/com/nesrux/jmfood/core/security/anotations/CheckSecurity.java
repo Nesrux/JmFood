@@ -56,8 +56,7 @@ public @interface CheckSecurity {
 				+ " @jmfoodSecurity.gerenciaRestaurante(returnObject.restaurante.restauranteId)")
 		@Retention(RUNTIME)
 		@Target(METHOD)
-		public @interface PodeBuscar {
-		}
+		public @interface PodeBuscar {}
 
 		//Obs : para pegar os dados da classe utilizando o # tem que ser o nome da variavel e não o nome da bean 
 		@PreAuthorize("hasAuthority('SCOPE_READ') and hasAuthority('CONSULTAR_PEDIDOS') or "
@@ -65,8 +64,13 @@ public @interface CheckSecurity {
 				+ "@jmfoodSecurity.gerenciaRestaurante(#filter.restauranteId)")
 		@Retention(RUNTIME)
 		@Target(METHOD)
-		public @interface PodePesquisar {
-		}
+		public @interface PodePesquisar {}
+	
+		@PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('GERENCIAR_PEDIDOS') or "
+				+ "@jmfoodSecurity.gerenciaPedido(#codigoPedido)")	
+		@Retention(RUNTIME)
+		@Target(METHOD)		
+		public @interface podeGerenciar{}
 
 	}
 

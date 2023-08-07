@@ -38,7 +38,7 @@ public interface RestauranteRepository extends CustomJpaRepository<Restaurante, 
 	// retornar page e implementar o peagleble
 	Page<Restaurante> findByEndereco(Endereco endereco, Pageable pageable);
 
-	//@Query("select case when count(1) > 0 then true else false end from Restaurante rest\r\n join rest.responsaveis resp\r\n where rest.id = :restauranteId	and resp.id = :usuarioId")
-	boolean existsResponsavel(Long restauranteId, Long usuarioId);
+	//@Query("select case when count(1) > 0 then true else false end from Restaurante rest join rest.responsaveis resp where rest.id = :restauranteId	and resp.id = :usuarioId")
+	boolean existsResponsavel(Long restauranteId, Long usuarioId);	
 
 }

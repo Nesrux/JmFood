@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nesrux.jmfood.api.v1.openapi.controller.pedido.FluxoPedidoControllerOpenApi;
+import com.nesrux.jmfood.core.security.anotations.CheckSecurity;
 import com.nesrux.jmfood.domain.service.FluxoPedidoService;
 
 @RestController
@@ -22,6 +23,7 @@ public class FluxoPedidoController implements FluxoPedidoControllerOpenApi {
 	@Override
 	@PutMapping("/confirmar")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@CheckSecurity.Pedidos.podeGerenciar
 	public ResponseEntity<Void> confirmarPedido(@PathVariable String codigoPedido) {
 		fluxoService.confirmar(codigoPedido);
 
@@ -31,6 +33,7 @@ public class FluxoPedidoController implements FluxoPedidoControllerOpenApi {
 	@Override
 	@PutMapping("/entregar")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@CheckSecurity.Pedidos.podeGerenciar
 	public ResponseEntity<Void> entregarPedido(@PathVariable String codigoPedido) {
 		fluxoService.entregar(codigoPedido);
 		return ResponseEntity.noContent().build();
@@ -40,6 +43,7 @@ public class FluxoPedidoController implements FluxoPedidoControllerOpenApi {
 	@Override
 	@PutMapping("/cancelar")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@CheckSecurity.Pedidos.podeGerenciar
 	public ResponseEntity<Void> cancelarPedido(@PathVariable String codigoPedido) {
 		fluxoService.cancelar(codigoPedido);
 		return ResponseEntity.noContent().build();
