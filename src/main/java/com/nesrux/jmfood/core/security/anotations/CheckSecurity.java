@@ -15,43 +15,59 @@ public @interface CheckSecurity {
 		@PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDITAR_COZINHAS')")
 		@Retention(RUNTIME)
 		@Target(METHOD)
-		public @interface PodeEditar {}
-		
+		public @interface PodeEditar {
+		}
+
 		@PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
 		@Retention(RUNTIME)
 		@Target(METHOD)
-		public @interface PodeConsultar {}
+		public @interface PodeConsultar {
+		}
 
 	}
-	
-	public @interface restaurantes{
+
+	public @interface restaurantes {
 		@PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDITAR_RESTAURANTES')")
 		@Retention(RUNTIME)
-		@Target(METHOD)		
-		public @interface podeGerenciarCadastro{}
-		
-		@PreAuthorize("hasAuthority('SCOPE_WRITE') and "
-				+ "(hasAuthority('EDITAR_RESTAURANTES') or "
+		@Target(METHOD)
+		public @interface podeGerenciarCadastro {
+		}
+
+		@PreAuthorize("hasAuthority('SCOPE_WRITE') and " + "(hasAuthority('EDITAR_RESTAURANTES') or "
 				+ "@jmfoodSecurity.gerenciaRestaurante(#restauranteId))")
 		@Retention(RUNTIME)
 		@Target(METHOD)
-		public @interface PodeGerenciarFuncionamento { }
-		
+		public @interface PodeGerenciarFuncionamento {
+		}
+
 		@PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
 		@Retention(RUNTIME)
 		@Target(METHOD)
-		public @interface PodeConsultar {}
+		public @interface PodeConsultar {
+		}
 
 	}
+
 	public @interface Pedidos {
-		
+
 		@PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
-		@PostAuthorize("hasAuthority('CONSULTAR_PEDIDOS') or @jmfoodSecurity.getUsuarioId() == returnObject.cliente.id or @jmfoodSecurity.gerenciaRestaurante(returnObject.restaurante.restauranteId)")
+		@PostAuthorize("hasAuthority('CONSULTAR_PEDIDOS') or "
+				+ "@jmfoodSecurity.getUsuarioId() == returnObject.cliente.id or"
+				+ " @jmfoodSecurity.gerenciaRestaurante(returnObject.restaurante.restauranteId)")
 		@Retention(RUNTIME)
 		@Target(METHOD)
-		public @interface PodeBuscar {}
+		public @interface PodeBuscar {
+		}
+
+		//Obs : para pegar os dados da classe utilizando o # tem que ser o nome da variavel e não o nome da bean 
+		@PreAuthorize("hasAuthority('SCOPE_READ') and hasAuthority('CONSULTAR_PEDIDOS') or "
+				+ "@jmfoodSecurity.getUsuarioId() == #filter.clienteId or"
+				+ "@jmfoodSecurity.gerenciaRestaurante(#filter.restauranteId)")
+		@Retention(RUNTIME)
+		@Target(METHOD)
+		public @interface PodePesquisar {
+		}
 
 	}
-
 
 }
