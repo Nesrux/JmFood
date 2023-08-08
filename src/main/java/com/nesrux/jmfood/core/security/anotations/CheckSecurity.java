@@ -71,6 +71,11 @@ public @interface CheckSecurity {
 		@Retention(RUNTIME)
 		@Target(METHOD)		
 		public @interface podeGerenciar{}
+		
+		@PreAuthorize("hasAuthority('SCOPE_WRITE') and isAuthenticated()")
+		@Retention(RUNTIME)
+		@Target(METHOD)
+		public @interface podeCriar{}
 
 	}
 
