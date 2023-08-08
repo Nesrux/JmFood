@@ -67,7 +67,7 @@ public class EstadoController implements EstadoControllerOpenapi {
 	}
 
 	@Override
-	@PutMapping("{estadoId}")
+	@PutMapping("/{estadoId}")
 	@CheckSecurity.Estados.podeEditar
 	public Estado atualizar(@PathVariable Long estadoId, @RequestBody @Valid EstadoInputDto estado) {
 		Estado estadoAtual = estadoService.acharOuFalhar(estadoId);
@@ -82,7 +82,7 @@ public class EstadoController implements EstadoControllerOpenapi {
 	}
 
 	@Override
-	@DeleteMapping("{estadoId}")
+	@DeleteMapping("/{estadoId}")
 	@CheckSecurity.Estados.podeEditar
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletar(@PathVariable Long estadoId) {
