@@ -47,7 +47,7 @@ public @interface CheckSecurity {
 
 		@PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
 		@PostAuthorize("hasAuthority('CONSULTAR_PEDIDOS') or "
-				+ "@jmfoodSecurity.getUsuarioId() == returnObject.cliente.id or"
+				+ "@jmfoodSecurity.usuarioAuthenticadoIgual(returnObject.cliente.id) or"
 				+ " @jmfoodSecurity.gerenciaRestaurante(returnObject.restaurante.restauranteId)")
 		@Retention(RUNTIME)
 		@Target(METHOD)
@@ -55,7 +55,7 @@ public @interface CheckSecurity {
 
 		//Obs : para pegar os dados da classe utilizando o # tem que ser o nome da variavel e não o nome da bean 
 		@PreAuthorize("hasAuthority('SCOPE_READ') and hasAuthority('CONSULTAR_PEDIDOS') or "
-				+ "@jmfoodSecurity.getUsuarioId() == #filter.clienteId or"
+				+ "@jmfoodSecurity.usuarioAuthenticadoIgual(#filter.clienteId) or"
 				+ "@jmfoodSecurity.gerenciaRestaurante(#filter.restauranteId)")
 		@Retention(RUNTIME)
 		@Target(METHOD)

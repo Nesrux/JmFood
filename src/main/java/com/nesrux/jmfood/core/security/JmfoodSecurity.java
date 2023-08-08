@@ -13,10 +13,9 @@ import com.nesrux.jmfood.domain.repository.RestauranteRepository;
 public class JmfoodSecurity {
 	@Autowired
 	private RestauranteRepository restauranteRepository;
-	
+
 	private PedidoRepository pedidoRepository;
-	
-	
+
 	public Authentication getAuthentication() {
 		return SecurityContextHolder.getContext().getAuthentication();
 	}
@@ -30,9 +29,14 @@ public class JmfoodSecurity {
 	public boolean gerenciaRestaurante(Long restauranteId) {
 		return restauranteRepository.existsResponsavel(restauranteId, getUsuarioId());
 	}
-	
+
 	public boolean gerenciaPedido(String codigoPedido) {
 		return pedidoRepository.isPedidoGerenciadoPor(codigoPedido, getUsuarioId());
 	}
-	
+
+	public boolean usuarioAuthenticadoIgual(Long usuarioId) {
+		return getUsuarioId() != null && usuarioId != null &&
+				getUsuarioId().equals(usuarioId);
+	}
+
 }
