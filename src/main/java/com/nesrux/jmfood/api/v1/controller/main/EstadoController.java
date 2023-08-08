@@ -21,6 +21,7 @@ import com.nesrux.jmfood.api.v1.classconversion.dissasembler.EstadoInputDisassem
 import com.nesrux.jmfood.api.v1.model.dto.input.estado.EstadoInputDto;
 import com.nesrux.jmfood.api.v1.model.dto.output.estado.EstadoModel;
 import com.nesrux.jmfood.api.v1.openapi.controller.estados.EstadoControllerOpenapi;
+import com.nesrux.jmfood.core.security.anotations.CheckSecurity;
 import com.nesrux.jmfood.domain.model.endereco.Estado;
 import com.nesrux.jmfood.domain.service.CadastroEstadoService;
 
@@ -39,12 +40,14 @@ public class EstadoController implements EstadoControllerOpenapi {
 
 	@Override
 	@GetMapping
+	@CheckSecurity.Estados.podeConsultar
 	public CollectionModel<EstadoModel> listar() {
 		return outputAssembler.toCollectionModel(estadoService.acharTodos());
 	}
 
 	@Override
 	@GetMapping("/{estadoId}")
+	@CheckSecurity.Estados.podeConsultar
 	public EstadoModel buscar(@PathVariable Long estadoId) {
 		return outputAssembler.toModel(estadoService.acharOuFalhar(estadoId));
 	}
@@ -52,6 +55,7 @@ public class EstadoController implements EstadoControllerOpenapi {
 	@Override
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@CheckSecurity.Estados.podeEditar
 	public EstadoModel adicionar(@RequestBody @Valid EstadoInputDto estadoDto) {
 		Estado estado = inputDisassembler.toDomainObject(estadoDto);
 		estadoService.salvar(estado);
@@ -64,6 +68,7 @@ public class EstadoController implements EstadoControllerOpenapi {
 
 	@Override
 	@PutMapping("{estadoId}")
+	@CheckSecurity.Estados.podeEditar
 	public Estado atualizar(@PathVariable Long estadoId, @RequestBody @Valid EstadoInputDto estado) {
 		Estado estadoAtual = estadoService.acharOuFalhar(estadoId);
 
@@ -78,6 +83,7 @@ public class EstadoController implements EstadoControllerOpenapi {
 
 	@Override
 	@DeleteMapping("{estadoId}")
+	@CheckSecurity.Estados.podeEditar
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletar(@PathVariable Long estadoId) {
 		estadoService.excluir(estadoId);
