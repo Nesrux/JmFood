@@ -29,6 +29,7 @@ import com.nesrux.jmfood.api.v1.classconversion.dissasembler.FormaPagamentoInput
 import com.nesrux.jmfood.api.v1.model.dto.input.formaPagamento.FormaPagamentoInputDto;
 import com.nesrux.jmfood.api.v1.model.dto.output.formaPagamento.FormaPagamentoModel;
 import com.nesrux.jmfood.api.v1.openapi.controller.formaPagamento.FormaPagamentoControllerOpenApi;
+import com.nesrux.jmfood.core.security.anotations.CheckSecurity;
 import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
 import com.nesrux.jmfood.domain.service.CadastroFormaPagamentoService;
 
@@ -47,6 +48,7 @@ public class FormaPagamentoController implements FormaPagamentoControllerOpenApi
 
 	@Override
 	@GetMapping
+	@CheckSecurity.FormasPagamento.podeConsultar
 	public ResponseEntity<CollectionModel<FormaPagamentoModel>> listar(ServletWebRequest request) {
 		// Deep Etags
 		ShallowEtagHeaderFilter.disableContentCaching(request.getRequest());
@@ -71,6 +73,7 @@ public class FormaPagamentoController implements FormaPagamentoControllerOpenApi
 
 	@Override
 	@GetMapping("/{formaPagamentoID}")
+	@CheckSecurity.FormasPagamento.podeConsultar
 	public ResponseEntity<FormaPagamentoModel> buscar(@PathVariable Long formaPagamentoID, ServletWebRequest request) {
 		// é esse aqui que eu trnho que fazer na consulta de restaurantes
 		ShallowEtagHeaderFilter.disableContentCaching(request.getRequest());
@@ -93,6 +96,7 @@ public class FormaPagamentoController implements FormaPagamentoControllerOpenApi
 	@Override
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@CheckSecurity.FormasPagamento.podeEditar
 	public FormaPagamentoModel adicionar(@RequestBody @Valid FormaPagamentoInputDto inputDto) {
 		FormaPagamento formaPagamento = disassembler.toDomainObject(inputDto);
 
@@ -103,6 +107,7 @@ public class FormaPagamentoController implements FormaPagamentoControllerOpenApi
 
 	@Override
 	@PutMapping("/{formaPagamentoId}")
+	@CheckSecurity.FormasPagamento.podeEditar
 	public FormaPagamentoModel atualizar(@RequestBody @Valid FormaPagamentoInputDto inputDto,
 			@PathVariable Long formaPagamentoId) {
 		FormaPagamento formaPagamento = service.acharOuFalhar(formaPagamentoId);
@@ -115,6 +120,7 @@ public class FormaPagamentoController implements FormaPagamentoControllerOpenApi
 	@Override
 	@DeleteMapping("/{formaPagamentoID}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@CheckSecurity.FormasPagamento.podeEditar
 	public void excluir(@PathVariable Long formaPagamentoID) {
 		service.excluir(formaPagamentoID);
 	}
