@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nesrux.jmfood.api.v1.openapi.controller.estatisticas.EstatisticasControllerOpenApi;
 import com.nesrux.jmfood.api.v1.utils.JmFoodLinks;
+import com.nesrux.jmfood.core.security.anotations.CheckSecurity;
 import com.nesrux.jmfood.domain.filter.VendaDiariaFilter;
 import com.nesrux.jmfood.domain.model.dto.VendaDiaria;
 import com.nesrux.jmfood.domain.service.VendaQueryService;
@@ -30,6 +31,7 @@ public class EstatisticasController implements EstatisticasControllerOpenApi {
 	private JmFoodLinks links;
 
 	@GetMapping
+	@CheckSecurity.Estatisticas.podeConsultar
 	public Estatisticas estatisticasLinks() {
 		Estatisticas estatistica = new Estatisticas();
 		estatistica.add(links.linkToVendasDiarias("venda-diaria"));
@@ -39,6 +41,7 @@ public class EstatisticasController implements EstatisticasControllerOpenApi {
 
 	@Override
 	@GetMapping(path = "/vendas-diarias", produces = MediaType.APPLICATION_JSON_VALUE)
+	@CheckSecurity.Estatisticas.podeConsultar
 	public List<VendaDiaria> consultarVendasDiarias(VendaDiariaFilter filtro,
 			@RequestParam(required = false, defaultValue = "+00:00") String timeOffset) {
 		return vendaQueryService.consultarVendaDiarias(filtro, timeOffset);
@@ -46,6 +49,7 @@ public class EstatisticasController implements EstatisticasControllerOpenApi {
 
 	@Override
 	@GetMapping(path = "/vendas-diarias", produces = MediaType.APPLICATION_PDF_VALUE)
+	@CheckSecurity.Estatisticas.podeConsultar
 	public ResponseEntity<byte[]> consultarVendasDiariasPdf(VendaDiariaFilter filtro,
 			@RequestParam(required = false, defaultValue = "+00:00") String timeOffset) {
 
@@ -56,6 +60,7 @@ public class EstatisticasController implements EstatisticasControllerOpenApi {
 
 		return ResponseEntity.ok().contentType(MediaType.APPLICATION_PDF).headers(header).body(bytesPdf);
 	}
+	
 	public static class Estatisticas extends RepresentationModel<Estatisticas> {}
 
 }
