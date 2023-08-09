@@ -24,6 +24,7 @@ import com.nesrux.jmfood.api.v1.model.dto.input.usuario.UsuarioInput;
 import com.nesrux.jmfood.api.v1.model.dto.input.usuario.UsuarioInputAtualizar;
 import com.nesrux.jmfood.api.v1.model.dto.output.usuario.UsuarioModel;
 import com.nesrux.jmfood.api.v1.openapi.controller.usuarios.UsuarioControllerOpenApi;
+import com.nesrux.jmfood.core.security.anotations.CheckSecurity;
 import com.nesrux.jmfood.domain.model.user.Usuario;
 import com.nesrux.jmfood.domain.service.CadastroUsuarioService;
 
@@ -39,6 +40,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
 
 	@Override
 	@GetMapping
+	@CheckSecurity.UsuariosGruposPermissoes.PodeConsultar
 	public CollectionModel<UsuarioModel> listar() {
 		List<Usuario> usuariosList = service.acharTodos();
 
@@ -48,6 +50,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
 
 	@Override
 	@GetMapping("{usuarioId}")
+	@CheckSecurity.UsuariosGruposPermissoes.PodeConsultar
 	public UsuarioModel buscar(@PathVariable Long usuarioId) {
 		Usuario usuario = service.acharOuFalhar(usuarioId);
 		return assembler.toModel(usuario);
@@ -56,6 +59,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
 	@Override
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@CheckSecurity.UsuariosGruposPermissoes.PodeAlterarUsuario
 	public UsuarioModel salvar(@RequestBody @Valid UsuarioInput userInput) {
 		Usuario user = dissasembler.toDomainObject(userInput);
 		service.salvar(user);
@@ -67,6 +71,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
 
 	@Override
 	@PutMapping("/{usuarioId}")
+	@CheckSecurity.UsuariosGruposPermissoes.PodeAlterarUsuario
 	public UsuarioModel atualizar(@PathVariable Long usuarioId,
 			@RequestBody @Valid UsuarioInputAtualizar usuarioInput) {
 		Usuario usuario = service.acharOuFalhar(usuarioId);
@@ -81,6 +86,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
 	@Override
 	@PutMapping("/{usuarioId}/senha")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@CheckSecurity.UsuariosGruposPermissoes.PodeAlterarPropriaSenha
 	public void atualizarSenha(@PathVariable Long usuarioId, @RequestBody @Valid TrocarSenhaInput senhainput) {
 		String senhaAtual = senhainput.getSenhaAtual();
 		String novaSenha = senhainput.getSenhaNova();
