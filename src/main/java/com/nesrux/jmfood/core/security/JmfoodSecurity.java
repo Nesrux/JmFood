@@ -47,5 +47,21 @@ public class JmfoodSecurity {
 	public boolean podeGerenciarPedidos(String codigoPedido) {
 		return hasAuthority("SCOPE_WRITE") && hasAuthority("GERENCIAR_PEDIDOS") || gerenciaPedido(codigoPedido);
 	}
+	
+	public boolean temEscopoEscrita() {
+		return hasAuthority("SCOPE_WRITE");
+	}
+	
+	public boolean temEscopoLeitura() {
+		return hasAuthority("SCOPE_READ");
+	}
+	
+	public boolean podeConsultarUsuariosGruposPermissoes() {
+		return temEscopoLeitura() && hasAuthority("CONSULTAR_USUARIOS_GRUPOS_PERMISSOES");
+	}
+	
+	public boolean podeEditarUsuariosGruposPermissoes() {
+		return temEscopoEscrita() && hasAuthority("EDITAR_USUARIOS_GRUPOS_PERMISSOES");
+	}
 
 }

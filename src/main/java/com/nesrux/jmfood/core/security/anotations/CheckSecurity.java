@@ -23,6 +23,34 @@ public @interface CheckSecurity {
 		public @interface PodeConsultar {}
 
 	}
+	
+	public @interface UsuariosGruposPermissoes {
+		
+		@PreAuthorize("hasAuthority('SCOPE_WRITE') and "
+				+ "@jmfoodSecurity.usuarioAutenticadoIgual(#usuarioId)")
+		@Retention(RUNTIME)
+		@Target(METHOD)
+		public @interface PodeAlterarPropriaSenha { }
+		
+		@PreAuthorize("hasAuthority('SCOPE_WRITE') and (hasAuthority('EDITAR_USUARIOS_GRUPOS_PERMISSOES') or "
+				+ "@algaSecurity.usuarioAutenticadoIgual(#usuarioId))")
+		@Retention(RUNTIME)
+		@Target(METHOD)
+		public @interface PodeAlterarUsuario { }
+
+		@PreAuthorize("@jmfoodSecurity.podeEditarUsuariosGruposPermissoes()")
+		@Retention(RUNTIME)
+		@Target(METHOD)
+		public @interface PodeEditar { }
+		
+
+		@PreAuthorize("@jmfoodSecurity.podeConsultarUsuariosGruposPermissoes()")
+		@Retention(RUNTIME)
+		@Target(METHOD)
+		public @interface PodeConsultar { }
+		
+	}
+	
 
 	public @interface restaurantes {
 		@PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDITAR_RESTAURANTES')")

@@ -17,6 +17,7 @@ import com.nesrux.jmfood.api.v1.classconversion.assembler.usuario.PermissaoModel
 import com.nesrux.jmfood.api.v1.model.dto.output.permissao.PermissaoModel;
 import com.nesrux.jmfood.api.v1.openapi.controller.grupos.GrupoPermissaoControllerOpenapi;
 import com.nesrux.jmfood.api.v1.utils.JmFoodLinks;
+import com.nesrux.jmfood.core.security.anotations.CheckSecurity;
 import com.nesrux.jmfood.domain.model.user.Permissao;
 import com.nesrux.jmfood.domain.service.CadastroGrupoService;
 import com.nesrux.jmfood.domain.service.CadastroPermissaoService;
@@ -38,6 +39,7 @@ public class GrupoPermissaoController implements GrupoPermissaoControllerOpenapi
 
 	@GetMapping
 	@Override
+	@CheckSecurity.UsuariosGruposPermissoes.PodeConsultar
 	public CollectionModel<PermissaoModel> ListarPermissoes(@PathVariable Long grupoId) {
 
 		CollectionModel<PermissaoModel> permissoesModel = assembler
@@ -54,6 +56,7 @@ public class GrupoPermissaoController implements GrupoPermissaoControllerOpenapi
 
 	@GetMapping("/{permissaoId}")
 	@Override
+	@CheckSecurity.UsuariosGruposPermissoes.PodeConsultar
 	public PermissaoModel buscarPermissao(@PathVariable Long grupoId, @PathVariable Long permissaoId) {
 
 		Permissao permissao = permissaoService.acharOuFalhar(permissaoId);
@@ -64,6 +67,7 @@ public class GrupoPermissaoController implements GrupoPermissaoControllerOpenapi
 	@DeleteMapping("/{permissaoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@Override
+	@CheckSecurity.UsuariosGruposPermissoes.PodeEditar
 	public ResponseEntity<Void> dessassociarPermissao(@PathVariable Long grupoId, @PathVariable Long permissaoId) {
 		grupoService.deassociarPermissao(grupoId, permissaoId);
 		return ResponseEntity.noContent().build();
@@ -72,6 +76,7 @@ public class GrupoPermissaoController implements GrupoPermissaoControllerOpenapi
 	@PutMapping("/{permissaoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@Override
+	@CheckSecurity.UsuariosGruposPermissoes.PodeEditar
 	public ResponseEntity<Void> associarPermissao(@PathVariable Long grupoId, @PathVariable Long permissaoId) {
 		grupoService.associarPermissao(grupoId, permissaoId);
 		return ResponseEntity.noContent().build();
