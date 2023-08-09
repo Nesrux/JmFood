@@ -25,7 +25,7 @@ public class ResourceServeConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-		.formLogin().loginPage("/login")
+		.formLogin()
 		.and()
 		.authorizeRequests()
 			.antMatchers("/oauth/**").authenticated()
