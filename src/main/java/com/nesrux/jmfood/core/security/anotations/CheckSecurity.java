@@ -61,8 +61,7 @@ public @interface CheckSecurity {
 		@Target(METHOD)
 		public @interface PodePesquisar {}
 	
-		@PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('GERENCIAR_PEDIDOS') or "
-				+ "@jmfoodSecurity.gerenciaPedido(#codigoPedido)")	
+		@PreAuthorize("@jmfoodSecurity.podeGerenciarPedidos(#codigoPedido)")	
 		@Retention(RUNTIME)
 		@Target(METHOD)		
 		public @interface podeGerenciar{}

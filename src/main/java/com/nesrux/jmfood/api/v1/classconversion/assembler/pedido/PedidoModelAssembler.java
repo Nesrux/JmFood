@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.nesrux.jmfood.api.v1.controller.main.PedidoController;
 import com.nesrux.jmfood.api.v1.model.dto.output.pedido.PedidoModel;
 import com.nesrux.jmfood.api.v1.utils.JmFoodLinks;
+import com.nesrux.jmfood.core.security.JmfoodSecurity;
 import com.nesrux.jmfood.domain.model.pedido.Pedido;
 
 @Component
@@ -17,6 +18,9 @@ public class PedidoModelAssembler extends RepresentationModelAssemblerSupport<Pe
 	private ModelMapper mapper;
 	@Autowired
 	private JmFoodLinks jmFoodLinks;
+
+	@Autowired
+	private JmfoodSecurity jmfoodSecurity;
 
 	public PedidoModelAssembler() {
 		super(PedidoController.class, PedidoModel.class);
@@ -46,19 +50,22 @@ public class PedidoModelAssembler extends RepresentationModelAssemblerSupport<Pe
 		pedidoModel.getItens().forEach(itemPedido -> itemPedido.getProduto()
 				.add(jmFoodLinks.linkToProduto(pedidoModel.getRestaurante().getRestauranteId(), itemPedido.getId())));
 
-		// para confimrar pedido
-		if (pedido.podeSerConfirmado()) {
-			pedidoModel.add(jmFoodLinks.linkToConfirmacaoPedido(pedidoModel.getCodigo(), "confirmar-pedido"));
-		}
+		if (jmfoodSecurity.gerenciaPedido(pedidoModel.getCodigo())) {
+		
+			// para confimrar pedido
+			if (pedido.podeSerConfirmado()) {
+				pedidoModel.add(jmFoodLinks.linkToConfirmacaoPedido(pedidoModel.getCodigo(), "confirmar-pedido"));
+			}
 
-		// Entregar pedido
-		if (pedido.podeSerEntegue()) {
-			pedidoModel.add(jmFoodLinks.linkToEntregaPedido(pedidoModel.getCodigo(), "entregar-pedido"));
-		}
-		// Cancelar Pedido
-		if (pedido.podeSerCancelado()) {
-			pedidoModel.add(jmFoodLinks.linkToCancelamentoPedido(pedidoModel.getCodigo(), "cancelar-pedido"));
+			// Entregar pedido
+			if (pedido.podeSerEntegue()) {
+				pedidoModel.add(jmFoodLinks.linkToEntregaPedido(pedidoModel.getCodigo(), "entregar-pedido"));
+			}
+			// Cancelar Pedido
+			if (pedido.podeSerCancelado()) {
+				pedidoModel.add(jmFoodLinks.linkToCancelamentoPedido(pedidoModel.getCodigo(), "cancelar-pedido"));
 
+			}
 		}
 		return pedidoModel;
 
