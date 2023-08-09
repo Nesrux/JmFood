@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.nesrux.jmfood.api.v1.controller.main.EstadoController;
 import com.nesrux.jmfood.api.v1.model.dto.output.estado.EstadoModel;
 import com.nesrux.jmfood.api.v1.utils.JmFoodLinks;
+import com.nesrux.jmfood.core.security.JmfoodSecurity;
 import com.nesrux.jmfood.domain.model.endereco.Estado;
 
 @Component
@@ -20,6 +21,9 @@ public class EstadoModelAssembler extends RepresentationModelAssemblerSupport<Es
 	@Autowired
 	private JmFoodLinks jmFoodLinks;
 
+	@Autowired
+	private JmfoodSecurity jmfoodSecurity;
+
 	public EstadoModelAssembler() {
 		super(EstadoController.class, EstadoModel.class);
 
@@ -27,14 +31,16 @@ public class EstadoModelAssembler extends RepresentationModelAssemblerSupport<Es
 
 	public EstadoModel toModel(Estado estado) {
 		EstadoModel estadoModel = createModelWithId(estado.getId(), estado);
-		mapper.map(estado, estadoModel);
+		if (jmfoodSecurity.podeConsultarEstados()) {
 
-		// Adiciona link da listagem de estados
-		estadoModel.add(jmFoodLinks.linkToEstados("estados"));
+			mapper.map(estado, estadoModel);
 
-		// Adiciona link do recurso do proprio Estado
-		// estadoModel.add(linkTo(methodOn(EstadoController.class).buscar(estado.getId())).withSelfRel());
+			// Adiciona link da listagem de estados
+			estadoModel.add(jmFoodLinks.linkToEstados("estados"));
 
+			// Adiciona link do recurso do proprio Estado
+			// estadoModel.add(linkTo(methodOn(EstadoController.class).buscar(estado.getId())).withSelfRel());
+		}
 		return estadoModel;
 	}
 

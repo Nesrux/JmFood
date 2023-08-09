@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.nesrux.jmfood.api.v1.controller.main.FormaPagamentoController;
 import com.nesrux.jmfood.api.v1.model.dto.output.formaPagamento.FormaPagamentoModel;
 import com.nesrux.jmfood.api.v1.utils.JmFoodLinks;
+import com.nesrux.jmfood.core.security.JmfoodSecurity;
 import com.nesrux.jmfood.domain.model.pedido.FormaPagamento;
 
 @Component
@@ -18,6 +19,8 @@ public class FormaPagamentoModelAssembler
 	private ModelMapper mapper;
 	@Autowired
 	private JmFoodLinks links;
+	@Autowired
+	private JmfoodSecurity jmfoodSecurity;
 
 	public FormaPagamentoModelAssembler() {
 		super(FormaPagamentoController.class, FormaPagamentoModel.class);
@@ -28,7 +31,9 @@ public class FormaPagamentoModelAssembler
 		FormaPagamentoModel formaPagamentoModel = createModelWithId(formaPagamento.getId(), formaPagamento);
 		mapper.map(formaPagamento, formaPagamentoModel);
 	
-		formaPagamentoModel.add(links.linkToFormasPagamentos("formas-pagamentos"));
+		if (jmfoodSecurity.podeConsultarFormasPagamento()) {
+			formaPagamentoModel.add(links.linkToFormasPagamentos("formas-pagamentos"));
+		}
 		return formaPagamentoModel;
 	}
 

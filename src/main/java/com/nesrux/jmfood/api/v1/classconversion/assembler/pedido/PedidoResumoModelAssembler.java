@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.nesrux.jmfood.api.v1.controller.main.PedidoController;
 import com.nesrux.jmfood.api.v1.model.dto.output.pedido.PedidoResumoModel;
 import com.nesrux.jmfood.api.v1.utils.JmFoodLinks;
+import com.nesrux.jmfood.core.security.JmfoodSecurity;
 import com.nesrux.jmfood.domain.model.pedido.Pedido;
 
 @Component
@@ -16,6 +17,8 @@ public class PedidoResumoModelAssembler extends RepresentationModelAssemblerSupp
 	private ModelMapper mapper;
 	@Autowired
 	private JmFoodLinks jmFoodLinks;
+	@Autowired
+	private JmfoodSecurity jmfoodSecurity;
 
 	public PedidoResumoModelAssembler() {
 		super(PedidoController.class, PedidoResumoModel.class);
@@ -25,14 +28,14 @@ public class PedidoResumoModelAssembler extends RepresentationModelAssemblerSupp
 	public PedidoResumoModel toModel(Pedido pedido) {
 		PedidoResumoModel pedidoResumoModel = createModelWithId(pedido.getCodigo(), pedido);
 		mapper.map(pedido, pedidoResumoModel);
+		if (jmfoodSecurity.podePesquisarPedidos()) {
+			pedidoResumoModel.add(jmFoodLinks.linkToPedidos("pedidos"));
 
-		pedidoResumoModel.add(jmFoodLinks.linkToPedidos("pedidos"));
+			pedidoResumoModel.getCliente().add(jmFoodLinks.linkToUsuario(pedidoResumoModel.getCliente().getId()));
 
-		pedidoResumoModel.getCliente().add(jmFoodLinks.linkToUsuario(pedidoResumoModel.getCliente().getId()));
-
-		pedidoResumoModel.getRestaurante()
-				.add(jmFoodLinks.linkToRestaurante(pedidoResumoModel.getRestaurante().getRestauranteId()));
-
+			pedidoResumoModel.getRestaurante()
+					.add(jmFoodLinks.linkToRestaurante(pedidoResumoModel.getRestaurante().getRestauranteId()));
+		}
 		return pedidoResumoModel;
 	}
 

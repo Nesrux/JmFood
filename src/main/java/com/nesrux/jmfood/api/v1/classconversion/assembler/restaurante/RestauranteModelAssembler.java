@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.nesrux.jmfood.api.v1.controller.main.RestauranteController;
 import com.nesrux.jmfood.api.v1.model.dto.output.restaurante.RestauranteModel;
 import com.nesrux.jmfood.api.v1.utils.JmFoodLinks;
+import com.nesrux.jmfood.core.security.JmfoodSecurity;
 import com.nesrux.jmfood.domain.model.restaurante.Restaurante;
 
 @Component
@@ -19,6 +20,8 @@ public class RestauranteModelAssembler extends RepresentationModelAssemblerSuppo
 
 	@Autowired
 	private JmFoodLinks links;
+	@Autowired
+	private JmfoodSecurity jmfoodSecurity;
 
 	public RestauranteModelAssembler() {
 		super(RestauranteController.class, RestauranteModel.class);
@@ -31,10 +34,12 @@ public class RestauranteModelAssembler extends RepresentationModelAssemblerSuppo
 
 		restauranteModel.add(links.linkToRestauranteResponsaveis(restauranteModel.getId(), "resposaveis"));
 
-		restauranteModel.getCozinha().add(links.linkToCozinha(restauranteModel.getCozinha().getId()));
-
-		restauranteModel.add(links.linkToRestauranteFormasPagamento(restaurante.getId(), "forma-pagamento"));
-
+		if (jmfoodSecurity.podeConsultarCozinhas()) {
+			restauranteModel.getCozinha().add(links.linkToCozinha(restauranteModel.getCozinha().getId()));
+		}
+		if (jmfoodSecurity.podeConsultarFormasPagamento()) {
+			restauranteModel.add(links.linkToRestauranteFormasPagamento(restaurante.getId(), "forma-pagamento"));
+		}
 		if (restaurante.verificaEnderecoNulo()) {
 
 			restauranteModel.getEndereco().getCidade()

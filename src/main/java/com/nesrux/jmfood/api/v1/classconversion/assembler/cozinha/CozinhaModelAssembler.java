@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.nesrux.jmfood.api.v1.controller.main.CozinhaController;
 import com.nesrux.jmfood.api.v1.model.dto.output.cozinha.CozinhaModel;
 import com.nesrux.jmfood.api.v1.utils.JmFoodLinks;
+import com.nesrux.jmfood.core.security.JmfoodSecurity;
 import com.nesrux.jmfood.domain.model.restaurante.Cozinha;
 
 @Component
@@ -20,16 +21,20 @@ public class CozinhaModelAssembler extends RepresentationModelAssemblerSupport<C
 	@Autowired
 	private JmFoodLinks jmFoodLinks;
 
+	@Autowired
+	private JmfoodSecurity jmfoodSecurity;
+
 	public CozinhaModelAssembler() {
 		super(CozinhaController.class, CozinhaModel.class);
 	}
 
 	public CozinhaModel toModel(Cozinha cozinha) {
 		CozinhaModel cozinhaModel = createModelWithId(cozinha.getId(), cozinha);
-		modelMapper.map(cozinha, cozinhaModel);
+		if (jmfoodSecurity.podeConsultarCozinhas()) {
+			modelMapper.map(cozinha, cozinhaModel);
 
-		cozinhaModel.add(jmFoodLinks.linkToCozinhas("cozinhas"));
-
+			cozinhaModel.add(jmFoodLinks.linkToCozinhas("cozinhas"));
+		}
 		return cozinhaModel;
 	}
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.nesrux.jmfood.api.v1.controller.subcontrollers.restaurantes.RestauranteFotoProdutoController;
 import com.nesrux.jmfood.api.v1.model.dto.output.fotoProduto.FotoProdutoModel;
 import com.nesrux.jmfood.api.v1.utils.JmFoodLinks;
+import com.nesrux.jmfood.core.security.JmfoodSecurity;
 import com.nesrux.jmfood.domain.model.pedido.FotoProduto;
 
 @Component
@@ -19,6 +20,9 @@ public class FotoProdutoModelAssembler extends RepresentationModelAssemblerSuppo
 	@Autowired
 	private JmFoodLinks links;
 
+	@Autowired
+	private JmfoodSecurity jmfoodSecurity;
+
 	public FotoProdutoModelAssembler() {
 		super(RestauranteFotoProdutoController.class, FotoProdutoModel.class);
 	}
@@ -26,10 +30,11 @@ public class FotoProdutoModelAssembler extends RepresentationModelAssemblerSuppo
 	public FotoProdutoModel toModel(FotoProduto fotoProduto) {
 		FotoProdutoModel fotoModel = new FotoProdutoModel();
 		mapper.map(fotoProduto, fotoModel);
-		
-		fotoModel.add(links.linkToFotoProduto(fotoProduto.getRestauranteId(), fotoProduto.getId()));;
+		if (jmfoodSecurity.podePesquisarPedidos()) {
+			fotoModel.add(links.linkToFotoProduto(fotoProduto.getRestauranteId(), fotoProduto.getId()));
 
-		fotoModel.add(links.linkToProduto(fotoProduto.getRestauranteId(), fotoProduto.getProduto().getId(), "produtos"));
+			fotoModel.add(links.linkToProduto(fotoProduto.getRestauranteId(), fotoProduto.getProduto().getId(), "produtos"));
+		}
 		return fotoModel;
 	}
 

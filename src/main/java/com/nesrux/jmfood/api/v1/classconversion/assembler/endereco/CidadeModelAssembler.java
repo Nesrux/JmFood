@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.nesrux.jmfood.api.v1.controller.main.CidadeController;
 import com.nesrux.jmfood.api.v1.model.dto.output.cidade.CidadeModel;
 import com.nesrux.jmfood.api.v1.utils.JmFoodLinks;
+import com.nesrux.jmfood.core.security.JmfoodSecurity;
 import com.nesrux.jmfood.domain.model.endereco.Cidade;
 
 @Component
@@ -19,6 +20,8 @@ public class CidadeModelAssembler extends RepresentationModelAssemblerSupport<Ci
 
 	@Autowired
 	private JmFoodLinks jmFoodLinks;
+	@Autowired
+	private JmfoodSecurity jmfoodSecurity;
 
 	public CidadeModelAssembler() {
 		super(CidadeController.class, CidadeModel.class);
@@ -27,12 +30,13 @@ public class CidadeModelAssembler extends RepresentationModelAssemblerSupport<Ci
 	@Override
 	public CidadeModel toModel(Cidade cidade) {
 		CidadeModel cidadeModel = createModelWithId(cidade.getId(), cidade);
-		
-		modelMapper.map(cidade, cidadeModel);
-		
-		cidadeModel.add(jmFoodLinks.linkToCidades("cidades"));
-		
-		cidadeModel.getEstado().add(jmFoodLinks.linkToEstado(cidadeModel.getEstado().getId()));
+		if (jmfoodSecurity.podeConsultarCidades()) {
+			modelMapper.map(cidade, cidadeModel);
+
+			cidadeModel.add(jmFoodLinks.linkToCidades("cidades"));
+
+			cidadeModel.getEstado().add(jmFoodLinks.linkToEstado(cidadeModel.getEstado().getId()));
+		}
 		return cidadeModel;
 	}
 
