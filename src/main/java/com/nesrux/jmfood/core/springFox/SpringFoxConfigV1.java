@@ -35,24 +35,31 @@ import com.nesrux.jmfood.api.v1.openapi.model.collectionModel.CidadesCollectionO
 import com.nesrux.jmfood.api.v1.openapi.model.collectionModel.CozinhasModelOpenApi;
 import com.nesrux.jmfood.api.v1.openapi.model.collectionModel.EstadosCollectionOpenApi;
 import com.nesrux.jmfood.api.v1.openapi.model.collectionModel.GrupoCollectionOpenApi;
+import com.nesrux.jmfood.api.v1.openapi.model.collectionModel.PedidosPageCollectionOpenApi.PedidosEmbeddedModelOpenApi;
 import com.nesrux.jmfood.api.v1.openapi.model.collectionModel.PermissoesCollectionOpenApi;
 import com.nesrux.jmfood.api.v1.openapi.model.collectionModel.ProdutosCollectionOpenApi;
 import com.nesrux.jmfood.api.v1.openapi.model.collectionModel.RestauranteCollectionOpenApi;
 import com.nesrux.jmfood.api.v1.openapi.model.collectionModel.UsuarioCollectionOpenApi;
-import com.nesrux.jmfood.api.v1.openapi.model.collectionModel.PedidosPageCollectionOpenApi.PedidosEmbeddedModelOpenApi;
 
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.OAuthBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.ResponseMessageBuilder;
 import springfox.documentation.schema.AlternateTypeRules;
 import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.Contact;
+import springfox.documentation.service.GrantType;
+import springfox.documentation.service.ResourceOwnerPasswordCredentialsGrant;
 import springfox.documentation.service.ResponseMessage;
+import springfox.documentation.service.SecurityReference;
+import springfox.documentation.service.SecurityScheme;
 import springfox.documentation.service.Tag;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -78,6 +85,9 @@ public class SpringFoxConfigV1 implements WebMvcConfigurer {
 				.globalResponseMessage(RequestMethod.PUT, globalPutResponsemessage())
 				//.globalOperationParameters() PARAMETROS GLOBAIS DA API 
 				.additionalModels(typeResolver.resolve(ErroApi.class))
+				
+				.securitySchemes(Arrays.asList(securityScheme()))
+				.securityContexts(Arrays.asList(securityContext()))
 				.ignoredParameterTypes(ServletWebRequest.class)
 				.directModelSubstitute(Pageable.class, PropriedadesPaginacaoModel.class)
 				.directModelSubstitute(Links.class, LinksModelOpenApi.class)
@@ -166,6 +176,33 @@ public class SpringFoxConfigV1 implements WebMvcConfigurer {
 				.build()
 				
 				);
+	}
+	private SecurityScheme securityScheme() {
+		return new OAuthBuilder()
+				.name("Jmfood")
+				.grantTypes(grantTypesList())
+				.scopes(scopes())
+				.build();
+	}
+	
+	private SecurityContext securityContext() {
+		var securityReference = SecurityReference.builder()
+				.reference("Jmfood")
+				.scopes(scopes().toArray(new AuthorizationScope[0]))
+				.build();
+		
+		return SecurityContext.builder().securityReferences(Arrays.asList(securityReference))
+				.forPaths(PathSelectors.any())
+				.build();
+	}
+	
+	private List<AuthorizationScope> scopes(){
+		return Arrays.asList(
+				new AuthorizationScope("READ", "Acesso de leitura"),
+				new AuthorizationScope("WRITE", "Acesso de escrita"));
+	}
+	private List<GrantType> grantTypesList(){
+		return Arrays.asList(new ResourceOwnerPasswordCredentialsGrant("/oauth/token"));
 	}
 
 	private List<ResponseMessage> globalPostResponsemessage() {
