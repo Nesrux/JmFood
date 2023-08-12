@@ -1,29 +1,19 @@
 package com.nesrux.jmfood.infrastructure.service.report;
 
-import java.util.HashMap;
-import java.util.Locale;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nesrux.jmfood.domain.filter.VendaDiariaFilter;
-import com.nesrux.jmfood.domain.service.VendaQueryService;
 import com.nesrux.jmfood.domain.service.VendaReportService;
-import com.nesrux.jmfood.infrastructure.exception.ReportException;
-
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Service
 public class PdfVendaReportService implements VendaReportService {
 
-	@Autowired
-	private VendaQueryService vendaService;
+	//@Autowired
+	//private VendaQueryService vendaService;
 
 	@Override
 	public byte[] emitirVendasDiarias(VendaDiariaFilter filtro, String timeOffset) {
-		try {
+	/**	try {
 			var inputStream = this.getClass().getResourceAsStream(
 					"/relatorios/jmfoodReport.jasper");
 			
@@ -38,7 +28,7 @@ public class PdfVendaReportService implements VendaReportService {
 			return JasperExportManager.exportReportToPdf(jasperPrint);
 		} catch (Exception e) {
 			throw new ReportException("Não foi possível emitir relatório de vendas diárias", e);
-		}
-		
+		}**/
+		return null;
 	}
 }
