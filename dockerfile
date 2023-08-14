@@ -1,8 +1,10 @@
-FROM openjdk:12-jre-slim
+FROM openjdk:11-jre-slim
 
 WORKDIR /app
 
-COPY target/*.jar /app/jmfood.jar
+ARG JAR_FILE
+
+COPY target/${JAR_FILE} /app/jmfood.jar
 
 EXPOSE 8080
 
