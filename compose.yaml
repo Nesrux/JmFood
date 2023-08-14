@@ -3,7 +3,7 @@ version: "3.9"
 networks:
   jmfood-network:
     driver: bridge
-
+    
 services:
   jmfood-mysql:
     image: mysql:8.0
@@ -12,11 +12,16 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - jmfood-network
+      - jmfood-network 
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s   # Adicione esta linha
+      timeout: 20s
+      retries: 10
 
   jmfood-api:
     image: jmfood-api
-    command: ["/wait-for-it.sh", "jmfood-mysql:3306", "-t", "30", "--", "java", "-jar", "jmfood.jar"]
+    command: ["java", "-jar", "jmfood.jar"]
     environment:
       DB_HOST: jmfood-mysql
     ports:
@@ -24,5 +29,5 @@ services:
     networks:
       - jmfood-network
     depends_on:
-      - jmfood-mysql
-      
+      jmfood-mysql:
+       condition: service_healthy
