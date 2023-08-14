@@ -1,0 +1,27 @@
+version: "3.9"
+
+networks:
+  jmfood-network:
+    driver: bridge
+
+services:
+  jmfood-mysql:
+    image: mysql:8.0
+    environment:
+       MYSQL_ROOT_PASSWORD: "marcos10"
+    ports:
+      - "3306:3306"
+    networks:
+      - jmfood-network
+
+  algafood-api:
+    image: jmfood-api
+    environment:
+      DB_HOST: jmfood-mysql
+    ports:
+      - "8080:8080"
+    networks:
+      - jmfood-network
+    depends_on:
+      - jmfood-mysql
+      
