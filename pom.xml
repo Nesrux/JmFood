@@ -24,7 +24,7 @@
     <logback-ext-loggly.version>0.1.5</logback-ext-loggly.version>
 	<spring-security-oauth2.version>2.3.7.RELEASE</spring-security-oauth2.version>
 	<spring-security-jwt.version>1.0.11.RELEASE</spring-security-jwt.version>
-	 <jasperreports.version>6.10.0</jasperreports.version>
+	<jasperreports.version>6.10.0</jasperreports.version>
   </properties>
 
   <dependencies>

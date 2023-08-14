@@ -14,9 +14,9 @@ services:
     networks:
       - jmfood-network
 
-  algafood-api:
+  jmfood-api:
     image: jmfood-api
-    command: ["/wait-for-it.sh", "-t 30", "jmfood-mysql:3306", "--", java", "-jar", "jmfood.jar"] 
+    command: ["/wait-for-it.sh", "jmfood-mysql:3306", "-t", "30", "--", "java", "-jar", "jmfood.jar"]
     environment:
       DB_HOST: jmfood-mysql
     ports:
