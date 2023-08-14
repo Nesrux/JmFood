@@ -16,6 +16,7 @@ services:
 
   algafood-api:
     image: jmfood-api
+    command: ["/wait-for-it.sh", "-t 30", "jmfood-mysql:3306", "--", java", "-jar", "jmfood.jar"] 
     environment:
       DB_HOST: jmfood-mysql
     ports:
