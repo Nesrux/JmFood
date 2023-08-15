@@ -8,7 +8,7 @@ services:
   jmfood-mysql:
     image: mysql:8.0
     environment:
-       MYSQL_ROOT_PASSWORD: "marcos10"
+       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     ports:
       - "3306:3306"
     networks:
@@ -16,7 +16,7 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s  
-      timeout: 20s
+      timeout: 30s
       retries: 10
 
   jmfood-api:
