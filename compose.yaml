@@ -30,5 +30,12 @@ services:
       jmfood-mysql:
        condition: service_healthy
        
-       
-       
+  jmfood-proxy:
+   build: ./nginx
+   image: jmfood-proxy
+   ports:
+    - "80:80"
+   networks:  
+       - jmfood-network
+   depends_on:
+    - jmfood-api
