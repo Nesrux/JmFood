@@ -13,22 +13,22 @@ services:
       - "3306:3306"
     networks:
       - jmfood-network 
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s  
-      timeout: 30s
-      retries: 10
+  #  healthcheck:
+  #    test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+  #    interval: 10s  
+  #    timeout: 30s
+  #    retries: 10
 
   jmfood-api:
     image: jmfood-api
-    command: ["java", "-jar", "jmfood.jar"]
+    command: ["/wait-for-it.sh", "jmfood-mysql:3306", "-t", "45", "--", "java", "-jar", "jmfood.jar"]
     environment:
       DB_HOST: jmfood-mysql
     networks:
       - jmfood-network
     depends_on:
-      jmfood-mysql:
-       condition: service_healthy
+     - jmfood-mysql
+      # condition: service_healthy
        
   jmfood-proxy:
    build: ./nginx
