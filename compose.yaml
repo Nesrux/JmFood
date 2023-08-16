@@ -8,34 +8,36 @@ services:
   jmfood-mysql:
     image: mysql:8.0
     environment:
-       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+       MYSQL_ROOT_PASSWORD: "marcos10"
     ports:
       - "3306:3306"
     networks:
       - jmfood-network 
-  #  healthcheck:
-  #    test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-  #    interval: 10s  
-  #    timeout: 30s
-  #    retries: 10
+      
+  jmfood-redis:
+    image: redis:6.2.1-alpine
+    networks:
+      - jmfood-network
+
+    
 
   jmfood-api:
     image: jmfood-api
-    command: ["/wait-for-it.sh", "jmfood-mysql:3306", "-t", "45", "--", "java", "-jar", "jmfood.jar"]
+    command: ["/wait-for-it.sh", "jmfood-mysql:3306", "-t", "240", "--", "java", "-jar", "api.jar"]
     environment:
       DB_HOST: jmfood-mysql
     networks:
       - jmfood-network
     depends_on:
      - jmfood-mysql
-      # condition: service_healthy
        
+
   jmfood-proxy:
-   build: ./nginx
-   image: jmfood-proxy
-   ports:
-    - "80:80"
-   networks:  
-       - jmfood-network
-   depends_on:
-    - jmfood-api
+    build: ./nginx
+    image: jmfood-proxy
+    ports:
+      - "80:80"
+    networks:
+      - jmfood-network
+    depends_on:
+      - jmfood-api
