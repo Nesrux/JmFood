@@ -19,6 +19,12 @@ Git:
 ```
 $ git clone https://github.com/Nesrux/JmFood.git
 ```
+Docker : Abra o terminal de seu sistema operacional e digite:
+```
+docker-compose up
+```
+
+
 ## Configurações importantes para a execução do projeto
 Além das configurações que ja estão no projeto, você precisará adicionar e modificar algumas, tais como
 ### Configuração do banco de dados
