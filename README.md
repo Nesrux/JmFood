@@ -5,25 +5,6 @@
   <img src="/docs/jmfoodLogo.png" alt="exemplo imagem" width=300px>
 </div>
 > Uma API Rest feita com Java e spring para simular um sistema de delivey de entrega de comida
-
-### Ajustes e melhorias
-
-- [x] Criar o projeto e adicionar dependencias.
-- [x] Criar classes de dominio.
-- [x] Criar as classes de controle
-- [x] mapear as entidades com JPA
-- [x] Criar as migrations com o flyway
-- [x] tratar exceptions
-- [x] fazer as validações com bean validation
-- [x] envio de PDF pronto
-- [x] implementando o envio de email
-- [x] implementação do serviço de envio de imagens
-- [x] Implementação de cache
-- [x] documentação da API
-- [x] Implementação de hateoas
-- [x] Versionando a API
-- [x] Segurança da aplicação
-- [ ] Dockerizando à aplicação
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
