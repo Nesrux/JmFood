@@ -1,0 +1,1646 @@
+{
+	"info": {
+		"_postman_id": "919af1e4-1a65-40d1-8329-055224e5724d",
+		"name": "JMFOOD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "24423343"
+	},
+	"item": [
+		{
+			"name": "Cozinhas",
+			"item": [
+				{
+					"name": "Cozinha - Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA0NjU2LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiYjMzMWNjZjMtYTA2OS00MWE4LWE0Y2MtYTBjOTkxZmU0ZjAyIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.mcPtpyWsFOUdNP9vfEIAnvHHyUTkVfLI4zni86zJTISEYAOLcC0Np-Oq0py9bzFum8zIXhN7qt0a1toW0PzBdlumvkM8bX0PtrzwlM8FhpEs9zpNo_7oa7CBoC_D8l5Q7rYrw1pYb6eeUhYmsotr9mWV7xrX5Xf868dpwi8n7G1R6pF2D6zr0pEc-NBrlPPW6ZiQqBG0OWGQrQ6EmnzjfhMTawFyRxzoIq-WvjYl1ivNdk17Vkrmstw1MQlehew5-ZCV3Gr7HAWZdQzwLbJet--yZdnlHf_2rr6wFhbsfm6qAniOIWsab31MOOBnha7RMEjH07W-HalOBmsW936UEgkihfKRiNtCxxBsAwVBgQb2_64YrSfiQHOwVrYzk91T8U4PqLt4vFfiwDsw9lEY2IWGHka5xFBBQRj47fLokqWOruvPAQ468oNGQAWA6MqdNZAmzYN6PIWMQhPrAfqt39lZ7FLoa0fIcTCjIFq5VHnr_4lyqM7fAIQtKwGL95X9"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 534d76e5-bdc0-4a01-b74e-97aee61d8dbe",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:/v1/cozinhas",
+							"host": [
+								"localhost"
+							],
+							"port": "",
+							"path": [
+								"v1",
+								"cozinhas"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "nome",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cozinha - Buscar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA0NjU2LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiYjMzMWNjZjMtYTA2OS00MWE4LWE0Y2MtYTBjOTkxZmU0ZjAyIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.mcPtpyWsFOUdNP9vfEIAnvHHyUTkVfLI4zni86zJTISEYAOLcC0Np-Oq0py9bzFum8zIXhN7qt0a1toW0PzBdlumvkM8bX0PtrzwlM8FhpEs9zpNo_7oa7CBoC_D8l5Q7rYrw1pYb6eeUhYmsotr9mWV7xrX5Xf868dpwi8n7G1R6pF2D6zr0pEc-NBrlPPW6ZiQqBG0OWGQrQ6EmnzjfhMTawFyRxzoIq-WvjYl1ivNdk17Vkrmstw1MQlehew5-ZCV3Gr7HAWZdQzwLbJet--yZdnlHf_2rr6wFhbsfm6qAniOIWsab31MOOBnha7RMEjH07W-HalOBmsW936UEgkihfKRiNtCxxBsAwVBgQb2_64YrSfiQHOwVrYzk91T8U4PqLt4vFfiwDsw9lEY2IWGHka5xFBBQRj47fLokqWOruvPAQ468oNGQAWA6MqdNZAmzYN6PIWMQhPrAfqt39lZ7FLoa0fIcTCjIFq5VHnr_4lyqM7fAIQtKwGL95X9"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:/v1/cozinhas/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Cozinha - Deletar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA0NjU2LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiYjMzMWNjZjMtYTA2OS00MWE4LWE0Y2MtYTBjOTkxZmU0ZjAyIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.mcPtpyWsFOUdNP9vfEIAnvHHyUTkVfLI4zni86zJTISEYAOLcC0Np-Oq0py9bzFum8zIXhN7qt0a1toW0PzBdlumvkM8bX0PtrzwlM8FhpEs9zpNo_7oa7CBoC_D8l5Q7rYrw1pYb6eeUhYmsotr9mWV7xrX5Xf868dpwi8n7G1R6pF2D6zr0pEc-NBrlPPW6ZiQqBG0OWGQrQ6EmnzjfhMTawFyRxzoIq-WvjYl1ivNdk17Vkrmstw1MQlehew5-ZCV3Gr7HAWZdQzwLbJet--yZdnlHf_2rr6wFhbsfm6qAniOIWsab31MOOBnha7RMEjH07W-HalOBmsW936UEgkihfKRiNtCxxBsAwVBgQb2_64YrSfiQHOwVrYzk91T8U4PqLt4vFfiwDsw9lEY2IWGHka5xFBBQRj47fLokqWOruvPAQ468oNGQAWA6MqdNZAmzYN6PIWMQhPrAfqt39lZ7FLoa0fIcTCjIFq5VHnr_4lyqM7fAIQtKwGL95X9"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "localhost:80/v1/cozinhas/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Cozinha Atualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA0NjU2LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiYjMzMWNjZjMtYTA2OS00MWE4LWE0Y2MtYTBjOTkxZmU0ZjAyIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.mcPtpyWsFOUdNP9vfEIAnvHHyUTkVfLI4zni86zJTISEYAOLcC0Np-Oq0py9bzFum8zIXhN7qt0a1toW0PzBdlumvkM8bX0PtrzwlM8FhpEs9zpNo_7oa7CBoC_D8l5Q7rYrw1pYb6eeUhYmsotr9mWV7xrX5Xf868dpwi8n7G1R6pF2D6zr0pEc-NBrlPPW6ZiQqBG0OWGQrQ6EmnzjfhMTawFyRxzoIq-WvjYl1ivNdk17Vkrmstw1MQlehew5-ZCV3Gr7HAWZdQzwLbJet--yZdnlHf_2rr6wFhbsfm6qAniOIWsab31MOOBnha7RMEjH07W-HalOBmsW936UEgkihfKRiNtCxxBsAwVBgQb2_64YrSfiQHOwVrYzk91T8U4PqLt4vFfiwDsw9lEY2IWGHka5xFBBQRj47fLokqWOruvPAQ468oNGQAWA6MqdNZAmzYN6PIWMQhPrAfqt39lZ7FLoa0fIcTCjIFq5VHnr_4lyqM7fAIQtKwGL95X9"
+							}
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Elma maria pinto\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/cozinhas/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Cozinha - Adicionar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA0NjU2LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiYjMzMWNjZjMtYTA2OS00MWE4LWE0Y2MtYTBjOTkxZmU0ZjAyIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.mcPtpyWsFOUdNP9vfEIAnvHHyUTkVfLI4zni86zJTISEYAOLcC0Np-Oq0py9bzFum8zIXhN7qt0a1toW0PzBdlumvkM8bX0PtrzwlM8FhpEs9zpNo_7oa7CBoC_D8l5Q7rYrw1pYb6eeUhYmsotr9mWV7xrX5Xf868dpwi8n7G1R6pF2D6zr0pEc-NBrlPPW6ZiQqBG0OWGQrQ6EmnzjfhMTawFyRxzoIq-WvjYl1ivNdk17Vkrmstw1MQlehew5-ZCV3Gr7HAWZdQzwLbJet--yZdnlHf_2rr6wFhbsfm6qAniOIWsab31MOOBnha7RMEjH07W-HalOBmsW936UEgkihfKRiNtCxxBsAwVBgQb2_64YrSfiQHOwVrYzk91T8U4PqLt4vFfiwDsw9lEY2IWGHka5xFBBQRj47fLokqWOruvPAQ468oNGQAWA6MqdNZAmzYN6PIWMQhPrAfqt39lZ7FLoa0fIcTCjIFq5VHnr_4lyqM7fAIQtKwGL95X9"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"Norueguesa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/cozinhas"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Restaurantes",
+			"item": [
+				{
+					"name": "Restaurantes listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/v1/restaurantes",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"v1",
+								"restaurantes"
+							],
+							"query": [
+								{
+									"key": "projecao",
+									"value": "apenas-nome",
+									"disabled": true
+								},
+								{
+									"key": "projecao",
+									"value": "resumo",
+									"disabled": true
+								},
+								{
+									"key": "campos",
+									"value": "taxaFrete",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurantes buscar",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": {
+								"clientSecret": "web123",
+								"clientId": "jmfoodWeb",
+								"username": "jmfood123",
+								"grant_type": "password_credentials",
+								"scope": "",
+								"accessTokenUrl": "http://localhost:8081/oauth/token",
+								"password": "123",
+								"tokenName": "Token jmfood",
+								"addTokenTo": "header"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/v1/restaurantes/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurantes Atualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA0NjU2LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiYjMzMWNjZjMtYTA2OS00MWE4LWE0Y2MtYTBjOTkxZmU0ZjAyIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.mcPtpyWsFOUdNP9vfEIAnvHHyUTkVfLI4zni86zJTISEYAOLcC0Np-Oq0py9bzFum8zIXhN7qt0a1toW0PzBdlumvkM8bX0PtrzwlM8FhpEs9zpNo_7oa7CBoC_D8l5Q7rYrw1pYb6eeUhYmsotr9mWV7xrX5Xf868dpwi8n7G1R6pF2D6zr0pEc-NBrlPPW6ZiQqBG0OWGQrQ6EmnzjfhMTawFyRxzoIq-WvjYl1ivNdk17Vkrmstw1MQlehew5-ZCV3Gr7HAWZdQzwLbJet--yZdnlHf_2rr6wFhbsfm6qAniOIWsab31MOOBnha7RMEjH07W-HalOBmsW936UEgkihfKRiNtCxxBsAwVBgQb2_64YrSfiQHOwVrYzk91T8U4PqLt4vFfiwDsw9lEY2IWGHka5xFBBQRj47fLokqWOruvPAQ468oNGQAWA6MqdNZAmzYN6PIWMQhPrAfqt39lZ7FLoa0fIcTCjIFq5VHnr_4lyqM7fAIQtKwGL95X9"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"gerundio\",\r\n    \"taxaFrete\": 1,\r\n    \"cozinha\": {\r\n        \"id\": 1\r\n    },\r\n    \"endereco\": {\r\n        \"cep\": \"38400-999\",\r\n        \"logradouro\": \"Rua João Pinheiro\",\r\n        \"numero\": \"1000\",\r\n        \"complemento\": null,\r\n        \"bairro\": \"Centro\",\r\n        \"cidade\": {\r\n            \"id\": 1\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/restaurantes/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurante Adicionar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA0NjU2LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiYjMzMWNjZjMtYTA2OS00MWE4LWE0Y2MtYTBjOTkxZmU0ZjAyIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.mcPtpyWsFOUdNP9vfEIAnvHHyUTkVfLI4zni86zJTISEYAOLcC0Np-Oq0py9bzFum8zIXhN7qt0a1toW0PzBdlumvkM8bX0PtrzwlM8FhpEs9zpNo_7oa7CBoC_D8l5Q7rYrw1pYb6eeUhYmsotr9mWV7xrX5Xf868dpwi8n7G1R6pF2D6zr0pEc-NBrlPPW6ZiQqBG0OWGQrQ6EmnzjfhMTawFyRxzoIq-WvjYl1ivNdk17Vkrmstw1MQlehew5-ZCV3Gr7HAWZdQzwLbJet--yZdnlHf_2rr6wFhbsfm6qAniOIWsab31MOOBnha7RMEjH07W-HalOBmsW936UEgkihfKRiNtCxxBsAwVBgQb2_64YrSfiQHOwVrYzk91T8U4PqLt4vFfiwDsw9lEY2IWGHka5xFBBQRj47fLokqWOruvPAQ468oNGQAWA6MqdNZAmzYN6PIWMQhPrAfqt39lZ7FLoa0fIcTCjIFq5VHnr_4lyqM7fAIQtKwGL95X9"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Elma  sorvestes\",\r\n    \"taxaFrete\": 6,\r\n    \"cozinha\": {\r\n        \"id\" : 3\r\n    },\r\n        \"endereco\": {\r\n        \"numero\": \"1000\",\r\n        \"cep\" : \"123456\",\r\n        \"complemento\": null,\r\n        \"logradouro\": \"aksjdkas\",\r\n        \"bairro\": \"Centro\",\r\n        \"cidade\": {\r\n            \"id\": 1\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/restaurantes/"
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurantes Ativar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA0NjU2LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiYjMzMWNjZjMtYTA2OS00MWE4LWE0Y2MtYTBjOTkxZmU0ZjAyIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.mcPtpyWsFOUdNP9vfEIAnvHHyUTkVfLI4zni86zJTISEYAOLcC0Np-Oq0py9bzFum8zIXhN7qt0a1toW0PzBdlumvkM8bX0PtrzwlM8FhpEs9zpNo_7oa7CBoC_D8l5Q7rYrw1pYb6eeUhYmsotr9mWV7xrX5Xf868dpwi8n7G1R6pF2D6zr0pEc-NBrlPPW6ZiQqBG0OWGQrQ6EmnzjfhMTawFyRxzoIq-WvjYl1ivNdk17Vkrmstw1MQlehew5-ZCV3Gr7HAWZdQzwLbJet--yZdnlHf_2rr6wFhbsfm6qAniOIWsab31MOOBnha7RMEjH07W-HalOBmsW936UEgkihfKRiNtCxxBsAwVBgQb2_64YrSfiQHOwVrYzk91T8U4PqLt4vFfiwDsw9lEY2IWGHka5xFBBQRj47fLokqWOruvPAQ468oNGQAWA6MqdNZAmzYN6PIWMQhPrAfqt39lZ7FLoa0fIcTCjIFq5VHnr_4lyqM7fAIQtKwGL95X9"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"url": "localhost/v1/restaurantes/1/ativo"
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurantes Desativar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA0NjU2LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiYjMzMWNjZjMtYTA2OS00MWE4LWE0Y2MtYTBjOTkxZmU0ZjAyIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.mcPtpyWsFOUdNP9vfEIAnvHHyUTkVfLI4zni86zJTISEYAOLcC0Np-Oq0py9bzFum8zIXhN7qt0a1toW0PzBdlumvkM8bX0PtrzwlM8FhpEs9zpNo_7oa7CBoC_D8l5Q7rYrw1pYb6eeUhYmsotr9mWV7xrX5Xf868dpwi8n7G1R6pF2D6zr0pEc-NBrlPPW6ZiQqBG0OWGQrQ6EmnzjfhMTawFyRxzoIq-WvjYl1ivNdk17Vkrmstw1MQlehew5-ZCV3Gr7HAWZdQzwLbJet--yZdnlHf_2rr6wFhbsfm6qAniOIWsab31MOOBnha7RMEjH07W-HalOBmsW936UEgkihfKRiNtCxxBsAwVBgQb2_64YrSfiQHOwVrYzk91T8U4PqLt4vFfiwDsw9lEY2IWGHka5xFBBQRj47fLokqWOruvPAQ468oNGQAWA6MqdNZAmzYN6PIWMQhPrAfqt39lZ7FLoa0fIcTCjIFq5VHnr_4lyqM7fAIQtKwGL95X9"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "localhost/v1/restaurantes/1/ativo"
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurantes  Ativaçoes ou desativações em massa",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA0NjU2LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiYjMzMWNjZjMtYTA2OS00MWE4LWE0Y2MtYTBjOTkxZmU0ZjAyIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.mcPtpyWsFOUdNP9vfEIAnvHHyUTkVfLI4zni86zJTISEYAOLcC0Np-Oq0py9bzFum8zIXhN7qt0a1toW0PzBdlumvkM8bX0PtrzwlM8FhpEs9zpNo_7oa7CBoC_D8l5Q7rYrw1pYb6eeUhYmsotr9mWV7xrX5Xf868dpwi8n7G1R6pF2D6zr0pEc-NBrlPPW6ZiQqBG0OWGQrQ6EmnzjfhMTawFyRxzoIq-WvjYl1ivNdk17Vkrmstw1MQlehew5-ZCV3Gr7HAWZdQzwLbJet--yZdnlHf_2rr6wFhbsfm6qAniOIWsab31MOOBnha7RMEjH07W-HalOBmsW936UEgkihfKRiNtCxxBsAwVBgQb2_64YrSfiQHOwVrYzk91T8U4PqLt4vFfiwDsw9lEY2IWGHka5xFBBQRj47fLokqWOruvPAQ468oNGQAWA6MqdNZAmzYN6PIWMQhPrAfqt39lZ7FLoa0fIcTCjIFq5VHnr_4lyqM7fAIQtKwGL95X9"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[1,2,315]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/restaurantes/ativacoes"
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurantes Fechar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA0NjU2LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiYjMzMWNjZjMtYTA2OS00MWE4LWE0Y2MtYTBjOTkxZmU0ZjAyIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.mcPtpyWsFOUdNP9vfEIAnvHHyUTkVfLI4zni86zJTISEYAOLcC0Np-Oq0py9bzFum8zIXhN7qt0a1toW0PzBdlumvkM8bX0PtrzwlM8FhpEs9zpNo_7oa7CBoC_D8l5Q7rYrw1pYb6eeUhYmsotr9mWV7xrX5Xf868dpwi8n7G1R6pF2D6zr0pEc-NBrlPPW6ZiQqBG0OWGQrQ6EmnzjfhMTawFyRxzoIq-WvjYl1ivNdk17Vkrmstw1MQlehew5-ZCV3Gr7HAWZdQzwLbJet--yZdnlHf_2rr6wFhbsfm6qAniOIWsab31MOOBnha7RMEjH07W-HalOBmsW936UEgkihfKRiNtCxxBsAwVBgQb2_64YrSfiQHOwVrYzk91T8U4PqLt4vFfiwDsw9lEY2IWGHka5xFBBQRj47fLokqWOruvPAQ468oNGQAWA6MqdNZAmzYN6PIWMQhPrAfqt39lZ7FLoa0fIcTCjIFq5VHnr_4lyqM7fAIQtKwGL95X9"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"url": "localhost/v1/restaurantes/1/fechamento"
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurantes Abrir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA0NjU2LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiYjMzMWNjZjMtYTA2OS00MWE4LWE0Y2MtYTBjOTkxZmU0ZjAyIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.mcPtpyWsFOUdNP9vfEIAnvHHyUTkVfLI4zni86zJTISEYAOLcC0Np-Oq0py9bzFum8zIXhN7qt0a1toW0PzBdlumvkM8bX0PtrzwlM8FhpEs9zpNo_7oa7CBoC_D8l5Q7rYrw1pYb6eeUhYmsotr9mWV7xrX5Xf868dpwi8n7G1R6pF2D6zr0pEc-NBrlPPW6ZiQqBG0OWGQrQ6EmnzjfhMTawFyRxzoIq-WvjYl1ivNdk17Vkrmstw1MQlehew5-ZCV3Gr7HAWZdQzwLbJet--yZdnlHf_2rr6wFhbsfm6qAniOIWsab31MOOBnha7RMEjH07W-HalOBmsW936UEgkihfKRiNtCxxBsAwVBgQb2_64YrSfiQHOwVrYzk91T8U4PqLt4vFfiwDsw9lEY2IWGHka5xFBBQRj47fLokqWOruvPAQ468oNGQAWA6MqdNZAmzYN6PIWMQhPrAfqt39lZ7FLoa0fIcTCjIFq5VHnr_4lyqM7fAIQtKwGL95X9"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"url": "localhost/v1/restaurantes/1/abertura"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cidades",
+			"item": [
+				{
+					"name": "Cidades Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA1MDE3LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiMGFlODI0MjctNWI0Yi00MjYzLTgzMDUtNjcxM2IyMzExYTFmIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.Ak_wBrcKyisSm0cGaNvVd1d-ILInOMKe_eVsdifK2aZWOfx3eiVZQpMZj9UWFmqOmFOZewwOnDjAzDFrb5QXB0HUY3S79J2Ja3gNsCRX1B3aG0CZI5H3IL6n1-MJLeuBsv92_5uP1PKlNjtKyFVk6-2pFokSt5SjSsKLysV2J4u4wpJ2YT_6FBJ3BWrbPYN_qxtlRlNrbp8_YpgRKx_31J8x5pB3Jkl7A9aB36Fd4WVtmyESWlGFAfvcnuO4NrYoxm-0h01oUo-yn8F1Z7MVMHF1NxFqB_WUWyY-bEJl7x4tVH8kbEr_Sv6JGMV2bx-M2dHHsFPKllgXeisFsiyQWnb5LyWoDq5zaPz5qRCXrFrzlQZ46FyrRg753LClGvacTCeq8u92Vj_YK8sfYgwJUu8zeGTveQTZAQ0z3regBPIw4gACRXtLuLrqouO5nOmpgx9J0G0_Yc5gvRo_AKSql9c6rrdlMsUeQhoPvwXHCKfndElmlO4W1l5ftOkSZuqV"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": "localhost/v1/cidades"
+					},
+					"response": []
+				},
+				{
+					"name": "Cidades Buscar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA1MDE3LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiMGFlODI0MjctNWI0Yi00MjYzLTgzMDUtNjcxM2IyMzExYTFmIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.Ak_wBrcKyisSm0cGaNvVd1d-ILInOMKe_eVsdifK2aZWOfx3eiVZQpMZj9UWFmqOmFOZewwOnDjAzDFrb5QXB0HUY3S79J2Ja3gNsCRX1B3aG0CZI5H3IL6n1-MJLeuBsv92_5uP1PKlNjtKyFVk6-2pFokSt5SjSsKLysV2J4u4wpJ2YT_6FBJ3BWrbPYN_qxtlRlNrbp8_YpgRKx_31J8x5pB3Jkl7A9aB36Fd4WVtmyESWlGFAfvcnuO4NrYoxm-0h01oUo-yn8F1Z7MVMHF1NxFqB_WUWyY-bEJl7x4tVH8kbEr_Sv6JGMV2bx-M2dHHsFPKllgXeisFsiyQWnb5LyWoDq5zaPz5qRCXrFrzlQZ46FyrRg753LClGvacTCeq8u92Vj_YK8sfYgwJUu8zeGTveQTZAQ0z3regBPIw4gACRXtLuLrqouO5nOmpgx9J0G0_Yc5gvRo_AKSql9c6rrdlMsUeQhoPvwXHCKfndElmlO4W1l5ftOkSZuqV"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": "localhost/v1/cidades/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar Cidade",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA1MDE3LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiMGFlODI0MjctNWI0Yi00MjYzLTgzMDUtNjcxM2IyMzExYTFmIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.Ak_wBrcKyisSm0cGaNvVd1d-ILInOMKe_eVsdifK2aZWOfx3eiVZQpMZj9UWFmqOmFOZewwOnDjAzDFrb5QXB0HUY3S79J2Ja3gNsCRX1B3aG0CZI5H3IL6n1-MJLeuBsv92_5uP1PKlNjtKyFVk6-2pFokSt5SjSsKLysV2J4u4wpJ2YT_6FBJ3BWrbPYN_qxtlRlNrbp8_YpgRKx_31J8x5pB3Jkl7A9aB36Fd4WVtmyESWlGFAfvcnuO4NrYoxm-0h01oUo-yn8F1Z7MVMHF1NxFqB_WUWyY-bEJl7x4tVH8kbEr_Sv6JGMV2bx-M2dHHsFPKllgXeisFsiyQWnb5LyWoDq5zaPz5qRCXrFrzlQZ46FyrRg753LClGvacTCeq8u92Vj_YK8sfYgwJUu8zeGTveQTZAQ0z3regBPIw4gACRXtLuLrqouO5nOmpgx9J0G0_Yc5gvRo_AKSql9c6rrdlMsUeQhoPvwXHCKfndElmlO4W1l5ftOkSZuqV"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"nome\": \"Osasco\",\r\n    \"estado\": {\r\n        \"id\": 2 \r\n    }\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:/v1/cidades"
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Cidade",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"nome\": \"Santo andré\",\r\n        \"estado\": {\r\n            \"id\": 1\r\n        }\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/cidades/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Cidade",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA1MDE3LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiMGFlODI0MjctNWI0Yi00MjYzLTgzMDUtNjcxM2IyMzExYTFmIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.Ak_wBrcKyisSm0cGaNvVd1d-ILInOMKe_eVsdifK2aZWOfx3eiVZQpMZj9UWFmqOmFOZewwOnDjAzDFrb5QXB0HUY3S79J2Ja3gNsCRX1B3aG0CZI5H3IL6n1-MJLeuBsv92_5uP1PKlNjtKyFVk6-2pFokSt5SjSsKLysV2J4u4wpJ2YT_6FBJ3BWrbPYN_qxtlRlNrbp8_YpgRKx_31J8x5pB3Jkl7A9aB36Fd4WVtmyESWlGFAfvcnuO4NrYoxm-0h01oUo-yn8F1Z7MVMHF1NxFqB_WUWyY-bEJl7x4tVH8kbEr_Sv6JGMV2bx-M2dHHsFPKllgXeisFsiyQWnb5LyWoDq5zaPz5qRCXrFrzlQZ46FyrRg753LClGvacTCeq8u92Vj_YK8sfYgwJUu8zeGTveQTZAQ0z3regBPIw4gACRXtLuLrqouO5nOmpgx9J0G0_Yc5gvRo_AKSql9c6rrdlMsUeQhoPvwXHCKfndElmlO4W1l5ftOkSZuqV"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"nome\": \"Santo andré\",\r\n        \"estado\": {\r\n            \"id\": 2 \r\n        }\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/cidades/89"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Estados",
+			"item": [
+				{
+					"name": "Estados - Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA1MDE3LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiMGFlODI0MjctNWI0Yi00MjYzLTgzMDUtNjcxM2IyMzExYTFmIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.Ak_wBrcKyisSm0cGaNvVd1d-ILInOMKe_eVsdifK2aZWOfx3eiVZQpMZj9UWFmqOmFOZewwOnDjAzDFrb5QXB0HUY3S79J2Ja3gNsCRX1B3aG0CZI5H3IL6n1-MJLeuBsv92_5uP1PKlNjtKyFVk6-2pFokSt5SjSsKLysV2J4u4wpJ2YT_6FBJ3BWrbPYN_qxtlRlNrbp8_YpgRKx_31J8x5pB3Jkl7A9aB36Fd4WVtmyESWlGFAfvcnuO4NrYoxm-0h01oUo-yn8F1Z7MVMHF1NxFqB_WUWyY-bEJl7x4tVH8kbEr_Sv6JGMV2bx-M2dHHsFPKllgXeisFsiyQWnb5LyWoDq5zaPz5qRCXrFrzlQZ46FyrRg753LClGvacTCeq8u92Vj_YK8sfYgwJUu8zeGTveQTZAQ0z3regBPIw4gACRXtLuLrqouO5nOmpgx9J0G0_Yc5gvRo_AKSql9c6rrdlMsUeQhoPvwXHCKfndElmlO4W1l5ftOkSZuqV"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": "localhost/v1/estados/"
+					},
+					"response": []
+				},
+				{
+					"name": "Estados - buscar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA1MDE3LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiMGFlODI0MjctNWI0Yi00MjYzLTgzMDUtNjcxM2IyMzExYTFmIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.Ak_wBrcKyisSm0cGaNvVd1d-ILInOMKe_eVsdifK2aZWOfx3eiVZQpMZj9UWFmqOmFOZewwOnDjAzDFrb5QXB0HUY3S79J2Ja3gNsCRX1B3aG0CZI5H3IL6n1-MJLeuBsv92_5uP1PKlNjtKyFVk6-2pFokSt5SjSsKLysV2J4u4wpJ2YT_6FBJ3BWrbPYN_qxtlRlNrbp8_YpgRKx_31J8x5pB3Jkl7A9aB36Fd4WVtmyESWlGFAfvcnuO4NrYoxm-0h01oUo-yn8F1Z7MVMHF1NxFqB_WUWyY-bEJl7x4tVH8kbEr_Sv6JGMV2bx-M2dHHsFPKllgXeisFsiyQWnb5LyWoDq5zaPz5qRCXrFrzlQZ46FyrRg753LClGvacTCeq8u92Vj_YK8sfYgwJUu8zeGTveQTZAQ0z3regBPIw4gACRXtLuLrqouO5nOmpgx9J0G0_Yc5gvRo_AKSql9c6rrdlMsUeQhoPvwXHCKfndElmlO4W1l5ftOkSZuqV"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": "localhost/v1/estados/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Estados - buscar Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA1MDE3LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiMGFlODI0MjctNWI0Yi00MjYzLTgzMDUtNjcxM2IyMzExYTFmIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.Ak_wBrcKyisSm0cGaNvVd1d-ILInOMKe_eVsdifK2aZWOfx3eiVZQpMZj9UWFmqOmFOZewwOnDjAzDFrb5QXB0HUY3S79J2Ja3gNsCRX1B3aG0CZI5H3IL6n1-MJLeuBsv92_5uP1PKlNjtKyFVk6-2pFokSt5SjSsKLysV2J4u4wpJ2YT_6FBJ3BWrbPYN_qxtlRlNrbp8_YpgRKx_31J8x5pB3Jkl7A9aB36Fd4WVtmyESWlGFAfvcnuO4NrYoxm-0h01oUo-yn8F1Z7MVMHF1NxFqB_WUWyY-bEJl7x4tVH8kbEr_Sv6JGMV2bx-M2dHHsFPKllgXeisFsiyQWnb5LyWoDq5zaPz5qRCXrFrzlQZ46FyrRg753LClGvacTCeq8u92Vj_YK8sfYgwJUu8zeGTveQTZAQ0z3regBPIw4gACRXtLuLrqouO5nOmpgx9J0G0_Yc5gvRo_AKSql9c6rrdlMsUeQhoPvwXHCKfndElmlO4W1l5ftOkSZuqV"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": "localhost/v1/estados/41"
+					},
+					"response": []
+				},
+				{
+					"name": "Estados - Adicionar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA1MDE3LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiMGFlODI0MjctNWI0Yi00MjYzLTgzMDUtNjcxM2IyMzExYTFmIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.Ak_wBrcKyisSm0cGaNvVd1d-ILInOMKe_eVsdifK2aZWOfx3eiVZQpMZj9UWFmqOmFOZewwOnDjAzDFrb5QXB0HUY3S79J2Ja3gNsCRX1B3aG0CZI5H3IL6n1-MJLeuBsv92_5uP1PKlNjtKyFVk6-2pFokSt5SjSsKLysV2J4u4wpJ2YT_6FBJ3BWrbPYN_qxtlRlNrbp8_YpgRKx_31J8x5pB3Jkl7A9aB36Fd4WVtmyESWlGFAfvcnuO4NrYoxm-0h01oUo-yn8F1Z7MVMHF1NxFqB_WUWyY-bEJl7x4tVH8kbEr_Sv6JGMV2bx-M2dHHsFPKllgXeisFsiyQWnb5LyWoDq5zaPz5qRCXrFrzlQZ46FyrRg753LClGvacTCeq8u92Vj_YK8sfYgwJUu8zeGTveQTZAQ0z3regBPIw4gACRXtLuLrqouO5nOmpgx9J0G0_Yc5gvRo_AKSql9c6rrdlMsUeQhoPvwXHCKfndElmlO4W1l5ftOkSZuqV"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"nome\": \"Santa catarina\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/estados/"
+					},
+					"response": []
+				},
+				{
+					"name": "Estados  - atualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA1MDE3LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiMGFlODI0MjctNWI0Yi00MjYzLTgzMDUtNjcxM2IyMzExYTFmIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.Ak_wBrcKyisSm0cGaNvVd1d-ILInOMKe_eVsdifK2aZWOfx3eiVZQpMZj9UWFmqOmFOZewwOnDjAzDFrb5QXB0HUY3S79J2Ja3gNsCRX1B3aG0CZI5H3IL6n1-MJLeuBsv92_5uP1PKlNjtKyFVk6-2pFokSt5SjSsKLysV2J4u4wpJ2YT_6FBJ3BWrbPYN_qxtlRlNrbp8_YpgRKx_31J8x5pB3Jkl7A9aB36Fd4WVtmyESWlGFAfvcnuO4NrYoxm-0h01oUo-yn8F1Z7MVMHF1NxFqB_WUWyY-bEJl7x4tVH8kbEr_Sv6JGMV2bx-M2dHHsFPKllgXeisFsiyQWnb5LyWoDq5zaPz5qRCXrFrzlQZ46FyrRg753LClGvacTCeq8u92Vj_YK8sfYgwJUu8zeGTveQTZAQ0z3regBPIw4gACRXtLuLrqouO5nOmpgx9J0G0_Yc5gvRo_AKSql9c6rrdlMsUeQhoPvwXHCKfndElmlO4W1l5ftOkSZuqV"
+							}
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"nome\": \"Santa Etelvina\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/estados/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "forma-pagamento",
+			"item": [
+				{
+					"name": "Forma-pagamento Adicionar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA1MDE3LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiMGFlODI0MjctNWI0Yi00MjYzLTgzMDUtNjcxM2IyMzExYTFmIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.Ak_wBrcKyisSm0cGaNvVd1d-ILInOMKe_eVsdifK2aZWOfx3eiVZQpMZj9UWFmqOmFOZewwOnDjAzDFrb5QXB0HUY3S79J2Ja3gNsCRX1B3aG0CZI5H3IL6n1-MJLeuBsv92_5uP1PKlNjtKyFVk6-2pFokSt5SjSsKLysV2J4u4wpJ2YT_6FBJ3BWrbPYN_qxtlRlNrbp8_YpgRKx_31J8x5pB3Jkl7A9aB36Fd4WVtmyESWlGFAfvcnuO4NrYoxm-0h01oUo-yn8F1Z7MVMHF1NxFqB_WUWyY-bEJl7x4tVH8kbEr_Sv6JGMV2bx-M2dHHsFPKllgXeisFsiyQWnb5LyWoDq5zaPz5qRCXrFrzlQZ46FyrRg753LClGvacTCeq8u92Vj_YK8sfYgwJUu8zeGTveQTZAQ0z3regBPIw4gACRXtLuLrqouO5nOmpgx9J0G0_Yc5gvRo_AKSql9c6rrdlMsUeQhoPvwXHCKfndElmlO4W1l5ftOkSZuqV"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descricao\" : \"AAAAAAAAAAAAAAa \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/formas-pagamento"
+					},
+					"response": []
+				},
+				{
+					"name": "Forma-pagamento Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA1MDE3LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiMGFlODI0MjctNWI0Yi00MjYzLTgzMDUtNjcxM2IyMzExYTFmIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.Ak_wBrcKyisSm0cGaNvVd1d-ILInOMKe_eVsdifK2aZWOfx3eiVZQpMZj9UWFmqOmFOZewwOnDjAzDFrb5QXB0HUY3S79J2Ja3gNsCRX1B3aG0CZI5H3IL6n1-MJLeuBsv92_5uP1PKlNjtKyFVk6-2pFokSt5SjSsKLysV2J4u4wpJ2YT_6FBJ3BWrbPYN_qxtlRlNrbp8_YpgRKx_31J8x5pB3Jkl7A9aB36Fd4WVtmyESWlGFAfvcnuO4NrYoxm-0h01oUo-yn8F1Z7MVMHF1NxFqB_WUWyY-bEJl7x4tVH8kbEr_Sv6JGMV2bx-M2dHHsFPKllgXeisFsiyQWnb5LyWoDq5zaPz5qRCXrFrzlQZ46FyrRg753LClGvacTCeq8u92Vj_YK8sfYgwJUu8zeGTveQTZAQ0z3regBPIw4gACRXtLuLrqouO5nOmpgx9J0G0_Yc5gvRo_AKSql9c6rrdlMsUeQhoPvwXHCKfndElmlO4W1l5ftOkSZuqV"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost/v1/formas-pagamento"
+					},
+					"response": []
+				},
+				{
+					"name": "Forma-pagamento excluir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA1MDE3LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiMGFlODI0MjctNWI0Yi00MjYzLTgzMDUtNjcxM2IyMzExYTFmIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.Ak_wBrcKyisSm0cGaNvVd1d-ILInOMKe_eVsdifK2aZWOfx3eiVZQpMZj9UWFmqOmFOZewwOnDjAzDFrb5QXB0HUY3S79J2Ja3gNsCRX1B3aG0CZI5H3IL6n1-MJLeuBsv92_5uP1PKlNjtKyFVk6-2pFokSt5SjSsKLysV2J4u4wpJ2YT_6FBJ3BWrbPYN_qxtlRlNrbp8_YpgRKx_31J8x5pB3Jkl7A9aB36Fd4WVtmyESWlGFAfvcnuO4NrYoxm-0h01oUo-yn8F1Z7MVMHF1NxFqB_WUWyY-bEJl7x4tVH8kbEr_Sv6JGMV2bx-M2dHHsFPKllgXeisFsiyQWnb5LyWoDq5zaPz5qRCXrFrzlQZ46FyrRg753LClGvacTCeq8u92Vj_YK8sfYgwJUu8zeGTveQTZAQ0z3regBPIw4gACRXtLuLrqouO5nOmpgx9J0G0_Yc5gvRo_AKSql9c6rrdlMsUeQhoPvwXHCKfndElmlO4W1l5ftOkSZuqV"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "localhost/v1/formas-pagamento/4"
+					},
+					"response": []
+				},
+				{
+					"name": "Forma-pagamento buscar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA1MDE3LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiMGFlODI0MjctNWI0Yi00MjYzLTgzMDUtNjcxM2IyMzExYTFmIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.Ak_wBrcKyisSm0cGaNvVd1d-ILInOMKe_eVsdifK2aZWOfx3eiVZQpMZj9UWFmqOmFOZewwOnDjAzDFrb5QXB0HUY3S79J2Ja3gNsCRX1B3aG0CZI5H3IL6n1-MJLeuBsv92_5uP1PKlNjtKyFVk6-2pFokSt5SjSsKLysV2J4u4wpJ2YT_6FBJ3BWrbPYN_qxtlRlNrbp8_YpgRKx_31J8x5pB3Jkl7A9aB36Fd4WVtmyESWlGFAfvcnuO4NrYoxm-0h01oUo-yn8F1Z7MVMHF1NxFqB_WUWyY-bEJl7x4tVH8kbEr_Sv6JGMV2bx-M2dHHsFPKllgXeisFsiyQWnb5LyWoDq5zaPz5qRCXrFrzlQZ46FyrRg753LClGvacTCeq8u92Vj_YK8sfYgwJUu8zeGTveQTZAQ0z3regBPIw4gACRXtLuLrqouO5nOmpgx9J0G0_Yc5gvRo_AKSql9c6rrdlMsUeQhoPvwXHCKfndElmlO4W1l5ftOkSZuqV"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost/v1/formas-pagamento/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Forma-pagamento buscar Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJ1c2VyX25hbWUiOiJqb2FvLmdlckBhbGdhZm9vZC5jb20iLCJzY29wZSI6WyJSRUFEIiwiV1JJVEUiXSwiZXhwIjoxNjkyMzA1MDE3LCJhdXRob3JpdGllcyI6WyJHRVJBUl9SRUxBVE9SSU9TIiwiRURJVEFSX0NPWklOSEFTIiwiRURJVEFSX0NJREFERVMiLCJFRElUQVJfRk9STUFTX1BBR0FNRU5UTyIsIkVESVRBUl9SRVNUQVVSQU5URVMiLCJHRVJFTkNJQVJfUEVESURPUyIsIkNPTlNVTFRBUl9VU1VBUklPUyIsIkVESVRBUl9VU1VBUklPUyIsIkNPTlNVTFRBUl9QRURJRE9TIiwiRURJVEFSX0VTVEFET1MiXSwianRpIjoiMGFlODI0MjctNWI0Yi00MjYzLTgzMDUtNjcxM2IyMzExYTFmIiwibm9tZV9jb21wbGV0byI6Ikpvw6NvIGRhIFNpbHZhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.Ak_wBrcKyisSm0cGaNvVd1d-ILInOMKe_eVsdifK2aZWOfx3eiVZQpMZj9UWFmqOmFOZewwOnDjAzDFrb5QXB0HUY3S79J2Ja3gNsCRX1B3aG0CZI5H3IL6n1-MJLeuBsv92_5uP1PKlNjtKyFVk6-2pFokSt5SjSsKLysV2J4u4wpJ2YT_6FBJ3BWrbPYN_qxtlRlNrbp8_YpgRKx_31J8x5pB3Jkl7A9aB36Fd4WVtmyESWlGFAfvcnuO4NrYoxm-0h01oUo-yn8F1Z7MVMHF1NxFqB_WUWyY-bEJl7x4tVH8kbEr_Sv6JGMV2bx-M2dHHsFPKllgXeisFsiyQWnb5LyWoDq5zaPz5qRCXrFrzlQZ46FyrRg753LClGvacTCeq8u92Vj_YK8sfYgwJUu8zeGTveQTZAQ0z3regBPIw4gACRXtLuLrqouO5nOmpgx9J0G0_Yc5gvRo_AKSql9c6rrdlMsUeQhoPvwXHCKfndElmlO4W1l5ftOkSZuqV"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descricao\" : \"BOLETO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/formas-pagamento/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Grupos",
+			"item": [
+				{
+					"name": "Permissoes",
+					"item": [
+						{
+							"name": "PERMISSOES - BUSCAR",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "localhost/v1/grupos/1/permissoes/1"
+							},
+							"response": []
+						},
+						{
+							"name": "PERMISSOES - Associar",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": "localhost/v1/grupos/1/permissoes/3"
+							},
+							"response": []
+						},
+						{
+							"name": "PERMISSOES - DeAssociar",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "localhost:/v1/grupos/1/permissoes/1"
+							},
+							"response": []
+						},
+						{
+							"name": "PERMISSOES - LISTAR",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "localhost:/v1/grupos/1/permissoes/"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Grupos Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/grupos"
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar grupos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/grupos"
+					},
+					"response": []
+				},
+				{
+					"name": "Grupos Buscar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost/v1/grupos/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Grupos Excluir",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "localhost/v1/grupos/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Grupos Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/grupos/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Grupo",
+					"item": [
+						{
+							"name": "USUARIO -LISTAR Grupos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "localhost/v1/usuarios/1/grupos/"
+							},
+							"response": []
+						},
+						{
+							"name": "USUARIO -Associar Grupos Copy",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": "localhost/v1/usuarios/1/grupos/2"
+							},
+							"response": []
+						},
+						{
+							"name": "USUARIO - desassociar grupo",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "localhost:/v1/usuarios/1/grupos/2"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "usuarios Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost/v1/usuarios"
+					},
+					"response": []
+				},
+				{
+					"name": "Usuarios Adicionar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTEwMzI0MjEsInVzZXJfbmFtZSI6Im1hcmlhLnZuZEBhbGdhZm9vZC5jb20iLCJqdGkiOiI1MGRhYTIxZS0zMGYyLTQzMjItYjVkMS01ZTI2YWQwNzU0ZGMiLCJjbGllbnRfaWQiOiJqbWZvb2RXZWIiLCJzY29wZSI6WyJ3cml0ZSIsInJlYWQiXX0.skPWifBYMjd9ytH6HW_rHYlP5AAqBFYG9wtNYB-9pBRjM86GsR9j4N-G3PszyDnEuIFZF6wNQiIVLHF-jeZAhxzSGkm-PSlyDo0C7darwhojm8Lu4dMfM5WgqzmbNDbMd52wFpS-Qb-2dEFQIpenbfbuDJXHi_5-jSS8UXRXa81YgjVEMZ8l09dSwtVQVD3UqL6NJhK1AdeHaEWstE4agNtRayv7fJnEdVdvJQE6Zd8uTaEO0KBlOk0V5rB2hDD5fV1nRULAsBg8NRVqYfW_VV7F5L7v24cb6smA_aOzHJzx6AWQnPELfpeZ4VTZVP3mxHTAtxCW38rxBUoPDOG43EksA7moKZTWAHBmYHFMjv_aKxkpuIl0JdVpKTFiJuKo9i2MVGJHCHNHvBUS5JY-PL1k4zQ_YLsjxIPznOHDrVkd5V2rZ11vb4sdR3ihOc6PMFhl2Hq90vXuBNhuIbmzzICbngUjn5oAVp0Fpl14weHGE0mr2BfbIXaH2I4BuCYy"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"gerundio da silva\",\r\n    \"email\" : \"joao@email.com\",\r\n    \"senha\" : \"gerundio123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/usuarios"
+					},
+					"response": []
+				},
+				{
+					"name": "Usuarios buscar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost/v1/usuarios/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Usuarios Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"cleiron\",\r\n    \"email\" : \"jurancidr@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/usuarios/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Usuarios Atualizar Senha",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTEwMzI0MjEsInVzZXJfbmFtZSI6Im1hcmlhLnZuZEBhbGdhZm9vZC5jb20iLCJqdGkiOiI1MGRhYTIxZS0zMGYyLTQzMjItYjVkMS01ZTI2YWQwNzU0ZGMiLCJjbGllbnRfaWQiOiJqbWZvb2RXZWIiLCJzY29wZSI6WyJ3cml0ZSIsInJlYWQiXX0.skPWifBYMjd9ytH6HW_rHYlP5AAqBFYG9wtNYB-9pBRjM86GsR9j4N-G3PszyDnEuIFZF6wNQiIVLHF-jeZAhxzSGkm-PSlyDo0C7darwhojm8Lu4dMfM5WgqzmbNDbMd52wFpS-Qb-2dEFQIpenbfbuDJXHi_5-jSS8UXRXa81YgjVEMZ8l09dSwtVQVD3UqL6NJhK1AdeHaEWstE4agNtRayv7fJnEdVdvJQE6Zd8uTaEO0KBlOk0V5rB2hDD5fV1nRULAsBg8NRVqYfW_VV7F5L7v24cb6smA_aOzHJzx6AWQnPELfpeZ4VTZVP3mxHTAtxCW38rxBUoPDOG43EksA7moKZTWAHBmYHFMjv_aKxkpuIl0JdVpKTFiJuKo9i2MVGJHCHNHvBUS5JY-PL1k4zQ_YLsjxIPznOHDrVkd5V2rZ11vb4sdR3ihOc6PMFhl2Hq90vXuBNhuIbmzzICbngUjn5oAVp0Fpl14weHGE0mr2BfbIXaH2I4BuCYy"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"senhaAtual\" : \"123\",\r\n    \"senhaNova\" : \"gersondasjdihjharuidashu\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/usuarios/1/senha"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedidos",
+			"item": [
+				{
+					"name": "Listar Pedidos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjo2LCJ1c2VyX25hbWUiOiJqdWNham90YXppY2FAZ21haWwuY29tIiwic2NvcGUiOlsiV1JJVEUiLCJSRUFEIl0sImV4cCI6MTY5MTM4MDc2MiwianRpIjoiMGI4ZjZiZjEtMmNlZC00YzZkLTliNmEtMzc4YjNjZjZkZTlkIiwibm9tZV9jb21wbGV0byI6IkTDqWJvcmEgTWVuZG9uw6dhIiwiY2xpZW50X2lkIjoiam1mb29kV2ViIn0.lhWLA8qXpj4n7JTMJc4jCVE_EPSeCl8W5eloceLwkXs3usLqrUSSEd38_wU66-0buVvU1xFkfPnaOg45xtZlCWp9RwNWq5Nl6s42MdvicuYYoYMqDo4kmQOLXSzOEAmVoFjGNS48abGJ_bDtHqPNvYAhHsXWiL9lQahbKrv79e3LGq4OYzRgSGDAvreTNShfmAazE9TsCnR3tPxUyVzhPsM6TkNbbRdHHhhKzph6Vw-Oo-lskh2fqXv2OOd0gVKhWappRH-Unu_JXAUeGiFsJnZKGjokwc4rZqbnntm8m7Ik9EvEBEqJR2pcqU8YzxyyGrk1ryC8lUiHkvzebfknBE5h5cg93hOgdgnrM3LXOizYZiHQJkKNcpIvD_xMJ35kr0KFykUtpWpdqSNnOqK0kPJ1kFcPYIp-jmE0tcz98lJrPPCnAZPvaq2HY0kU7QvMKwOmJYs3_DHWpQyXvTs5WS15_DE4_qkTD3pFXvTpLGdWfX4lrgc_OFOvjEjeIvkL"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/v1/pedidos",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"v1",
+								"pedidos"
+							],
+							"query": [
+								{
+									"key": "clienteId",
+									"value": "29p",
+									"disabled": true
+								},
+								{
+									"key": "restauranteId",
+									"value": "4",
+									"disabled": true
+								},
+								{
+									"key": "dataFinalizacao",
+									"value": "2023-05-25T15:00",
+									"disabled": true
+								},
+								{
+									"key": "dataCriacao",
+									"value": "2023-05-25T15:00",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "cliente.nome",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Emitir pedido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurante\": {\r\n        \"id\": 1\r\n    },\r\n    \"formaPagamento\": {\r\n        \"id\": 1\r\n    },\r\n    \"enderecoEntrega\": {\r\n        \"cep\": \"38400-000\",\r\n        \"logradouro\": \"Rua Floriano Peixoto\",\r\n        \"numero\": \"600\",\r\n        \"complemento\": \"apto 44b\",\r\n        \"bairro\": \"Santa etelvina\",\r\n        \"cidade\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    \"itens\": [\r\n        {\r\n            \"produtoId\": 1,\r\n            \"quantidade\": 5,\r\n            \"observacao\": \"sem queijo\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/pedidos/"
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost/v1/pedidos/{{pedidoID2}}"
+					},
+					"response": [
+						{
+							"name": "Buscar Pedidos",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "localhost:8080/pedidos/{{pedidoID2}}"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "ETag",
+									"value": "\"09a9f291d1c44ab79ae9ac5dd73ce88e7\""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1310"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 03 Jul 2023 22:20:43 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"codigo\": \"d178b637-a785-4768-a3cb-aa1ce5a8cdab\",\n    \"subtotal\": 79,\n    \"taxaFrete\": 0,\n    \"valorTotal\": 79,\n    \"dataCriacao\": \"2023-07-03T22:18:51Z\",\n    \"dataConfirmacao\": null,\n    \"dataCancelamento\": null,\n    \"dataEntrega\": null,\n    \"statusPedido\": \"CRIADO\",\n    \"cliente\": {\n        \"id\": 7,\n        \"nome\": \"glaucya\",\n        \"email\": \"jmfoodmail@gmail.com\",\n        \"_links\": {\n            \"self\": {\n                \"href\": \"http://localhost:8080/usuarios/7\"\n            }\n        }\n    },\n    \"restaurante\": {\n        \"restauranteId\": 4,\n        \"nome\": \"BORA GRILL\",\n        \"_links\": {\n            \"self\": {\n                \"href\": \"http://localhost:8080/restaurantes/4\"\n            }\n        }\n    },\n    \"endereco\": {\n        \"cep\": \"38400-111\",\n        \"logradouro\": \"Rua Acre\",\n        \"numero\": \"300\",\n        \"complemento\": \"Casa 2\",\n        \"bairro\": \"Centro\",\n        \"cidade\": {\n            \"id\": 1,\n            \"nome\": \"Uberlândia\",\n            \"estado\": \"Minas Gerais\",\n            \"_links\": {\n                \"self\": {\n                    \"href\": \"http://localhost:8080/cidades/1\"\n                }\n            }\n        }\n    },\n    \"formaPagamento\": {\n        \"id\": 2,\n        \"descricao\": \"Cartão de débito\",\n        \"_links\": {\n            \"self\": {\n                \"href\": \"http://localhost:8080/formas-pagamento/2\"\n            }\n        }\n    },\n    \"itens\": [\n        {\n            \"id\": 3,\n            \"quantidade\": 1,\n            \"precoUnitario\": 79,\n            \"precoTotal\": 79,\n            \"produto\": {\n                \"id\": 6,\n                \"nome\": \"Bife Ancho\",\n                \"descricao\": \"Corte macio e suculento, com dois dedos de espessura, retirado da parte dianteira do contrafilé\",\n                \"preco\": 79,\n                \"ativo\": true,\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/restaurantes/4/produtos/3\"\n                    }\n                }\n            }\n        }\n    ],\n    \"_links\": {\n        \"self\": [\n            {\n                \"href\": \"http://localhost:8080/pedidos/d178b637-a785-4768-a3cb-aa1ce5a8cdab\"\n            },\n            {\n                \"href\": \"http://localhost:8080/pedidos\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "estatisticas",
+			"item": [
+				{
+					"name": "Vendas-diarias",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/pdf,application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost/v1/estatisticas/vendas-diarias",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"v1",
+								"estatisticas",
+								"vendas-diarias"
+							],
+							"query": [
+								{
+									"key": "dataCriacao",
+									"value": "2019-01-01T12:00:00Z",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "totalVendas,asc",
+									"disabled": true
+								},
+								{
+									"key": "restauranteId",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AdicionarFotos",
+			"item": [
+				{
+					"name": "Adicionar foto a um produto",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "arquivo",
+									"type": "file",
+									"src": "/C:/Users/jucaj/Downloads/download.jpeg"
+								},
+								{
+									"key": "descricao",
+									"value": "Carne grelhada que acompanha uma porção de batata frita e um refigerante",
+									"type": "text"
+								}
+							]
+						},
+						"url": "localhost/v1/restaurantes/1/produtos/1/foto"
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar foto a um produto Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "arquivo",
+									"type": "file",
+									"src": "/C:/Users/jucaj/OneDrive/Área de Trabalho/BANCO_DE_FOTOS/download.jpeg"
+								},
+								{
+									"key": "descricao",
+									"value": "em buraco de paca, tatu caminha na sua cama ?",
+									"type": "text"
+								}
+							]
+						},
+						"url": "localhost/v1/restaurantes/1/produtos/1/foto"
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar fotoProduto",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "image/jpeg",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "image/png",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "localhost/v1/restaurantes/1/produtos/1/foto"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Produtos",
+			"item": [
+				{
+					"name": "Restaurante Listar produtos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/v1/restaurantes/1/produtos",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"v1",
+								"restaurantes",
+								"1",
+								"produtos"
+							],
+							"query": [
+								{
+									"key": "incluirInativos",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurantes buscar produto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost/v1/restaurantes/1/produtos/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurantes Produtos Salvar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"Trem Bala\",\r\n    \"descricao\" : \"um lanche de matar KKKKKK\",\r\n    \"preco\" : null,\r\n    \"ativo\" : true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost/v1/restaurantes/1/produtos"
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurantes Produtos Salvar Copy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"lanche patriota\",\r\n    \"descricao\" : \"Faria um golpe por esse lanche\",\r\n    \"preco\" : 50,\r\n    \"ativo\" : false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:/v1/restaurantes/1/produtos/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FormaPagamento",
+			"item": [
+				{
+					"name": "Restaurantes Forma-pagamento associar (put)- Desassociar (DEL)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "localhost/v1/restaurantes/1/formas-pagamento/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Forma-pagamento Restautante",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:/v1/restaurantes/1/formas-pagamento"
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurantes forma-pagamento Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:/v1/restaurantes/1/formas-pagamento"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Listar funcionario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost/v1/restaurantes/1/usuarios/"
+					},
+					"response": []
+				},
+				{
+					"name": "Associar um funcionario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": "localhost/v1/restaurantes/1/usuarios/1"
+					},
+					"response": []
+				},
+				{
+					"name": "desassociar um funcionario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "localhost/v1/restaurantes/1/usuarios/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FluxoPedido",
+			"item": [
+				{
+					"name": "Confirmar Pedido",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": "localhost/v1/pedidos/{{pedido1}}/confirmar"
+					},
+					"response": []
+				},
+				{
+					"name": "Cancelar Pedido",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": "localhost/v1/pedidos/{{pedido2}}/cancelar"
+					},
+					"response": []
+				},
+				{
+					"name": "Entregar Pedido",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": "localhost/v1/pedidos/1/entregar"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Autorização",
+			"item": [
+				{
+					"name": "Password flow - token Copy",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "web123",
+								"username": "jmfoodWeb"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "joao.ger@algafood.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": "localhost:80/oauth/token"
+					},
+					"response": []
+				},
+				{
+					"name": "Authorization code - Solicitar token Copy",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "foodanalytics",
+								"password": "food123"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "code",
+									"value": "FhYW3l",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://www.foodanalytics.local:8082",
+									"type": "text"
+								}
+							]
+						},
+						"url": "localhost/oauth/token"
+					},
+					"response": []
+				},
+				{
+					"name": "Solicitar refresh_Token Copy",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "web123",
+								"username": "jmfoodWeb"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "joao",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"type": "text"
+								},
+								{
+									"key": "refresh_token",
+									"value": "4af32495-30c4-4845-9ebb-d4d89ae88314",
+									"type": "text"
+								}
+							]
+						},
+						"url": "localhost/oauth/token"
+					},
+					"response": []
+				},
+				{
+					"name": "Check_Token Copy",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "web123",
+								"username": "jmfoodWeb"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "4d02f969-844f-4178-982c-245b14d11c63",
+									"type": "text"
+								}
+							]
+						},
+						"url": "localhost/oauth/check_token"
+					},
+					"response": []
+				},
+				{
+					"name": "Token public key Copy",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{AuthServer}}/oauth/token_key"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Root entry Point",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "pedido1",
+			"value": "f9981ca4-5a5e-4da3-af04-933861df3e55"
+		},
+		{
+			"key": "pedido2",
+			"value": "d178b637-a785-4768-a3cb-aa1ce5a8cdab"
+		}
+	]
+}

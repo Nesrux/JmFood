@@ -1,6 +1,4 @@
 version: "3.9"
-
-
 networks:
   jmfood-network:
     driver: bridge
@@ -15,24 +13,23 @@ services:
     networks:
       - jmfood-network 
       
-  jmfood-redis:
-    image: redis:6.2.1-alpine
-    networks:
-      - jmfood-network
-
-    
-
+ # jmfood-redis:
+  #  image: redis:6.2.1-alpine
+   # networks:
+    #  - jmfood-network
+      
   jmfood-api:
     image: jmfood-api
-    command: ["/wait-for-it.sh", "jmfood-mysql:3306", "-t", "500", "--", "java", "-jar", "api.jar"]
+    command: ["/wait-for-it.sh", "jmfood-mysql:3306", "-t", "600", "--", "java", "-jar", "api.jar"]
     environment:
       DB_HOST: jmfood-mysql
+      #SPRING.SESSION.STORE-TYPE: redis
+      #SPRING_REDIS_HOST: jmfood-redis
     networks:
       - jmfood-network
     depends_on:
      - jmfood-mysql
-       
-
+     
   jmfood-proxy:
     build: ./nginx
     image: jmfood-proxy
