@@ -84,7 +84,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
       <a href="#">
         <img src="https://avatars.githubusercontent.com/u/102268237?v=4" width="100px;" alt="Foto do joao marcos no GitHub"/><br>
         <sub>
-          <b>Lucas Ferreira</b>
+          <b><a src="https://github.com/lucasferreiraz">Lucas Ferreira</a></b>
         </sub>
       </a>
     </td>
